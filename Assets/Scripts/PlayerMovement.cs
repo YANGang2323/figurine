@@ -91,9 +91,42 @@ public class PlayerMovement : MonoBehaviour
         // 부드럽게 전환
         //currentMoveX = Mathf.Lerp(currentMoveX, moveX, Time.deltaTime / smoothTime);
         // 애니메이터에 적용
-        animator.SetFloat("MoveX", h);
-        animator.SetFloat("MoveY", v);
+        //animator.SetFloat("MoveX", h);
+        //animator.SetFloat("MoveY", v);
         //animator.SetFloat("MoveX", currentMoveX);
+
+        //애니메이션 MoveState 상태 변경
+        int currentState = 0; // 기본 채널은 0번 (대기)
+
+        if (moveDir != Vector3.zero) // 방향키를 눌러서 이동 중일 때
+        {
+            currentState = 1; // 일단 1번 (걷기)
+
+            // 만약 왼쪽 Shift 키를 누른 상태로 이동 중이라면?
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                currentState = 2; // 2번 (달리기)
+            }
+            // 만약 Ctrl 키를 누른 상태로 이동 중이라면?
+            else if (Input.GetKey(KeyCode.LeftControl))
+            {
+                currentState = 3; // 3번 (기어가기)
+            }
+        }
+        else // 방향키를 안 누르고 멈춰있을 때
+        {
+            // 제자리에 멈춰서 Ctrl키를 누르면 제자리 엎드리기(3번) 유지
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                currentState = 3;
+            }
+            else
+            {
+                currentState = 0; // 아무것도 안 누르면 0번 (대기)
+            }
+        }
+        animator.SetInteger("MoveState", currentState);
+
         // 실제 이동
         //transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
 
