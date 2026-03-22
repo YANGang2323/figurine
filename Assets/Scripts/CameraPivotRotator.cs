@@ -171,7 +171,7 @@ public class CameraPivotRotator : MonoBehaviour
 
         if (nowstage == "1")
         {
-            cameraType = CameraMovingType.Fix;
+            cameraType = CameraMovingType.Moving;
 
             defaultRotation = Quaternion.Euler(0, 180, 0);
             sideRotation = Quaternion.Euler(0, 270, 0);

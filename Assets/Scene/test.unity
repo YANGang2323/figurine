@@ -1265,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3adaf8e33d5f14f44b96d4e265cdcf64, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.12
+      value: -17.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3adaf8e33d5f14f44b96d4e265cdcf64, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1598,7 +1598,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1623,7 +1623,7 @@ Transform:
   m_GameObject: {fileID: 1222665097}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.78, y: -0.62, z: -22.04}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2253,7 +2253,7 @@ Transform:
   m_GameObject: {fileID: 2144843936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -2.9, y: 2.61, z: -2.58}
+  m_LocalPosition: {x: 0.5, y: 1.35, z: -14.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2273,18 +2273,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 3
-  isSideView: 0
+  isSideView: 1
   timingMode: 0
   normalSpeed: 5
   timingSpeed: 1.2
   player: {fileID: 770354336}
   followSpeed: 3
-  sideViewOffset: {x: 5, y: 0, z: 0}
-  playerObj: {fileID: 0}
+  sideViewOffset: {x: 0, y: 1.35, z: -4}
+  playerObj: {fileID: 770354331}
   useMovementConstraints: 1
-  minPosition: {x: -10, y: 0, z: -10}
-  maxPosition: {x: 10, y: 0, z: 10}
-  cameraType: 0
+  minPosition: {x: 0.5, y: 1.35, z: -16}
+  maxPosition: {x: 0.5, y: 1.35, z: 10}
+  cameraType: 1
   PipeManager: {fileID: 0}
   PipeRun: 0
   pipe: {fileID: 147737035}
