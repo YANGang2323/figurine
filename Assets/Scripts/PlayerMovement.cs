@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(camDirection);
             Vector3 currentEuler = transform.eulerAngles;
             // 현재 X, Z는 유지하고 Y만 카메라 방향으로 설정
-            transform.rotation = Quaternion.Euler(-90f, targetRotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
     }
 
@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         if (lookDirection.sqrMagnitude > 0.001f) // 방향 벡터가 너무 작지 않은지 확인
         {
             Quaternion  targetRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Euler(-90f, targetRotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
     }
     private void CheckGrounded()
