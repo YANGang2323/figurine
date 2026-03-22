@@ -2279,7 +2279,7 @@ MonoBehaviour:
   timingSpeed: 1.2
   player: {fileID: 770354336}
   followSpeed: 3
-  sideViewOffset: {x: 0, y: 1.35, z: -4}
+  sideViewOffset: {x: 0, y: 1.35, z: 0}
   playerObj: {fileID: 770354331}
   useMovementConstraints: 1
   minPosition: {x: 0.5, y: 1.35, z: -16}
