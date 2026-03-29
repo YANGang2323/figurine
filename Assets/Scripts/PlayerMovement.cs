@@ -23,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask jumpableLayers;
 
+    // [추가] 달리기 및 회전 설정 변수
+    [Header("Run & Rotation Settings")]
+    public float runSpeedMultiplier = 1.5f; // 달리기 시 속도 증가 배율
+    private float currentSpeed; // 현재 적용되는 실제 속도
+    public float rotationOffsetA = 90f; // A키 누를 때 추가 회전 각도
+    public float rotationOffsetD = -90f; // D키 누를 때 추가 회전 각도
+
 
     void Awake()
     {
@@ -48,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         moveDir = Vector3.zero;
         h = 0;
         v = 0;
+
+        // [추가] 매 프레임 기본 속도로 초기화
+        currentSpeed = moveSpeed;
 
         // 시점1: 왼쪽 시점(기본) → 좌우(A, D) 이동만 허용
         if (!CameraPivotRotator.Instance.isSideView)
@@ -106,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 currentState = 2; // 2번 (달리기)
+                currentSpeed = moveSpeed * runSpeedMultiplier; // [추가] 달리기 중일 때 속도 배율 적용
             }
             // 만약 Ctrl 키를 누른 상태로 이동 중이라면?
             else if (Input.GetKey(KeyCode.LeftControl))
@@ -142,7 +153,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveDir != Vector3.zero)
         {
-            Vector3 newPos = rb.position + moveDir * moveSpeed * Time.fixedDeltaTime;
+            // [수정] moveSpeed 대신 currentSpeed(달리기 상태 반영된 속도) 사용
+            Vector3 newPos = rb.position + moveDir * currentSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPos);
         }
     }
@@ -155,10 +167,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (lookDirection.sqrMagnitude > 0.001f) // 방향 벡터가 너무 작지 않은지 확인
         {
-            Quaternion  targetRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+
+            // [추가] A 또는 D 키를 누르고 있을 때 추가 회전값 설정
+            float yOffset = 0f;
+            if (InputManager.instance.GetKey(KeyCode.A))
+            {
+                yOffset = rotationOffsetA; // 기본 90도
+            }
+            else if (InputManager.instance.GetKey(KeyCode.D))
+            {
+                yOffset = rotationOffsetD; // 기본 -90도
+            }
+
+            // [수정] 카메라를 바라보는 회전값에 yOffset을 더하여 최종 회전 적용
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
         }
     }
+
     private void CheckGrounded()
     {
         Vector3 origin = transform.position + Vector3.up * 0.1f; // 약간 위에서 쏨
@@ -172,5 +198,4 @@ public class PlayerMovement : MonoBehaviour
     //        isGrounded = true;
     //    }
     //}
-
 }
