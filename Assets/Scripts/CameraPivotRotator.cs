@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 // 카메라 시점을 회전시키는 스크립트 (싱글톤 적용)
@@ -27,11 +28,20 @@ public class CameraPivotRotator : MonoBehaviour
     private PlayerMovement3 playerMovement;
     public GameObject playerObj;
 
-    [Header("Movement Constraints")]
-    public bool useMovementConstraints = true; // 움직임 제한 사용 여부
-    public Vector3 minPosition = new Vector3(-10f, 0f, -10f); // 최소 위치
-    public Vector3 maxPosition = new Vector3(10f, 0f, 10f); // 최대 위치
-    //
+
+    [Header("Movement Constraints - Current")]
+    public bool useMovementConstraints = true;
+    private Vector3 minPosition; // 현재 적용 중인 최소 범위
+    private Vector3 maxPosition; // 현재 적용 중인 최대 범위
+    
+    [Header("Movement Constraints - Default View")]
+    public Vector3 minPosDefault = new Vector3(-10f, 0f, -10f);
+    public Vector3 maxPosDefault = new Vector3(10f, 0f, 10f);
+
+    [Header("Movement Constraints - Side View")]
+    public Vector3 minPosSide = new Vector3(-20f, 0f, -5f);
+    public Vector3 maxPosSide = new Vector3(20f, 0f, 5f);
+    
 
     public enum CameraMovingType { Fix, Moving, Follow } 
     public CameraMovingType cameraType = CameraMovingType.Fix;
@@ -58,10 +68,15 @@ public class CameraPivotRotator : MonoBehaviour
     void Start()
     {
         if (player != null)
+        {
             playerMovement = player.GetComponent<PlayerMovement3>();
-
+            //sideViewOffset = transform.position - player.position;
+        }
+            
         DecideCameraType();
+        SetConstraintsByView();
 
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
         /* GameData data = DataManager.instance.nowGame;     
         nowstage = data.stage.ToString();
         PipeRun = PipeManager.GetComponent<BoardManager>().PipeRun;*/ //잠시주석처리0314
@@ -102,22 +117,15 @@ public class CameraPivotRotator : MonoBehaviour
         //Debug.Log("현재 cameraType: " + cameraType);
         //Debug.Log("현재 스테이지: " + nowstage);
         
-
-
-
         // Tab 키 입력 시 시점 전환
-        //if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && !pipe.activeSelf && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
-        //{
         if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
             isSideView = !isSideView;
             targetRotation = isSideView ? sideRotation : defaultRotation;
             isRotating = true;
 
-            //if (nowstage == "2")
-            //{
-            //    cameraType = isSideView ? CameraMovingType.Moving : CameraMovingType.Fix;
-            //}*/ //잠시주석0314
+            // 시점에 따라 제한 범위를 즉시 교체
+            SetConstraintsByView();
         }
 
 
@@ -141,25 +149,7 @@ public class CameraPivotRotator : MonoBehaviour
             }
         }
 
-        // Moving 타입이고 사이드뷰일 때만 플레이어 따라가기
-        if (cameraType == CameraMovingType.Moving && isSideView && player != null && !isRotating)
-        {
-            FollowPlayer();
-        }
-        else if ( !isRotating  && !isSideView && cameraType == CameraMovingType.Fix)
-        {
-            //if (nowstage == "1" && nowstage == "2")
-            //{
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
-            //}*/ //잠시주석0314
-        }
-        else if (cameraType == CameraMovingType.Follow && player != null ) //&& !isRotating
-        {
-            //SetFollowSettings(3f, sideViewOffset);
-
-            // Follow 타입일 때는 자유롭게 플레이어 따라 부드럽게 이동
-            FreeCircleFollowPlayer();
-        }
+        FollowPlayer();
     }
     void DecideCameraType() {
         //GameData data = DataManager.instance.nowGame;
@@ -223,8 +213,13 @@ public class CameraPivotRotator : MonoBehaviour
 
     void FollowPlayer()
     {
+
         // 플레이어 위치에 오프셋을 더한 목표 위치 계산
-        Vector3 desiredPosition = player.position + sideViewOffset;
+        //Vector3 desiredPosition = player.position + sideViewOffset;
+        // [핵심] 현재 카메라의 회전(transform.rotation)을 오프셋에 곱합니다.
+        // 이렇게 하면 탭 키를 눌러 카메라가 돌 때, 오프셋 방향도 같이 회전합니다.
+        Vector3 rotatedOffset = transform.rotation * sideViewOffset;
+        Vector3 desiredPosition = player.position + rotatedOffset;
 
         // 움직임 제한 적용
         if (useMovementConstraints)
@@ -236,22 +231,40 @@ public class CameraPivotRotator : MonoBehaviour
 
         // 부드럽게 이동
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
+
+        // [보정] 끝까지 안 따라가는 문제 해결
+        if (Vector3.Distance(transform.position, desiredPosition) < 0.01f)
+            transform.position = desiredPosition;
     }
     // 외부에서 움직임 범위를 설정할 수 있는 메서드
     public void SetMovementConstraints(Vector3 min, Vector3 max)
     {
-        minPosition = min;
-        maxPosition = max;
+            minPosition = min;
+            maxPosition = max;
     }
 
 
     public Vector3 cameraOffset;      // 카메라와 플레이어 사이 거리
     
-    // 외부에서 플레이어 따라가기 설정을 변경할 수 있는 메서드
+        // 외부에서 플레이어 따라가기 설정을 변경할 수 있는 메서드
     public void SetFollowSettings(float speed, Vector3 offset)
     {
-        followSpeed = speed;
-        sideViewOffset = offset;
+            followSpeed = speed;
+            sideViewOffset = offset;
+    }
+    // [추가] 시점에 따라 범위를 갈아끼워주는 전용 함수
+    void SetConstraintsByView()
+    {
+        if (isSideView)
+        {
+            minPosition = minPosSide;
+            maxPosition = maxPosSide;
+        }
+        else
+        {
+            minPosition = minPosDefault;
+            maxPosition = maxPosDefault;
+        }
     }
     //void FreeFollowPlayer()
     //{

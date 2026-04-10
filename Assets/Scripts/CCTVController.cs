@@ -1,88 +1,216 @@
 ﻿using UnityEngine;
+using UnityEngine.UI; // 게임오버 UI용 (필요 시)
 
 public class CCTVController : MonoBehaviour
 {
-    public float viewAngle = 60f;
-    public float viewDistance = 8f;
+    [Header("회전 설정")]
+    public bool isRotating = true;
+    public float rotationAngle = 45f;
+    public float rotationSpeed = 2f;
+    private Quaternion initialRotation;
 
-    public float rotateSpeed = 30f;
-    public float rotateLimit = 45f;
+    [Header("감지 및 경고 설정")]
+    public Light cctvLight;            // CCTV의 스포트라이트
+    public float detectionThreshold = 2.0f; // 감지까지 걸리는 시간 (초)
+    private float detectionTimer = 0f;      // 현재 쌓인 감지 시간
 
-    public float detectTime = 2f;
+    [Header("플레이어 설정")]
+    public Transform spawnPoint;       // 리스폰 지점
+    public Transform rayOrigin;         // 레이 시작점 (CCTV 렌즈)
 
-    public float height = 3f; // 감지 높이
-
-    float detectTimer;
-    float currentAngle;
-    bool right = true;
-
-    Transform player;
-
-    public LayerMask obstacleMask; // 벽
-    public LayerMask playerMask;   // 플레이어
+    private Color normalColor = Color.white; // 평상시 불빛 색상
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialRotation = transform.rotation;
+        if (cctvLight != null) normalColor = cctvLight.color;
     }
 
     void Update()
     {
-        if (DetectPlayer())
+        // 1. 회전 로직
+        if (isRotating)
         {
-            detectTimer += Time.deltaTime;
-        }
-        else
-        {
-            detectTimer -= Time.deltaTime;
+            float angle = Mathf.Sin(Time.time * rotationSpeed) * rotationAngle;
+            transform.rotation = initialRotation * Quaternion.Euler(0, angle, 0);
         }
 
-        detectTimer = Mathf.Clamp(detectTimer, 0, detectTime);
-
-        // UI 업데이트
-        DetectionUI.Instance.UpdateUI(detectTimer / detectTime);
-
-        if (detectTimer >= detectTime)
+        // 2. 감지 안 될 때 색상 및 타이머 서서히 복구 (선택 사항)
+        if (detectionTimer > 0)
         {
-            GameOver();
+            // 시야에서 벗어나면 경고 수치가 서서히 줄어들게 함
+            detectionTimer -= Time.deltaTime * 0.5f;
+            UpdateLightColor();
         }
     }
 
-
-
-    bool DetectPlayer()
+    private void OnTriggerStay(Collider other)
     {
-        if (player == null) return false;
-
-        Vector3 origin = transform.position + Vector3.up * 1.5f;
-        Vector3 dir = player.position - origin;
-
-        if (dir.magnitude > viewDistance)
-            return false;
-
-        // 평면 기준 각도
-        Vector3 flatDir = new Vector3(dir.x, 0, dir.z);
-        float angle = Vector3.Angle(transform.forward, flatDir);
-
-        if (angle < viewAngle * 0.5f)
+        if (other.CompareTag("Player"))
         {
-            RaycastHit hit;
+            Vector3 direction = (other.transform.position + Vector3.up) - rayOrigin.position;
+            float distance = Vector3.Distance(rayOrigin.position, other.transform.position + Vector3.up);
 
-            // LayerMask 아예 안 씀 (핵심)
-            if (Physics.Raycast(origin, dir.normalized, out hit, viewDistance))
+            // 레이캐스트로 벽 체크
+            if (Physics.Raycast(rayOrigin.position, direction, out RaycastHit hit, distance))
             {
-                Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
+                Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));   
+                if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
+                    // 벽이 없어서 감지됨
+                    detectionTimer += Time.deltaTime * 1.5f; // 감지 속도 가중치
+                    UpdateLightColor();
 
-                if (hit.collider.CompareTag("Player"))
-                    return true;
+                    if (detectionTimer >= detectionThreshold)
+                    {
+                        GameOver(other.transform);
+                    }
+                }
             }
         }
+    }
+    public void OnPlayerInSight(Collider playerCollider)
+    {
+        // 1. 레이 방향 설정 (CCTV 렌즈 -> 플레이어 중심)
+        Vector3 targetPos = playerCollider.bounds.center;
+        Vector3 direction = targetPos - rayOrigin.position;
+        float distance = Vector3.Distance(rayOrigin.position, targetPos);
 
-        return false;
+        // 2. Scene 뷰에서 확인용 레이 그리기 (에디터 전용)
+        Debug.DrawRay(rayOrigin.position, direction, Color.red);
+
+        // 3. 레이캐스트 실행 (벽 레이어만 체크하고 싶다면 세번째 인자에 레이어마스크 추가 가능)
+        if (Physics.Raycast(rayOrigin.position, direction, out RaycastHit hit, distance))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                // [감지 성공] 벽에 가려지지 않음
+                detectionTimer += Time.deltaTime * 1.5f;
+                UpdateLightColor();
+
+                if (detectionTimer >= detectionThreshold)
+                {
+                    GameOver(playerCollider.transform);
+                }
+            }
+            else
+            {
+                // [감지 실패] 레이가 벽이나 다른 물체에 먼저 맞음
+                // 필요하다면 여기서 타이머를 서서히 줄이는 로직을 넣으세요.
+            }
+        }
+    }
+    void UpdateLightColor()
+    {
+        if (cctvLight != null)
+        {
+            // 감지 시간에 따라 흰색(평상시) -> 붉은색으로 보간(Lerp)
+            float t = detectionTimer / detectionThreshold;
+            cctvLight.color = Color.Lerp(normalColor, Color.red, t);
+        }
     }
 
-    void GameOver()
+    void GameOver(Transform player)
     {
-        Debug.Log("Game Over");
+        Debug.Log("게임 오버! 플레이어 검거!");
+        detectionTimer = 0; // 타이머 초기화
+        UpdateLightColor();
+
+        // 플레이어를 스폰 지점으로 이동
+        player.position = spawnPoint.position;
+
+        // (참고) 만약 CharacterController를 사용 중이라면 이동 전후로 
+        // .enabled = false/true를 해줘야 위치 값이 즉시 반영됩니다.
     }
 }
+
+
+
+
+//public class CCTVController : MonoBehaviour
+//{
+//    public float viewAngle = 60f;
+//    public float viewDistance = 8f;
+
+//    public float rotateSpeed = 30f;
+//    public float rotateLimit = 45f;
+
+//    public float detectTime = 2f;
+
+//    public float height = 3f; // 감지 높이
+
+//    float detectTimer;
+//    float currentAngle;
+//    bool right = true;
+
+//    Transform player;
+
+//    public LayerMask obstacleMask; // 벽
+//    public LayerMask playerMask;   // 플레이어
+
+//    void Start()
+//    {
+//        player = GameObject.FindGameObjectWithTag("Player").transform;
+//    }
+
+//    void Update()
+//    {
+//        if (DetectPlayer())
+//        {
+//            detectTimer += Time.deltaTime;
+//        }
+//        else
+//        {
+//            detectTimer -= Time.deltaTime;
+//        }
+
+//        detectTimer = Mathf.Clamp(detectTimer, 0, detectTime);
+
+//        // UI 업데이트
+//        DetectionUI.Instance.UpdateUI(detectTimer / detectTime);
+
+//        if (detectTimer >= detectTime)
+//        {
+//            GameOver();
+//        }
+//    }
+
+
+
+//    bool DetectPlayer()
+//    {
+//        if (player == null) return false;
+
+//        Vector3 origin = transform.position + Vector3.up * 1.5f;
+//        Vector3 dir = player.position - origin;
+
+//        if (dir.magnitude > viewDistance)
+//            return false;
+
+//        // 평면 기준 각도
+//        Vector3 flatDir = new Vector3(dir.x, 0, dir.z);
+//        float angle = Vector3.Angle(transform.forward, flatDir);
+
+//        if (angle < viewAngle * 0.5f)
+//        {
+//            RaycastHit hit;
+
+//            // LayerMask 아예 안 씀 (핵심)
+//            if (Physics.Raycast(origin, dir.normalized, out hit, viewDistance))
+//            {
+//                Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
+
+//                if (hit.collider.CompareTag("Player"))
+//                    return true;
+//            }
+//        }
+
+//        return false;
+//    }
+
+//    void GameOver()
+//    {
+//        Debug.Log("Game Over");
+//    }
+//}

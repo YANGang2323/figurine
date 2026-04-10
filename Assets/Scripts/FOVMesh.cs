@@ -1,12 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(MeshFilter))]
 public class FOVMesh : MonoBehaviour
 {
     public float viewAngle = 60f;
     public float viewDistance = 8f;
-    public float height = 3f;
-    public int rayCount = 50;
+
+    public int horizontalRayCount = 50;
+    public int verticalRayCount = 25;
+
+    public float verticalAngle = 45f;
 
     public LayerMask obstacleMask;
 
@@ -25,51 +29,69 @@ public class FOVMesh : MonoBehaviour
 
     void DrawFOV()
     {
-        float angleStep = viewAngle / rayCount;
+        Vector3 origin = transform.position;
 
-        Vector3[] vertices = new Vector3[rayCount + 2];
-        int[] triangles = new int[rayCount * 3];
+        int hCount = horizontalRayCount;
+        int vCount = verticalRayCount;
 
-        vertices[0] = Vector3.zero;
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
 
-        for (int i = 0; i <= rayCount; i++)
+        // ðŸ”¥ ê¼­ì§“ì  (CCTV ìœ„ì¹˜)
+        vertices.Add(transform.InverseTransformPoint(origin));
+
+        // ðŸ”¥ Rayë¡œ ì  ìƒì„±
+        for (int y = 0; y <= vCount; y++)
         {
-            float angle = -viewAngle / 2 + angleStep * i;
-            Vector3 dir = DirFromAngle(angle);
+            float vAngle = Mathf.Lerp(-verticalAngle / 2, verticalAngle / 2, (float)y / vCount);
 
-            RaycastHit hit;
-
-            Vector3 point;
-
-            if (Physics.Raycast(transform.position, dir, out hit, viewDistance, obstacleMask))
+            for (int x = 0; x <= hCount; x++)
             {
-                point = hit.point;
-            }
-            else
-            {
-                point = transform.position + dir * viewDistance;
-            }
+                float hAngle = Mathf.Lerp(-viewAngle / 2, viewAngle / 2, (float)x / hCount);
 
-            // À§/¾Æ·¡ µÎ Á¡ »ý¼º (3D ÇüÅÂ)
-            vertices[i + 1] = transform.InverseTransformPoint(point);
+                Vector3 dir = Quaternion.Euler(vAngle, hAngle, 0) * transform.forward;
+
+                RaycastHit hit;
+                Vector3 point;
+
+                if (Physics.Raycast(origin, dir, out hit, viewDistance, obstacleMask))
+                {
+                    point = hit.point; // ðŸ”¥ ë²½ì—ì„œ ë©ˆì¶¤
+                }
+                else
+                {
+                    point = origin + dir * viewDistance;
+                }
+
+                vertices.Add(transform.InverseTransformPoint(point));
+
+                Debug.DrawRay(origin, dir * viewDistance, Color.red);
+            }
         }
 
-        for (int i = 0; i < rayCount; i++)
+        int row = hCount + 1;
+
+        // ðŸ”¥ ì‚¼ê°í˜• ì—°ê²° (í•µì‹¬)
+        for (int y = 0; y < vCount; y++)
         {
-            triangles[i * 3] = 0;
-            triangles[i * 3 + 1] = i + 1;
-            triangles[i * 3 + 2] = i + 2;
+            for (int x = 0; x < hCount; x++)
+            {
+                int current = y * row + x + 1;
+                int next = current + row;
+
+                triangles.Add(0);
+                triangles.Add(current);
+                triangles.Add(current + 1);
+
+                triangles.Add(0);
+                triangles.Add(current);
+                triangles.Add(next);
+            }
         }
 
         mesh.Clear();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
+        mesh.vertices = vertices.ToArray();
+        mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
-    }
-
-    Vector3 DirFromAngle(float angle)
-    {
-        float rad = angle * Mathf.Deg2Rad;
-        return transform.forward * Mathf.Cos(rad) + transform.right * Mathf.Sin(rad);
     }
 }

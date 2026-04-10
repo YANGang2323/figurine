@@ -5,8 +5,6 @@ public class DetectionUI : MonoBehaviour
 {
     public static DetectionUI Instance;
 
-    public Image detectionBar;
-    public Image damageOverlay;
     public AudioSource warningSound;
 
     void Awake()
@@ -16,14 +14,7 @@ public class DetectionUI : MonoBehaviour
 
     public void UpdateUI(float ratio)
     {
-        // 게이지
-        detectionBar.fillAmount = ratio;
-
-        // 화면 빨개짐
-        Color c = damageOverlay.color;
-        c.a = ratio * 0.6f;
-        damageOverlay.color = c;
-
+        
         // 경고음
         if (ratio > 0)
         {
