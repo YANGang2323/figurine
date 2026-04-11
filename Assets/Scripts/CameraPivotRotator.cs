@@ -74,7 +74,20 @@ public class CameraPivotRotator : MonoBehaviour
         }
             
         DecideCameraType();
+        
+        float currentY = transform.eulerAngles.y;
+        if (Mathf.Abs(currentY - 270f) < 45f || Mathf.Abs(currentY + 90f) < 45f)
+        {
+            isSideView = true;
+        }
+        else
+        {
+            isSideView = false;
+        }
+        targetRotation = isSideView ? sideRotation : defaultRotation;
+
         SetConstraintsByView();
+
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
         /* GameData data = DataManager.instance.nowGame;     
@@ -266,25 +279,7 @@ public class CameraPivotRotator : MonoBehaviour
             maxPosition = maxPosDefault;
         }
     }
-    //void FreeFollowPlayer()
-    //{
-    //    if (player == null) return;
-
-    //    // 플레이어 → 중심 방향 계산
-    //    Vector3 playerToCenter = player.position - playerMovement.center.position;
-    //    Vector3 offsetDirection = Quaternion.Euler(0f, 90f, 0f) * playerToCenter.normalized; // 90도 회전해서 옆에서 보기
-
-    //    float distance = 5f; // 플레이어와 카메라 거리
-    //    float height = 0.1f;   // 카메라 높이
-
-    //    // 최종 위치 계산 (원 궤도 따라 회전)
-    //    Vector3 desiredPosition = player.position + offsetDirection * distance + Vector3.up * height;
-
-    //    transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
-    //    //transform.LookAt(player.position + Vector3.up * 1f); // 약간 위를 바라보게
-    //    Debug.Log("FreeFollow target position: " + desiredPosition);
-    //    Debug.Log("Camera position before move: " + transform.position);
-    //}
+    
     void FreeCircleFollowPlayer()
     {
         if (player == null || playerMovement == null || playerMovement.center == null)
@@ -314,4 +309,23 @@ public class CameraPivotRotator : MonoBehaviour
         lookAtPos.y = transform.position.y; // 현재 카메라 높이로 고정 (X, Z축 회전 방지)
         transform.LookAt(lookAtPos);
     }
+    //void FreeFollowPlayer()
+    //{
+    //    if (player == null) return;
+
+    //    // 플레이어 → 중심 방향 계산
+    //    Vector3 playerToCenter = player.position - playerMovement.center.position;
+    //    Vector3 offsetDirection = Quaternion.Euler(0f, 90f, 0f) * playerToCenter.normalized; // 90도 회전해서 옆에서 보기
+
+    //    float distance = 5f; // 플레이어와 카메라 거리
+    //    float height = 0.1f;   // 카메라 높이
+
+    //    // 최종 위치 계산 (원 궤도 따라 회전)
+    //    Vector3 desiredPosition = player.position + offsetDirection * distance + Vector3.up * height;
+
+    //    transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+    //    //transform.LookAt(player.position + Vector3.up * 1f); // 약간 위를 바라보게
+    //    Debug.Log("FreeFollow target position: " + desiredPosition);
+    //    Debug.Log("Camera position before move: " + transform.position);
+    //}
 }
