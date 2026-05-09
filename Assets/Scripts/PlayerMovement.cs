@@ -118,15 +118,15 @@ public class PlayerMovement : MonoBehaviour
                 currentState = 2; // 2번 (달리기)
                 currentSpeed = moveSpeed * runSpeedMultiplier; // [추가] 달리기 중일 때 속도 배율 적용
             }
-            // 만약 Ctrl 키를 누른 상태로 이동 중이라면?
+            // 만약 Ctrl 키를 누른 상태 (엎드리기)+ 움직임
             else if (Input.GetKey(KeyCode.LeftControl))
             {
-                currentState = 3; // 3번 (기어가기)
+                currentState = 4; //
             }
         }
-        else // 방향키를 안 누르고 멈춰있을 때
+        else // 엎드리고 방향키를 누르고, 멈춰있을 때
         {
-            // 제자리에 멈춰서 Ctrl키를 누르면 제자리 엎드리기(3번) 유지
+            // 엎드림(3번) 
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 currentState = 3;

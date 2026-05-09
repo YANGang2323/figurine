@@ -36,8 +36,8 @@ ModelImporter:
       name: Armature|Armature|Crawl_and_Look_Back|baselayer
       takeName: Armature|Armature|Crawl_and_Look_Back|baselayer
       internalID: -8192306370803859126
-      firstFrame: 0
-      lastFrame: 208
+      firstFrame: 132
+      lastFrame: 181
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
