@@ -1,20 +1,20 @@
 using UnityEngine;
 
-// ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ Á¦¾î ½ºÅ©¸³Æ®
-// ½ÃÁ¡¿¡ µû¶ó ÀÌµ¿ °¡´ÉÇÑ ¹æÇâ Á¦ÇÑ
-//3½ºÅ×ÀÌÁö
+// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public class PlayerMovement3 : MonoBehaviour
 {
-    public float moveSpeed; // ÀÌµ¿ ¼Óµµ
+    public float moveSpeed; // ï¿½Ìµï¿½ ï¿½Óµï¿½
     public Animator animator;
     float h = 0;
     float v = 0;
-    //public float smoothTime = 0.1f; // ÀüÈ¯ ¼Óµµ Á¶Àý
-    //private float currentMoveX = 0f; // ÇöÀç ¾Ö´Ï¸ÞÀÌÅÍ¿¡ Àû¿ë ÁßÀÎ °ª
+    //public float smoothTime = 0.1f; // ï¿½ï¿½È¯ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+    //private float currentMoveX = 0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     private string CameraType;
 
-    // Á¡ÇÁ °ü·Ã º¯¼ö
-    //public float jumpForce = 5f; // Á¡ÇÁ Èû
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //public float jumpForce = 5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     private Rigidbody rb;
     private bool isGrounded = true;
 
@@ -28,13 +28,13 @@ public class PlayerMovement3 : MonoBehaviour
     void Awake() { 
         rb = GetComponent<Rigidbody>();
         Vector3 camDirection = Camera.main.transform.position - transform.position;
-        camDirection.y = 0; // ¼öÁ÷ ¹æÇâ Á¦°Å ¡æ ÁÂ¿ì ¹æÇâ¸¸ °í·Á
+        camDirection.y = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½â¸¸ ï¿½ï¿½ï¿½ï¿½
 
         if (camDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(camDirection);
             Vector3 currentEuler = transform.eulerAngles;
-            // ÇöÀç X, Z´Â À¯ÁöÇÏ°í Y¸¸ Ä«¸Þ¶ó ¹æÇâÀ¸·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ X, Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Yï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             transform.rotation = Quaternion.Euler(currentEuler.x, targetRotation.eulerAngles.y, currentEuler.z);
         }
     }
@@ -42,14 +42,14 @@ public class PlayerMovement3 : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        // ÃÊ±â À§Ä¡ ¼³Á¤ (µî´ë ±âÁØ radius °Å¸®ÀÇ ÀûÀýÇÑ À§Ä¡)
+        // ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ radius ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡)
         Vector3 startPos = new Vector3(-11.5f, 0f, 6f);
         transform.position = startPos;
 
-        // Rigidbody ¼³Á¤
+        // Rigidbody ï¿½ï¿½ï¿½ï¿½
         rb.freezeRotation = true;
 
-        // currentAngle°ú currentHeight ÃÊ±âÈ­
+        // currentAngleï¿½ï¿½ currentHeight ï¿½Ê±ï¿½È­
         Vector3 dir = startPos - center.position;
         currentAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         currentHeight = startPos.y;
@@ -62,21 +62,21 @@ public class PlayerMovement3 : MonoBehaviour
         v = 0;
 
 
-        // ½ÇÁ¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         if (CameraPivotRotator.Instance.cameraType == CameraPivotRotator.CameraMovingType.Fix)
         {
-            Debug.Log("ÇÈ½ºÄ«¸Þ¶ó ¿òÁ÷ÀÓ");
+            Debug.Log("ï¿½È½ï¿½Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             FixMove();
             rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
         }
         //else if (CameraPivotRotator.Instance.cameraType == CameraPivotRotator.CameraMovingType.Follow)
         //{
-        //    Debug.Log("¿øÇü¿òÁ÷ÀÓ");
+        //    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         //    UpCircular();
         //}
-        // ºÎµå·´°Ô ÀüÈ¯
+        // ï¿½Îµå·´ï¿½ï¿½ ï¿½ï¿½È¯
         //currentMoveX = Mathf.Lerp(currentMoveX, moveX, Time.deltaTime / smoothTime);
-        // ¾Ö´Ï¸ÞÀÌÅÍ¿¡ Àû¿ë
+        // ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         //animator.SetFloat("MoveX", h);
         //animator.SetFloat("MoveY", v);
         //animator.SetFloat("MoveX", currentMoveX);
@@ -87,7 +87,7 @@ public class PlayerMovement3 : MonoBehaviour
     {
         if (CameraPivotRotator.Instance.cameraType == CameraPivotRotator.CameraMovingType.Follow)
         {
-            //Debug.Log("¿øÇü¿òÁ÷ÀÓ");
+            //Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             UpCircular();
             animator.SetFloat("MoveX", h);
             animator.SetFloat("MoveY", v);
@@ -96,15 +96,15 @@ public class PlayerMovement3 : MonoBehaviour
         //CheckSideCollision();
     }
 
-    public Transform center;       // Áß½ÉÃà (¿ø±âµÕ Áß½É)
-    public float radius;      // È¸Àü ¹ÝÁö¸§
-    public float angularSpeed;   // È¸Àü ¼Óµµ (µµ/ÃÊ)
-    public float heightSpeed;     // ¿Ã¶ó°¡´Â ¼Óµµ (À¯´Ö/ÃÊ)
+    public Transform center;       // ï¿½ß½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½)
+    public float radius;      // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float angularSpeed;   // È¸ï¿½ï¿½ ï¿½Óµï¿½ (ï¿½ï¿½/ï¿½ï¿½)
+    public float heightSpeed;     // ï¿½Ã¶ó°¡´ï¿½ ï¿½Óµï¿½ (ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½)
 
     private float currentAngle = 0f;
     private float currentHeight = 0f;
 
-    [SerializeField] private float gravity; // Áß·Â °­ÇÏ°Ô ¼³Á¤
+    [SerializeField] private float gravity; // ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
     private float verticalSpeed = 0f;
 
     void UpCircular()
@@ -118,33 +118,33 @@ public class PlayerMovement3 : MonoBehaviour
         else if (InputManager.instance.GetKey(KeyCode.D))
             horizontalInput = -1f;
 
-        // ¡æ ÀÌ ½ÃÁ¡¿¡¼­ Ãæµ¹ Ã¼Å©
+        // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ Ã¼Å©
         Vector3 centerToPlayer = transform.position - center.position;
         Vector3 tangentDir = Vector3.Cross(Vector3.up, centerToPlayer).normalized;
         Vector3 rayOrigin = transform.position + Vector3.up * 0.5f;
         float rayDistance = 0.3f;
 
-        // È¸Àü ¹æÇâ¿¡ µû¶ó ·¹ÀÌ ¹æÇâ °áÁ¤
+        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 rayDir = (horizontalInput > 0) ? tangentDir : -tangentDir;
 
         if (horizontalInput != 0 && Physics.Raycast(rayOrigin, rayDir, rayDistance, ~0, QueryTriggerInteraction.Ignore))
         {
             
-            //horizontalInput = 0f;  // Ãæµ¹ ½Ã È¸Àü Â÷´Ü
+            //horizontalInput = 0f;  // ï¿½æµ¹ ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
-        // ?? ÀÌ ÀÌÈÄ¿¡ °¢µµ °»½ÅÇØ¾ß ÇÔ!! 
+        // ?? ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½!! 
         currentAngle -= horizontalInput * angularSpeed * Time.deltaTime;
 
-        // Á¡ÇÁ Ã³¸®
+        // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         CheckGrounded();
         if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
 
-        // À§Ä¡ °è»ê
+        // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
         float rad = currentAngle * Mathf.Deg2Rad;
         float x = center.position.x + radius * Mathf.Cos(rad);
         float z = center.position.z + radius * Mathf.Sin(rad);
@@ -153,7 +153,7 @@ public class PlayerMovement3 : MonoBehaviour
         Vector3 moveVector = newXZPosition - transform.position;
         rb.MovePosition(transform.position + new Vector3(moveVector.x, 0, moveVector.z));
 
-        // ¹æÇâ °íÁ¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (horizontalInput > 0)
             transform.forward = tangentDir;
         else if (horizontalInput < 0)
@@ -165,14 +165,14 @@ public class PlayerMovement3 : MonoBehaviour
 
     void FixMove()
     {
-        // ÃÊ±âÈ­
+        // ï¿½Ê±ï¿½È­
         moveDir = Vector3.zero;
 
         CheckGrounded();
 
         if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Á¡ÇÁ Àü¿¡ ¼öÁ÷¼Óµµ ÃÊ±âÈ­
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ ï¿½Ê±ï¿½È­
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
 
@@ -199,11 +199,11 @@ public class PlayerMovement3 : MonoBehaviour
             }
         }
 
-        // ¹Ù¶óº¸´Â ¹æÇâ Àû¿ë
+        // ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (moveDir != Vector3.zero)
             transform.forward = moveDir;
 
-        // ¾Ö´Ï¸ÞÀÌÅÍ ¿¬µ¿¿ë
+        // ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
@@ -215,41 +215,41 @@ public class PlayerMovement3 : MonoBehaviour
     }
     private void CheckGrounded()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.1f; // ¾à°£ À§¿¡¼­ ½ô
+        Vector3 origin = transform.position + Vector3.up * 0.1f; // ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, jumpableLayers);
     }
 
     bool frontBlocked = false;  
 
-    private void CheckForwardCollision() //Àü¹æ ·¹ÀÌÄ³½ºÆ®
+    private void CheckForwardCollision() //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®
     {
-        Vector3 origin = transform.position + Vector3.up * 0.2f; // ÇÃ·¹ÀÌ¾î ¸öÅëÂë ³ôÀÌ
+        Vector3 origin = transform.position + Vector3.up * 0.2f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 direction = transform.forward;
         float rayDistance = 0.2f;
 
         frontBlocked = Physics.Raycast(origin, direction, rayDistance);
         if (Physics.Raycast(origin, transform.forward, out RaycastHit frontHit, rayDistance, ~0, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log("Àü¹æ Ãæµ¹: " + frontHit.collider.gameObject.name);
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹: " + frontHit.collider.gameObject.name);
         }
-        Debug.DrawRay(origin, direction * rayDistance, Color.red); // Scene¿¡¼­ ½Ã°¢È­
+        Debug.DrawRay(origin, direction * rayDistance, Color.red); // Sceneï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½È­
     }
-    private void CheckSideCollision() //ÁÂ¿ì ·¹ÀÌÄ³½ºÆ®
+    private void CheckSideCollision() //ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®
     {
         Vector3 origin = transform.position + Vector3.up * 0.2f;
         float rayDistance = 0.2f;
 
-        // ÁÂÃø
+        // ï¿½ï¿½ï¿½ï¿½
         if (Physics.Raycast(origin, -transform.right, out RaycastHit leftHit, rayDistance, ~0, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log("ÁÂÃø Ãæµ¹: " + leftHit.collider.gameObject.name);
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹: " + leftHit.collider.gameObject.name);
             
         }
 
-        // ¿ìÃø
+        // ï¿½ï¿½ï¿½ï¿½
         if (Physics.Raycast(origin, transform.right, out RaycastHit rightHit, rayDistance, ~0, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log("¿ìÃø Ãæµ¹: " + rightHit.collider.gameObject.name);
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹: " + rightHit.collider.gameObject.name);
         }
 
         Debug.DrawRay(origin, -transform.right * rayDistance, Color.green);
@@ -258,11 +258,11 @@ public class PlayerMovement3 : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Ãæµ¹ ¹ß»ý: " + collision.gameObject.name);
+        Debug.Log("ï¿½æµ¹ ï¿½ß»ï¿½: " + collision.gameObject.name);
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Æ®¸®°Å Ãæµ¹: " + other.name);
+        Debug.Log("Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹: " + other.name);
     }
 
 }

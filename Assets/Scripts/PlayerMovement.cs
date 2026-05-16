@@ -1,24 +1,24 @@
 using UnityEngine;
 
-// ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ Á¦¾î ½ºÅ©¸³Æ®
-// ½ÃÁ¡¿¡ µû¶ó ÀÌµ¿ °¡´ÉÇÑ ¹æÇâ Á¦ÇÑ
-//1,2½ºÅ×ÀÌÁö
+// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//1,2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider standingCollider;
     [SerializeField] private CapsuleCollider crouchCollider;
     private bool isCrouching = false;
 
-    public float moveSpeed; // ÀÌµ¿ ¼Óµµ
+    public float moveSpeed; // ï¿½Ìµï¿½ ï¿½Óµï¿½
     public Animator animator;
     float h = 0;
     float v = 0;
     private Vector3 moveDir = Vector3.zero;
-    //public float smoothTime = 0.1f; // ÀüÈ¯ ¼Óµµ Á¶Àý
-    //private float currentMoveX = 0f; // ÇöÀç ¾Ö´Ï¸ÞÀÌÅÍ¿¡ Àû¿ë ÁßÀÎ °ª
+    //public float smoothTime = 0.1f; // ï¿½ï¿½È¯ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+    //private float currentMoveX = 0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    // Á¡ÇÁ °ü·Ã º¯¼ö
-    //public float jumpForce = 5f; // Á¡ÇÁ Èû
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //public float jumpForce = 5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     private Rigidbody rb;
     private bool isGrounded = true;
 
@@ -27,25 +27,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask jumpableLayers;
 
-    // [Ãß°¡] ´Þ¸®±â ¹× È¸Àü ¼³Á¤ º¯¼ö
+    // [ï¿½ß°ï¿½] ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [Header("Run & Rotation Settings")]
     public bool runable;
-    public float runSpeedMultiplier = 1.5f; // ´Þ¸®±â ½Ã ¼Óµµ Áõ°¡ ¹èÀ²
-    private float currentSpeed; // ÇöÀç Àû¿ëµÇ´Â ½ÇÁ¦ ¼Óµµ
-    public float rotationOffsetA = 90f; // AÅ° ´©¸¦ ¶§ Ãß°¡ È¸Àü °¢µµ
-    public float rotationOffsetD = -90f; // DÅ° ´©¸¦ ¶§ Ãß°¡ È¸Àü °¢µµ
+    public float runSpeedMultiplier = 1.5f; // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private float currentSpeed; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    public float rotationOffsetA = 90f; // AÅ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float rotationOffsetD = -90f; // DÅ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         Vector3 camDirection = Camera.main.transform.position - transform.position;
-        camDirection.y = 0; // ¼öÁ÷ ¹æÇâ Á¦°Å ¡æ ÁÂ¿ì ¹æÇâ¸¸ °í·Á
+        camDirection.y = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½â¸¸ ï¿½ï¿½ï¿½ï¿½
         if (camDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(camDirection);
             Vector3 currentEuler = transform.eulerAngles;
-            // ÇöÀç X, Z´Â À¯ÁöÇÏ°í Y¸¸ Ä«¸Þ¶ó ¹æÇâÀ¸·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ X, Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Yï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
     }
@@ -63,14 +63,14 @@ public class PlayerMovement : MonoBehaviour
         h = 0;
         v = 0;
 
-        // [Ãß°¡] ¸Å ÇÁ·¹ÀÓ ±âº» ¼Óµµ·Î ÃÊ±âÈ­
+        // [ï¿½ß°ï¿½] ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½Óµï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         currentSpeed = moveSpeed;
 
-        // ½ÃÁ¡1: ¿ÞÂÊ ½ÃÁ¡(±âº») ¡æ ÁÂ¿ì(A, D) ÀÌµ¿¸¸ Çã¿ë
+        // ï¿½ï¿½ï¿½ï¿½1: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½âº») ï¿½ï¿½ ï¿½Â¿ï¿½(A, D) ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (!CameraPivotRotator.Instance.isSideView)
         {
             if (InputManager.instance.GetKey(KeyCode.A))
-            { // ½ÃÁ¡ ¶§¹®¿¡ ¹Ý´ë »óÅÂ
+            { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´ï¿½ ï¿½ï¿½ï¿½ï¿½
                 moveDir = Vector3.right;
                 h = Input.GetAxis("Horizontal");
                 v = Input.GetAxis("Vertical");
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 v = Input.GetAxis("Vertical");
             }
         }
-        // ½ÃÁ¡2: ¿À¸¥ÂÊ ½ÃÁ¡(Ãø¸é) ¡æ ¹æÇâÅ°(¿À¸¥ÂÊ, ¿ÞÂÊ) ÀÌµ¿¸¸ Çã¿ë
+        // ï¿½ï¿½ï¿½ï¿½2: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½) ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         else
         {
             if (InputManager.instance.GetKey(KeyCode.A))
@@ -102,10 +102,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Á¡ÇÁ Àü¿¡ ¼öÁ÷¼Óµµ ÃÊ±âÈ­
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ ï¿½Ê±ï¿½È­
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
-        //¾ÉÀºÅ° ÄÝ¶óÀÌ´õ º¯°æ
+        //ï¿½ï¿½ï¿½ï¿½Å° ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (Input.GetKey(KeyCode.LeftControl))
         {
             EnterCrouch();
@@ -115,44 +115,44 @@ public class PlayerMovement : MonoBehaviour
             ExitCrouch();
         }
 
-        //¾Ö´Ï¸ÞÀÌ¼Ç MoveState »óÅÂ º¯°æ
-        int currentState = 0; // ±âº» Ã¤³ÎÀº 0¹ø (´ë±â)
+        //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ MoveState ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        int currentState = 0; // ï¿½âº» Ã¤ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ (ï¿½ï¿½ï¿½)
         
-        if (moveDir != Vector3.zero) // ¹æÇâÅ°¸¦ ´­·¯¼­ ÀÌµ¿ ÁßÀÏ ¶§
+        if (moveDir != Vector3.zero) // ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
-            currentState = 1; // ÀÏ´Ü 1¹ø (°È±â)
+            currentState = 1; // ï¿½Ï´ï¿½ 1ï¿½ï¿½ (ï¿½È±ï¿½)
 
-            // ¸¸¾à ¿ÞÂÊ Shift Å°¸¦ ´©¸¥ »óÅÂ·Î ÀÌµ¿ ÁßÀÌ¶ó¸é?
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Shift Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½?
             if (Input.GetKey(KeyCode.LeftShift) & runable == true)
             {
-                currentState = 2; // 2¹ø (´Þ¸®±â)
-                currentSpeed = moveSpeed * runSpeedMultiplier; // [Ãß°¡] ´Þ¸®±â ÁßÀÏ ¶§ ¼Óµµ ¹èÀ² Àû¿ë
+                currentState = 2; // 2ï¿½ï¿½ (ï¿½Þ¸ï¿½ï¿½ï¿½)
+                currentSpeed = moveSpeed * runSpeedMultiplier; // [ï¿½ß°ï¿½] ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸¸¾à Ctrl Å°¸¦ ´©¸¥ »óÅÂ (¾þµå¸®±â)+ ¿òÁ÷ÀÓ
+            // ï¿½ï¿½ï¿½ï¿½ Ctrl Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½å¸®ï¿½ï¿½)+ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             else if (Input.GetKey(KeyCode.LeftControl))
             {
                 currentState = 4;
                 currentSpeed = moveSpeed * 0.5f;
             }
         }
-        else // ¾þµå¸®°í ¹æÇâÅ°¸¦ ´©¸£°í, ¸ØÃçÀÖÀ» ¶§
+        else // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
-            // ¾þµå¸²(3¹ø) 
+            // ï¿½ï¿½ï¿½å¸²(3ï¿½ï¿½) 
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 currentState = 3;
             }
             else
             {
-                currentState = 0; // ¾Æ¹«°Íµµ ¾È ´©¸£¸é 0¹ø (´ë±â)
+                currentState = 0; // ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ (ï¿½ï¿½ï¿½)
             }
         }
         animator.SetInteger("MoveState", currentState);
 
-        // ½ÇÁ¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         //transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
 
-        ////Á¡ÇÁ ÀÔ·Â Ã³¸®
+        ////ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
         //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         //{
         //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveDir != Vector3.zero)
         {
-            // [¼öÁ¤] moveSpeed ´ë½Å currentSpeed(´Þ¸®±â »óÅÂ ¹Ý¿µµÈ ¼Óµµ) »ç¿ë
+            // [ï¿½ï¿½ï¿½ï¿½] moveSpeed ï¿½ï¿½ï¿½ currentSpeed(ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¿ï¿½ï¿½ï¿½ ï¿½Óµï¿½) ï¿½ï¿½ï¿½
             Vector3 newPos = rb.position + moveDir * currentSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPos);
         }
@@ -174,24 +174,24 @@ public class PlayerMovement : MonoBehaviour
     {
         //transform.LookAt(Camera.main.transform);
         Vector3 lookDirection = Camera.main.transform.position - transform.position;
-        lookDirection.y = 0; // yÃà ¹æÇâ Á¦°ÅÇØ¼­ ¼öÆò ¹æÇâ¸¸ ¹Ù¶óº¸°Ô
+        lookDirection.y = 0; // yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¸ ï¿½Ù¶óº¸°ï¿½
 
-        if (lookDirection.sqrMagnitude > 0.001f) // ¹æÇâ º¤ÅÍ°¡ ³Ê¹« ÀÛÁö ¾ÊÀºÁö È®ÀÎ
+        if (lookDirection.sqrMagnitude > 0.001f) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
 
-            // [Ãß°¡] A ¶Ç´Â D Å°¸¦ ´©¸£°í ÀÖÀ» ¶§ Ãß°¡ È¸Àü°ª ¼³Á¤
+            // [ï¿½ß°ï¿½] A ï¿½Ç´ï¿½ D Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             float yOffset = 0f;
             if (InputManager.instance.GetKey(KeyCode.A))
             {
-                yOffset = rotationOffsetA; // ±âº» 90µµ
+                yOffset = rotationOffsetA; // ï¿½âº» 90ï¿½ï¿½
             }
             else if (InputManager.instance.GetKey(KeyCode.D))
             {
-                yOffset = rotationOffsetD; // ±âº» -90µµ
+                yOffset = rotationOffsetD; // ï¿½âº» -90ï¿½ï¿½
             }
 
-            // [¼öÁ¤] Ä«¸Þ¶ó¸¦ ¹Ù¶óº¸´Â È¸Àü°ª¿¡ yOffsetÀ» ´õÇÏ¿© ÃÖÁ¾ È¸Àü Àû¿ë
+            // [ï¿½ï¿½ï¿½ï¿½] Ä«ï¿½Þ¶ï¿½ ï¿½Ù¶óº¸´ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ yOffsetï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
         }
     }
@@ -211,11 +211,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckGrounded()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.1f; // ¾à°£ À§¿¡¼­ ½ô
+        Vector3 origin = transform.position + Vector3.up * 0.1f; // ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, jumpableLayers);
     }
 
-    ////¹Ù´Ú ÂøÁö °¨Áö
+    ////ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag("Ground"))
