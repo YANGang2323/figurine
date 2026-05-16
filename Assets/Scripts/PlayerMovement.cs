@@ -5,6 +5,10 @@ using UnityEngine;
 //1,2스테이지
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private CapsuleCollider standingCollider;
+    [SerializeField] private CapsuleCollider crouchCollider;
+    private bool isCrouching = false;
+
     public float moveSpeed; // 이동 속도
     public Animator animator;
     float h = 0;
@@ -48,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        standingCollider.enabled = true;
+        crouchCollider.enabled = false;
     }
 
     void Update()
@@ -98,16 +104,19 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // 점프 전에 수직속도 초기화
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
-        // 부드럽게 전환
-        //currentMoveX = Mathf.Lerp(currentMoveX, moveX, Time.deltaTime / smoothTime);
-        // 애니메이터에 적용
-        //animator.SetFloat("MoveX", h);
-        //animator.SetFloat("MoveY", v);
-        //animator.SetFloat("MoveX", currentMoveX);
+        //앉은키 콜라이더 변경
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            EnterCrouch();
+        }
+        else
+        {
+            ExitCrouch();
+        }
 
         //애니메이션 MoveState 상태 변경
         int currentState = 0; // 기본 채널은 0번 (대기)
-
+        
         if (moveDir != Vector3.zero) // 방향키를 눌러서 이동 중일 때
         {
             currentState = 1; // 일단 1번 (걷기)
@@ -121,7 +130,8 @@ public class PlayerMovement : MonoBehaviour
             // 만약 Ctrl 키를 누른 상태 (엎드리기)+ 움직임
             else if (Input.GetKey(KeyCode.LeftControl))
             {
-                currentState = 4; //
+                currentState = 4;
+                currentSpeed = moveSpeed * 0.5f;
             }
         }
         else // 엎드리고 방향키를 누르고, 멈춰있을 때
@@ -184,12 +194,26 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
         }
     }
+    void EnterCrouch(){
+        if (isCrouching) return;
+        isCrouching = true;
 
+        standingCollider.enabled = false;
+        crouchCollider.enabled = true;
+    }
+    void ExitCrouch(){
+        if (!isCrouching) return;
+        isCrouching = false;
+
+        crouchCollider.enabled = false;
+        standingCollider.enabled = true;
+    }
     private void CheckGrounded()
     {
         Vector3 origin = transform.position + Vector3.up * 0.1f; // 약간 위에서 쏨
         isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, jumpableLayers);
     }
+
     ////바닥 착지 감지
     //void OnCollisionEnter(Collision collision)
     //{

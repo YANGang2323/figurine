@@ -48,18 +48,19 @@ public class CCTVController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Vector3 direction = (other.transform.position + Vector3.up) - rayOrigin.position;
-            float distance = Vector3.Distance(rayOrigin.position, other.transform.position + Vector3.up);
+            // 플레이어 중심 높이 사용
+            Vector3 targetPos = other.bounds.center;
 
-            // 레이캐스트로 벽 체크
-            if (Physics.Raycast(rayOrigin.position, direction, out RaycastHit hit, distance))
+            Vector3 direction = targetPos - rayOrigin.position;
+            float distance = direction.magnitude;
+
+            if (Physics.Raycast(rayOrigin.position, direction.normalized, out RaycastHit hit, distance))
             {
-                Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));   
+                Debug.DrawRay(rayOrigin.position, direction, Color.red);
+
                 if (hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("Hit: " + hit.collider.name + " / Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
-                    // 벽이 없어서 감지됨
-                    detectionTimer += Time.deltaTime * 1.5f; // 감지 속도 가중치
+                    detectionTimer += Time.deltaTime * 1.5f;
                     UpdateLightColor();
 
                     if (detectionTimer >= detectionThreshold)
