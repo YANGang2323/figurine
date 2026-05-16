@@ -1439,6 +1439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef824bf9acf0134bbe30f59715e219e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standingCollider: {fileID: 0}
+  crouchCollider: {fileID: 0}
   moveSpeed: 5
   animator: {fileID: 955303152}
   jumpForce: 7
