@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     // [추가] 달리기 및 회전 설정 변수
     [Header("Run & Rotation Settings")]
+    public bool runable;
     public float runSpeedMultiplier = 1.5f; // 달리기 시 속도 증가 배율
     private float currentSpeed; // 현재 적용되는 실제 속도
     public float rotationOffsetA = 90f; // A키 누를 때 추가 회전 각도
@@ -122,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             currentState = 1; // 일단 1번 (걷기)
 
             // 만약 왼쪽 Shift 키를 누른 상태로 이동 중이라면?
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) & runable == true)
             {
                 currentState = 2; // 2번 (달리기)
                 currentSpeed = moveSpeed * runSpeedMultiplier; // [추가] 달리기 중일 때 속도 배율 적용
