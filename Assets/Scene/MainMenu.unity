@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
+    m_HighlightedColor: {r: 0.38039216, g: 0, b: 0, a: 0.78431374}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1988,7 +1988,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.6105375, g: 0.6945597, b: 0.7924528, a: 1}
+    m_HighlightedColor: {r: 0.38039216, g: 0, b: 0, a: 0.78431374}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
+    m_HighlightedColor: {r: 0.38039216, g: 0, b: 0, a: 0.78431374}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT
+  m_text: '   QUIT'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
   m_sharedMaterial: {fileID: -1421823920538256402, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
@@ -2524,7 +2524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NEW GAME
+  m_text: '   NEW GAME'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
   m_sharedMaterial: {fileID: -1421823920538256402, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
@@ -3144,7 +3144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOAD
+  m_text: '   LOAD'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
   m_sharedMaterial: {fileID: -1421823920538256402, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
@@ -4163,7 +4163,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
+    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.6117647, g: 0.69411767, b: 0.7921569, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4788,7 +4788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SETTING
+  m_text: '   SETTING'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
   m_sharedMaterial: {fileID: -1421823920538256402, guid: 923e2bb053cb9a34ab54b1e5b2d8e3cc, type: 2}
