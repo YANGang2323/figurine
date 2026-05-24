@@ -9,6 +9,8 @@ public class PlayerInteraction : MonoBehaviour
     // UI 이동 속도
     public float uiFollowSpeed = 10f;
 
+    public Vector3 uiOffset = new Vector3(0, 2f, 0);
+
     // 근처 상호작용 가능한 물체들
     private List<InteractableObject> nearbyObjects =
         new List<InteractableObject>();
@@ -39,7 +41,7 @@ public class PlayerInteraction : MonoBehaviour
             // Collider 중심 위치 가져오기
             Vector3 worldPosition =
                 closestObject.transform.position
-                + Vector3.up * 2f;
+                + uiOffset;
 
             // 월드 좌표 → 화면 좌표 변환
             Vector3 screenPosition =
