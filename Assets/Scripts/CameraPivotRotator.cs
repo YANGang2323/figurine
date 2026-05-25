@@ -1,18 +1,18 @@
-using System.Runtime.InteropServices;
+ï»¿using System.Runtime.InteropServices;
 using UnityEngine;
 
-// Ä«¸Ş¶ó ½ÃÁ¡À» È¸Àü½ÃÅ°´Â ½ºÅ©¸³Æ® (½Ì±ÛÅæ Àû¿ë)
-// Tab Å°¸¦ ´­·¯ ¿ŞÂÊ ½ÃÁ¡(±âº») ¡ê ¿À¸¥ÂÊ ½ÃÁ¡(Ãø¸é) ÀüÈ¯
+// ì¹´ë©”ë¼ ì‹œì ì„ íšŒì „ì‹œí‚¤ëŠ” ìŠ¤í¬ë¦½íŠ¸ (ì‹±ê¸€í†¤ ì ìš©)
+// Tab í‚¤ë¥¼ ëˆŒëŸ¬ ì™¼ìª½ ì‹œì (ê¸°ë³¸) â†” ì˜¤ë¥¸ìª½ ì‹œì (ì¸¡ë©´) ì „í™˜
 public class CameraPivotRotator : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static CameraPivotRotator Instance { get; private set; }
 
     [Header("Rotation Settings")]
-    public float rotationSpeed = 5f;          // È¸Àü ¼Óµµ Á¶Àı
-    public bool isSideView;           // ÇöÀç Ãø¸é ½ÃÁ¡ ¿©ºÎ (true¸é ½ÃÁ¡2)
+    public float rotationSpeed = 5f;          // íšŒì „ ì†ë„ ì¡°ì ˆ
+    public bool isSideView;           // í˜„ì¬ ì¸¡ë©´ ì‹œì  ì—¬ë¶€ (trueë©´ ì‹œì 2)
     private bool isRotating = false;
-    public bool IsRotating => isRotating; // ¿ÜºÎ Á¢±Ù¿ë
+    public bool IsRotating => isRotating; // ì™¸ë¶€ ì ‘ê·¼ìš©
 
     [Header("Timing Puzzle")]
     public bool timingMode = false;
@@ -20,19 +20,20 @@ public class CameraPivotRotator : MonoBehaviour
     public float timingSpeed = 10.0f;
 
 
-    //Ãß°¡
+    //ì¶”ê°€
     [Header("Player Following Settings")]
-    public Transform player; // ÇÃ·¹ÀÌ¾î Transform
-    public float followSpeed = 3f; // Ä«¸Ş¶ó°¡ ÇÃ·¹ÀÌ¾î¸¦ µû¶ó°¡´Â ¼Óµµ
-    public Vector3 sideViewOffset = new Vector3(5f, 0f, 0f); // »çÀÌµåºä¿¡¼­ÀÇ ¿ÀÇÁ¼Â
-    private PlayerMovement3 playerMovement;
+    public PlayerMovement playerMovement;
+    public Transform player; // í”Œë ˆì´ì–´ Transform
+    public float followSpeed = 3f; // ì¹´ë©”ë¼ê°€ í”Œë ˆì´ì–´ë¥¼ ë”°ë¼ê°€ëŠ” ì†ë„
+    public Vector3 sideViewOffset = new Vector3(5f, 0f, 0f); // ì‚¬ì´ë“œë·°ì—ì„œì˜ ì˜¤í”„ì…‹
+    private PlayerMovement3 playerMovement3;
     public GameObject playerObj;
 
 
     [Header("Movement Constraints - Current")]
     public bool useMovementConstraints = true;
-    private Vector3 minPosition; // ÇöÀç Àû¿ë ÁßÀÎ ÃÖ¼Ò ¹üÀ§
-    private Vector3 maxPosition; // ÇöÀç Àû¿ë ÁßÀÎ ÃÖ´ë ¹üÀ§
+    private Vector3 minPosition; // í˜„ì¬ ì ìš© ì¤‘ì¸ ìµœì†Œ ë²”ìœ„
+    private Vector3 maxPosition; // í˜„ì¬ ì ìš© ì¤‘ì¸ ìµœëŒ€ ë²”ìœ„
     
     [Header("Movement Constraints - Default View")]
     public Vector3 minPosDefault = new Vector3(-10f, 0f, -10f);
@@ -46,11 +47,11 @@ public class CameraPivotRotator : MonoBehaviour
     public enum CameraMovingType { Fix, Moving, Follow } 
     public CameraMovingType cameraType = CameraMovingType.Fix;
 
-    private Quaternion defaultRotation;       // ¿ŞÂÊ ½ÃÁ¡(±âº»)
-    private Quaternion sideRotation;          // ¿À¸¥ÂÊ ½ÃÁ¡
-    private Quaternion targetRotation;        // ¸ñÇ¥ È¸Àü°ª
-    private Vector3 defaultPosition; // ±âº» À§Ä¡
-    private Vector3 targetPosition; // ¸ñÇ¥ À§Ä¡
+    private Quaternion defaultRotation;       // ì™¼ìª½ ì‹œì (ê¸°ë³¸)
+    private Quaternion sideRotation;          // ì˜¤ë¥¸ìª½ ì‹œì 
+    private Quaternion targetRotation;        // ëª©í‘œ íšŒì „ê°’
+    private Vector3 defaultPosition; // ê¸°ë³¸ ìœ„ì¹˜
+    private Vector3 targetPosition; // ëª©í‘œ ìœ„ì¹˜
     private string nowstage;
 
     public GameObject PipeManager;
@@ -59,7 +60,7 @@ public class CameraPivotRotator : MonoBehaviour
     public GameObject pipe;
     void Awake()
     {
-        // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º ÃÊ±âÈ­
+        // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ ì´ˆê¸°í™”
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         
@@ -69,7 +70,7 @@ public class CameraPivotRotator : MonoBehaviour
     {
         if (player != null)
         {
-            playerMovement = player.GetComponent<PlayerMovement3>();
+            playerMovement3 = player.GetComponent<PlayerMovement3>();
             //sideViewOffset = transform.position - player.position;
         }
             
@@ -92,7 +93,7 @@ public class CameraPivotRotator : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
         /* GameData data = DataManager.instance.nowGame;     
         nowstage = data.stage.ToString();
-        PipeRun = PipeManager.GetComponent<BoardManager>().PipeRun;*/ //Àá½ÃÁÖ¼®Ã³¸®0314
+        PipeRun = PipeManager.GetComponent<BoardManager>().PipeRun;*/ //ì ì‹œì£¼ì„ì²˜ë¦¬0314
 
         //if (nowstage == "1")
         //{
@@ -112,12 +113,12 @@ public class CameraPivotRotator : MonoBehaviour
         //    else
         //    {
         //        cameraType = CameraMovingType.Fix;
-        //        Debug.Log("Fix¿Ï·á!");
+        //        Debug.Log("Fixì™„ë£Œ!");
         //    }
 
 
         //}
-        //else if (nowstage == "3") //3½ºÅ×ÀÌÁö Ä«¸Ş¶ó Á¶°Ç Á¤ÇÏ±â
+        //else if (nowstage == "3") //3ìŠ¤í…Œì´ì§€ ì¹´ë©”ë¼ ì¡°ê±´ ì •í•˜ê¸°
         //{
         //    //if (!isSideView) { cameraType = CameraMovingType.Fix; }
         //    cameraType = CameraMovingType.Follow;
@@ -127,46 +128,61 @@ public class CameraPivotRotator : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("ÇöÀç cameraType: " + cameraType);
-        //Debug.Log("ÇöÀç ½ºÅ×ÀÌÁö: " + nowstage);
+        //Debug.Log("í˜„ì¬ cameraType: " + cameraType);
+        //Debug.Log("í˜„ì¬ ìŠ¤í…Œì´ì§€: " + nowstage);
         
-        // Tab Å° ÀÔ·Â ½Ã ½ÃÁ¡ ÀüÈ¯
+        // Tab í‚¤ ì…ë ¥ ì‹œ ì‹œì  ì „í™˜
         if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
             isSideView = !isSideView;
             targetRotation = isSideView ? sideRotation : defaultRotation;
             isRotating = true;
 
-            // ½ÃÁ¡¿¡ µû¶ó Á¦ÇÑ ¹üÀ§¸¦ Áï½Ã ±³Ã¼
+            //playermovement ì´ë™ ì œí•œ
+            if (playerMovement != null)
+                playerMovement.canMove = false;
+
+            // ì‹œì ì— ë”°ë¼ ì œí•œ ë²”ìœ„ë¥¼ ì¦‰ì‹œ êµì²´
             SetConstraintsByView();
         }
 
 
-        // ºÎµå·¯¿î È¸Àü Ã³¸®
         if (isRotating)
         {
-            float rotationSpeed = timingMode ? timingSpeed : 5f;
-            if (cameraType == CameraMovingType.Moving)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            //// íƒ€ì´ë° ëª¨ë“œë©´ ì¦‰ì‹œ íšŒì „
+            //if (timingMode)
+            //{
+            //    transform.rotation = targetRotation;
+            //    isRotating = false;
+            //    if (playerMovement != null)
+            //        playerMovement.canMove = true;
+            //}
+            //else
+            //{
+                float rotationSpeed = 5f;
 
-            }
-            else { transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); 
-            }
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    Time.deltaTime * rotationSpeed
+                );
 
-            // È¸Àü ¿Ï·á ÆÇÁ¤
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
-            {
-                transform.rotation = targetRotation;
-                isRotating = false;
-            }
+                // íšŒì „ ì™„ë£Œ íŒì •
+                if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
+                {
+                    transform.rotation = targetRotation;
+                    isRotating = false;
+                    if (playerMovement != null)
+                        playerMovement.canMove = true;
+                }
+            //}
         }
 
         FollowPlayer();
     }
     void DecideCameraType() {
         //GameData data = DataManager.instance.nowGame;
-        //nowstage = data.stage.ToString(); */ //Àá½ÃÁÖ¼®0314
+        //nowstage = data.stage.ToString(); */ //ì ì‹œì£¼ì„0314
         nowstage = "1";
 
         defaultPosition = transform.position;
@@ -199,12 +215,12 @@ public class CameraPivotRotator : MonoBehaviour
             else
             {
                 cameraType = CameraMovingType.Fix;
-                Debug.Log("Fix¿Ï·á!");
+                Debug.Log("Fixì™„ë£Œ!");
             }
             
             
         }
-        else if (nowstage == "3") //3½ºÅ×ÀÌÁö Ä«¸Ş¶ó Á¶°Ç Á¤ÇÏ±â
+        else if (nowstage == "3") //3ìŠ¤í…Œì´ì§€ ì¹´ë©”ë¼ ì¡°ê±´ ì •í•˜ê¸°
         {
             var playerscript1 = playerObj.GetComponent<PlayerMovement>();
             var playerscript3 = playerObj.GetComponent<PlayerMovement3>();
@@ -227,14 +243,14 @@ public class CameraPivotRotator : MonoBehaviour
     void FollowPlayer()
     {
 
-        // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ ¿ÀÇÁ¼ÂÀ» ´õÇÑ ¸ñÇ¥ À§Ä¡ °è»ê
+        // í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ì˜¤í”„ì…‹ì„ ë”í•œ ëª©í‘œ ìœ„ì¹˜ ê³„ì‚°
         //Vector3 desiredPosition = player.position + sideViewOffset;
-        // [ÇÙ½É] ÇöÀç Ä«¸Ş¶óÀÇ È¸Àü(transform.rotation)À» ¿ÀÇÁ¼Â¿¡ °öÇÕ´Ï´Ù.
-        // ÀÌ·¸°Ô ÇÏ¸é ÅÇ Å°¸¦ ´­·¯ Ä«¸Ş¶ó°¡ µ¹ ¶§, ¿ÀÇÁ¼Â ¹æÇâµµ °°ÀÌ È¸ÀüÇÕ´Ï´Ù.
+        // [í•µì‹¬] í˜„ì¬ ì¹´ë©”ë¼ì˜ íšŒì „(transform.rotation)ì„ ì˜¤í”„ì…‹ì— ê³±í•©ë‹ˆë‹¤.
+        // ì´ë ‡ê²Œ í•˜ë©´ íƒ­ í‚¤ë¥¼ ëˆŒëŸ¬ ì¹´ë©”ë¼ê°€ ëŒ ë•Œ, ì˜¤í”„ì…‹ ë°©í–¥ë„ ê°™ì´ íšŒì „í•©ë‹ˆë‹¤.
         Vector3 rotatedOffset = transform.rotation * sideViewOffset;
         Vector3 desiredPosition = player.position + rotatedOffset;
 
-        // ¿òÁ÷ÀÓ Á¦ÇÑ Àû¿ë
+        // ì›€ì§ì„ ì œí•œ ì ìš©
         if (useMovementConstraints)
         {
             desiredPosition.x = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
@@ -242,14 +258,14 @@ public class CameraPivotRotator : MonoBehaviour
             desiredPosition.z = Mathf.Clamp(desiredPosition.z, minPosition.z, maxPosition.z);
         }
 
-        // ºÎµå·´°Ô ÀÌµ¿
+        // ë¶€ë“œëŸ½ê²Œ ì´ë™
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
 
-        // [º¸Á¤] ³¡±îÁö ¾È µû¶ó°¡´Â ¹®Á¦ ÇØ°á
+        // [ë³´ì •] ëê¹Œì§€ ì•ˆ ë”°ë¼ê°€ëŠ” ë¬¸ì œ í•´ê²°
         if (Vector3.Distance(transform.position, desiredPosition) < 0.01f)
             transform.position = desiredPosition;
     }
-    // ¿ÜºÎ¿¡¼­ ¿òÁ÷ÀÓ ¹üÀ§¸¦ ¼³Á¤ÇÒ ¼ö ÀÖ´Â ¸Ş¼­µå
+    // ì™¸ë¶€ì—ì„œ ì›€ì§ì„ ë²”ìœ„ë¥¼ ì„¤ì •í•  ìˆ˜ ìˆëŠ” ë©”ì„œë“œ
     public void SetMovementConstraints(Vector3 min, Vector3 max)
     {
             minPosition = min;
@@ -257,15 +273,15 @@ public class CameraPivotRotator : MonoBehaviour
     }
 
 
-    public Vector3 cameraOffset;      // Ä«¸Ş¶ó¿Í ÇÃ·¹ÀÌ¾î »çÀÌ °Å¸®
+    public Vector3 cameraOffset;      // ì¹´ë©”ë¼ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ ê±°ë¦¬
     
-        // ¿ÜºÎ¿¡¼­ ÇÃ·¹ÀÌ¾î µû¶ó°¡±â ¼³Á¤À» º¯°æÇÒ ¼ö ÀÖ´Â ¸Ş¼­µå
+        // ì™¸ë¶€ì—ì„œ í”Œë ˆì´ì–´ ë”°ë¼ê°€ê¸° ì„¤ì •ì„ ë³€ê²½í•  ìˆ˜ ìˆëŠ” ë©”ì„œë“œ
     public void SetFollowSettings(float speed, Vector3 offset)
     {
             followSpeed = speed;
             sideViewOffset = offset;
     }
-    // [Ãß°¡] ½ÃÁ¡¿¡ µû¶ó ¹üÀ§¸¦ °¥¾Æ³¢¿öÁÖ´Â Àü¿ë ÇÔ¼ö
+    // [ì¶”ê°€] ì‹œì ì— ë”°ë¼ ë²”ìœ„ë¥¼ ê°ˆì•„ë¼ì›Œì£¼ëŠ” ì „ìš© í•¨ìˆ˜
     void SetConstraintsByView()
     {
         if (isSideView)
@@ -282,49 +298,49 @@ public class CameraPivotRotator : MonoBehaviour
     
     void FreeCircleFollowPlayer()
     {
-        if (player == null || playerMovement == null || playerMovement.center == null)
+        if (player == null || playerMovement3 == null || playerMovement3.center == null)
             return;
 
-        // Áß½É ±âÁØ º¤ÅÍ
-        Vector3 center = playerMovement.center.position;
+        // ì¤‘ì‹¬ ê¸°ì¤€ ë²¡í„°
+        Vector3 center = playerMovement3.center.position;
         Vector3 toPlayer = player.position - center;
 
         float playerRadius = toPlayer.magnitude;
-        float cameraRadius = playerRadius + 3f; // Ä«¸Ş¶ó°¡ ÇÃ·¹ÀÌ¾îº¸´Ù ´õ ¸Ö¸® ¶³¾îÁöµµ·Ï
+        float cameraRadius = playerRadius + 3f; // ì¹´ë©”ë¼ê°€ í”Œë ˆì´ì–´ë³´ë‹¤ ë” ë©€ë¦¬ ë–¨ì–´ì§€ë„ë¡
 
-        // ÇÃ·¹ÀÌ¾î°¡ ÀÖ´Â °¢µµ °è»ê (XZ Æò¸é)
+        // í”Œë ˆì´ì–´ê°€ ìˆëŠ” ê°ë„ ê³„ì‚° (XZ í‰ë©´)
         float angleRad = Mathf.Atan2(toPlayer.z, toPlayer.x);
 
-        // Ä«¸Ş¶ó À§Ä¡ = °°Àº °¢µµ, ´õ Å« ¹İÁö¸§
+        // ì¹´ë©”ë¼ ìœ„ì¹˜ = ê°™ì€ ê°ë„, ë” í° ë°˜ì§€ë¦„
         float x = center.x + cameraRadius * Mathf.Cos(angleRad);
         float z = center.z + cameraRadius * Mathf.Sin(angleRad);
         float y = player.position.y + 1f; 
 
         Vector3 desiredPosition = new Vector3(x, y, z);
 
-        float t = 1f - Mathf.Exp(-10f * Time.deltaTime); // ºü¸¥ Áö¼ö º¸°£
+        float t = 1f - Mathf.Exp(-10f * Time.deltaTime); // ë¹ ë¥¸ ì§€ìˆ˜ ë³´ê°„
         transform.position = Vector3.Lerp(transform.position, desiredPosition, t);
 
         Vector3 lookAtPos = player.position;
-        lookAtPos.y = transform.position.y; // ÇöÀç Ä«¸Ş¶ó ³ôÀÌ·Î °íÁ¤ (X, ZÃà È¸Àü ¹æÁö)
+        lookAtPos.y = transform.position.y; // í˜„ì¬ ì¹´ë©”ë¼ ë†’ì´ë¡œ ê³ ì • (X, Zì¶• íšŒì „ ë°©ì§€)
         transform.LookAt(lookAtPos);
     }
     //void FreeFollowPlayer()
     //{
     //    if (player == null) return;
 
-    //    // ÇÃ·¹ÀÌ¾î ¡æ Áß½É ¹æÇâ °è»ê
+    //    // í”Œë ˆì´ì–´ â†’ ì¤‘ì‹¬ ë°©í–¥ ê³„ì‚°
     //    Vector3 playerToCenter = player.position - playerMovement.center.position;
-    //    Vector3 offsetDirection = Quaternion.Euler(0f, 90f, 0f) * playerToCenter.normalized; // 90µµ È¸ÀüÇØ¼­ ¿·¿¡¼­ º¸±â
+    //    Vector3 offsetDirection = Quaternion.Euler(0f, 90f, 0f) * playerToCenter.normalized; // 90ë„ íšŒì „í•´ì„œ ì˜†ì—ì„œ ë³´ê¸°
 
-    //    float distance = 5f; // ÇÃ·¹ÀÌ¾î¿Í Ä«¸Ş¶ó °Å¸®
-    //    float height = 0.1f;   // Ä«¸Ş¶ó ³ôÀÌ
+    //    float distance = 5f; // í”Œë ˆì´ì–´ì™€ ì¹´ë©”ë¼ ê±°ë¦¬
+    //    float height = 0.1f;   // ì¹´ë©”ë¼ ë†’ì´
 
-    //    // ÃÖÁ¾ À§Ä¡ °è»ê (¿ø ±Ëµµ µû¶ó È¸Àü)
+    //    // ìµœì¢… ìœ„ì¹˜ ê³„ì‚° (ì› ê¶¤ë„ ë”°ë¼ íšŒì „)
     //    Vector3 desiredPosition = player.position + offsetDirection * distance + Vector3.up * height;
 
     //    transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
-    //    //transform.LookAt(player.position + Vector3.up * 1f); // ¾à°£ À§¸¦ ¹Ù¶óº¸°Ô
+    //    //transform.LookAt(player.position + Vector3.up * 1f); // ì•½ê°„ ìœ„ë¥¼ ë°”ë¼ë³´ê²Œ
     //    Debug.Log("FreeFollow target position: " + desiredPosition);
     //    Debug.Log("Camera position before move: " + transform.position);
     //}

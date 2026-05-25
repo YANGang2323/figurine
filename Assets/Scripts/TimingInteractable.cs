@@ -4,32 +4,54 @@ public class TimingInteractable : MonoBehaviour
 {
     public bool isActivated = false;
 
-    public Renderer rend;
-    public Color normalColor = Color.white;
-    public Color targetColor = Color.yellow;
-    public Color activatedColor = Color.green;
+    [Header("Outline")]
+    public Outline outline;
+
+    [Header("Effects")]
+    public ParticleSystem successParticle;
+    //public AudioSource audioSource;
+    //public AudioClip successClip;
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        rend.material.color = normalColor;
+        if (outline == null)
+            outline = GetComponent<Outline>();
+
+        if (outline != null)
+        {
+            outline.enabled = false;
+
+            // Quick Outline 설정
+            outline.OutlineWidth = 1f;
+        }
     }
 
+    // 🎯 타겟팅
     public void SetTarget(bool active)
     {
         if (isActivated) return;
 
-        if (active)
-            rend.material.color = targetColor;
-        else
-            rend.material.color = normalColor;
+        if (outline != null)
+            outline.enabled = active;
     }
 
-    public void Activate()
+    // ✅ 성공
+    public virtual void Activate()
     {
         if (isActivated) return;
 
         isActivated = true;
-        rend.material.color = activatedColor;
+
+        // Outline 제거
+        if (outline != null)
+            outline.enabled = false;
+
+        // 파티클 재생
+        if (successParticle != null)
+            successParticle.Play();
+
+        // 띵 소리
+        //if (audioSource != null && successClip != null)
+        //    audioSource.PlayOneShot(successClip);
     }
 }

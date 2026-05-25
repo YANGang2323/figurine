@@ -11,7 +11,7 @@ public class TimingInteractionManager : MonoBehaviour
 
     [Header("Timing Settings")]
     public float lineTolerance = 120f;   // 중앙선 판정 두께
-    public float timingWindow = 0.3f;  // 입력 허용 시간
+    public float timingWindow = 0.5f;  // 입력 허용 시간
 
     private TimingInteractable currentTarget;
 

@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CapsuleCollider standingCollider;
     [SerializeField] private CapsuleCollider crouchCollider;
     private bool isCrouching = false;
-
+    public bool canMove = true;
+        
     public float moveSpeed; // �̵� �ӵ�
     public Animator animator;
     float h = 0;
@@ -59,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
+
         moveDir = Vector3.zero;
         h = 0;
         v = 0;
