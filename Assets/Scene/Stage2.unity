@@ -292,7 +292,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 1, g: 0.90539324, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.55919003, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 67
@@ -867,11 +867,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300002, guid: 670e9ab602834f049b0dac77d6a298d8, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6b74074c1b399f5448486ffa52329ddf, type: 2}
     - target: {fileID: 2300006, guid: 670e9ab602834f049b0dac77d6a298d8, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 8435c264ba4b3ef46abdcf3b27cda62c, type: 2}
     m_RemovedComponents: []
@@ -1631,10 +1631,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRotating: 1
-  rotationAngle: 45
+  rotationAngle: 60
   rotationSpeed: 0.7
   cctvLight: {fileID: 683912512}
-  detectionThreshold: 1
+  detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1208358169}
 --- !u!4 &237800488
@@ -1646,7 +1646,7 @@ Transform:
   m_GameObject: {fileID: 237800483}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: -19.6}
   m_LocalScale: {x: 0.40047002, y: 0.40047, z: 0.40047002}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2066,7 +2066,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 1, g: 0.90539324, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.56078434, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 63
@@ -2211,7 +2211,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 1, g: 0.90539324, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.56078434, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 63
@@ -4201,10 +4201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRotating: 1
-  rotationAngle: 60
-  rotationSpeed: 0.7
+  rotationAngle: 50
+  rotationSpeed: 0.8
   cctvLight: {fileID: 359575559}
-  detectionThreshold: 1
+  detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1930827678}
 --- !u!1 &641919711
@@ -4512,7 +4512,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 1, g: 0.90539324, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.56078434, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 63
@@ -5591,9 +5591,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRotating: 1
   rotationAngle: 60
-  rotationSpeed: 0.8
+  rotationSpeed: 0.6
   cctvLight: {fileID: 34264124}
-  detectionThreshold: 1
+  detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1335924968}
 --- !u!4 &930744287
@@ -5605,7 +5605,7 @@ Transform:
   m_GameObject: {fileID: 930744282}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -36}
+  m_LocalPosition: {x: 0, y: 0, z: -34.82}
   m_LocalScale: {x: 0.4051956, y: 0.40519556, z: 0.4051956}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6068,7 +6068,7 @@ Transform:
   m_GameObject: {fileID: 1199577610}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -7.63, z: 0}
+  m_LocalPosition: {x: 0, y: -7.66, z: 0}
   m_LocalScale: {x: 10, y: 0.10000004, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7025,9 +7025,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRotating: 1
   rotationAngle: 45
-  rotationSpeed: 0.7
+  rotationSpeed: 0.9
   cctvLight: {fileID: 359190137}
-  detectionThreshold: 1
+  detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 382630953}
 --- !u!4 &1539821697
@@ -7039,7 +7039,7 @@ Transform:
   m_GameObject: {fileID: 1539821692}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -24}
+  m_LocalPosition: {x: 0, y: 0, z: -26.7}
   m_LocalScale: {x: 0.40047002, y: 0.40047, z: 0.40047002}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7609,7 +7609,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -7820,7 +7820,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -9002,7 +9002,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -9347,7 +9347,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -9585,6 +9585,7 @@ MonoBehaviour:
   timingMode: 0
   normalSpeed: 5
   timingSpeed: 1.2
+  playerMovement: {fileID: 0}
   player: {fileID: 955303158}
   followSpeed: 3
   sideViewOffset: {x: 0, y: 1.8, z: 0}
