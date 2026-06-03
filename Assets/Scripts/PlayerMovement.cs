@@ -60,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (InputLockManager.IsLocked)
+            return;
         if (!canMove)
             return;
 

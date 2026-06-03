@@ -18,7 +18,8 @@ public class GameData
 
     public string sceneName;       // 저장된 씬 이름
     public Vector3 playerPosition = Vector3.zero; // 플레이어 위치
-    
+    public List<string> playedDialogues = new List<string>();    // 재생된 대화 ID 목록
+
 }
 public class DataManager : MonoBehaviour
 {

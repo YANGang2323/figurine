@@ -130,7 +130,9 @@ public class CameraPivotRotator : MonoBehaviour
     {
         //Debug.Log("현재 cameraType: " + cameraType);
         //Debug.Log("현재 스테이지: " + nowstage);
-        
+        //인풋막을 때는 카메라 회전도 막기
+        if (InputLockManager.IsLocked)
+            return;
         // Tab 키 입력 시 시점 전환
         if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
