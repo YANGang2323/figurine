@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: NPC_ExtraWoman
+  m_Name: NPC_ExtraWoman_First
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: "\uC5D1\uC2A4\uD2B8\uB77C1"
-  playOnlyOnce: 0
+  dialogueID: "\uC5D1\uC2A4\uD2B8\uB77C1 first"
+  playOnlyOnce: 1
   lines:
   - speakerName: "\uC5D1\uC2A4\uD2B8\uB77C1"
     text: "\u3161...\u3161\u3161...\u3161..."
@@ -54,7 +54,7 @@ MonoBehaviour:
     portrait: {fileID: 0}
   - speakerName: 
     text: "\uB2F9\uC2E0\uC740 \uADF8\uB140\uC640 \uAC00\uBCBC\uC6B4 \uC774\uC57C\uAE30\uB97C
-      \uB9C8\uCD98 \uB4A4, \uB2E4\uC2DC \uADD3\uAC00\uB97C \uB9CC\uC9C0\uC791\uAC70\uB838\uB2E4."
+      \uB9C8\uCE5C \uB4A4, \uB2E4\uC2DC \uADD3\uAC00\uB97C \uB9CC\uC9C0\uC791\uAC70\uB838\uB2E4."
     portrait: {fileID: 0}
   - speakerName: 
     text: "\uD655\uC2E4\uD558\uAC8C \uB290\uAEF4\uC9C0\uB294 \uAE30\uACC4\uC758 \uAC10\uAC01.

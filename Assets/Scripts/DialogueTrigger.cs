@@ -9,8 +9,16 @@ public enum DialogueTriggerType
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public DialogueData dialogue;
     public DialogueTriggerType triggerType;
+
+    [Header("처음 대화")]
+    public DialogueData firstDialogue;
+
+    [Header("반복 대화")]
+    public DialogueData repeatDialogue;
+
+    [Header("퍼즐 완료 후 대화 (선택사항)")]
+    public DialogueData puzzleCompleteDialogue;
 
     private void Start()
     {
@@ -22,15 +30,22 @@ public class DialogueTrigger : MonoBehaviour
 
     public void PlayDialogue()
     {
-        if (dialogue == null)
+        if (firstDialogue == null)
             return;
 
-        if (dialogue.playOnlyOnce &&
-            DataManager.Instance.nowGame.playedDialogues.Contains(dialogue.dialogueID))
+        bool played =
+            DataManager.Instance.nowGame.playedDialogues
+            .Contains(firstDialogue.dialogueID);
+        Debug.Log($"played = {played}");
+
+        if (!played)
         {
-            return;
+            DialogueManager.Instance.StartDialogue(firstDialogue);
         }
-
-        DialogueManager.Instance.StartDialogue(dialogue);
+        else
+        {
+            if (repeatDialogue != null)
+                DialogueManager.Instance.StartDialogue(repeatDialogue);
+        }
     }
 }

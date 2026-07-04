@@ -95,8 +95,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        if (currentDialogue != null &&
-           currentDialogue.playOnlyOnce)
+        if (currentDialogue != null)
         {
             if (!DataManager.Instance.nowGame.playedDialogues
                 .Contains(currentDialogue.dialogueID))

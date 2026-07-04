@@ -15,7 +15,7 @@ public class Game : MonoBehaviour
     public GameObject OptionUI;
     public GameObject SaveUI;
     public GameObject Save;
-    public GameObject pipeManager;
+    //public GameObject pipeManager;
 
     //public Text name;
     //public Text level;
@@ -44,7 +44,7 @@ public class Game : MonoBehaviour
         nowstage = data.stage.ToString();
         nowpiece = data.piece.ToString();
         nowinfo = data.info.ToString();
-        pipeManager.SetActive(false);
+        //pipeManager.SetActive(false);
         //if(nowstage == "1")
         //{
         //    Camera.main.orthographicSize = 2.5f;
