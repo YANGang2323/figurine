@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: emblem_Complete
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: emblem_Complete
+  playOnlyOnce: 0
+  lines:
+  - speakerName: "\uC8FC\uC778\uACF5"
+    text: "\uC774 \uC815\uB3C4\uBA74 \uB410\uB2E4."
+    portrait: {fileID: 0}
+  - speakerName: "\uC8FC\uC778\uACF5"
+    text: "\uB2E4\uB978 \uACF3\uC744 \uB354 \uB458\uB7EC\uBCFC\uAE4C."
+    portrait: {fileID: 0}

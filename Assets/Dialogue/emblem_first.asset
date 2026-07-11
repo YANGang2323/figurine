@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: emblem_first
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: emblem_first
+  playOnlyOnce: 1
+  lines:
+  - speakerName: "\uC8FC\uC778\uACF5"
+    text: "\uC774\uAC74... \uAC00\uBB38\uC758 \uBB38\uC7A5\uC774 \uC774\uC0C1\uD574\uC9C4\uAC83
+      \uAC19\uB2E4. "
+    portrait: {fileID: 0}
+  - speakerName: "\uC8FC\uC778\uACF5"
+    text: "\uB2E4\uB978 \uC0AC\uB78C\uC774 \uBCF4\uAE30\uC804\uC5D0 \uC81C\uB300\uB85C
+      \uB3CC\uB824\uB193\uC790."
+    portrait: {fileID: 0}
+  - speakerName: 
+    text: "E \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD574
+      \uBCF4\uC138\uC694."
+    portrait: {fileID: 0}

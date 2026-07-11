@@ -48,4 +48,12 @@ public class DialogueTrigger : MonoBehaviour
                 DialogueManager.Instance.StartDialogue(repeatDialogue);
         }
     }
+
+    public void PlayCompleteDialogue()
+    {
+        if (puzzleCompleteDialogue != null)
+        {
+            DialogueManager.Instance.StartDialogue(puzzleCompleteDialogue);
+        }
+    }
 }

@@ -101,6 +101,10 @@ public class PlayerInteraction : MonoBehaviour
             if (obj == null)
                 continue;
 
+            // 상호작용 불가한 오브젝트 예외 처리 인터랙션오브젝트의 IsAvailable()
+            if (!obj.IsAvailable())
+                continue;
+
             // 거리 계산
             float distance =
                 Vector3.Distance(
