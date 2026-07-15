@@ -12,7 +12,9 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text speakerText;
     public TMP_Text dialogueText;
 
-    public Image portraitImage;
+    public Image backgroundImage;
+    public Image leftPortraitImage;
+    public Image rightPortraitImage;
 
     private Queue<DialogueLine> lines
     = new Queue<DialogueLine>();
@@ -82,15 +84,41 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = line.text;
         //portraitImage.sprite = line.portrait;
 
-        if (line.portrait != null)
+        // 배경
+        if (line.hideBackground)
         {
-            portraitImage.gameObject.SetActive(true);
-            portraitImage.sprite = line.portrait;
+            backgroundImage.gameObject.SetActive(false);
         }
-        else
+        else if (line.background != null)
         {
-            portraitImage.gameObject.SetActive(false);
+            backgroundImage.gameObject.SetActive(true);
+            backgroundImage.sprite = line.background;
         }
+        // background == null이면 아무것도 안 함(이전 배경 유지)
+
+        // 왼쪽 초상화
+        if (line.hideLeftPortrait)
+        {
+            leftPortraitImage.gameObject.SetActive(false);
+        }
+        else if (line.leftPortrait != null)
+        {
+            leftPortraitImage.gameObject.SetActive(true);
+            leftPortraitImage.sprite = line.leftPortrait;
+        }
+        //null이면 아무것도 안 함(이전 유지)
+
+        // 오른쪽 초상화
+        if (line.hideRightPortrait)
+        {
+            rightPortraitImage.gameObject.SetActive(false);
+        }
+        else if (line.rightPortrait != null)
+        {
+            rightPortraitImage.gameObject.SetActive(true);
+            rightPortraitImage.sprite = line.rightPortrait;
+        }
+        //null이면 아무것도 안 함(이전 유지)
     }
 
     void EndDialogue()
@@ -104,6 +132,9 @@ public class DialogueManager : MonoBehaviour
                     .Add(currentDialogue.dialogueID);
             }
         }
+        backgroundImage.gameObject.SetActive(false);
+        leftPortraitImage.gameObject.SetActive(false);
+        rightPortraitImage.gameObject.SetActive(false);
 
         panel.SetActive(false);
         isPlaying = false;

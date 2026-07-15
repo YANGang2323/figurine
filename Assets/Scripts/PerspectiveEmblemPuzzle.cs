@@ -26,10 +26,6 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
     public PerspectivePuzzlePiece pieceX;
     public PerspectivePuzzlePiece pieceY;
 
-    [Header("Answer Rotation")]
-    public float answerX = 0f;
-    public float answerY = 0f;
-
     private void Awake()
     {
         startInteractable = GetComponent<InteractableObject>();
@@ -73,6 +69,7 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
                 break;
 
             case PuzzleState.Cleared:
+                dialogueTrigger.PlayPuzzleCompleteDialogue();
                 break;
         }
     }
@@ -82,13 +79,11 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
         if (state != PuzzleState.Playing)
             return;
 
-        bool rightCorrect =
-            Mathf.Abs(Mathf.DeltaAngle(
-                pieceX.transform.localEulerAngles.x,
-                answerY)) < 1f;
+        bool rightCorrect = pieceX.IsCorrect();
+        bool leftCorrect = pieceY.IsCorrect();
 
         // 첫 번째 조각 완성
-        if (rightCorrect && !firstPieceCompleted)
+        if (!firstPieceCompleted && (rightCorrect || leftCorrect))
         {
             firstPieceCompleted = true;
 
@@ -98,10 +93,7 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
             }
         }
 
-        bool leftCorrect =
-            Mathf.Abs(Mathf.DeltaAngle(
-                pieceY.transform.localEulerAngles.y,
-                answerX)) < 1f;
+        
 
         if (rightCorrect && leftCorrect)
         {
@@ -136,7 +128,6 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
     void ClearPuzzle()
     {
         state = PuzzleState.Cleared;
-
         pieceX.canRotate = false;
         pieceY.canRotate = false;
 
@@ -145,6 +136,6 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
         rightInteractable.canInteract = false;
         leftInteractable.canInteract = false;
 
-        dialogueTrigger.PlayCompleteDialogue();
+        dialogueTrigger.PlayPuzzleCompleteDialogue();
     }
 }

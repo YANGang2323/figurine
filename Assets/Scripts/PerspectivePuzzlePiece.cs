@@ -17,6 +17,11 @@ public class PerspectivePuzzlePiece : MonoBehaviour
     [HideInInspector]
     public bool canRotate = false;
 
+    public int currentStep = 0;
+
+    [Tooltip("정답 회전 횟수")]
+    public int answerStep = 0;
+
     public PerspectiveEmblemPuzzle puzzle;
 
     public void Interact()
@@ -39,13 +44,17 @@ public class PerspectivePuzzlePiece : MonoBehaviour
 
     void RotatePiece()
     {
+        currentStep = (currentStep + 1) % 4;
+
         if (axis == RotateAxis.X)
-        {
-            transform.Rotate(-90f, 0f, 0f, Space.Self);
-        }
+            transform.Rotate(-90f, 0, 0, Space.Self);
         else
-        {
-            transform.Rotate(0f, -90f, 0f, Space.Self);
-        }
+            transform.Rotate(0, -90f, 0, Space.Self);
+
+    }
+
+    public bool IsCorrect()
+    {
+        return currentStep == answerStep;
     }
 }
