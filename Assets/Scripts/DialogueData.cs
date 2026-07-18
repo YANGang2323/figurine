@@ -9,4 +9,7 @@ public class DialogueData : ScriptableObject
     public bool playOnlyOnce;
 
     public List<DialogueLine> lines;
+
+    [Header("대화 종료 이벤트")]
+    public DialogueEvent endEvent;
 }

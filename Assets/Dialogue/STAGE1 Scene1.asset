@@ -25,7 +25,7 @@ MonoBehaviour:
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
   - speakerName: 
-    text: "\uBD89\uC740 \uAC00\uBB38\uC758 \uBB38\uC7A5."
+    text: "\uBD89\uC740\uC0C9 \uAC00\uBB38\uC758 \uBB38\uC7A5."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     rightPortrait: {fileID: 0}
   - speakerName: ???
     text: "\uBC15\uC0AC\uB2D8\uC5D0\uAC8C \uCC3E\uC544\uAC00 \uBCF4\uC790. \uADF8\uBD84\uC740
-      \uBAA8\uB4E0 \uAC78 \uD574\uACB0\uD558\uC2DC\uAC70\uB4E0."
+      \uBAA8\uB4E0 \uAC78 \uD574\uACB0\uD558\uC2E4\uC218 \uC788\uC73C\uC2DC\uB2C8."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -59,7 +59,15 @@ MonoBehaviour:
     rightPortrait: {fileID: 0}
   - speakerName: ???
     text: "\uADF8\uB798\uB3C4 \uB10C \uD6CC\uB96D\uD55C \uBCA0\uC778 \uAC00\uC758
-      \uC77C\uC6D0\uC774\uC57C."
+      \uC77C\uC6D0\uC774\uB780\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+  - speakerName: 
+    text: ...
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -67,8 +75,8 @@ MonoBehaviour:
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
   - speakerName: ???
-    text: "\uBC15\uC0AC\uB2D8\uC774 \uB110 \uC704\uD574 \uAC10\uAC01 \uBCF4\uC870
-      \uC7A5\uCE58\uB97C \uBC1C\uBA85\uD588\uC5B4!"
+    text: "\uBC15\uC0AC\uB2D8\uC774 \uB110 \uC704\uD55C \uAC10\uAC01 \uBCF4\uC870
+      \uC7A5\uCE58 \uBC1C\uBA85\uC5D0 \uC131\uACF5\uD558\uC168\uC5B4!"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -83,8 +91,26 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+  - speakerName: 
+    text: "\uC73D....!"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
   - speakerName: ???
-    text: "\uBCA0\uC778\uD640\uC774 \uC644\uACF5\uB418\uC5C8\uC2B5\uB2C8\uB2E4! "
+    text: "\uB4DC\uB514\uC5B4 \uAD6D\uB0B4 \uCD5C\uB300 \uADDC\uBAA8\uC758 \uC624\uD398\uB77C
+      \uD558\uC6B0\uC2A4\uAC00 \uC644\uACF5\uB418\uC5C8\uB2E4!"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+  - speakerName: ???
+    text: "\uC6B0\uB9AC\uB294 \uBCA0\uC778\uBB38\uD654\uC7AC\uB2E8\uC758 \uC774\uB984\uC744
+      \uB530 \uBCA0\uC778\uD640\uC774\uB77C \uD558\uAE30\uB85C \uD588\uC2B5\uB2C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -92,8 +118,18 @@ MonoBehaviour:
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
   - speakerName: 
-    text: "\uC8FD\uC5B4\uAC00\uB358 \uC774\uB4E4\uC5D0\uAC8C \uB450 \uBC88\uC9F8
-      \uC2EC\uC7A5\uC744."
+    text: "\uBCA0\uC778\uD640\uC5D0\uC11C \uAC01\uC885 \uC720\uBA85 \uACF5\uC5F0\uC774
+      \uC5F4\uB838\uACE0, \uBCA0\uC778 \uAC00\uBB38\uC740 \uC0AC\uC5C5 \uBFD0 \uC544\uB2C8\uB77C
+      \uC0AC\uD68C\uBB38\uD654\uC801\uC778 \uC601\uD5A5\uB825\uB3C4 \uB113\uD600\uAC14\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+  - speakerName: 
+    text: "\uBC15\uC0AC\uB294 \uC8FD\uC5B4\uAC00\uB358 \uC774\uB4E4\uC5D0\uAC8C \uB450
+      \uBC88\uC9F8 \uC2EC\uC7A5\uC744 \uC8FC\uC5C8\uACE0."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -149,17 +185,25 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
-  - speakerName: "\uC8FC\uC778\uACF5"
-    text: "\u2026\uC5B8\uC81C \uC7A0\uC5D0 \uB4E4\uC5C8\uB354\uB77C?"
+  - speakerName: 
+    text: ....
+    hideBackground: 0
+    background: {fileID: 21300000, guid: 51ba6ca1aec6b3a428e633fc7b5bc93a, type: 3}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\u2026\uC774\uAC8C \uB300\uCCB4 \uBB34\uC2A8 \uAFC8\uC774\uC9C0...?"
     hideBackground: 1
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
-  - speakerName: "\uC8FC\uC778\uACF5"
-    text: "\uC774\uC81C \uADF8\uB9CC \uC77C\uC5B4\uB098\uC11C \uC8FC\uBCC0\uC744
-      \uC0B4\uD3B4\uBCF4\uC790."
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC774\uB7F0.. \uC2DC\uAC04\uC774 \uBC8C\uC368.. \uC2DC\uC791 \uC804\uC5D0
+      \uC5BC\uB978 \uB458\uB7EC\uBD10\uC57C\uC9C0."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
