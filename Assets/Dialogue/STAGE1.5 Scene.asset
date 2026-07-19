@@ -65,7 +65,7 @@ MonoBehaviour:
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
     text: "\uBB34\uB300 \uC606\uC5D0 \uC7A0\uAE50 \uB46C\uB3C4 \uB418\uACA0\uC9C0.
-      \uC5B4\uCC28\uD53C \uC8FC\uCD5C \uCE21 \uAC00\uBC29\uC778\uAC78 \uC54C\uD14C\uB2C8."
+      \uC5B4\uCC28\uD53C \uC8FC\uCD5C \uCE21 \uAC00\uBC29\uC778 \uAC78 \uC54C\uD14C\uB2C8."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uB098\uB294 \uBB34\uB300\uCABD\uC5D0 \uAC00\uBC29\uC744 \uBD99\uC5EC\uB450\uACE4
+    text: "\uB098\uB294 \uBB34\uB300\uCABD\uC5D0 \uAC00\uBC29\uC744 \uBD99\uC5EC\uB450\uACE0
       \uC790\uB9AC\uC5D0 \uC549\uC558\uB2E4. "
     hideBackground: 0
     background: {fileID: 0}
@@ -260,7 +260,7 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uC800\uB294 \uC624\uB798 \uC0B4\uC9C0 \uBABB\uD560 \uAC70\uC608\uC694.
-      \uC774 \uC637\uC744 \uC785\uACE0 \uBB34\uB3C4\uD68C\uC5D0 \uAC04\uB2E4 \uD574\uB3C4
+      \n\uC774 \uC637\uC744 \uC785\uACE0 \uBB34\uB3C4\uD68C\uC5D0 \uAC04\uB2E4 \uD574\uB3C4
       \uC18C\uC6A9\uC5C6\uC5B4\uC694."
     hideBackground: 0
     background: {fileID: 0}
@@ -285,8 +285,8 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uD074\uB77C\uB77C \uC544\uAC00\uC528\uB294 \uB2E8\uB150\uD55C \uBCF5\uC18C\uB9AC\uB85C
-      \uC7AC\uB2E8\uC0AC\uC5D0\uAC8C \uB9D0\uD588\uB2E4. \uADF9 \uC911 \uADF8\uB140\uB294
+    text: "\uD074\uB77C\uB77C \uC544\uAC00\uC528\uB294 \uB2E8\uB150\uD55C \uBAA9\uC18C\uB9AC\uB85C
+      \uC7AC\uB2E8\uC0AC\uC5D0\uAC8C \uB9D0\uD588\uB2E4. \n\uADF9 \uC911 \uADF8\uB140\uB294
       \uACE0\uCE60 \uC218 \uC5C6\uB294 \uC2EC\uC7A5\uBCD1\uC5D0 \uAC78\uB838\uB2E4,
       \uADF8\uB7F0 \uC124\uC815\uC774\uC5C8\uC9C0."
     hideBackground: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uC624\uB294 \uAE38\uC5D0 \uB9CC\uB09C \uC5B4\uB5A4 \uCCAD\uB144\uC774
-      \uC544\uAC00\uC528\uC758 \uB531\uD55C \uC0AC\uC5F0\uC744 \uB4E3\uACE0 \uC774\uAC83\uC744
+      \n\uC544\uAC00\uC528\uC758 \uB531\uD55C \uC0AC\uC5F0\uC744 \uB4E3\uACE0 \uC774\uAC83\uC744
       \uAC74\uB124\uC8FC\uB354\uAD70\uC694."
     hideBackground: 0
     background: {fileID: 0}
@@ -466,7 +466,7 @@ MonoBehaviour:
   - speakerName: 
     text: "\uC790\uC2E0\uC744 \uB204\uAD70\uAC00\uC758 \uC870\uC218\uB77C\uACE0 \uC18C\uAC1C\uD55C
       \uB0A8\uC790\uB294 \uC8FC\uC778\uACF5\uC774 \uC704\uD5D8\uC5D0 \uCC98\uD558\uAC70\uB098
-      \uC4F0\uB7EC\uC9C8 \uB54C\uB9C8\uB2E4 \uC57D\uC744 \uAC74\uB124\uACE0, \uAE38\uC744
+      \uC4F0\uB7EC\uC9C8 \uB54C\uB9C8\uB2E4\n\uC57D\uC744 \uAC74\uB124\uACE0, \uAE38\uC744
       \uC54C\uB824\uC900\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
@@ -614,7 +614,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uC8FC\uC704\uB97C \uB450\uB9AC\uBC88\uAC70\uB9AC\uB2C8 \uBB34\uB300 \uC606\uC5D0
-      \uB454 \uAC00\uBC29\uC5D0\uC11C \uBD89\uC740\uBE5B\uC774 \uC0C8\uACE0 \uC788\uC5C8\uB2E4."
+      \uB454 \uAC00\uBC29\uC5D0\uC11C \uBD89\uC740\uBE5B\uC774 \uC0C8\uC5B4\uB098\uC624\uACE0
+      \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -638,7 +639,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uC7A0\uAE08\uC1E0\uAC00 \uC5F4\uB824 \uC788\uB2E4."
+    text: "\uC7A0\uAE08\uC1E0\uAC00 \uC5F4\uB824 \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -685,7 +686,7 @@ MonoBehaviour:
     soundVolume: 1
     hasChoice: 0
     choices: []
-  - speakerName: "\uC8FC\uC778\uACF5"
+  - speakerName: 
     text: "\uBD89\uC740\uBE5B\uC774 \uB6F0\uACE0 \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
@@ -709,7 +710,7 @@ MonoBehaviour:
     soundVolume: 1
     hasChoice: 0
     choices: []
-  - speakerName: "\uC8FC\uC778\uACF5"
+  - speakerName: 
     text: "\uC2EC\uC7A5\uCC98\uB7FC."
     hideBackground: 0
     background: {fileID: 0}
