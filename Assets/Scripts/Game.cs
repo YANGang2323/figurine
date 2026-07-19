@@ -121,6 +121,8 @@ public class Game : MonoBehaviour
     public void SaveBtn()
     {
         DataManager.instance.SaveData();
+        SlotText();
+        Save.SetActive(false);
 
     }
     public void inGameSlot(int number)	// 슬롯의 기능 구현
@@ -139,7 +141,6 @@ public class Game : MonoBehaviour
     public void SaveDestr()	// Save UI를 비활성화하는 메소드
     {
         Save.gameObject.SetActive(false);
-        SlotText();
     }
    
     public void OnClickBackToGame()
