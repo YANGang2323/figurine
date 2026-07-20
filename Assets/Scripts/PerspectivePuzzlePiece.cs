@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PerspectivePuzzlePiece : MonoBehaviour
@@ -22,6 +23,9 @@ public class PerspectivePuzzlePiece : MonoBehaviour
     [Tooltip("정답 회전 횟수")]
     public int answerStep = 0;
 
+    [Header("Rotate speed")]
+    public float rotateSpeed = 180f;
+
     public PerspectiveEmblemPuzzle puzzle;
 
     public void Interact()
@@ -38,22 +42,46 @@ public class PerspectivePuzzlePiece : MonoBehaviour
             return;
         }
         RotatePiece();
-
-        puzzle.CheckPuzzle();
     }
+
+    private bool isRotating = false;
 
     void RotatePiece()
     {
+        if (isRotating)
+            return;
+
         currentStep = (currentStep + 1) % 4;
 
-        if (axis == RotateAxis.X)
-            transform.Rotate(-90f, 0, 0, Space.Self);
-        else
-            transform.Rotate(0, -90f, 0, Space.Self);
+        Vector3 axisVector =
+            (axis == RotateAxis.X) ? Vector3.right : Vector3.up;
 
-        Debug.Log("RotatePiece");
-        Debug.Log(transform.name);
+        StartCoroutine(RotateSmooth(axisVector));
+    }
+    IEnumerator RotateSmooth(Vector3 axisVector)
+    {
+        isRotating = true;
 
+        float rotated = 0f;
+        float speed = rotateSpeed;   // 초당 회전 각도
+
+        while (rotated < 90f)
+        {
+            float angle = speed * Time.deltaTime;
+
+            if (rotated + angle > 90f)
+                angle = 90f - rotated;
+
+            transform.Rotate(axisVector, -angle, Space.Self);
+
+            rotated += angle;
+
+            yield return null;
+        }
+
+        isRotating = false;
+
+        puzzle.CheckPuzzle();
     }
 
     public bool IsCorrect()
