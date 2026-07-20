@@ -172,7 +172,7 @@ public class Game : MonoBehaviour
     private void SlotText()
     {
         savePath = Application.persistentDataPath; // 저장 경로
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
             string latestFile = DataManager.instance.FindLatestSaveFile(i);

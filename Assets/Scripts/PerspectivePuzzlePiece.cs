@@ -51,6 +51,9 @@ public class PerspectivePuzzlePiece : MonoBehaviour
         else
             transform.Rotate(0, -90f, 0, Space.Self);
 
+        Debug.Log("RotatePiece");
+        Debug.Log(transform.name);
+
     }
 
     public bool IsCorrect()

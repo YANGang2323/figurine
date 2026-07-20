@@ -83,13 +83,23 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
         bool leftCorrect = pieceY.IsCorrect();
 
         // 첫 번째 조각 완성
-        if (!firstPieceCompleted && (rightCorrect || leftCorrect))
+        if (!firstPieceCompleted)
         {
-            firstPieceCompleted = true;
-
-            if (firstPieceDialogue != null)
+            if (rightCorrect)
             {
-                DialogueManager.Instance.StartDialogue(firstPieceDialogue);
+                firstPieceCompleted = true;
+                pieceX.canRotate = false;   // 오른쪽 조각 잠금
+
+                if (firstPieceDialogue != null)
+                    DialogueManager.Instance.StartDialogue(firstPieceDialogue);
+            }
+            else if (leftCorrect)
+            {
+                firstPieceCompleted = true;
+                pieceY.canRotate = false;   // 왼쪽 조각 잠금
+
+                if (firstPieceDialogue != null)
+                    DialogueManager.Instance.StartDialogue(firstPieceDialogue);
             }
         }
 

@@ -1,16 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NoiseJitter : MonoBehaviour
 {
-    RawImage image;
+    private RawImage image;
+    private Coroutine jitterCoroutine;
 
-    void Start()
+    private void Awake()
     {
         image = GetComponent<RawImage>();
-        StartCoroutine(Jitter());
+    }
+
+    private void OnEnable()
+    {
+        // 혹시 남아있을 수도 있는 코루틴 정리
+        if (jitterCoroutine != null)
+            StopCoroutine(jitterCoroutine);
+
+        jitterCoroutine = StartCoroutine(Jitter());
+    }
+
+    private void OnDisable()
+    {
+        if (jitterCoroutine != null)
+        {
+            StopCoroutine(jitterCoroutine);
+            jitterCoroutine = null;
+        }
     }
 
     IEnumerator Jitter()
@@ -18,10 +35,8 @@ public class NoiseJitter : MonoBehaviour
         while (true)
         {
             Rect rect = image.uvRect;
-
             rect.x = Random.Range(0f, 1f);
             rect.y = Random.Range(0f, 1f);
-
             image.uvRect = rect;
 
             Color c = image.color;
