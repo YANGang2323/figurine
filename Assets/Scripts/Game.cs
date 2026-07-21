@@ -73,8 +73,18 @@ public class Game : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape)) {
-            ESCMenuUI.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (!ESCMenuUI.activeSelf)
+            {
+                ESCMenuUI.SetActive(true);
+                UISoundManager.Instance.PlayOpen();
+            }
+            else
+            {
+                ESCMenuUI.SetActive(false);
+                UISoundManager.Instance.PlayClose();
+            }
+            //ESCMenuUI.SetActive(true);
         }
         //if (nowstage == "1")
         //{
@@ -122,6 +132,7 @@ public class Game : MonoBehaviour
     {
         DataManager.instance.SaveData();
         SlotText();
+        UISoundManager.Instance.PlayClick();
         Save.SetActive(false);
 
     }
@@ -134,39 +145,47 @@ public class Game : MonoBehaviour
         SaveCreat();	// 플레이어 닉네임 입력 UI 활성화
         
     }
-    public void SaveCreat()	// Save 팝업창 활성화하는 메소드
+    public void SaveCreat()	// Save슬롯 버튼 클릭 시
     {
+        UISoundManager.Instance.PlayClick();
         Save.gameObject.SetActive(true);
     }
-    public void SaveDestr()	// Save 팝업창 비활성화하는 메소드
+    public void SaveDestr()	// Save 팝업창 no선택시
     {
+        UISoundManager.Instance.PlayClick();
         Save.gameObject.SetActive(false);
     }
    
     public void OnClickBackToGame()
     {
         ESCMenuUI.SetActive(false);
+        UISoundManager.Instance.PlayOpen();
     }
     public void OnClickOpenOptionUI()
     {
         OptionUI.SetActive(true);
+        UISoundManager.Instance.PlayClick();
     }
     public void OnClickCloseOptionUI()
     {
         OptionUI.SetActive(false);
+        UISoundManager.Instance.PlayClick();
     }
     public void OnClickOpenSaveUI()
     {
         SaveUI.SetActive(true);
+        UISoundManager.Instance.PlayClick();
     }
     public void OnClickCloseSaveUI()
     {
         SaveUI.SetActive(false);
+        UISoundManager.Instance.PlayClick();
     }
     
     public void OnClickBackToMenu()
     {
         ESCMenuUI.SetActive(false);
+        UISoundManager.Instance.PlayClose();
         SceneManager.LoadScene("MainMenu");
     }
     private void SlotText()

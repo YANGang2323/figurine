@@ -10,10 +10,20 @@ public class NoiseJitter : MonoBehaviour
     private void Awake()
     {
         image = GetComponent<RawImage>();
+        if (image == null)
+        {
+            Debug.LogError($"{name}에 RawImage가 없습니다.");
+            enabled = false;
+            return;
+        }
+        Debug.Log($"Awake image = {image}");
     }
 
     private void OnEnable()
     {
+        Debug.Log($"OnEnable image = {image}");
+        if (image == null)
+            return;
         // 혹시 남아있을 수도 있는 코루틴 정리
         if (jitterCoroutine != null)
             StopCoroutine(jitterCoroutine);
@@ -32,6 +42,7 @@ public class NoiseJitter : MonoBehaviour
 
     IEnumerator Jitter()
     {
+        Debug.Log($"Jitter image = {image}");
         while (true)
         {
             Rect rect = image.uvRect;
