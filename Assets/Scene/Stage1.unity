@@ -2053,7 +2053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5379395511866914235, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5379395511866914235, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2088,12 +2088,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6269902831244680269, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
+      propertyPath: canJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269902831244680269, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7504482150661455546, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504482150661455546, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504482150661455546, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504482150661455546, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2676,6 +2692,7 @@ Transform:
   m_Children:
   - {fileID: 95940467}
   - {fileID: 1120065902}
+  - {fileID: 1118692338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &838986111
@@ -3173,6 +3190,11 @@ MonoBehaviour:
   canMove: 1
   moveSpeed: 5
   animator: {fileID: 955303152}
+  obstacleCheckDistance: 0.2
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  canJump: 1
   jumpForce: 7
   groundCheckDistance: 0.2
   jumpableLayers:
@@ -3383,6 +3405,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1118692337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118692338}
+  - component: {fileID: 1118692339}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1118692338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118692337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 838986110}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1118692339
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118692337}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.609416, y: 1.9384964, z: 3.406015}
+  m_Center: {x: 1.1653882, y: 0.46924692, z: -0.04701257}
 --- !u!1001 &1120065899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5779,7 +5854,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 35d50e80ef53f264c97f7ef3898aea77, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 2
@@ -12509,6 +12584,10 @@ PrefabInstance:
       propertyPath: speakerText
       value: 
       objectReference: {fileID: 1315892592}
+    - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
+      propertyPath: typingSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: dialogueText
       value: 

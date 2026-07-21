@@ -114,8 +114,7 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uB09C \uC18C\uB9AC\uAC00 \uB4E4\uB9AC\uC9C0 \uC54A\uC544\uC11C \uB298
-      \uC774 \uADC0\uCC2E\uC740 \uAE30\uACC4\uB97C \uB2EC\uACE0 \uC0B4\uC544\uC57C\uD588\uB2E4.
-      YES."
+      \uC774 \uADC0\uCC2E\uC740 \uAE30\uACC4\uB97C \uB2EC\uACE0 \uC0B4\uC544\uC57C\uD588\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -138,11 +137,35 @@ MonoBehaviour:
     soundVolume: 1
     hasChoice: 0
     choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: YES.
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    soundEffect: {fileID: 0}
+    soundVolume: 1
+    hasChoice: 0
+    choices: []
   - speakerName: 
     text: "\uCCAD\uAC01 \uB3D9\uAE30\uD654 \uD504\uB85C\uC138\uC2A4 \uC2DC\uC791\u2026"
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}

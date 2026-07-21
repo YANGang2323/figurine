@@ -23,7 +23,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded = true;
 
+    [SerializeField] private float obstacleCheckDistance = 0.2f;
+    [SerializeField] private LayerMask obstacleLayers;
+
     [Header("Jump Settings")]
+    public bool canJump = true;
+    
+
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask jumpableLayers;
@@ -106,9 +112,11 @@ public class PlayerMovement : MonoBehaviour
         }
         CheckGrounded();
 
-        if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
+        if (canJump &&
+        isGrounded &&
+        InputManager.instance.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // ���� ���� �����ӵ� �ʱ�ȭ
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
         //����Ű �ݶ��̴� ����
@@ -168,12 +176,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (moveDir != Vector3.zero)
+        if (moveDir == Vector3.zero)
+            return;
+
+        // 점프가 불가능한 플레이어만 벽 체크
+        if (!canJump)
         {
-            // [����] moveSpeed ��� currentSpeed(�޸��� ���� �ݿ��� �ӵ�) ���
-            Vector3 newPos = rb.position + moveDir * currentSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(newPos);
+            Vector3 origin1 = rb.position + Vector3.up * 0.2f;
+            Vector3 origin2 = rb.position + Vector3.up * 0.8f;
+
+            bool blocked =
+                Physics.Raycast(origin1, moveDir.normalized, obstacleCheckDistance, obstacleLayers) ||
+                Physics.Raycast(origin2, moveDir.normalized, obstacleCheckDistance, obstacleLayers);
+
+            if (blocked)
+                return;
         }
+
+        Vector3 newPos = rb.position + moveDir * currentSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPos);
     }
 
     void LateUpdate()
@@ -201,6 +222,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
         }
     }
+
     void EnterCrouch(){
         if (isCrouching) return;
         isCrouching = true;
