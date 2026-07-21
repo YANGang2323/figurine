@@ -134,11 +134,11 @@ public class Game : MonoBehaviour
         SaveCreat();	// 플레이어 닉네임 입력 UI 활성화
         
     }
-    public void SaveCreat()	// Save UI를 활성화하는 메소드
+    public void SaveCreat()	// Save 팝업창 활성화하는 메소드
     {
         Save.gameObject.SetActive(true);
     }
-    public void SaveDestr()	// Save UI를 비활성화하는 메소드
+    public void SaveDestr()	// Save 팝업창 비활성화하는 메소드
     {
         Save.gameObject.SetActive(false);
     }

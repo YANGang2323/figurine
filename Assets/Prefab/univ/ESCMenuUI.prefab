@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickCloseOptionUI
         m_Mode: 1
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: SaveDestr
         m_Mode: 1
@@ -815,10 +815,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickCloseSaveUI
         m_Mode: 1
@@ -1763,10 +1763,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2166,7 +2166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Left\t\t: A Key\nRight\t: D Key"
+  m_Text: "Left\t\t: A Key\nRight\t \t: D Key"
 --- !u!1 &3301943022121441220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,10 +2639,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3124,10 +3124,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3738,7 +3738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8335186506147545769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3945,7 +3945,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickOpenOptionUI
         m_Mode: 1
@@ -4440,7 +4440,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickOpenSaveUI
         m_Mode: 1
@@ -5208,10 +5208,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5341,10 +5341,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5613,10 +5613,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6101,10 +6101,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6583,7 +6583,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickBackToGame
         m_Mode: 1
@@ -6853,7 +6853,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: OnClickBackToMenu
         m_Mode: 1
@@ -6988,7 +6988,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
         m_MethodName: SaveBtn
         m_Mode: 1
@@ -7258,10 +7258,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4975633698787850729, guid: 2b0fd506365fcaa42b0010f729ec8856, type: 3}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: inGameSlot
-        m_Mode: 3
+        m_MethodName: SaveCreat
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

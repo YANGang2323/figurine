@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -46,9 +47,23 @@ public class DialogueManager : MonoBehaviour
 
     public Color defaultDialogueColor = Color.white;
     public Color defaultSpeakerColor = Color.white;
+
+    // ===== 타이핑 =====
+    [Header("Typing")]
+    public float typingSpeed = 0.03f;
+
+    private DialogueLine currentLine;
+    private Coroutine typingCoroutine;
+    private bool isTyping;
+
+    // ===== Dialogue 효과음 =====
+    [Header("스페이스바 Audio")]
+    public AudioClip nextClip;
+    public AudioClip choiceSelectClip;
+    //스페이스바 효과음
+    public AudioSource DialogueAudioSource;
     
-    //효과음
-    public AudioSource audioSource;
+
 
     private Queue<DialogueLine> lines
     = new Queue<DialogueLine>();
@@ -86,15 +101,26 @@ public class DialogueManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // 타이핑 중이면 효과음 없이 즉시 출력
+            if (isTyping)
+            {
+                FinishTyping();
+                return;
+            }
+
+            // 선택지 대기
             if (waitingForChoice)
             {
                 waitingForChoice = false;
                 ShowChoiceUI(pendingChoices);
+                return;
             }
-            else
-            {
-                ShowNextLine();
-            }
+
+            // 다음 대사로 넘어갈 때만 효과음
+            if (nextClip != null)
+                DialogueAudioSource.PlayOneShot(nextClip);
+
+            ShowNextLine();
         }
     }
 
@@ -115,6 +141,21 @@ public class DialogueManager : MonoBehaviour
 
         ShowNextLine();
     }
+    //타이핑 코루틴
+    IEnumerator TypeText(string text)
+    {
+        isTyping = true;
+
+        dialogueText.text = "";
+
+        foreach (char c in text)
+        {
+            dialogueText.text += c;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+    }
 
     public void ShowNextLine()
     {
@@ -124,7 +165,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        DialogueLine line = lines.Dequeue();
+        currentLine = lines.Dequeue();
+        DialogueLine line = currentLine;
 
         if (string.IsNullOrEmpty(line.speakerName))
         {
@@ -136,7 +178,10 @@ public class DialogueManager : MonoBehaviour
             speakerText.text = line.speakerName;
         }
 
-        dialogueText.text = line.text;
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText(line.text));
 
         // 배경
         if (line.hideBackground)
@@ -210,7 +255,7 @@ public class DialogueManager : MonoBehaviour
         //사운드
         if (line.soundEffect != null)
         {
-            audioSource.PlayOneShot(line.soundEffect, line.soundVolume);
+            DialogueAudioSource.PlayOneShot(line.soundEffect, line.soundVolume);
         }
 
         //선택지 저장만
@@ -220,6 +265,16 @@ public class DialogueManager : MonoBehaviour
             waitingForChoice = true;
         }
 
+    }
+
+    void FinishTyping()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        dialogueText.text = currentLine.text;
+
+        isTyping = false;
     }
 
     void EndDialogue()
@@ -254,6 +309,7 @@ public class DialogueManager : MonoBehaviour
     {
         choicePanel.SetActive(true);
 
+
         for (int i = 0; i < choiceButtons.Length; i++)
         {
             if (i < choices.Length)
@@ -283,6 +339,9 @@ public class DialogueManager : MonoBehaviour
     }
     void SelectChoice(DialogueChoice choice)
     {
+        if (choiceSelectClip != null)
+            DialogueAudioSource.PlayOneShot(choiceSelectClip);
+
         choicePanel.SetActive(false);
 
         pendingChoices = null;

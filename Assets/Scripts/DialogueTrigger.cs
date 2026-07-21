@@ -39,26 +39,7 @@ public class DialogueTrigger : MonoBehaviour
 
         PlayDialogue();
     }
-    //public void PlayDialogue()
-    //{
-    //    if (firstDialogue == null)
-    //        return;
-
-    //    bool played =
-    //        DataManager.Instance.nowGame.playedDialogues
-    //        .Contains(firstDialogue.dialogueID);
-    //    Debug.Log($"played = {played}");
-
-    //    if (!played)
-    //    {
-    //        DialogueManager.Instance.StartDialogue(firstDialogue);
-    //    }
-    //    else
-    //    {
-    //        if (repeatDialogue != null)
-    //            DialogueManager.Instance.StartDialogue(repeatDialogue);
-    //    }
-    //}
+    
     public void PlayDialogue()
     {
         // first가 없는 경우

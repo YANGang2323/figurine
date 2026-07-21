@@ -44,13 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb2e3d9dc2c95849a76d8c804f4b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ESCMenuUI: {fileID: 0}
+  ESCMenuUI: {fileID: 5049172536477300226, guid: 22bc08b3c34eac742a5bb8170a417d11, type: 3}
   OptionUI: {fileID: 0}
   SaveUI: {fileID: 0}
   Save: {fileID: 0}
-  pipeManager: {fileID: 0}
   slotButtons:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -60,6 +58,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   slotNum: 0
-  dialogManager: {fileID: 0}
