@@ -80,6 +80,7 @@ public class Game : MonoBehaviour
                 UISoundManager.Instance.PlayOpen();
 
                 InputLockManager.ESCMenuLock = true; // LockMove, LockInteraction, LockCamera 잠금
+                InputLockManager.Refresh();
             }
             else
             {

@@ -139,6 +139,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueData dialogue)
     {
         InputLockManager.DialogueLock = true; // LockMove, LockInteraction, LockCamera 잠금
+        InputLockManager.Refresh();
 
         playerInteraction.HideInteractionUI();
         currentDialogue = dialogue;

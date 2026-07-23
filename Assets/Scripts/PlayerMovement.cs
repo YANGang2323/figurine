@@ -1,8 +1,5 @@
 using UnityEngine;
 
-// �÷��̾� ������ ���� ��ũ��Ʈ
-// ������ ���� �̵� ������ ���� ����
-//1,2��������
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider standingCollider;
@@ -10,16 +7,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isCrouching = false;
     public bool canMove = true;
         
-    public float moveSpeed; // �̵� �ӵ�
+    public float moveSpeed;
     public Animator animator;
     float h = 0;
     float v = 0;
     private Vector3 moveDir = Vector3.zero;
-    //public float smoothTime = 0.1f; // ��ȯ �ӵ� ����
-    //private float currentMoveX = 0f; // ���� �ִϸ����Ϳ� ���� ���� ��
-
-    // ���� ���� ����
-    //public float jumpForce = 5f; // ���� ��
     private Rigidbody rb;
     private bool isGrounded = true;
 
@@ -34,25 +26,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask jumpableLayers;
 
-    // [�߰�] �޸��� �� ȸ�� ���� ����
     [Header("Run & Rotation Settings")]
     public bool runable;
-    public float runSpeedMultiplier = 1.5f; // �޸��� �� �ӵ� ���� ����
-    private float currentSpeed; // ���� ����Ǵ� ���� �ӵ�
-    public float rotationOffsetA = 90f; // AŰ ���� �� �߰� ȸ�� ����
-    public float rotationOffsetD = -90f; // DŰ ���� �� �߰� ȸ�� ����
+    public float runSpeedMultiplier = 1.5f; 
+    private float currentSpeed; 
+    public float rotationOffsetA = 90f;
+    public float rotationOffsetD = -90f; 
 
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        InputLockManager.OnLock += StopMotion;
         Vector3 camDirection = Camera.main.transform.position - transform.position;
-        camDirection.y = 0; // ���� ���� ���� �� �¿� ���⸸ ����
+        camDirection.y = 0; 
         if (camDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(camDirection);
             Vector3 currentEuler = transform.eulerAngles;
-            // ���� X, Z�� �����ϰ� Y�� ī�޶� �������� ����
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
     }
@@ -69,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if (InputLockManager.LockMove)
         {
             moveDir = Vector3.zero;
+            currentSpeed = 0f;
             animator.SetInteger("MoveState", 0);
             return;
         }
@@ -77,14 +69,12 @@ public class PlayerMovement : MonoBehaviour
         h = 0;
         v = 0;
 
-        // [�߰�] �� ������ �⺻ �ӵ��� �ʱ�ȭ
         currentSpeed = moveSpeed;
 
-        // ����1: ���� ����(�⺻) �� �¿�(A, D) �̵��� ���
         if (!CameraPivotRotator.Instance.isSideView)
         {
             if (InputManager.instance.GetKey(KeyCode.A))
-            { // ���� ������ �ݴ� ����
+            { 
                 moveDir = Vector3.right;
                 h = Input.GetAxis("Horizontal");
                 v = Input.GetAxis("Vertical");
@@ -96,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
                 v = Input.GetAxis("Vertical");
             }
         }
-        // ����2: ������ ����(����) �� ����Ű(������, ����) �̵��� ���
         else
         {
             if (InputManager.instance.GetKey(KeyCode.A))
@@ -121,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
-        //����Ű �ݶ��̴� ����
         if (Input.GetKey(KeyCode.LeftControl))
         {
             EnterCrouch();
@@ -131,49 +119,35 @@ public class PlayerMovement : MonoBehaviour
             ExitCrouch();
         }
 
-        //�ִϸ��̼� MoveState ���� ����
-        int currentState = 0; // �⺻ ä���� 0�� (���)
+        int currentState = 0;
         
-        if (moveDir != Vector3.zero) // ����Ű�� ������ �̵� ���� ��
+        if (moveDir != Vector3.zero)
         {
-            currentState = 1; // �ϴ� 1�� (�ȱ�)
+            currentState = 1;
 
-            // ���� ���� Shift Ű�� ���� ���·� �̵� ���̶��?
             if (Input.GetKey(KeyCode.LeftShift) & runable == true)
             {
-                currentState = 2; // 2�� (�޸���)
-                currentSpeed = moveSpeed * runSpeedMultiplier; // [�߰�] �޸��� ���� �� �ӵ� ���� ����
+                currentState = 2;
+                currentSpeed = moveSpeed * runSpeedMultiplier; 
             }
-            // ���� Ctrl Ű�� ���� ���� (���帮��)+ ������
             else if (Input.GetKey(KeyCode.LeftControl))
             {
                 currentState = 4;
                 currentSpeed = moveSpeed * 0.5f;
             }
         }
-        else // ���帮�� ����Ű�� ������, �������� ��
+        else
         {
-            // ���帲(3��) 
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 currentState = 3;
             }
             else
             {
-                currentState = 0; // �ƹ��͵� �� ������ 0�� (���)
+                currentState = 0; 
             }
         }
         animator.SetInteger("MoveState", currentState);
-
-        // ���� �̵�
-        //transform.Translate(moveDir * moveSpeed * Time.deltaTime, Space.World);
-
-        ////���� �Է� ó��
-        //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        //{
-        //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //    isGrounded = false;
-        //}
     }
 
     void FixedUpdate()
@@ -203,30 +177,49 @@ public class PlayerMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        if (InputLockManager.LockCamera)
-            return;
-
         //transform.LookAt(Camera.main.transform);
         Vector3 lookDirection = Camera.main.transform.position - transform.position;
-        lookDirection.y = 0; // y�� ���� �����ؼ� ���� ���⸸ �ٶ󺸰�
+        lookDirection.y = 0; 
 
-        if (lookDirection.sqrMagnitude > 0.001f) // ���� ���Ͱ� �ʹ� ���� ������ Ȯ��
+        if (lookDirection.sqrMagnitude > 0.001f) 
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
 
-            // [�߰�] A �Ǵ� D Ű�� ������ ���� �� �߰� ȸ���� ����
             float yOffset = 0f;
-            if (InputManager.instance.GetKey(KeyCode.A))
+            if (!InputLockManager.LockMove)
             {
-                yOffset = rotationOffsetA; // �⺻ 90��
-            }
-            else if (InputManager.instance.GetKey(KeyCode.D))
-            {
-                yOffset = rotationOffsetD; // �⺻ -90��
+                if (InputManager.instance.GetKey(KeyCode.A))
+                {
+                    yOffset = rotationOffsetA; // 90도
+                }
+                else if (InputManager.instance.GetKey(KeyCode.D))
+                {
+                    yOffset = rotationOffsetD; // -90도
+                }
             }
 
-            // [����] ī�޶� �ٶ󺸴� ȸ������ yOffset�� ���Ͽ� ���� ȸ�� ����
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
+        }
+    }
+
+    void OnDestroy()
+    {
+        InputLockManager.OnLock -= StopMotion;
+    }
+
+    void StopMotion()
+    {
+        moveDir = Vector3.zero;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        Vector3 lookDirection = Camera.main.transform.position - transform.position;
+        lookDirection.y = 0f;
+
+        if (lookDirection.sqrMagnitude > 0.001f)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDirection);
         }
     }
 

@@ -74,7 +74,7 @@ public class CameraPivotRotator : MonoBehaviour
             //sideViewOffset = transform.position - player.position;
         }
             
-        DecideCameraType();
+        //DecideCameraType();
         
         float currentY = transform.eulerAngles.y;
         if (Mathf.Abs(currentY - 270f) < 45f || Mathf.Abs(currentY + 90f) < 45f)
@@ -130,13 +130,17 @@ public class CameraPivotRotator : MonoBehaviour
     {
         //Debug.Log("현재 cameraType: " + cameraType);
         //Debug.Log("현재 스테이지: " + nowstage);
-        //인풋막을 때는 카메라 회전도 막기
-        if (InputLockManager.LockCamera)
+        // 이미 회전중이 아니고 잠겨있을 때만 입력 차단
+        if (!isRotating && InputLockManager.LockCamera)
             return;
         // Tab 키 입력 시 시점 전환
-        if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
+        if (!isRotating &&
+        InputManager.instance.GetKeyDown(KeyCode.Tab) &&
+        (cameraType == CameraMovingType.Fix ||
+         cameraType == CameraMovingType.Moving))
         {
             InputLockManager.CameraRotateLock = true;   //LockMove, LockCamera 잠금
+
             isSideView = !isSideView;
             targetRotation = isSideView ? sideRotation : defaultRotation;
             isRotating = true;
@@ -145,7 +149,7 @@ public class CameraPivotRotator : MonoBehaviour
             SetConstraintsByView();
         }
 
-
+        // 회전은 Lock이어도 계속 수행
         if (isRotating)
         {
             //// 타이밍 모드면 즉시 회전
@@ -181,7 +185,7 @@ public class CameraPivotRotator : MonoBehaviour
     }
     void DecideCameraType() {
         //GameData data = DataManager.instance.nowGame;
-        //nowstage = data.stage.ToString(); */ //잠시주석0314
+        //nowstage = data.stage.ToString();  //잠시주석0314
         nowstage = "1";
 
         defaultPosition = transform.position;
@@ -237,6 +241,7 @@ public class CameraPivotRotator : MonoBehaviour
             //else if (isSideView) { cameraType = CameraMovingType.Follow; }
         }
         targetRotation = isSideView ? sideRotation : defaultRotation;
+        
     }
 
     void FollowPlayer()
