@@ -22,7 +22,10 @@ MonoBehaviour:
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 0}
+    rightPortrait: {fileID: 21300000, guid: 54825adbfad59644ea17fab77e852691, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -46,8 +49,11 @@ MonoBehaviour:
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 0
+    hideRightPortrait: 1
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 1
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
@@ -69,9 +75,12 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -92,10 +101,13 @@ MonoBehaviour:
     text: "\uADC0\uC5D0 \uAC78\uB9B0 \uAE30\uACC4\uC5D0\uC11C \uB09C \uC18C\uB9AC\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 1
+    hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -121,6 +133,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -142,9 +157,12 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -169,6 +187,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 1
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
@@ -193,6 +214,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 1
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
@@ -219,6 +243,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 1
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
@@ -242,7 +269,10 @@ MonoBehaviour:
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 0}
+    rightPortrait: {fileID: 21300000, guid: 8e9fda9697c804e40aa4530cc65db7d4, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -264,9 +294,12 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
-    hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -287,10 +320,13 @@ MonoBehaviour:
     text: "\uB610 \uC7A5\uCE58\uB97C \uB044\uACE0 \uC788\uC5C8\uAD6C\uB098?"
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 1
-    rightPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: 8e9fda9697c804e40aa4530cc65db7d4, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -317,6 +353,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -342,6 +381,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -368,6 +410,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -394,6 +439,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -417,9 +465,12 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
-    hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -441,10 +492,13 @@ MonoBehaviour:
       \uC2F6\uC9C0\uB9CC\u2026"
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 1
-    rightPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: 8e9fda9697c804e40aa4530cc65db7d4, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -471,6 +525,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -496,6 +553,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -521,6 +581,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -542,9 +605,12 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
-    hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -566,10 +632,13 @@ MonoBehaviour:
       \uB610 \uC7A5\uCE58\uB97C \uB044\uACE0 \uC788\uC73C\uBA74 \uC548 \uB41C\uB2E4?"
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 1
-    rightPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: 8e9fda9697c804e40aa4530cc65db7d4, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -595,7 +664,10 @@ MonoBehaviour:
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 0}
+    rightPortrait: {fileID: 21300000, guid: 54825adbfad59644ea17fab77e852691, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -614,6 +686,6 @@ MonoBehaviour:
     choices: []
   endEvent:
     type: 0
-    target: {fileID: 0}
+    targetID: 
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
