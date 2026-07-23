@@ -131,18 +131,21 @@ public class CameraPivotRotator : MonoBehaviour
         //Debug.Log("현재 cameraType: " + cameraType);
         //Debug.Log("현재 스테이지: " + nowstage);
         //인풋막을 때는 카메라 회전도 막기
-        if (InputLockManager.IsLocked)
+        if (InputLockManager.LockCamera)
             return;
         // Tab 키 입력 시 시점 전환
         if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
+            InputLockManager.LockMove = true;
             isSideView = !isSideView;
             targetRotation = isSideView ? sideRotation : defaultRotation;
             isRotating = true;
 
+
+            InputLockManager.LockMove = false;
             //playermovement 이동 제한
-            if (playerMovement != null)
-                playerMovement.canMove = false;
+            //if (playerMovement != null)
+            //    playerMovement.canMove = false;
 
             // 시점에 따라 제한 범위를 즉시 교체
             SetConstraintsByView();

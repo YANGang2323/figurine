@@ -1497,7 +1497,7 @@ PrefabInstance:
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: leftButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 895083973}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: choicePanel
       value: 
@@ -1513,7 +1513,7 @@ PrefabInstance:
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: rightButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1747739092}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: speakerText
       value: 
@@ -4343,6 +4343,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 976d4df10192b7a4c8cb0e930c8afc8f, type: 3}
   m_PrefabInstance: {fileID: 1848700408}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &895083973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4907887252241837942, guid: 457da025f2936894bb2c26b22fb26ff9, type: 3}
+  m_PrefabInstance: {fileID: 462590126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &896377251
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,6 +6967,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 896377252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1747739092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2314457315039160225, guid: 457da025f2936894bb2c26b22fb26ff9, type: 3}
+  m_PrefabInstance: {fileID: 462590126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1754091015
 PrefabInstance:
   m_ObjectHideFlags: 0

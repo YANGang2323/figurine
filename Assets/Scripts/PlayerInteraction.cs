@@ -27,12 +27,6 @@ public class PlayerInteraction : MonoBehaviour
 
     void LateUpdate()
     {
-        if (InputLockManager.IsLocked)
-    {
-        interactionUI.SetActive(false);
-        previousObject = null;
-        return;
-    }
         if (DialogueManager.Instance != null &&DialogueManager.Instance.IsPlaying)
         {
             interactionUI.SetActive(false);
@@ -100,7 +94,9 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             // E Å° ÀÔ·Â
-            if (Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.IsPlaying)
+            if (Input.GetKeyDown(KeyCode.E)
+            && !InputLockManager.LockInteract
+            && !DialogueManager.Instance.IsPlaying)
             {
                 closestObject.Interact();
             }

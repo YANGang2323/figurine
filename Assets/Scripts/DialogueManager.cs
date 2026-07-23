@@ -138,7 +138,10 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueData dialogue)
     {
-        InputLockManager.Lock();
+        InputLockManager.LockMove = true;   // 플레이어 이동 잠금
+        InputLockManager.LockInteract = true;  // 상호작용 잠금
+        InputLockManager.LockCamera = true; // 카메라 잠금
+
         playerInteraction.HideInteractionUI();
         currentDialogue = dialogue;
 
@@ -410,7 +413,9 @@ public class DialogueManager : MonoBehaviour
         panel.SetActive(false);
 
         isPlaying = false;
-        InputLockManager.Unlock();
+        InputLockManager.LockMove = false;
+        InputLockManager.LockInteract = false;
+        InputLockManager.LockCamera = false;
     }
 
     void ShowChoiceUI(DialogueChoice[] choices)

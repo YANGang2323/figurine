@@ -2,17 +2,14 @@ using UnityEngine;
 
 public static class InputLockManager
 {
-    private static int lockCount = 0;
+    public static bool LockMove;
+    public static bool LockInteract;
+    public static bool LockCamera;
 
-    public static bool IsLocked => lockCount > 0;
-
-    public static void Lock()
+    public static void UnlockAll()
     {
-        lockCount++;
-    }
-
-    public static void Unlock()
-    {
-        lockCount = Mathf.Max(0, lockCount - 1);
+        LockMove = false;
+        LockInteract = false;
+        LockCamera = false;
     }
 }
