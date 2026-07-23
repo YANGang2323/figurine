@@ -20,7 +20,7 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
+    leftPortrait: {fileID: 21300000, guid: 5cc70156aa740c4439a2270a2288b493, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
     detailImage1: {fileID: 21300000, guid: cee2d3aa2ae5a564ebe55c7ad4e693ad, type: 3}
@@ -103,7 +103,7 @@ MonoBehaviour:
       \uC5EC\uB7EC\uBD84\uAED8\uC11C\uB294 \uC790\uB9AC\uB85C\u2026"
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}

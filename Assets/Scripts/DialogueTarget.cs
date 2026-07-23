@@ -26,10 +26,11 @@ public class DialogueTarget : MonoBehaviour
 
     public static DialogueTarget Find(string id)
     {
-        if (targets.TryGetValue(id, out DialogueTarget target))
-            return target;
+        if (string.IsNullOrEmpty(id))
+            return null;
 
-        return null;
+        targets.TryGetValue(id, out DialogueTarget target);
+        return target;
     }
 
     public void Enable()

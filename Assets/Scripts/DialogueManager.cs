@@ -497,7 +497,11 @@ public class DialogueManager : MonoBehaviour
             case DialogueEventType.DisableObject:
 
                 if (target != null)
+                {
                     target.Disable();
+                }else{
+                    Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {dialogueEvent.targetID}");
+                }
 
                 break;
 
