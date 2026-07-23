@@ -95,7 +95,7 @@ public class PlayerInteraction : MonoBehaviour
 
             // E Å° ÀÔ·Â
             if (Input.GetKeyDown(KeyCode.E)
-            && !InputLockManager.LockInteract
+            && !InputLockManager.LockInteraction
             && !DialogueManager.Instance.IsPlaying)
             {
                 closestObject.Interact();

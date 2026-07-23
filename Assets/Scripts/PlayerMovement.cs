@@ -66,8 +66,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //if (!canMove)
-        //    return;
+        if (InputLockManager.LockMove)
+        {
+            moveDir = Vector3.zero;
+            animator.SetInteger("MoveState", 0);
+            return;
+        }
 
         moveDir = Vector3.zero;
         h = 0;
@@ -174,6 +178,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (InputLockManager.LockMove)
+            return;
         if (moveDir == Vector3.zero)
             return;
 
@@ -197,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        if (InputLockManager.LockMove)
+        if (InputLockManager.LockCamera)
             return;
 
         //transform.LookAt(Camera.main.transform);

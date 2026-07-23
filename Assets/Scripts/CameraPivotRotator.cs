@@ -136,16 +136,10 @@ public class CameraPivotRotator : MonoBehaviour
         // Tab 키 입력 시 시점 전환
         if (InputManager.instance.GetKeyDown(KeyCode.Tab) && !isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
-            InputLockManager.LockMove = true;
+            InputLockManager.CameraRotateLock = true;   //LockMove, LockCamera 잠금
             isSideView = !isSideView;
             targetRotation = isSideView ? sideRotation : defaultRotation;
             isRotating = true;
-
-
-            InputLockManager.LockMove = false;
-            //playermovement 이동 제한
-            //if (playerMovement != null)
-            //    playerMovement.canMove = false;
 
             // 시점에 따라 제한 범위를 즉시 교체
             SetConstraintsByView();
@@ -164,7 +158,6 @@ public class CameraPivotRotator : MonoBehaviour
             //}
             //else
             //{
-            //InputLockManager.Lock();
             float rotationSpeed = 5f;
 
             transform.rotation = Quaternion.Slerp(
@@ -179,7 +172,7 @@ public class CameraPivotRotator : MonoBehaviour
                 isRotating = false;
                 if (playerMovement != null)
                      playerMovement.canMove = true;
-                //InputLockManager.Unlock();
+                InputLockManager.CameraRotateLock = false;
             }
             //}
         }

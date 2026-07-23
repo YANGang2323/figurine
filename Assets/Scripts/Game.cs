@@ -79,16 +79,14 @@ public class Game : MonoBehaviour
                 ESCMenuUI.SetActive(true);
                 UISoundManager.Instance.PlayOpen();
 
-                InputLockManager.LockMove = true;
-                InputLockManager.LockInteract = true;
-                InputLockManager.LockCamera = true;
+                InputLockManager.ESCMenuLock = true; // LockMove, LockInteraction, LockCamera 잠금
             }
             else
             {
                 ESCMenuUI.SetActive(false);
                 UISoundManager.Instance.PlayClose();
 
-                InputLockManager.UnlockAll();
+                InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
             }
             //ESCMenuUI.SetActive(true);
         }

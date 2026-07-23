@@ -2,14 +2,16 @@ using UnityEngine;
 
 public static class InputLockManager
 {
-    public static bool LockMove;
-    public static bool LockInteract;
-    public static bool LockCamera;
+    public static bool DialogueLock;
+    public static bool ESCMenuLock;
+    public static bool CameraRotateLock;
 
-    public static void UnlockAll()
-    {
-        LockMove = false;
-        LockInteract = false;
-        LockCamera = false;
-    }
+    public static bool LockMove =>
+        DialogueLock || ESCMenuLock || CameraRotateLock;
+
+    public static bool LockInteraction =>
+        DialogueLock || ESCMenuLock;
+
+    public static bool LockCamera =>
+        DialogueLock || ESCMenuLock || CameraRotateLock;
 }
