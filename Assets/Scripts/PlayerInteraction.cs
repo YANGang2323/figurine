@@ -27,6 +27,12 @@ public class PlayerInteraction : MonoBehaviour
 
     void LateUpdate()
     {
+        if (InputLockManager.IsLocked)
+    {
+        interactionUI.SetActive(false);
+        previousObject = null;
+        return;
+    }
         if (DialogueManager.Instance != null &&DialogueManager.Instance.IsPlaying)
         {
             interactionUI.SetActive(false);

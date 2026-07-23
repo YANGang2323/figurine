@@ -161,22 +161,23 @@ public class CameraPivotRotator : MonoBehaviour
             //}
             //else
             //{
-                float rotationSpeed = 5f;
+            //InputLockManager.Lock();
+            float rotationSpeed = 5f;
 
-                transform.rotation = Quaternion.Slerp(
-                    transform.rotation,
-                    targetRotation,
-                    Time.deltaTime * rotationSpeed
-                );
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                Time.deltaTime * rotationSpeed
+            );
 
-                // 회전 완료 판정
-                if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
-                {
-                    transform.rotation = targetRotation;
-                    isRotating = false;
-                    if (playerMovement != null)
-                        playerMovement.canMove = true;
-                }
+            // 회전 완료 판정
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f){
+                transform.rotation = targetRotation;
+                isRotating = false;
+                if (playerMovement != null)
+                     playerMovement.canMove = true;
+                //InputLockManager.Unlock();
+            }
             //}
         }
 

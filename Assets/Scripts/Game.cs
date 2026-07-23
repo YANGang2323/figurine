@@ -78,11 +78,15 @@ public class Game : MonoBehaviour
             {
                 ESCMenuUI.SetActive(true);
                 UISoundManager.Instance.PlayOpen();
+
+                InputLockManager.Lock();
             }
             else
             {
                 ESCMenuUI.SetActive(false);
                 UISoundManager.Instance.PlayClose();
+
+                InputLockManager.Unlock();
             }
             //ESCMenuUI.SetActive(true);
         }

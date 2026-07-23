@@ -199,6 +199,9 @@ public class PlayerMovement : MonoBehaviour
 
     void LateUpdate()
     {
+        if (InputLockManager.IsLocked)
+            return;
+
         //transform.LookAt(Camera.main.transform);
         Vector3 lookDirection = Camera.main.transform.position - transform.position;
         lookDirection.y = 0; // y�� ���� �����ؼ� ���� ���⸸ �ٶ󺸰�

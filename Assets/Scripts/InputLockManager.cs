@@ -2,15 +2,17 @@ using UnityEngine;
 
 public static class InputLockManager
 {
-    public static bool IsLocked { get; private set; }
+    private static int lockCount = 0;
+
+    public static bool IsLocked => lockCount > 0;
 
     public static void Lock()
     {
-        IsLocked = true;
+        lockCount++;
     }
 
     public static void Unlock()
     {
-        IsLocked = false;
+        lockCount = Mathf.Max(0, lockCount - 1);
     }
 }

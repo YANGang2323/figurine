@@ -138,8 +138,16 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueData dialogue)
     {
+        InputLockManager.Lock();
         playerInteraction.HideInteractionUI();
         currentDialogue = dialogue;
+
+        // 한번만 재생되는 대화는 시작하는 순간 기록
+        if (dialogue.playOnlyOnce &&
+            !DataManager.Instance.nowGame.playedDialogues.Contains(dialogue.dialogueID))
+        {
+            DataManager.Instance.nowGame.playedDialogues.Add(dialogue.dialogueID);
+        }
 
         panel.SetActive(true);
 
@@ -392,13 +400,6 @@ public class DialogueManager : MonoBehaviour
         if (currentDialogue != null)
         {
             ExecuteDialogueEvent(currentDialogue.endEvent);
-
-            if (!DataManager.Instance.nowGame.playedDialogues
-                .Contains(currentDialogue.dialogueID))
-            {
-                DataManager.Instance.nowGame.playedDialogues
-                    .Add(currentDialogue.dialogueID);
-            }
         }
         backgroundImage.gameObject.SetActive(false);
         leftPortraitImage.gameObject.SetActive(false);
@@ -409,6 +410,7 @@ public class DialogueManager : MonoBehaviour
         panel.SetActive(false);
 
         isPlaying = false;
+        InputLockManager.Unlock();
     }
 
     void ShowChoiceUI(DialogueChoice[] choices)
