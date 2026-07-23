@@ -119,24 +119,23 @@ public class PlayerInteraction : MonoBehaviour
     {
         float closestDistance = Mathf.Infinity;
         closestObject = null;
-
-        foreach (InteractableObject obj in nearbyObjects)
+        for (int i = nearbyObjects.Count - 1; i >= 0; i--)
         {
-            // 삭제된 오브젝트 예외 처리
-            if (obj == null)
-                continue;
+            InteractableObject obj = nearbyObjects[i];
 
+            // 삭제되었거나 비활성화되었으면 리스트에서 제거
+            if (obj == null || !obj.gameObject.activeInHierarchy)
+            {
+                nearbyObjects.RemoveAt(i);
+                continue;
+            }
             // 상호작용 불가한 오브젝트 예외 처리 인터랙션오브젝트의 IsAvailable()
             if (!obj.IsAvailable())
                 continue;
-
             // 거리 계산
-            float distance =
-                Vector3.Distance(
-                    transform.position,
-                    obj.transform.position
-                );
-
+            float distance = Vector3.Distance(
+                transform.position,
+                obj.transform.position);
             // 더 가까운 물체 발견 시 교체
             if (distance < closestDistance)
             {

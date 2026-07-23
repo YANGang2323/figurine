@@ -139,7 +139,6 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueData dialogue)
     {
         InputLockManager.DialogueLock = true; // LockMove, LockInteraction, LockCamera 잠금
-        InputLockManager.Refresh();
 
         playerInteraction.HideInteractionUI();
         currentDialogue = dialogue;
@@ -474,10 +473,14 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
         }
     }
+
     void ExecuteDialogueEvent(DialogueEvent dialogueEvent)
     {
         if (dialogueEvent == null)
             return;
+
+        DialogueTarget target =
+            DialogueTarget.Find(dialogueEvent.targetID);
 
         switch (dialogueEvent.type)
         {
@@ -485,13 +488,17 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case DialogueEventType.EnableObject:
-                if (dialogueEvent.target != null)
-                    dialogueEvent.target.SetActive(true);
+
+                if (target != null)
+                    target.Enable();
+
                 break;
 
             case DialogueEventType.DisableObject:
-                if (dialogueEvent.target != null)
-                    dialogueEvent.target.SetActive(false);
+
+                if (target != null)
+                    target.Disable();
+
                 break;
 
             case DialogueEventType.LoadScene:
@@ -507,24 +514,17 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case DialogueEventType.DoorUnlock:
-                // TODO : Door 스크립트 구현 후 추가
-                /*if (dialogueEvent.target != null)
-                {
-                    Door door =
-                        dialogueEvent.target.GetComponent<Door>();
 
-                    if (door != null)
-                        door.Unlock();
-                }*/
+                // 추후 DoorTarget 등 구현
 
                 break;
 
             case DialogueEventType.StartPuzzle:
 
-                if (dialogueEvent.target != null)
+                if (target != null)
                 {
                     PerspectiveEmblemPuzzle puzzle =
-                        dialogueEvent.target.GetComponent<PerspectiveEmblemPuzzle>();
+                        target.GetComponent<PerspectiveEmblemPuzzle>();
 
                     if (puzzle != null)
                         puzzle.InteractPuzzle();
@@ -534,7 +534,7 @@ public class DialogueManager : MonoBehaviour
 
             case DialogueEventType.PlayCutscene:
 
-                // 추후 Timeline이나 컷씬 매니저 연결
+                // 추후 Timeline 연결
 
                 break;
         }

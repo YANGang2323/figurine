@@ -5,8 +5,9 @@ public class DialogueEvent
 {
     public DialogueEventType type = DialogueEventType.None;
 
-    [Header("대상 오브젝트")]
-    public GameObject target;
+    [Header("대상 오브젝트 ID")]
+    public string targetID;
+    //public GameObject target;
 
     [Header("씬 이동")]
     public string sceneName;

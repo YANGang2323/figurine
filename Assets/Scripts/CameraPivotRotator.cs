@@ -74,7 +74,7 @@ public class CameraPivotRotator : MonoBehaviour
             //sideViewOffset = transform.position - player.position;
         }
             
-        //DecideCameraType();
+        DecideCameraType();
         
         float currentY = transform.eulerAngles.y;
         if (Mathf.Abs(currentY - 270f) < 45f || Mathf.Abs(currentY + 90f) < 45f)

@@ -1,0 +1,44 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueTarget : MonoBehaviour
+{
+    public string targetID;
+
+    private static Dictionary<string, DialogueTarget> targets
+        = new Dictionary<string, DialogueTarget>();
+
+    private void Awake()
+    {
+        if (!string.IsNullOrEmpty(targetID))
+        {
+            targets[targetID] = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (targets.ContainsKey(targetID))
+        {
+            targets.Remove(targetID);
+        }
+    }
+
+    public static DialogueTarget Find(string id)
+    {
+        if (targets.TryGetValue(id, out DialogueTarget target))
+            return target;
+
+        return null;
+    }
+
+    public void Enable()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+}
