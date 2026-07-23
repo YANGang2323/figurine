@@ -17,7 +17,54 @@ MonoBehaviour:
   lines:
   - speakerName: "\uC8FC\uC778\uACF5"
     text: "\uC774 \uC815\uB3C4\uBA74 \uB410\uB2E4."
-    portrait: {fileID: 0}
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    soundEffect: {fileID: 8300000, guid: e747aa2f37247ef4abc60bb24ea33f17, type: 3}
+    soundVolume: 1
+    hasChoice: 0
+    choices: []
   - speakerName: "\uC8FC\uC778\uACF5"
     text: "\uB2E4\uB978 \uACF3\uC744 \uB354 \uB458\uB7EC\uBCFC\uAE4C."
-    portrait: {fileID: 0}
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    soundEffect: {fileID: 0}
+    soundVolume: 1
+    hasChoice: 0
+    choices: []
+  endEvent:
+    type: 0
+    target: {fileID: 0}
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}

@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: NPC_ExtraWoman_Repeat
+  m_Name: stage2_O1box_rpeat
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: NPC_ExtraWoman_Repeat
+  dialogueID: O1 repeat
   playOnlyOnce: 0
   lines:
-  - speakerName: "\uC5EC\uC790"
-    text: "\uC544\uC544, \uC624\uB298\uB3C4 \uAE30\uB300\uB3FC. \u300A\uB450 \uBC88\uC9F8
-      \uC2EC\uC7A5\u300B\uC744 \uBD10\uC57C \uBE44\uB85C\uC18C \uB0B4 \uC77C\uC8FC\uC77C\uC774
-      \uC2DC\uC791\uB41C\uB2E4\uAD6C."
+  - speakerName: 
+    text: "\uCCAB \uBC88\uC9F8 \uB2E8\uC11C. \uC18C\uD488\uB4E4\uC774 \uB2F4\uAE34
+      \uBC15\uC2A4\uB2E4. \uC2E4\uACFC \uAC00\uC704, \uBBF8\uC0AC\uC6A9 \uD050\uC2DC\uD2B8
+      \uB4F1\uC774 \uB2F4\uACA8\uC788\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 21300000, guid: e8c23baf858dd924490b9df0f57f8103, type: 3}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -34,11 +37,11 @@ MonoBehaviour:
     useCustomSpeakerSize: 0
     speakerFontSize: 0
     useCustomDialogueColor: 0
-    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
     useCustomSpeakerColor: 0
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
-    soundVolume: 1
+    soundVolume: 0
     hasChoice: 0
     choices: []
   endEvent:

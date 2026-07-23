@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: NPC_man_Repeat
+  m_Name: stage2_O4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: NPC_man_Repeat
-  playOnlyOnce: 0
+  dialogueID: O4
+  playOnlyOnce: 1
   lines:
-  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
-    text: "\uACE7 \uBB34\uB300\uC5D0\uC11C \uBD59\uC8E0. \uC990\uAC70\uC6B4 \uAD00\uB78C
-      \uB418\uC138\uC694."
+  - speakerName: 
+    text: "\uC5EC\uC8FC\uC778\uACF5\uC774 \uCC29\uC6A9\uD560 \uD30C\uB780 \uBCA8\uBCB3
+      \uB4DC\uB808\uC2A4\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 21300000, guid: d498e642feadfca42a5a6d0205ed9a2b, type: 3}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -33,11 +36,11 @@ MonoBehaviour:
     useCustomSpeakerSize: 0
     speakerFontSize: 0
     useCustomDialogueColor: 0
-    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
     useCustomSpeakerColor: 0
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
-    soundVolume: 1
+    soundVolume: 0
     hasChoice: 0
     choices: []
   endEvent:

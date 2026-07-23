@@ -21,6 +21,10 @@ public class DialogueLine
     public bool hideRightPortrait;
     public Sprite rightPortrait;
 
+    [Header("DetailImage")]
+    public Sprite detailImage1;
+    public Sprite detailImage2;
+    public Sprite detailImage3;
 
     [Header("텍스트 스타일")]
     public bool useCustomDialogueFont;

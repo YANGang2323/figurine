@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
+    public Transform interactionPoint;
     public string objectName = "extrawoman";
     public bool canInteract = true;
     public bool requireSideView;
@@ -45,6 +46,9 @@ public class InteractableObject : MonoBehaviour
             return;
         }
 
+        if (DialogueManager.Instance != null &&
+        DialogueManager.Instance.IsPlaying)
+        {return;}
 
         if (dialogueTrigger != null)
         {

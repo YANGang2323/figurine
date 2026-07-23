@@ -9,8 +9,6 @@ public class PlayerInteraction : MonoBehaviour
     // UI 이동 속도
     public float uiFollowSpeed = 10f;
 
-    public Vector3 uiOffset = new Vector3(0, 2f, 0);
-
     // 근처 상호작용 가능한 물체들
     private List<InteractableObject> nearbyObjects =
         new List<InteractableObject>();
@@ -29,6 +27,11 @@ public class PlayerInteraction : MonoBehaviour
 
     void LateUpdate()
     {
+        if (DialogueManager.Instance != null &&DialogueManager.Instance.IsPlaying)
+        {
+            interactionUI.SetActive(false);
+            return;
+        }
         // 가장 가까운 물체 찾기
         FindClosestObject();
 
@@ -38,10 +41,17 @@ public class PlayerInteraction : MonoBehaviour
             // UI 표시
             interactionUI.SetActive(true);
 
-            // Collider 중심 위치 가져오기
-            Vector3 worldPosition =
-                closestObject.transform.position
-                + uiOffset;
+            // interactionPoint 위치 가져오기
+            Vector3 worldPosition;
+
+            if (closestObject.interactionPoint != null)
+            {
+                worldPosition = closestObject.interactionPoint.position;
+            }
+            else
+            {
+                worldPosition = closestObject.transform.position;
+            }
 
             // 월드 좌표 → 화면 좌표 변환
             Vector3 screenPosition =
@@ -50,12 +60,21 @@ public class PlayerInteraction : MonoBehaviour
             // 카메라 앞에 있을 때만 표시
             if (screenPosition.z > 0)
             {
+                float margin = 80f;
+                screenPosition.x = Mathf.Clamp(
+                    screenPosition.x,
+                    margin,
+                    Screen.width - margin);
+
+                screenPosition.y = Mathf.Clamp(
+                    screenPosition.y,
+                    margin,
+                    Screen.height - margin);
+
                 // 다른 물체로 변경되었으면 즉시 이동
                 if (closestObject != previousObject)
                 {
-                    interactionUI.transform.position =
-                        screenPosition;
-
+                    interactionUI.transform.position = screenPosition;
                     previousObject = closestObject;
                 }
                 else
@@ -75,7 +94,7 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             // E 키 입력
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.IsPlaying)
             {
                 closestObject.Interact();
             }
@@ -89,7 +108,11 @@ public class PlayerInteraction : MonoBehaviour
             previousObject = null;
         }
     }
-
+    public void HideInteractionUI()
+    {
+        interactionUI.SetActive(false);
+        previousObject = null;
+    }
     void FindClosestObject()
     {
         float closestDistance = Mathf.Infinity;

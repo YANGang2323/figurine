@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: stage2_O1box
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: O1
+  playOnlyOnce: 1
+  lines:
+  - speakerName: 
+    text: "\uC18C\uD488\uB4E4\uC774 \uB2F4\uAE34 \uBC15\uC2A4\uB2E4. \uC2E4\uACFC
+      \uAC00\uC704, \uBBF8\uC0AC\uC6A9 \uD050\uC2DC\uD2B8 \uB4F1\uC774 \uB2F4\uACA8\uC788\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 21300000, guid: e8c23baf858dd924490b9df0f57f8103, type: 3}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    hasChoice: 0
+    choices: []
+  endEvent:
+    type: 0
+    target: {fileID: 0}
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}

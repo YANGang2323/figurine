@@ -61,7 +61,7 @@ MonoBehaviour:
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
-    soundVolume: 1
+    soundVolume: 0.068
     hasChoice: 0
     choices: []
   - speakerName: ???
@@ -599,7 +599,7 @@ MonoBehaviour:
     dialogueColor: {r: 1, g: 1, b: 1, a: 1}
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    soundEffect: {fileID: 0}
+    soundEffect: {fileID: 8300000, guid: e747aa2f37247ef4abc60bb24ea33f17, type: 3}
     soundVolume: 1
     hasChoice: 0
     choices: []

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: poster_access
+  m_Name: poster1_access
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: poster_access
   playOnlyOnce: 1
@@ -24,3 +24,24 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    soundEffect: {fileID: 8300000, guid: e747aa2f37247ef4abc60bb24ea33f17, type: 3}
+    soundVolume: 1
+    hasChoice: 0
+    choices: []
+  endEvent:
+    type: 0
+    target: {fileID: 0}
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}

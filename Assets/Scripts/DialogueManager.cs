@@ -13,7 +13,7 @@ public class ChoiceRecord
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-
+    public PlayerInteraction playerInteraction;
     public GameObject panel;
 
     public TMP_Text speakerText;
@@ -22,6 +22,17 @@ public class DialogueManager : MonoBehaviour
     public Image backgroundImage;
     public Image leftPortraitImage;
     public Image rightPortraitImage;
+
+    [Header("DetailImage")]
+    public GameObject detailPanel;
+    public Image detailImage;
+
+    public Button leftButton;
+    public Button rightButton;
+
+    private Sprite[] detailSprites = new Sprite[3];
+    private int currentDetailIndex;
+    private int currentDetailCount;
 
     public List<ChoiceRecord> choiceHistory = new(); //선택지 기록
     /*나중에 사용시
@@ -68,6 +79,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<DialogueLine> lines
     = new Queue<DialogueLine>();
     private DialogueData currentDialogue;   //현재 대화 기억
+    
 
     bool isPlaying;
 
@@ -126,6 +138,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueData dialogue)
     {
+        playerInteraction.HideInteractionUI();
         currentDialogue = dialogue;
 
         panel.SetActive(true);
@@ -218,7 +231,20 @@ public class DialogueManager : MonoBehaviour
             rightPortraitImage.sprite = line.rightPortrait;
         }
         //null이면 아무것도 안 함(이전 유지)
+        // 디테일 이미지
+        if (line.detailImage1 != null || line.detailImage2 != null || line.detailImage3 != null)
+        {
+            detailPanel.SetActive(true);
+            detailSprites[0] = line.detailImage1;
+            detailSprites[1] = line.detailImage2;
+            detailSprites[2] = line.detailImage3;
 
+            ShowDetail();
+        }
+        else
+        {
+            detailPanel.SetActive(false);
+        }
         //텍스트 스타일
         // Dialogue Font
         dialogueText.font =
@@ -267,6 +293,85 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    void ShowDetail()
+    {
+        currentDetailCount = 0;
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (detailSprites[i] != null)
+            {
+                currentDetailIndex = i;
+                currentDetailCount++;
+                break;
+            }
+        }
+
+        if (currentDetailCount == 0)
+        {
+            detailPanel.SetActive(false);
+            return;
+        }
+
+        detailPanel.SetActive(true);
+        RefreshDetail();
+    }
+
+    void RefreshDetail()
+    {
+        detailImage.sprite = detailSprites[currentDetailIndex];
+
+        bool hasLeft = false;
+        bool hasRight = false;
+
+        for (int i = currentDetailIndex - 1; i >= 0; i--)
+        {
+            if (detailSprites[i] != null)
+            {
+                hasLeft = true;
+                break;
+            }
+        }
+
+        for (int i = currentDetailIndex + 1; i < 3; i++)
+        {
+            if (detailSprites[i] != null)
+            {
+                hasRight = true;
+                break;
+            }
+        }
+
+        leftButton.gameObject.SetActive(hasLeft);
+        rightButton.gameObject.SetActive(hasRight);
+    }
+    //디테일왼쪽버튼
+    public void PrevDetail()
+    {
+        for (int i = currentDetailIndex - 1; i >= 0; i--)
+        {
+            if (detailSprites[i] != null)
+            {
+                currentDetailIndex = i;
+                RefreshDetail();
+                return;
+            }
+        }
+    }
+    //디테일오른쪽버튼
+    public void NextDetail()
+    {
+        for (int i = currentDetailIndex + 1; i < 3; i++)
+        {
+            if (detailSprites[i] != null)
+            {
+                currentDetailIndex = i;
+                RefreshDetail();
+                return;
+            }
+        }
+    }
+
     void FinishTyping()
     {
         if (typingCoroutine != null)
@@ -298,6 +403,7 @@ public class DialogueManager : MonoBehaviour
         backgroundImage.gameObject.SetActive(false);
         leftPortraitImage.gameObject.SetActive(false);
         rightPortraitImage.gameObject.SetActive(false);
+        detailPanel.SetActive(false);
 
         choicePanel.SetActive(false);
         panel.SetActive(false);

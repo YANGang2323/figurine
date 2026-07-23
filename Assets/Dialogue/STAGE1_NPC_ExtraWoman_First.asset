@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: NPC_ExtraWoman_First
+  m_Name: stage1_NPC_ExtraWoman_First
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: NPC_ExtraWoman_First
   playOnlyOnce: 1
