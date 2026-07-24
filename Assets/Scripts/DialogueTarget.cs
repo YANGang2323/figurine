@@ -7,6 +7,23 @@ public class DialogueTarget : MonoBehaviour
 
     private static Dictionary<string, DialogueTarget> targets
         = new Dictionary<string, DialogueTarget>();
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+
+    static void RegisterAll()
+    {
+        targets.Clear();
+
+        DialogueTarget[] allTargets =
+            Resources.FindObjectsOfTypeAll<DialogueTarget>();
+
+        foreach (DialogueTarget target in allTargets)
+        {
+            if (string.IsNullOrEmpty(target.targetID))
+                continue;
+
+            targets[target.targetID] = target;
+        }
+    }
 
     private void Awake()
     {

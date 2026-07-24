@@ -46,11 +46,20 @@ public class DialogueLine
     public Color speakerColor = Color.white;
 
 
-    [Header("Audio")]
+    [Header("SFX")]
     public AudioClip soundEffect;
 
     [Range(0f, 1f)]
     public float soundVolume = 1f;
+
+    [Header("BGM")]
+    public bool changeBGM;
+    public AudioClip bgm;
+
+    [Range(0f, 1f)]
+    public float bgmVolume = 1f;
+
+    public bool stopBGM;
 
 
     [Header("Choice")]

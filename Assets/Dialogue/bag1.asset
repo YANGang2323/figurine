@@ -20,7 +20,7 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 21300000, guid: 5cc70156aa740c4439a2270a2288b493, type: 3}
+    leftPortrait: {fileID: 21300000, guid: dbb04cd5fac914d46aff1444bd726cd9, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
     detailImage1: {fileID: 21300000, guid: cee2d3aa2ae5a564ebe55c7ad4e693ad, type: 3}
@@ -40,6 +40,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -67,6 +71,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -95,6 +103,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -124,6 +136,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -131,9 +147,9 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
+    leftPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
+    rightPortrait: {fileID: 0}
     detailImage1: {fileID: 21300000, guid: cee2d3aa2ae5a564ebe55c7ad4e693ad, type: 3}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -151,6 +167,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   endEvent:

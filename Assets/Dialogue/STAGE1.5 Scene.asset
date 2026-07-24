@@ -20,9 +20,9 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 21300000, guid: f4391888a1d100e46972c53f6075922d, type: 3}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 0}
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    rightPortrait: {fileID: 0}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -40,6 +40,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -67,6 +71,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -95,6 +103,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -102,9 +114,9 @@ MonoBehaviour:
       \uC790\uB9AC\uC5D0 \uC549\uC558\uB2E4. "
     hideBackground: 0
     background: {fileID: 0}
-    hideLeftPortrait: 0
+    hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
-    hideRightPortrait: 1
+    hideRightPortrait: 0
     rightPortrait: {fileID: 0}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
@@ -123,6 +135,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -150,6 +166,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -177,6 +197,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -204,6 +228,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -232,6 +260,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -259,6 +291,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -286,6 +322,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -315,6 +355,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -345,6 +389,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -373,6 +421,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -401,6 +453,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -430,6 +486,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -458,6 +518,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -487,6 +551,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -515,6 +583,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -545,6 +617,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -573,6 +649,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 8300000, guid: 9e1ed9d4aba95bf4095670bf81085fe4, type: 3}
     soundVolume: 0.539
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -600,6 +680,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -627,6 +711,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -654,6 +742,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -682,6 +774,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -711,6 +807,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -738,6 +838,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -745,7 +849,7 @@ MonoBehaviour:
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
-    leftPortrait: {fileID: 21300000, guid: 5cc70156aa740c4439a2270a2288b493, type: 3}
+    leftPortrait: {fileID: 21300000, guid: dbb04cd5fac914d46aff1444bd726cd9, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
     detailImage1: {fileID: 0}
@@ -765,6 +869,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -792,6 +900,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -819,6 +931,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -846,6 +962,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -874,6 +994,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -901,6 +1025,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -928,6 +1056,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -955,6 +1087,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -982,6 +1118,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1011,6 +1151,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1039,6 +1183,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1068,6 +1216,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1096,6 +1248,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1123,6 +1279,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1151,6 +1311,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1180,6 +1344,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1208,6 +1376,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1236,6 +1408,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1264,6 +1440,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1291,6 +1471,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -1318,6 +1502,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC8FC\uC778\uACF5"
@@ -1347,6 +1535,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 1
     choices:
     - text: "\uB2EC\uB824\uC624\uB294 \uC0AC\uB78C\uB4E4\uC5D0\uAC8C \uC124\uBA85\uD574

@@ -1495,6 +1495,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 342ebe73ccc8a0e46872c535efa72c93, type: 3}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
+      propertyPath: bgmSource
+      value: 
+      objectReference: {fileID: 1569419894}
+    - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1569419894}
+    - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
       propertyPath: leftButton
       value: 
       objectReference: {fileID: 895083973}
@@ -6228,8 +6236,8 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
-  m_Pitch: 2
+  m_Volume: 0
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0

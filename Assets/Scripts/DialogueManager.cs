@@ -68,12 +68,17 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping;
 
     // ===== Dialogue 효과음 =====
-    [Header("스페이스바 Audio")]
+    [Header("Audio")]
     public AudioClip nextClip;
     public AudioClip choiceSelectClip;
     //스페이스바 효과음
     public AudioSource DialogueAudioSource;
     
+    [SerializeField] private AudioSource bgmSource; //브금
+    [SerializeField] private float bgmFadeTime = 1f;
+    private Coroutine bgmCoroutine;
+    [SerializeField] private AudioSource sfxSource; //효과음
+
 
 
     private Queue<DialogueLine> lines
@@ -177,6 +182,64 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+    }
+    //브금
+    public bool IsCutsceneBGMPlaying
+    {
+        get
+        {
+            return bgmSource != null && bgmSource.isPlaying;
+        }
+    }
+    IEnumerator ChangeBGM(AudioClip newClip, float targetVolume, float fadeTime)
+    {
+        // 현재 브금 Fade Out
+        if (bgmSource.isPlaying)
+        {
+            float start = bgmSource.volume;
+
+            for (float t = 0; t < fadeTime; t += Time.deltaTime)
+            {
+                bgmSource.volume = Mathf.Lerp(start, 0f, t / fadeTime);
+                yield return null;
+            }
+        }
+
+        // 교체
+        bgmSource.Stop();
+
+        if (newClip == null)
+            yield break;
+
+        bgmSource.clip = newClip;
+        bgmSource.volume = 0f;
+        bgmSource.Play();
+
+        // Fade In
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            bgmSource.volume = Mathf.Lerp(0f, targetVolume, t / fadeTime);
+            yield return null;
+        }
+
+        bgmSource.volume = targetVolume;
+    }
+
+    IEnumerator StopBGM(float fadeTime)
+    {
+        if (!bgmSource.isPlaying)
+            yield break;
+
+        float start = bgmSource.volume;
+
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            bgmSource.volume = Mathf.Lerp(start, 0f, t / fadeTime);
+            yield return null;
+        }
+
+        bgmSource.Stop();
+        bgmSource.volume = start;
     }
 
     public void ShowNextLine()
@@ -292,6 +355,34 @@ public class DialogueManager : MonoBehaviour
         {
             DialogueAudioSource.PlayOneShot(line.soundEffect, line.soundVolume);
         }
+        // ===== 컷씬 BGM =====
+        if (line.changeBGM)
+        {
+            if (bgmCoroutine != null)
+                StopCoroutine(bgmCoroutine);
+
+            bgmCoroutine =
+                StartCoroutine(ChangeBGM(
+                    line.bgm,
+                    line.bgmVolume,
+                    bgmFadeTime));
+        }
+
+        if (line.stopBGM)
+        {
+            if (bgmCoroutine != null)
+                StopCoroutine(bgmCoroutine);
+
+            bgmCoroutine =
+                StartCoroutine(StopBGM(bgmFadeTime));
+        }
+
+        // ===== 대사 효과음 =====
+        if (line.soundEffect != null)
+        {
+            sfxSource.PlayOneShot(line.soundEffect, line.soundVolume);
+        }
+
 
         //선택지 저장만
         if (line.hasChoice)
@@ -300,6 +391,37 @@ public class DialogueManager : MonoBehaviour
             waitingForChoice = true;
         }
 
+    }
+
+    void EndDialogue()
+    {
+        if (currentChoiceEvent != null)
+        {
+            ExecuteDialogueEvent(currentChoiceEvent);
+            currentChoiceEvent = null;
+        }
+        if (currentDialogue != null)
+        {
+            ExecuteDialogueEvent(currentDialogue.endEvent);
+        }
+        if (bgmSource.isPlaying)
+        {
+            if (bgmCoroutine != null)
+                StopCoroutine(bgmCoroutine);
+
+            bgmCoroutine =
+                StartCoroutine(StopBGM(bgmFadeTime));
+        }
+        backgroundImage.gameObject.SetActive(false);
+        leftPortraitImage.gameObject.SetActive(false);
+        rightPortraitImage.gameObject.SetActive(false);
+        detailPanel.SetActive(false);
+
+        choicePanel.SetActive(false);
+        panel.SetActive(false);
+
+        isPlaying = false;
+        InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
     }
 
     void ShowDetail()
@@ -391,28 +513,7 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
-    void EndDialogue()
-    {
-        if (currentChoiceEvent != null)
-        {
-            ExecuteDialogueEvent(currentChoiceEvent);
-            currentChoiceEvent = null;
-        }
-        if (currentDialogue != null)
-        {
-            ExecuteDialogueEvent(currentDialogue.endEvent);
-        }
-        backgroundImage.gameObject.SetActive(false);
-        leftPortraitImage.gameObject.SetActive(false);
-        rightPortraitImage.gameObject.SetActive(false);
-        detailPanel.SetActive(false);
-
-        choicePanel.SetActive(false);
-        panel.SetActive(false);
-
-        isPlaying = false;
-        InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
-    }
+    
 
     void ShowChoiceUI(DialogueChoice[] choices)
     {
@@ -489,9 +590,11 @@ public class DialogueManager : MonoBehaviour
 
             case DialogueEventType.EnableObject:
 
-                if (target != null)
+                if (target != null) { 
                     target.Enable();
-
+                }else{
+                    Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {dialogueEvent.targetID}");
+                }
                 break;
 
             case DialogueEventType.DisableObject:
