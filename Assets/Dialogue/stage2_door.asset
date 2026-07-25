@@ -490,15 +490,8 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   endEvent:
-    type: 7
+    type: 9
     targetIDs:
-    - cctvLight0
-    - cctvLight1
-    - cctvLight2
-    - cctvLight3
-    - cctvTrigger0
-    - cctvTrigger1
-    - cctvTrigger2
-    - cctvTrigger3
+    - door2
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

@@ -16,38 +16,17 @@ MonoBehaviour:
   playOnlyOnce: 1
   lines:
   - speakerName: 
-    text: "\uB410\uB2E4\u2026!"
-    hideBackground: 0
-    background: {fileID: 0}
-    hideLeftPortrait: 0
-    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
-    hideRightPortrait: 0
-    rightPortrait: {fileID: 0}
-    useCustomDialogueFont: 0
-    dialogueFont: {fileID: 0}
-    useCustomSpeakerFont: 0
-    speakerFont: {fileID: 0}
-    useCustomDialogueSize: 0
-    dialogueFontSize: 0
-    useCustomSpeakerSize: 0
-    speakerFontSize: 0
-    useCustomDialogueColor: 0
-    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
-    useCustomSpeakerColor: 0
-    speakerColor: {r: 0, g: 0, b: 0, a: 0}
-    soundEffect: {fileID: 8300000, guid: 2008ab3ed3d2833408bc756cc3ca5aeb, type: 3}
-    soundVolume: 0.539
-    hasChoice: 0
-    choices: []
-  - speakerName: 
     text: "\uBB38\uC744 \uC5F4\uACE0 \uC5B4\uB450\uC6B4 \uCC3D\uACE0 \uC548\uC73C\uB85C
       \uB4E4\uC5B4\uAC14\uB2E4."
     hideBackground: 0
-    background: {fileID: 0}
-    hideLeftPortrait: 1
+    background: {fileID: 21300000, guid: 752b975b4ec4b814dad6b812c4264efc, type: 3}
+    hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -62,17 +41,25 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uC644\uC804\uD55C \uC554\uC804. \uB0B4 \uBC1C\uAC78\uC74C \uC18C\uB9AC\uC640
-      \uC5B4\uB514\uC120\uAC00 \uBB3C \uB5A8\uC5B4\uC9C0\uB294 \uC18C\uB9AC \uBFD0\uC774\uC5C8\uB2E4."
+    text: "\uADF8\uACF3\uC740 \uC644\uC804\uD55C \uC554\uC804\uC774\uC5C8\uB2E4.\n\uB4E4\uB9AC\uB294
+      \uAC83\uC774\uB77C\uACE4 \uB0B4 \uBC1C\uAC78\uC74C \uC18C\uB9AC\uC640 \uC5B4\uB514\uC120\uAC00
+      \uBB3C \uB5A8\uC5B4\uC9C0\uB294 \uC18C\uB9AC\uBFD0\uC774\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -87,6 +74,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 8300000, guid: 0696a6fa0a521b54ab5c32f84d3a6850, type: 3}
     soundVolume: 0.485
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -97,6 +88,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 21300000, guid: 83f481c23212f1b47b3ffe6a7b41f9d2, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -111,6 +105,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 8300000, guid: 1c5d6afd20778a84cba46e0316adc41c, type: 3}
     soundVolume: 0.603
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -123,6 +121,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -137,6 +138,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -151,6 +156,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -165,6 +173,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -176,6 +188,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 21300000, guid: 83f481c23212f1b47b3ffe6a7b41f9d2, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -190,6 +205,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -203,6 +222,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -217,6 +239,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -227,6 +253,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -241,6 +270,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -251,6 +284,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -265,6 +301,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -275,6 +315,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -289,6 +332,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -299,6 +346,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 21300000, guid: 83f481c23212f1b47b3ffe6a7b41f9d2, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -313,6 +363,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -323,6 +377,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -337,10 +394,14 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   endEvent:
     type: 0
-    target: {fileID: 0}
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

@@ -673,6 +673,23 @@ public class DialogueManager : MonoBehaviour
             case DialogueEventType.CctvRespawn:
                 StealthManager.Instance.Respawn();
                 break;
+
+            case DialogueEventType.TwoStageDoorFirst:
+                {
+                    foreach (string id in dialogueEvent.targetIDs)
+                    {
+                        DialogueTarget target = DialogueTarget.Find(id);
+                        if (target != null)
+                        {
+                            NumberSelectDoor door = target.GetComponent<NumberSelectDoor>();
+
+                            if (door != null)
+                                door.FirstInteraction();
+                        }
+                    }
+                }
+                break;
+
         }
     }
 }

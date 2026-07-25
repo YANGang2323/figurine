@@ -12,6 +12,7 @@ public class InteractableObject : MonoBehaviour
     public PerspectiveEmblemPuzzle puzzle;
     public PerspectivePuzzlePiece puzzlePiece;
 
+
     private void Awake()
     {
         dialogueTrigger = GetComponent<DialogueTrigger>();

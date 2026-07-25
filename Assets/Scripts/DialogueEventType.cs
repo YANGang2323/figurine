@@ -12,5 +12,6 @@ public enum DialogueEventType
     CctvRespawn,        // 리스폰
 
     EnableObject,   // 오브젝트 활성화
-    DisableObject   // 오브젝트 비활성화
+    DisableObject,   // 오브젝트 비활성화
+    TwoStageDoorFirst, // 2스테이지 첫 상호작용시 이벤트모음
 }
