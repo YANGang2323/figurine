@@ -18,7 +18,7 @@ MonoBehaviour:
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
     text: "3\uC5F4 G..."
     hideBackground: 0
-    background: {fileID: 21300000, guid: f4391888a1d100e46972c53f6075922d, type: 3}
+    background: {fileID: 21300000, guid: 7f0dc11f40c851f40ba5b2de6f2aa15b, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
     hideRightPortrait: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   - speakerName: 
     text: "\uC870\uBA85\uC774 \uAEBC\uC84C\uB2E4."
     hideBackground: 0
-    background: {fileID: 0}
+    background: {fileID: 21300000, guid: 65270794db32c354ca83a258313b2422, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   - speakerName: 
     text: '@ # $ % $ * ! ! ! ! !'
     hideBackground: 0
-    background: {fileID: 0}
+    background: {fileID: 21300000, guid: f0dbb88fdd2e9d1499ed6af7bb5debc4, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
@@ -1546,7 +1546,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: 7e113d5deaed1434abd0b83c2309ecca, type: 2}
       eventData:
         type: 0
-        targetID: 
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: 7e113d5deaed1434abd0b83c2309ecca, type: 2}
       eventData:
         type: 0
-        targetID: 
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -1564,6 +1564,6 @@ MonoBehaviour:
       score: 0
   endEvent:
     type: 0
-    targetID: 
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
