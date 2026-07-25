@@ -84,7 +84,7 @@ MonoBehaviour:
     text: "\uB098\uB294 \uB2EC\uB824\uC624\uB294 \uC0AC\uB78C\uB4E4\uC744 \uD53C\uD574
       \uBB34\uB300 \uB4A4\uD3B8\uC73C\uB85C \uB6F0\uC5B4\uC654\uB2E4."
     hideBackground: 0
-    background: {fileID: 21300000, guid: 26d57fd0a329b634b9c047d72cf143d8, type: 3}
+    background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
@@ -113,9 +113,9 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
-    text: "\uAC00\uBC29\uC744 \uB4E4\uACE0 \uC785\uC7A5\uD55C \uAC78 \uB4E4\uD0A4\uBA74\n...
-      \uB0B4\uAC00 \uC900\uBE44\uD55C\uAC8C \uC544\uB2C8\uB77C\uACE0 \uD574\uB3C4,
-      \uC5B5\uC6B8\uD558\uAC8C \uC7A1\uD600\uAC00\uACA0\uC9C0.."
+    text: "\uAC00\uBC29\uC744 \uB4E4\uACE0 \uC785\uC7A5\uD55C \uAC78 \uB4E4\uD0A4\uBA74...\n\uB0B4\uAC00
+      \uC900\uBE44\uD55C\uAC8C \uC544\uB2C8\uB77C\uACE0 \uD574\uB3C4, \uC5B5\uC6B8\uD558\uAC8C
+      \uC7A1\uD600\uAC00\uACA0\uC9C0."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
       \uC605\uC5B4\uC9C0\uACE0, \uAE38\uAC8C \uC774\uC5B4\uC9C4 \uBCF5\uB3C4\uAC00
       \uB098\uC654\uB2E4."
     hideBackground: 0
-    background: {fileID: 0}
+    background: {fileID: 21300000, guid: 26d57fd0a329b634b9c047d72cf143d8, type: 3}
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
