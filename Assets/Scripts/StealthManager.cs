@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StealthManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class StealthManager : MonoBehaviour
 
     public Transform player;
     public Transform currentCheckpoint;
+    [SerializeField] private ScreenFader screenFader;
+    [SerializeField] private float fadeTime = 1f;
+    private bool isRespawning;
 
     void Awake()
     {
@@ -14,9 +18,43 @@ public class StealthManager : MonoBehaviour
 
     public void Respawn()
     {
+        if (isRespawning)
+            return;
+
+        StartCoroutine(RespawnRoutine());
+    }
+
+    IEnumerator RespawnRoutine()
+    {
+        isRespawning = true;
+
+        InputLockManager.DialogueLock = true;
+
+        // 암전
+        yield return screenFader.FadeOut(fadeTime);
+
         player.position = currentCheckpoint.position;
 
-        // 감지 초기화
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
         DetectionUI.Instance.UpdateUI(0);
+
+        CameraPivotRotator.Instance.SnapToPlayer();
+
+        yield return null;
+
+        // 밝아짐
+        yield return screenFader.FadeIn(fadeTime);
+
+        player.position = currentCheckpoint.position;
+
+        InputLockManager.DialogueLock = false;
+
+        isRespawning = false;
     }
 }

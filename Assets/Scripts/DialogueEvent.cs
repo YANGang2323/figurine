@@ -1,12 +1,13 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 [System.Serializable]
 public class DialogueEvent
 {
     public DialogueEventType type = DialogueEventType.None;
 
     [Header("대상 오브젝트 ID")]
-    public string targetID;
+    public List<string> targetIDs = new();
+    //public string targetID;
     //public GameObject target;
 
     [Header("씬 이동")]

@@ -580,30 +580,34 @@ public class DialogueManager : MonoBehaviour
         if (dialogueEvent == null)
             return;
 
-        DialogueTarget target =
-            DialogueTarget.Find(dialogueEvent.targetID);
-
         switch (dialogueEvent.type)
         {
             case DialogueEventType.None:
                 break;
 
             case DialogueEventType.EnableObject:
+                foreach (string id in dialogueEvent.targetIDs)
+                {
+                    DialogueTarget target = DialogueTarget.Find(id);
 
-                if (target != null) { 
-                    target.Enable();
-                }else{
-                    Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {dialogueEvent.targetID}");
+                    if (target != null)
+                        target.Enable();
+                    else
+                        Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {id}");
                 }
+
                 break;
 
             case DialogueEventType.DisableObject:
 
-                if (target != null)
+                foreach (string id in dialogueEvent.targetIDs)
                 {
-                    target.Disable();
-                }else{
-                    Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {dialogueEvent.targetID}");
+                    DialogueTarget target = DialogueTarget.Find(id);
+
+                    if (target != null)
+                        target.Disable();
+                    else
+                        Debug.LogWarning($"DialogueTarget을 찾을 수 없습니다. ID : {id}");
                 }
 
                 break;
@@ -628,21 +632,46 @@ public class DialogueManager : MonoBehaviour
 
             case DialogueEventType.StartPuzzle:
 
-                if (target != null)
+                foreach (string id in dialogueEvent.targetIDs)
                 {
+                    DialogueTarget target = DialogueTarget.Find(id);
+
+                    if (target == null)
+                        continue;
+
                     PerspectiveEmblemPuzzle puzzle =
                         target.GetComponent<PerspectiveEmblemPuzzle>();
 
                     if (puzzle != null)
                         puzzle.InteractPuzzle();
                 }
-
                 break;
 
             case DialogueEventType.PlayCutscene:
 
                 // 추후 Timeline 연결
 
+                break;
+
+            case DialogueEventType.ActivateCCTV:
+                foreach (string id in dialogueEvent.targetIDs)
+                {
+                    DialogueTarget target = DialogueTarget.Find(id);
+
+                    if (target == null)
+                        continue;
+
+                    CCTVController cctv =
+                        target.GetComponent<CCTVController>();
+
+                    if (cctv != null)
+                        cctv.Activate();
+                }
+
+                break;
+
+            case DialogueEventType.CctvRespawn:
+                StealthManager.Instance.Respawn();
                 break;
         }
     }

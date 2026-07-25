@@ -14,7 +14,8 @@ public class DetectionUI : MonoBehaviour
 
     public void UpdateUI(float ratio)
     {
-        
+        if (warningSound == null)
+            return;
         // °æ°íÀ½
         if (ratio > 0)
         {

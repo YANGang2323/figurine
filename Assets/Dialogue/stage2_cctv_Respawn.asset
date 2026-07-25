@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
-  m_Name: stage2_cctv death
+  m_Name: stage2_cctv_Respawn
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: stage2_cctv death
+  dialogueID: stage2_cctv_Respawn
   playOnlyOnce: 0
   lines:
   - speakerName: 
@@ -30,7 +30,7 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
     speakerFont: {fileID: 0}
-    useCustomDialogueSize: 0
+    useCustomDialogueSize: 1
     dialogueFontSize: 50
     useCustomSpeakerSize: 0
     speakerFontSize: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: a3cc6a60fa3425943a59009135333441, type: 2}
     useCustomSpeakerFont: 0
     speakerFont: {fileID: 0}
-    useCustomDialogueSize: 0
+    useCustomDialogueSize: 1
     dialogueFontSize: 50
     useCustomSpeakerSize: 0
     speakerFontSize: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   endEvent:
-    type: 0
+    type: 5
     targetID: 
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

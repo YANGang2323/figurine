@@ -243,7 +243,23 @@ public class CameraPivotRotator : MonoBehaviour
         targetRotation = isSideView ? sideRotation : defaultRotation;
         
     }
+    public void SnapToPlayer()
+    {
+        if (player == null)
+            return;
 
+        Vector3 rotatedOffset = transform.rotation * sideViewOffset;
+        Vector3 desiredPosition = player.position + rotatedOffset;
+
+        if (useMovementConstraints)
+        {
+            desiredPosition.x = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
+            desiredPosition.y = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
+            desiredPosition.z = Mathf.Clamp(desiredPosition.z, minPosition.z, maxPosition.z);
+        }
+
+        transform.position = desiredPosition;
+    }
     void FollowPlayer()
     {
 

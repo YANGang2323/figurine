@@ -3,6 +3,8 @@ using UnityEngine.UI; // 게임오버 UI용 (필요 시)
 
 public class CCTVController : MonoBehaviour
 {
+    [Header("활성 여부")]
+    [SerializeField] private bool isActive = false;
     [Header("회전 설정")]
     public bool isRotating = true;
     public float rotationAngle = 45f;
@@ -19,6 +21,8 @@ public class CCTVController : MonoBehaviour
     public Transform rayOrigin;         // 레이 시작점 (CCTV 렌즈)
 
     private Color normalColor = Color.white; // 평상시 불빛 색상
+    [Header("오버시 스크립트")]
+    public DialogueData stage2_cctv_Respawn;
 
     void Start()
     {
@@ -28,6 +32,8 @@ public class CCTVController : MonoBehaviour
 
     void Update()
     {
+        if (!isActive)
+            return;
         // 1. 회전 로직
         if (isRotating)
         {
@@ -40,12 +46,23 @@ public class CCTVController : MonoBehaviour
         {
             // 시야에서 벗어나면 경고 수치가 서서히 줄어들게 함
             detectionTimer -= Time.deltaTime * 0.5f;
+            detectionTimer = Mathf.Max(0f, detectionTimer);
             UpdateLightColor();
         }
     }
+    public void Activate()
+    {
+        isActive = true;
 
+        detectionTimer = 0f;
+
+        if (cctvLight != null)
+            cctvLight.color = normalColor;
+    }
     private void OnTriggerStay(Collider other)
     {
+        if (!isActive)
+            return;
         if (other.CompareTag("Player"))
         {
             // 플레이어 중심 높이 사용
@@ -73,6 +90,8 @@ public class CCTVController : MonoBehaviour
     }
     public void OnPlayerInSight(Collider playerCollider)
     {
+        if (!isActive)
+            return;
         // 1. 레이 방향 설정 (CCTV 렌즈 -> 플레이어 중심)
         Vector3 targetPos = playerCollider.bounds.center;
         Vector3 direction = targetPos - rayOrigin.position;
@@ -118,8 +137,8 @@ public class CCTVController : MonoBehaviour
         detectionTimer = 0; // 타이머 초기화
         UpdateLightColor();
 
-        // 플레이어를 스폰 지점으로 이동
-        player.position = spawnPoint.position;
+        // 실패 다이얼로그 재생
+        DialogueManager.Instance.StartDialogue(stage2_cctv_Respawn);
 
         // (참고) 만약 CharacterController를 사용 중이라면 이동 전후로 
         // .enabled = false/true를 해줘야 위치 값이 즉시 반영됩니다.
