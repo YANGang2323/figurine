@@ -23,7 +23,7 @@ public class CCTVController : MonoBehaviour
     private Color normalColor = Color.white; // 평상시 불빛 색상
     [Header("오버시 스크립트")]
     public DialogueData stage2_cctv_Respawn;
-
+    private bool isCaught = false;
     void Start()
     {
         initialRotation = transform.rotation;
@@ -33,6 +33,8 @@ public class CCTVController : MonoBehaviour
     void Update()
     {
         if (!isActive)
+            return;
+        if (StealthManager.Instance.IsRespawning)
             return;
         // 1. 회전 로직
         if (isRotating)
@@ -53,7 +55,7 @@ public class CCTVController : MonoBehaviour
     public void Activate()
     {
         isActive = true;
-
+        isCaught = false;
         detectionTimer = 0f;
 
         if (cctvLight != null)
@@ -62,6 +64,11 @@ public class CCTVController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!isActive)
+            return;
+        if (isCaught)
+            return;
+        if (StealthManager.Instance != null &&
+            StealthManager.Instance.IsRespawning)
             return;
         if (other.CompareTag("Player"))
         {
@@ -73,6 +80,7 @@ public class CCTVController : MonoBehaviour
 
             if (Physics.Raycast(rayOrigin.position, direction.normalized, out RaycastHit hit, distance))
             {
+                Debug.Log(hit.transform.name);
                 Debug.DrawRay(rayOrigin.position, direction, Color.red);
 
                 if (hit.transform.CompareTag("Player"))
@@ -92,6 +100,8 @@ public class CCTVController : MonoBehaviour
     {
         if (!isActive)
             return;
+        if (isCaught)
+            return;
         // 1. 레이 방향 설정 (CCTV 렌즈 -> 플레이어 중심)
         Vector3 targetPos = playerCollider.bounds.center;
         Vector3 direction = targetPos - rayOrigin.position;
@@ -103,6 +113,7 @@ public class CCTVController : MonoBehaviour
         // 3. 레이캐스트 실행 (벽 레이어만 체크하고 싶다면 세번째 인자에 레이어마스크 추가 가능)
         if (Physics.Raycast(rayOrigin.position, direction, out RaycastHit hit, distance))
         {
+            Debug.Log(hit.transform.name);
             if (hit.transform.CompareTag("Player"))
             {
                 // [감지 성공] 벽에 가려지지 않음
@@ -133,7 +144,11 @@ public class CCTVController : MonoBehaviour
 
     void GameOver(Transform player)
     {
+        if (isCaught)
+            return;
+        
         Debug.Log("게임 오버! 플레이어 검거!");
+        isCaught = true;
         detectionTimer = 0; // 타이머 초기화
         UpdateLightColor();
 
@@ -142,6 +157,14 @@ public class CCTVController : MonoBehaviour
 
         // (참고) 만약 CharacterController를 사용 중이라면 이동 전후로 
         // .enabled = false/true를 해줘야 위치 값이 즉시 반영됩니다.
+    }
+    public void ResetDetection()
+    {
+        isCaught = false;
+        detectionTimer = 0f;
+
+        if (cctvLight != null)
+            cctvLight.color = normalColor;
     }
 }
 

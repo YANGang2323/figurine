@@ -205,7 +205,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   endEvent:
-    type: 5
-    targetID: 
+    type: 6
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

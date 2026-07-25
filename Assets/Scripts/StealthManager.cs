@@ -9,7 +9,8 @@ public class StealthManager : MonoBehaviour
     public Transform currentCheckpoint;
     [SerializeField] private ScreenFader screenFader;
     [SerializeField] private float fadeTime = 1f;
-    private bool isRespawning;
+    private bool isRespawning = false;
+    public bool IsRespawning => isRespawning;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class StealthManager : MonoBehaviour
 
     public void Respawn()
     {
+        Debug.Log("Respawn 호출");
         if (isRespawning)
             return;
 
@@ -26,15 +28,16 @@ public class StealthManager : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
+        Debug.Log("RespawnRoutine 시작");
         isRespawning = true;
 
         InputLockManager.DialogueLock = true;
 
         // 암전
         yield return screenFader.FadeOut(fadeTime);
-
+        Debug.Log("암전 완료");
         player.position = currentCheckpoint.position;
-
+        Debug.Log("플레이어 이동");
         Rigidbody rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -50,11 +53,12 @@ public class StealthManager : MonoBehaviour
 
         // 밝아짐
         yield return screenFader.FadeIn(fadeTime);
-
+        Debug.Log("페이드인 완료");
         player.position = currentCheckpoint.position;
-
         InputLockManager.DialogueLock = false;
-
         isRespawning = false;
+
+        foreach (var cctv in FindObjectsOfType<CCTVController>())
+            cctv.ResetDetection();
     }
 }
