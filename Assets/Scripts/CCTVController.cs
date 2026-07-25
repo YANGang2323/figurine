@@ -20,7 +20,7 @@ public class CCTVController : MonoBehaviour
     public Transform spawnPoint;       // 리스폰 지점
     public Transform rayOrigin;         // 레이 시작점 (CCTV 렌즈)
 
-    private Color normalColor = Color.white; // 평상시 불빛 색상
+    public Color normalColor = Color.white; // 평상시 불빛 색상
     [Header("오버시 스크립트")]
     public DialogueData stage2_cctv_Respawn;
     private bool isCaught = false;
@@ -29,7 +29,16 @@ public class CCTVController : MonoBehaviour
         initialRotation = transform.rotation;
         if (cctvLight != null) normalColor = cctvLight.color;
     }
+    public void SetNormalColor(Color color)
+    {
+        normalColor = color;
 
+        // 감지 중이 아닐 때는 즉시 색 변경
+        if (detectionTimer <= 0f && cctvLight != null)
+        {
+            cctvLight.color = normalColor;
+        }
+    }
     void Update()
     {
         if (!isActive)

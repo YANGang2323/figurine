@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
+#if UNITY_EDITOR
+using UnityEditor.Build.Content;
 using static UnityEditor.Progress;
+#endif
 using UnityEngine.EventSystems;
 
 public class Game : MonoBehaviour
@@ -44,6 +47,11 @@ public class Game : MonoBehaviour
         nowstage = data.stage.ToString();
         nowpiece = data.piece.ToString();
         nowinfo = data.info.ToString();
+    //    newGame.playCode =
+    //Guid.NewGuid()
+    //    .ToString("N")
+    //    .Substring(0, 8)
+    //    .ToUpper();
         //pipeManager.SetActive(false);
         //if(nowstage == "1")
         //{
