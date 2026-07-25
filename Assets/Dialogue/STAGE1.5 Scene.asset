@@ -18,7 +18,7 @@ MonoBehaviour:
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
     text: "3\uC5F4 G..."
     hideBackground: 0
-    background: {fileID: 21300000, guid: 7f0dc11f40c851f40ba5b2de6f2aa15b, type: 3}
+    background: {fileID: 21300000, guid: 78513acb7a3389d4fa3f7eee06912693, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
     hideRightPortrait: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   - speakerName: 
     text: "\uC870\uBA85\uC774 \uAEBC\uC84C\uB2E4."
     hideBackground: 0
-    background: {fileID: 21300000, guid: 65270794db32c354ca83a258313b2422, type: 3}
+    background: {fileID: 21300000, guid: f661e326494f8e94eb48a9efe1041d8f, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   - speakerName: 
     text: "1\uB9C9."
     hideBackground: 0
-    background: {fileID: 0}
+    background: {fileID: 21300000, guid: b6af1acbad631be46a051c79fa0c1570, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   - speakerName: 
     text: '@ # $ % $ * ! ! ! ! !'
     hideBackground: 0
-    background: {fileID: 21300000, guid: f0dbb88fdd2e9d1499ed6af7bb5debc4, type: 3}
+    background: {fileID: 21300000, guid: 3515f411c78e4b64faf0fe79698321a4, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0

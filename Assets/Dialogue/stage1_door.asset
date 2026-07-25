@@ -23,6 +23,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -37,16 +40,24 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
-    text: "\uACF5\uC5F0 \uC785\uC7A5\uC774 \uC2DC\uC791\uB41C\uC9C0 \uC880 \uB41C\uAC70\uAC19\uC740\uB370"
+    text: "\uACF5\uC5F0 \uC785\uC7A5\uC774 \uC2DC\uC791\uB41C \uC9C0 \uC880 \uB41C
+      \uAC83 \uAC19\uC740\uB370"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -61,6 +72,10 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -71,6 +86,9 @@ MonoBehaviour:
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -85,13 +103,17 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 1
     choices:
     - text: "\uBB38 \uC190\uC7A1\uC774\uB97C \uC7A1\uC558\uB2E4."
       nextDialogue: {fileID: 11400000, guid: 7785b8084ec6d8d41bbf73fb0e3d0db0, type: 2}
       eventData:
         type: 0
-        target: {fileID: 0}
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -101,7 +123,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: daceb7c64aea6e44f8728b558088cde6, type: 2}
       eventData:
         type: 0
-        target: {fileID: 0}
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -109,6 +131,6 @@ MonoBehaviour:
       score: 0
   endEvent:
     type: 0
-    target: {fileID: 0}
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
