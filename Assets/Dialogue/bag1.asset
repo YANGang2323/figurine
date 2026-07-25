@@ -174,7 +174,8 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   endEvent:
-    type: 6
-    targetID: bag01
+    type: 8
+    targetIDs:
+    - bag01
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
