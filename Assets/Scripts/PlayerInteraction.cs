@@ -32,6 +32,14 @@ public class PlayerInteraction : MonoBehaviour
             interactionUI.SetActive(false);
             return;
         }
+        // 회전 다하고 ui뜨게
+        if (CameraPivotRotator.Instance != null &&
+            CameraPivotRotator.Instance.IsRotating)
+        {
+            interactionUI.SetActive(false);
+            previousObject = null;
+            return;
+        }
         // 가장 가까운 물체 찾기
         FindClosestObject();
 
