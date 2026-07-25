@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
   m_Name: emblem_Complete_repeat
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: 
+  dialogueID: emblem_Complete_repeat
   playOnlyOnce: 0
   lines:
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
