@@ -108,7 +108,8 @@ MonoBehaviour:
     stopBGM: 0
     hasChoice: 1
     choices:
-    - text: "\uB2E4\uB978 \uC0AC\uB78C\uC774 \uC624\uAE30\uC804\uC5D0 \uB4E4\uC5B4\uAC08\uAE4C."
+    - text: "\uB2E4\uB978 \uC0AC\uB78C\uC774 \uC624\uAE30 \uC804\uC5D0 \uB4E4\uC5B4\uAC00
+        \uBCFC\uAE4C."
       nextDialogue: {fileID: 11400000, guid: 2a06b6c6087e417418e1d1b193a34fc5, type: 2}
       eventData:
         type: 0
@@ -118,7 +119,7 @@ MonoBehaviour:
       tag: 0
       value: 0
       score: 0
-    - text: "\uBA38\uB9AC\uB97C \uC4F0\uB2C8 \uC880 \uC26C\uACE0\uC2F6\uC5B4\uC84C\uB2E4."
+    - text: "\uBA38\uB9AC\uB97C \uC4F0\uB2C8 \uC7A0\uC2DC \uC26C\uACE0 \uC2F6\uC5B4\uC84C\uB2E4."
       nextDialogue: {fileID: 0}
       eventData:
         type: 0

@@ -561,7 +561,7 @@ MonoBehaviour:
     text: "2\uB9C9. \uACF5\uC5F0 \uC804\uC5D0 \uBCF8 \uB0A8\uC790\uAC00 \uBB34\uB300\uC5D0
       \uC624\uB978\uB2E4."
     hideBackground: 0
-    background: {fileID: 0}
+    background: {fileID: 21300000, guid: 748773169dff8ef409f7a207ee6ced8a, type: 3}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0

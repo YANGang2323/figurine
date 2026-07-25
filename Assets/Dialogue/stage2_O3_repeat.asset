@@ -16,7 +16,7 @@ MonoBehaviour:
   playOnlyOnce: 0
   lines:
   - speakerName: 
-    text: "\uC138 \uBC88\uC9F8 \uB2E8\uC11C. \uC5EC\uC8FC\uC778\uACF5\uC774 \uC8FC\uB85C
+    text: "\uC138 \uBC88\uC9F8 \uB2E8\uC11C. \uC8FC\uC778\uACF5\uC774 \uC8FC\uB85C
       \uC0AC\uC6A9\uD558\uB294 \uD654\uC7A5\uB300\uC774\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
@@ -41,10 +41,14 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   endEvent:
     type: 0
-    target: {fileID: 0}
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
