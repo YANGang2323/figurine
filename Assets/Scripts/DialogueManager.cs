@@ -690,6 +690,11 @@ public class DialogueManager : MonoBehaviour
                 }
                 break;
 
+            case DialogueEventType.EndingUI:
+                StartCoroutine(
+                    CenterMessageUI.Instance.EndingRoutine(
+                        DataManager.Instance.nowGame.playCode));
+                break;
         }
     }
 }

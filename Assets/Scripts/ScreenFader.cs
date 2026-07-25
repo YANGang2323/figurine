@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class ScreenFader : MonoBehaviour
 {
     public Image fadeImage;
-
     public IEnumerator FadeOut(float time)
     {
         float t = 0f;
