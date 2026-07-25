@@ -462,7 +462,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
-    text: "\uC800\uC640 \uD568\uAED8 \uAC00\uB294\uAC81\uB2C8\uAE4C?"
+    text: "\uC800\uC640 \uD568\uAED8 \uAC00\uB294 \uAC81\uB2C8\uAE4C?"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -559,7 +559,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: 63f97222e2238754994c6c0bb0c2f7ab, type: 2}
       eventData:
         type: 0
-        targetID: 
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: 23cb9a2fb059757449d095d2a808a6a6, type: 2}
       eventData:
         type: 0
-        targetID: 
+        targetIDs: []
         sceneName: 
         spawnPosition: {x: 0, y: 0, z: 0}
       tag: 0
@@ -578,6 +578,6 @@ MonoBehaviour:
       score: 0
   endEvent:
     type: 0
-    targetID: 
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}
