@@ -54,7 +54,7 @@ MonoBehaviour:
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 80a27738247c0ac43b97434c4f87841b, type: 3}
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 80a27738247c0ac43b97434c4f87841b, type: 3}
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 80a27738247c0ac43b97434c4f87841b, type: 3}
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -276,7 +276,7 @@ MonoBehaviour:
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
-    rightPortrait: {fileID: 21300000, guid: 80a27738247c0ac43b97434c4f87841b, type: 3}
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
     detailImage1: {fileID: 0}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uADF8\uB9AC \uB9D0\uD558\uACE4 \uD14C\uC624\uB3C4\uB974\uB294 \uBCF5\uB3C4
-      \uB05D\uC5D0 \uC788\uB294 \uBB38\uC744 \uD5A5\uD574 \n\uACE0\uAC1C\uB97C \uB3CC\uB838\uB2E4."
+      \uB05D\uC5D0 \uC788\uB294 \uBB38\uC744 \uD5A5\uD574 \uACE0\uAC1C\uB97C \uB3CC\uB838\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
