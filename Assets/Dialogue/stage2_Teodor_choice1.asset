@@ -16,8 +16,8 @@ MonoBehaviour:
   playOnlyOnce: 0
   lines:
   - speakerName: 
-    text: "\uBC30\uC6B0\uC774\uB2C8 \uD14C\uB7EC\uC758 \uD0C0\uAC9F\uC774\uC5C8\uC744
-      \uC218\uB3C4 \uC788\uC5B4. "
+    text: "\uADF8\uB294 \uBC30\uC6B0\uC774\uB2C8 \uD14C\uB7EC\uC758 \uD0C0\uAC9F\uC774\uC5C8\uC744
+      \uC218\uB3C4 \uC788\uACA0\uC5B4. "
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -80,6 +80,6 @@ MonoBehaviour:
     choices: []
   endEvent:
     type: 0
-    targetID: 
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

@@ -110,7 +110,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
-    text: "\uADF8\uAC74 \uC81C\uAC00 \uBB3B\uACE0 \uC2F6\uC740 \uB9D0\uC774\uAD70\uC694."
+    text: "\uADF8\uAC74 \uC81C\uAC00 \uBB3B\uACE0 \uC2F6\uAD70\uC694."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 1
