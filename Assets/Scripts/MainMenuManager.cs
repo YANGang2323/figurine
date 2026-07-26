@@ -11,12 +11,10 @@ public class MainMenuManager : MonoBehaviour
 {
     public GameObject optionUI;
     public GameObject LoadUI;
-    public GameObject Save;
     public Button[] slotButtons; // 버튼들을 인스펙터에서 연결
     public TMP_Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
-    public int slotNum;
 
-    bool[] savefile = new bool[5];	// 세이브파일 존재유무 저장
+    bool[] savefile = new bool[4];	// 세이브파일 존재유무 저장
 
     private string savePath;
     public string NewGameScene = "Stage1";
@@ -76,15 +74,6 @@ public class MainMenuManager : MonoBehaviour
             //SaveCreat();	// 저장 UI 활성화
         }
     }
-    public void SaveCreat()	// Save UI를 활성화하는 메소드
-    {
-        Save.gameObject.SetActive(true);
-    }
-    public void SaveDestr()	// Save UI를 비활성화하는 메소드
-    {
-        Save.gameObject.SetActive(false);
-        SlotTextEdit();
-    }
     public void GoGame()	// 게임씬으로 이동
     {
         if (!savefile[DataManager.instance.nowSlot])	// 현재 슬롯번호의 데이터가 없다면
@@ -140,7 +129,7 @@ public class MainMenuManager : MonoBehaviour
     private void SlotTextEdit()
     {
         savePath = Application.persistentDataPath; // 저장 경로
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
             string latestFile = DataManager.instance.FindLatestSaveFile(i);

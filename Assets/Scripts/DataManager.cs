@@ -21,6 +21,11 @@ public class GameData
     public Vector3 playerPosition = Vector3.zero; // 플레이어 위치
     public List<string> playedDialogues = new List<string>();    // 재생된 대화 ID 목록
     public List<string> progressFlags = new();  // 진행 상황 플래그 목록
+
+    public int EmblemPuzzleState;          // 0: Before, 1: Playing, 2: Cleared
+    public int EmblempieceXCurrentStep;    // pieceX의 현재 회전 단계 (0~3)
+    public int EmblempieceYCurrentStep;    // pieceY의 현재 회전 단계 (0~3)
+    public bool EmblemfirstPieceCompleted; // 첫 번째 조각 완성 여부
 }
 public class DataManager : MonoBehaviour
 {
