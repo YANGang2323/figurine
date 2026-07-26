@@ -15,6 +15,10 @@ public class NumberSelectDoor : MonoBehaviour
     [SerializeField] private InteractableObject[] unlockObjects;
     [SerializeField] private GameObject[] activateObjects;
 
+    [Header("Objects to disable (최초 상호작용 이후 비활성)")]
+    [SerializeField] private GameObject[] deactivateObjects;
+
+
     private bool firstInteract = false;
     private bool solved = false;
 
@@ -46,6 +50,11 @@ public class NumberSelectDoor : MonoBehaviour
         {
             if (obj != null)
                 obj.SetActive(true);
+        }
+        foreach (GameObject obj in deactivateObjects)
+        {
+            if (obj != null)
+                obj.SetActive(false);
         }
     }
 

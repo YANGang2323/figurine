@@ -5696,11 +5696,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  isRotating: 1
+  isRotating: 0
   rotationAngle: 1
   rotationSpeed: 0.8
   cctvLight: {fileID: 359575559}
-  detectionThreshold: 1.5
+  detectionThreshold: 1.2
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1930827678}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -7614,7 +7614,7 @@ MonoBehaviour:
   rotationAngle: 5
   rotationSpeed: 0.6
   cctvLight: {fileID: 34264124}
-  detectionThreshold: 1.5
+  detectionThreshold: 1.2
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1335924968}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -13245,6 +13245,8 @@ MonoBehaviour:
   - {fileID: 305017798}
   - {fileID: 359575557}
   - {fileID: 1281702628}
+  deactivateObjects:
+  - {fileID: 717223901}
   successDialogue: {fileID: 11400000, guid: 29598faa98d434b4fa1cf4a0bde8ac1e, type: 2}
   failDialogue: {fileID: 11400000, guid: 8a9d229f80c0e3e4bbc94fead8bb4d58, type: 2}
   newRepeatDialogue: {fileID: 11400000, guid: 1fd31d84c4e39ae49a017e405de3582d, type: 2}
