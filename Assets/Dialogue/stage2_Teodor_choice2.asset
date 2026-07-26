@@ -17,7 +17,7 @@ MonoBehaviour:
   lines:
   - speakerName: 
     text: "\uAD00\uACC4\uC790\uB3C4 \uBAA8\uB974\uB294 \uBE44\uBC00 \uC628\uC2E4...
-      \uC5B4\uCA4C\uBA74 \uC774 \uC0AC\uB78C\uC774 \uC8FC\uBAA8\uC790\uC778\uAC00?"
+      \uC5B4\uCA4C\uBA74 \uC774 \uC0AC\uB78C\uC774 \uAFB8\uBBFC \uC9D3\uC77C\uAE4C?"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
