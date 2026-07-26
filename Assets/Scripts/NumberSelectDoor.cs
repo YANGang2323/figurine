@@ -122,6 +122,7 @@ public class NumberSelectDoor : MonoBehaviour
 
     void Fail()
     {
+        puzzleUI.SetActive(false);
         DialogueManager.Instance.StartDialogue(failDialogue);
     }
 }
