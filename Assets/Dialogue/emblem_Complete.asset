@@ -100,7 +100,7 @@ MonoBehaviour:
     dialogueColor: {r: 1, g: 1, b: 1, a: 1}
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    soundEffect: {fileID: 0}
+    soundEffect: {fileID: 8300000, guid: 8538e04f73712bf4b9e82042834ffa47, type: 3}
     soundVolume: 1
     changeBGM: 0
     bgm: {fileID: 0}

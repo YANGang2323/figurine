@@ -42,7 +42,7 @@ MonoBehaviour:
     soundEffect: {fileID: 0}
     soundVolume: 1
     changeBGM: 1
-    bgm: {fileID: 0}
+    bgm: {fileID: 8300000, guid: 47e9319f4829ac5469cf5bd70ca94ba9, type: 3}
     bgmVolume: 0.609
     stopBGM: 0
     hasChoice: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
     dialogueColor: {r: 1, g: 1, b: 1, a: 1}
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    soundEffect: {fileID: 0}
-    soundVolume: 0.068
+    soundEffect: {fileID: 8300000, guid: b803d7c59c81c50478b3e352dfd9a469, type: 3}
+    soundVolume: 0.911
     changeBGM: 0
     bgm: {fileID: 0}
     bgmVolume: 1
@@ -673,7 +673,7 @@ MonoBehaviour:
     changeBGM: 0
     bgm: {fileID: 0}
     bgmVolume: 1
-    stopBGM: 0
+    stopBGM: 1
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
