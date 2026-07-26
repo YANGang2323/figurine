@@ -9,6 +9,7 @@ public class CenterMessageUI : MonoBehaviour
     public static CenterMessageUI Instance;
     [SerializeField] private ScreenFader screenFader;
     [SerializeField] private GameObject root;
+    [SerializeField] private Image background;
 
     [Header("Texts")]
     [SerializeField] private TMP_Text titleText;      // figurine
@@ -52,7 +53,8 @@ public class CenterMessageUI : MonoBehaviour
             "여러분의 소중한 의견은\n" +
             "정식 버전 개발에 큰 도움이 됩니다.";
 
-        yield return screenFader.FadeOut(1f);
+        SetImageAlpha(background, 1);
+        //yield return screenFader.FadeOut(1f);
         root.SetActive(true);
         yield return new WaitForSeconds(3f);
 
