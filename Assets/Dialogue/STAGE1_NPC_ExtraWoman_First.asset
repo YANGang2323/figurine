@@ -40,6 +40,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: ' '
@@ -68,6 +72,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -95,6 +103,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -122,6 +134,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -150,6 +166,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -177,6 +197,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -203,7 +227,11 @@ MonoBehaviour:
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
-    soundVolume: 1
+    soundVolume: 0.6
+    changeBGM: 1
+    bgm: {fileID: 8300000, guid: a836d991075f9c942a91646556009484, type: 3}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -231,6 +259,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: 
@@ -260,6 +292,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 1
     hasChoice: 0
     choices: []
   - speakerName: "\uC5D1\uC2A4\uD2B8\uB77C1"
@@ -287,6 +323,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 1
     hasChoice: 0
     choices: []
   - speakerName: "\uC8FC\uC778\uACF5"
@@ -314,6 +354,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -341,6 +385,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -370,6 +418,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -398,6 +450,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -427,6 +483,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -456,6 +516,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -485,6 +549,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -513,6 +581,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -542,6 +614,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -570,6 +646,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -598,6 +678,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
@@ -625,6 +709,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -653,6 +741,10 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   - speakerName: "\uC5EC\uC790"
@@ -682,10 +774,14 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 0}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   endEvent:
     type: 0
-    targetID: 
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

@@ -709,7 +709,7 @@ MonoBehaviour:
     dialogueColor: {r: 1, g: 1, b: 1, a: 1}
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    soundEffect: {fileID: 0}
+    soundEffect: {fileID: 8300000, guid: cfd119c3178491a4f8adacd34798d91e, type: 3}
     soundVolume: 1
     changeBGM: 0
     bgm: {fileID: 0}
@@ -740,7 +740,7 @@ MonoBehaviour:
     dialogueColor: {r: 0.63522005, g: 0, b: 0, a: 1}
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    soundEffect: {fileID: 0}
+    soundEffect: {fileID: 8300000, guid: 94b8bc00ee926c2468c34d5a79c2aeec, type: 3}
     soundVolume: 1
     changeBGM: 0
     bgm: {fileID: 0}
