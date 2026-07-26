@@ -24,7 +24,7 @@ MonoBehaviour:
     leftPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
-    detailImage1: {fileID: 21300000, guid: ab37cb1b7ba19de49990b4dfa74aed78, type: 3}
+    detailImage1: {fileID: 21300000, guid: e1ea4baa85cc5dc4b81462083e712095, type: 3}
     detailImage2: {fileID: 0}
     detailImage3: {fileID: 0}
     useCustomDialogueFont: 0

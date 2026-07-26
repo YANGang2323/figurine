@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvLight0
+  progressFlag: 
 --- !u!1 &35836525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,7 +1577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &206577553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,6 +2733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvTrigger3
+  progressFlag: 
 --- !u!4 &310074903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
@@ -3340,6 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvLight1
+  progressFlag: 
 --- !u!1 &359447363
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,6 +3547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvLight3
+  progressFlag: 
 --- !u!1 &359725197
 GameObject:
   m_ObjectHideFlags: 0
@@ -6262,6 +6266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvLight2
+  progressFlag: 
 --- !u!1 &689813723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7834,6 +7839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: num01
+  progressFlag: 
 --- !u!1 &1036979515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20d3eaf0f170564439ac1bf8da756fd9, type: 3}
@@ -9221,6 +9227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvTrigger2
+  progressFlag: 
 --- !u!1 &1292113856
 GameObject:
   m_ObjectHideFlags: 0
@@ -10542,6 +10549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvTrigger1
+  progressFlag: 
 --- !u!114 &1546733549 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3893988863198628838, guid: 3aa1851ed063b9a4499c2ce3814ec900, type: 3}
@@ -12055,6 +12063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: cctvTrigger0
+  progressFlag: 
 --- !u!1001 &1921177603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13253,6 +13262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
   targetID: door2
+  progressFlag: 
 --- !u!1001 &2058877032
 PrefabInstance:
   m_ObjectHideFlags: 0
