@@ -565,8 +565,8 @@ MonoBehaviour:
       tag: 0
       value: 0
       score: 0
-    - text: "\uD14C\uC624\uB3C4\uB974 \uC528\uB294 \uC774 \uC0AC\uAC74\uACFC \uBB34\uC2A8\uAD00\uB828\uC774
-        \uC788\uB294\uAC70\uC9C0?"
+    - text: "\uD14C\uC624\uB3C4\uB974 \uC528\uB294 \uC774 \uC0AC\uAC74\uACFC \uBB34\uC2A8
+        \uAD00\uB828\uC774 \uC788\uB294 \uAC70\uC9C0?"
       nextDialogue: {fileID: 11400000, guid: 23cb9a2fb059757449d095d2a808a6a6, type: 2}
       eventData:
         type: 0

@@ -1477,7 +1477,7 @@ MonoBehaviour:
     stopBGM: 0
     hasChoice: 0
     choices: []
-  - speakerName: 
+  - speakerName: ???
     text: "\uC800\uCABD\uC774\uB2E4!"
     hideBackground: 0
     background: {fileID: 0}
@@ -1508,7 +1508,7 @@ MonoBehaviour:
     stopBGM: 0
     hasChoice: 0
     choices: []
-  - speakerName: "\uC8FC\uC778\uACF5"
+  - speakerName: 
     text: "\uB611\uAC19\uC740 \uAC80\uC740 \uC815\uC7A5\uC744 \uC785\uC740 \uC0AC\uB78C\uB4E4\uC774
       \uC77C\uC81C\uD788 \uAC00\uBC29\uC774 \uC788\uB294 \uC790\uB9AC\uB85C \uB2EC\uB824\uC624\uACE0
       \uC788\uC5C8\uB2E4."

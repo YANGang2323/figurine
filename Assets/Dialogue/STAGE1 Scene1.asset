@@ -142,7 +142,7 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uBC15\uC0AC\uB2D8\uC5D0\uAC8C \uCC3E\uC544\uAC00 \uBCF4\uC790. \uADF8\uBD84\uC740
-      \uBAA8\uB4E0 \uAC78 \uD574\uACB0\uD558\uC2E4\uC218 \uC788\uC73C\uC2DC\uB2C8."
+      \uBAA8\uB4E0 \uAC78 \uD574\uACB0\uD558\uC2E4\uC218 \uC788\uC73C\uC2DC\uB2C8\uAE4C."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: ...
+    text: "\u2026"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uC73D....!"
+    text: "\uC73D...!"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -646,7 +646,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: ....
+    text: "\u2026"
     hideBackground: 0
     background: {fileID: 21300000, guid: 51ba6ca1aec6b3a428e633fc7b5bc93a, type: 3}
     hideLeftPortrait: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
-    text: "\u2026\uC774\uAC8C \uB300\uCCB4 \uBB34\uC2A8 \uAFC8\uC774\uC9C0...?"
+    text: "\uC774\uAC8C \uB300\uCCB4 \uBB34\uC2A8 \uAFC8\uC774\uC9C0...?"
     hideBackground: 1
     background: {fileID: 0}
     hideLeftPortrait: 0
