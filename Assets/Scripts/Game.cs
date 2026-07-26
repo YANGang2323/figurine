@@ -200,6 +200,8 @@ public class Game : MonoBehaviour
         ESCMenuUI.SetActive(false);
         UISoundManager.Instance.PlayClose();
         InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
+        InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
+        InputLockManager.CameraRotateLock = false; // LockMove, LockCamera 해제
         SceneManager.LoadScene("MainMenu");
     }
     private void SlotText()

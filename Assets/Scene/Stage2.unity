@@ -18387,8 +18387,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1049695574648429930}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SaveCreat
-        m_Mode: 1
+        m_MethodName: inGameSlot
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20064,8 +20064,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1049695574648429930}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SaveCreat
-        m_Mode: 1
+        m_MethodName: inGameSlot
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20177,8 +20177,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1049695574648429930}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SaveCreat
-        m_Mode: 1
+        m_MethodName: inGameSlot
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22779,8 +22779,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1049695574648429930}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SaveCreat
-        m_Mode: 1
+        m_MethodName: inGameSlot
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
