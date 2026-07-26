@@ -213,7 +213,7 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uD55C\uCABD\uC5D0\uB294 \uBA54\uBAA8\uB4E4\uACFC \uD050\uC2DC\uD2B8\uAC00
-      \uC788\uB294 \uD654\uC774\uD2B8\uBCF4\uB4DC\uAC00 \uAC78\uB824 \uC788\uC5C8\uB2E4."
+      \uBD99\uC5B4 \uC788\uB294 \uD654\uC774\uD2B8\uBCF4\uB4DC\uAC00 \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
