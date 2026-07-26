@@ -7,6 +7,8 @@ public class DialogueTarget : MonoBehaviour
 
     private static Dictionary<string, DialogueTarget> targets
         = new Dictionary<string, DialogueTarget>();
+    [SerializeField] private string progressFlag;
+    public string ProgressFlag => progressFlag;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 
     static void RegisterAll()
@@ -57,6 +59,10 @@ public class DialogueTarget : MonoBehaviour
 
     public void Disable()
     {
+        if (!string.IsNullOrEmpty(ProgressFlag))
+        {
+            ProgressManager.Instance.AddFlag(ProgressFlag);
+        }
         gameObject.SetActive(false);
     }
 }

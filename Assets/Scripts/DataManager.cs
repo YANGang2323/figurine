@@ -12,7 +12,7 @@ public class GameData
 {
     // 스테이지, 쪽지번호, 정보개수
     //public string name;
-    public string playCode = "#0000";
+    public string playCode = "#000000";
     public int stage = 1;
     public int piece = 0;
     public int info = 0;
@@ -20,7 +20,7 @@ public class GameData
     public string sceneName;       // 저장된 씬 이름
     public Vector3 playerPosition = Vector3.zero; // 플레이어 위치
     public List<string> playedDialogues = new List<string>();    // 재생된 대화 ID 목록
-
+    public List<string> progressFlags = new();  // 진행 상황 플래그 목록
 }
 public class DataManager : MonoBehaviour
 {

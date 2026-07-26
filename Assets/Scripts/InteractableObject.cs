@@ -50,6 +50,13 @@ public class InteractableObject : MonoBehaviour
         if (DialogueManager.Instance != null &&
         DialogueManager.Instance.IsPlaying)
         {return;}
+        //플래그처리
+        IInteractHandler handler = GetComponent<IInteractHandler>();
+        if (handler != null)
+        {
+            handler.Interact();
+            return; // 분기 처리를 했으므로 아래 기본 dialogueTrigger는 실행 안 함
+        }
 
         if (dialogueTrigger != null)
         {

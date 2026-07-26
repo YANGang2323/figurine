@@ -405,7 +405,7 @@ MonoBehaviour:
     text: "\uBC15\uC2A4\uB4E4 \uC0AC\uC774\uB97C \uC9C0\uB098\uB358 \uC911, \uC55E\uCABD\uC5D0
       \uC0AC\uB78C\uC774 \uC11C \uC788\uB294 \uAC83\uC774 \uBCF4\uC600\uB2E4. \uC800
       \uBA40\uB054\uD55C \uC218\uD2B8\uD54F\uC740\u2026"
-    hideBackground: 0
+    hideBackground: 1
     background: {fileID: 0}
     hideLeftPortrait: 1
     leftPortrait: {fileID: 0}
@@ -432,7 +432,7 @@ MonoBehaviour:
     bgm: {fileID: 0}
     bgmVolume: 1
     stopBGM: 0
-    hasChoice: 0
+    hasChoice: 1
     choices:
     - text: "\uB204\uAD6C\uB354\uB77C?"
       nextDialogue: {fileID: 0}

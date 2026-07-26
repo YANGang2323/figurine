@@ -4805,6 +4805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   targetID: bag01
+  progressFlag: bag01_having
 --- !u!114 &1526803947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6035,9 +6036,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1781796234}
   - component: {fileID: 1781796233}
-  - component: {fileID: 1781796236}
   - component: {fileID: 1781796235}
   - component: {fileID: 1781796237}
+  - component: {fileID: 1781796239}
+  - component: {fileID: 1781796236}
+  - component: {fileID: 1781796238}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -6133,7 +6136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   interactionPoint: {fileID: 1055239906}
-  objectName: door
+  objectName: stage1door
   canInteract: 1
   requireSideView: 1
   useViewCondition: 1
@@ -6176,6 +6179,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.9620447, y: 6.4434147, z: 29.976242}
   m_Center: {x: 0.10882134, y: -2.051016, z: -14.988257}
+--- !u!114 &1781796238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781796232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2d9b5c54653bd44aaf2126b564aa53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
+  triggerType: 1
+  firstDialogue: {fileID: 11400000, guid: 6d836b5347397394a9723bc2c1fab350, type: 2}
+  repeatDialogue: {fileID: 0}
+  puzzleCompleteDialogue: {fileID: 0}
+--- !u!114 &1781796239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781796232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2346df52dac939498aef0624f632514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlagDialogueHandler
+  requiredFlag: bag01_having
+  successDialogue: {fileID: 1781796236}
+  failDialogue: {fileID: 1781796238}
 --- !u!1 &1869471992 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1215751146217931932, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
@@ -14281,6 +14315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5055199377271313123}
   - component: {fileID: 4975633699405753954}
+  - component: {fileID: 8097724808855428109}
   m_Layer: 0
   m_Name: InGameObj
   m_TagString: Untagged
@@ -14288,6 +14323,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8097724808855428109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097724808855428108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3f21fcaebe086428336ae9fa5287e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProgressManager
 --- !u!222 &8100111142341340497
 CanvasRenderer:
   m_ObjectHideFlags: 0

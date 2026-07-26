@@ -21,15 +21,12 @@ public class Game : MonoBehaviour
     //public GameObject pipeManager;
 
     //public Text name;
-    //public Text level;
-    //public Text coin;
-    //public GameObject[] item;
     public Button[] slotButtons; // 버튼들을 인스펙터에서 연결
     public TMP_Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
     public int slotNum;
 
     bool[] savefile = new bool[5];	// 세이브파일 존재유무 저장
-    private bool isFirstTab = true;
+    //private bool isFirstTab = true;
     //bool isCorrectCameraAngle = true; //카메라 각도 사이드뷰에서 시작
 
     private string savePath;
