@@ -17,7 +17,8 @@ public class NumberSelectDoor : MonoBehaviour
 
     [Header("Objects to disable (최초 상호작용 이후 비활성)")]
     [SerializeField] private GameObject[] deactivateObjects;
-
+    //Progress 플래그
+    [SerializeField] private string firstInteractFlag;
 
     private bool firstInteract = false;
     private bool solved = false;
@@ -33,6 +34,20 @@ public class NumberSelectDoor : MonoBehaviour
         currentNumbers = new int[numberTexts.Length];
         RefreshAll();
     }
+
+    void Start()
+    {
+        // ProgressManager와 세이브 데이터에 플래그가 들어있는지 확인
+        if (!string.IsNullOrEmpty(firstInteractFlag) && ProgressManager.Instance != null)
+        {
+            if (ProgressManager.Instance.HasFlag(firstInteractFlag))
+            {
+                // 이미 플래그가 있다면, 대화나 이벤트를 스킵하고 오브젝트들의 상태만 복구합니다.
+                ApplyFirstInteractionWorldState();
+            }
+        }
+    }
+
     public void FirstInteraction() 
     {
         if (firstInteract)
@@ -40,22 +55,63 @@ public class NumberSelectDoor : MonoBehaviour
 
         firstInteract = true;
 
+        ApplyFirstInteractionWorldState();
+
+        ////오브젝트 비활성화
+        //foreach (InteractableObject obj in unlockObjects)
+        //{
+        //    if (obj != null)
+        //        obj.canInteract = true;
+        //}
+        //// CCTV, SpotLight, Trigger 등 원하는 오브젝트 활성화
+        //foreach (GameObject obj in activateObjects)
+        //{
+        //    if (obj != null)
+        //        obj.SetActive(true);
+        //}
+        //foreach (GameObject obj in deactivateObjects)
+        //{
+        //    if (obj != null)
+        //        obj.SetActive(false);
+        //}
+
+        if (!string.IsNullOrEmpty(firstInteractFlag))
+        {
+            if (ProgressManager.Instance != null)
+            {
+                ProgressManager.Instance.AddFlag(firstInteractFlag);
+                Debug.Log($"[NumberSelectDoor] 최초 상호작용 플래그 등록 완료: {firstInteractFlag}");
+            }
+            else
+            {
+                Debug.LogError("🚨 씬에 ProgressManager 인스턴스가 존재하지 않습니다!");
+            }
+        }
+    }
+
+    private void ApplyFirstInteractionWorldState()
+    {
+        firstInteract = true;
+
         foreach (InteractableObject obj in unlockObjects)
         {
             if (obj != null)
                 obj.canInteract = true;
         }
-        // CCTV, SpotLight, Trigger 등 원하는 오브젝트 활성화
+
         foreach (GameObject obj in activateObjects)
         {
             if (obj != null)
                 obj.SetActive(true);
         }
+
         foreach (GameObject obj in deactivateObjects)
         {
             if (obj != null)
                 obj.SetActive(false);
         }
+
+        Debug.Log($"상호작용 후 변화 상태 완료");
     }
 
     public void OpenPuzzle()

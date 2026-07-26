@@ -3205,11 +3205,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
-      propertyPath: 'choiceButtons.Array.data[0]'
+      propertyPath: choiceButtons.Array.data[0]
       value: 
       objectReference: {fileID: 752965742}
     - target: {fileID: 2874397995929609531, guid: 18948f6daf0f9a1478886dbd74e06a22, type: 3}
-      propertyPath: 'choiceButtons.Array.data[1]'
+      propertyPath: choiceButtons.Array.data[1]
       value: 
       objectReference: {fileID: 1546733549}
     m_RemovedComponents: []
@@ -11107,7 +11107,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -11326,7 +11326,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -12141,7 +12141,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -12955,7 +12955,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d7d030968579f904eb6922376e725e54, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7d030968579f904eb6922376e725e54, type: 3}
@@ -13247,6 +13247,7 @@ MonoBehaviour:
   - {fileID: 1281702628}
   deactivateObjects:
   - {fileID: 717223901}
+  firstInteractFlag: door2_firstinteract
   successDialogue: {fileID: 11400000, guid: 29598faa98d434b4fa1cf4a0bde8ac1e, type: 2}
   failDialogue: {fileID: 11400000, guid: 8a9d229f80c0e3e4bbc94fead8bb4d58, type: 2}
   newRepeatDialogue: {fileID: 11400000, guid: 1fd31d84c4e39ae49a017e405de3582d, type: 2}
@@ -17972,6 +17973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989641692891750891}
   - component: {fileID: 1049695574648429930}
+  - component: {fileID: 4322506918225571589}
   m_Layer: 0
   m_Name: InGameObj
   m_TagString: Untagged
@@ -17979,6 +17981,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4322506918225571589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322506918225571588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3f21fcaebe086428336ae9fa5287e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProgressManager
 --- !u!224 &4364811156060219277
 RectTransform:
   m_ObjectHideFlags: 0
