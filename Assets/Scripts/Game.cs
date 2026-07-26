@@ -36,9 +36,10 @@ public class Game : MonoBehaviour
     private string nowstage;
     private string nowpiece;
     private string nowinfo;
+    private string nowcctvAlarm;
 
     //[SerializeField] private DialogManager dialogManager;
-    
+
     void Start()
     {
         GameData data = DataManager.instance.nowGame;
@@ -172,7 +173,9 @@ public class Game : MonoBehaviour
     public void OnClickBackToGame()
     {
         ESCMenuUI.SetActive(false);
-        UISoundManager.Instance.PlayOpen();
+        UISoundManager.Instance.PlayClose();
+
+        InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
     }
     public void OnClickOpenOptionUI()
     {
@@ -199,6 +202,7 @@ public class Game : MonoBehaviour
     {
         ESCMenuUI.SetActive(false);
         UISoundManager.Instance.PlayClose();
+        InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
         SceneManager.LoadScene("MainMenu");
     }
     private void SlotText()
