@@ -18,7 +18,6 @@ public class Game : MonoBehaviour
     public GameObject OptionUI;
     public GameObject SaveUI;
     public GameObject Save;
-    //public GameObject pipeManager;
 
     //public Text name;
     public Button[] slotButtons; // 버튼들을 인스펙터에서 연결
@@ -45,37 +44,9 @@ public class Game : MonoBehaviour
         nowstage = data.stage.ToString();
         nowpiece = data.piece.ToString();
         nowinfo = data.info.ToString();
-    //    newGame.playCode =
-    //Guid.NewGuid()
-    //    .ToString("N")
-    //    .Substring(0, 8)
-    //    .ToUpper();
-        //pipeManager.SetActive(false);
-        //if(nowstage == "1")
-        //{
-        //    Camera.main.orthographicSize = 2.5f;
-        //}
-        //else if(nowstage == "2")
-        //{
-        //    Camera.main.orthographicSize = 2.5f;
-        //}
-        //else if (nowstage == "3")
-        //{
-        //    Camera.main.orthographicSize = 4f;
-        //    if (CameraPivotRotator.Instance != null)
-        //    {
-        //        CameraPivotRotator.Instance.cameraType = CameraPivotRotator.CameraMovingType.Follow;
-        //        CameraPivotRotator.Instance.isSideView = false; // 필요하면 시점도 설정
-        //    }
-        //}
+    
 
         Debug.Log($"스테이지: {nowstage}, 조각: {nowpiece}, 정보: {nowinfo}");
-
-        //if (DialogueDataBase.instance != null && DialogueDataBase.instance.isFinish)
-        //{
-        //    Dialogue[] startDialogues = DialogueDataBase.instance.GetDialogues(1, 2);
-        //    dialogManager.ShowDialogue(startDialogues);
-        //}
     }
     private void Update()
     {
@@ -207,24 +178,39 @@ public class Game : MonoBehaviour
     private void SlotText()
     {
         savePath = Application.persistentDataPath; // 저장 경로
-        for (int i = 0; i < 3; i++)
+        int totalSlots = slotButtons.Length;
+
+        for (int i = 0; i < totalSlots; i++)
         {
             slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
+            if (slotButtons[i] == null) continue;
             string latestFile = DataManager.instance.FindLatestSaveFile(i);
+            if (slotText[i] == null) continue;
 
             if (latestFile != null)
             {
-                savefile[i] = true;
+                // 2. savefile 배열 범위 초과 크래시 방지
+                if (i < savefile.Length)
+                {
+                    savefile[i] = true;
+                }
                 string fileName = Path.GetFileName(latestFile);
 
-                // 텍스트만 업데이트 (슬롯 상태는 건드리지 않음)
-                slotText[i].text = $"Slot {i}: {fileName}";
+                // 메인메뉴와 동일하게 1번부터 표기되도록 i+1로 매치합니다.
+                slotText[i].text = $"Slot {i + 1}: {fileName}";
             }
             else
             {
-                savefile[i] = false;
-                slotText[i].text = $"Slot {i}";
+                if (i < savefile.Length)
+                {
+                    savefile[i] = false;
+                }
+                // 파일이 없어도 무조건 Slot 1, Slot 2 형태로 텍스트가 바뀝니다.
+                slotText[i].text = $"Slot {i + 1}";
             }
         }
     }
+
+    
+
 }

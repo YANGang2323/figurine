@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using Unity.VisualScripting;
 using TMPro;
+using Unity.Services.Analytics;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -50,6 +51,30 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickNewGame()
     {
         Debug.Log("새 게임");
+        // 1. 중복되지 않는 영어 대문자+숫자 4자리 조합 생성
+        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        char[] stringChars = new char[4];
+        System.Random random = new System.Random();
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+
+        // 2. 새 게임 데이터 세팅
+        DataManager.instance.nowGame = new GameData();
+        DataManager.instance.nowGame.playCode = "#" + new string(stringChars);
+        DataManager.instance.nowGame.startTimeStamp = System.DateTime.Now.ToString("o"); // 현재 시간 기록
+        DataManager.instance.nowGame.totalGameStartTime = System.DateTime.Now.ToString("o"); // 새게임 시작 시간 기록    
+
+        // 3. 애널리틱스 전송: 게임 최초 실행 및 플레이코드 부여
+        var eventData = new Dictionary<string, object> {
+            { "PlayCode", DataManager.instance.nowGame.playCode }
+        };
+        // 앞에 주소(Unity.Services.Analytics.)를 명확하게 붙여서 충돌을 피합니다.
+        Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("game_start");
+        foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+        AnalyticsService.Instance.RecordEvent(myEvent);
+
         SceneManager.LoadScene(NewGameScene);
     }
 
@@ -63,7 +88,7 @@ public class MainMenuManager : MonoBehaviour
     {
         DataManager.instance.nowSlot = number;	// 슬롯의 번호를 슬롯번호로 입력함.
 
-        if (savefile[number])	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
+        if (number < savefile.Length && savefile[number])	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
         {
             DataManager.instance.LoadData();	// 데이터를 로드하고
             GoGame();	// 게임씬으로 이동
@@ -129,23 +154,33 @@ public class MainMenuManager : MonoBehaviour
     private void SlotTextEdit()
     {
         savePath = Application.persistentDataPath; // 저장 경로
-        for (int i = 0; i < 4; i++)
+        int totalSlots = slotButtons.Length;
+
+        for (int i = 0; i < totalSlots; i++)
         {
+            if (slotButtons[i] == null) continue;
             slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
+            if (slotText[i] == null) continue;
             string latestFile = DataManager.instance.FindLatestSaveFile(i);
 
             if (latestFile != null)
             {
-                savefile[i] = true;
+                if (i < savefile.Length)
+                {
+                    savefile[i] = true;
+                }
                 string fileName = Path.GetFileName(latestFile);
 
                 // 텍스트만 업데이트 (슬롯 상태는 건드리지 않음)
-                slotText[i].text = $"Slot {i}: {fileName}";
+                slotText[i].text = $"Slot {i+1}: {fileName}";
             }
             else
             {
-                savefile[i] = false;
-                slotText[i].text = $"Slot {i}";
+                if (i < savefile.Length)
+                {
+                    savefile[i] = false;
+                }
+                slotText[i].text = $"Slot {i+1}";
             }
         }
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections.Generic; 
+using Unity.Services.Analytics;
 public class InteractableObject : MonoBehaviour
 {
     public Transform interactionPoint;
@@ -35,6 +36,16 @@ public class InteractableObject : MonoBehaviour
     public void Interact()
     {
         Debug.Log(objectName + " 와 상호작용!");
+        
+        // 애널리틱스 전송: 오브젝트 ID와 플레이코드를 묶어서 송신
+        var eventData = new Dictionary<string, object> {
+            { "PlayCode", DataManager.instance.nowGame.playCode },
+            { "ObjectID", objectName } // 인스펙터에 적어두신 extrawoman 같은 고유 이름 활용
+        };
+        CustomEvent myEvent = new CustomEvent("object_interact");
+        foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+        AnalyticsService.Instance.RecordEvent(myEvent);
+
         if (puzzle != null)
         {
             puzzle.InteractPuzzle();

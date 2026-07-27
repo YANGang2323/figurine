@@ -4,6 +4,8 @@ using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Unity.Services.Analytics;
+
 [System.Serializable]
 public class ChoiceRecord
 {
@@ -121,7 +123,17 @@ public class DialogueManager : MonoBehaviour
             // 타이핑 중이면 효과음 없이 즉시 출력
             if (isTyping)
             {
+                var game = DataManager.instance.nowGame;
+                game.dialogueSkipCount++;
                 FinishTyping();
+                var eventData = new Dictionary<string, object> {
+                    { "PlayCode", game.playCode },
+                    { "DialogueID", currentDialogue.dialogueID }, // 현재 출력 중인 대화 데이터의 고유 ID
+                    { "TotalSkips", game.dialogueSkipCount }
+                };
+                CustomEvent myEvent = new CustomEvent("dialogue_skip");
+                foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+                AnalyticsService.Instance.RecordEvent(myEvent);
                 return;
             }
 
@@ -551,7 +563,57 @@ public class DialogueManager : MonoBehaviour
     {
         if (choiceSelectClip != null)
             DialogueAudioSource.PlayOneShot(choiceSelectClip);
+        // ----------------------------------------------------------------
+        // [애널리틱스 수집용 코드 추가] 선택지를 누른 순간 데이터 수집
+        // ----------------------------------------------------------------
+        if (DataManager.instance != null && DataManager.instance.nowGame != null)
+        {
+            // 1. 혹시 매개변수(choice) 객체 자체가 널일 경우를 완벽하게 차단
+            string playCode = DataManager.instance.nowGame.playCode;
+            string tagString = "Null_Tag";
+            string valueString = "Null_Value";
+            bool hasNext = false;
 
+            if (choice != null)
+            {
+                // 2. ChoiceTag가 enum이거나 null일 수 있으므로 안전하게 ToString()으로 형변환 처리합니다.
+                tagString = choice.tag != null ? choice.tag.ToString() : "Empty_Tag";
+                valueString = choice.value != null ? choice.value.ToString() : "Empty_Value";
+                hasNext = choice.nextDialogue != null;
+            }
+            // 1. 수집할 데이터 상자(Dictionary) 만들기
+            var eventData = new Dictionary<string, object> {
+            { "PlayCode", playCode  },
+            { "ChoiceTag", tagString  },                   // 선택지의 고유 태그 정보
+            { "ChoiceValue", valueString  },               // 선택지의 값 (데이터 내용)
+            { "HasNextDialogue", hasNext  } // 다음 대화 연결 여부
+        };
+
+            try
+            {
+                Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("dialogue_choice");
+                foreach (var param in eventData)
+                {
+                    // 파라미터가 null 인 데이터가 있어도 무시하거나 안전하게 전송하기 위한 방어벽
+                    if (param.Value == null)
+                    {
+                        myEvent.Add(param.Key, "Null_Param");
+                    }
+                    else
+                    {
+                        myEvent.Add(param.Key, param.Value);
+                    }
+                }
+                Unity.Services.Analytics.AnalyticsService.Instance.RecordEvent(myEvent);
+                Debug.Log($"[Analytics] 선택지 로그 정상 기록 완료 - Tag: {tagString}, Value: {valueString}");
+            }
+            catch (System.Exception ex)
+            {
+                // 애널리틱스가 설령 실패하더라도 인게임 시스템은 절대 튕기지 않도록 로그만 띄웁니다.
+                Debug.LogWarning($"[Analytics] 데이터 전송이 예외 처리되었습니다: {ex.Message}");
+            }
+        }
+        // ----------------------------------------------------------------
         choicePanel.SetActive(false);
 
         pendingChoices = null;
@@ -619,6 +681,8 @@ public class DialogueManager : MonoBehaviour
 
                 DataManager.Instance.nowGame.playerPosition =
                     dialogueEvent.spawnPosition;
+                //로드씬 함수를 실행하기 직전에 애널리틱스 호출 (가려는 씬 이름을 던져줌)
+                DataManager.Instance.StageClear(dialogueEvent.sceneName);
 
                 SceneManager.LoadScene(dialogueEvent.sceneName);
 
@@ -691,6 +755,8 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case DialogueEventType.EndingUI:
+                DataManager.Instance.StageClear("STAGE3");
+                DataManager.Instance.EndingClear();
                 StartCoroutine(
                     CenterMessageUI.Instance.EndingRoutine(
                         DataManager.Instance.nowGame.playCode));

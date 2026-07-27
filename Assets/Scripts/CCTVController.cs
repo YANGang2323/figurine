@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI; // 게임오버 UI용 (필요 시)
+using System.Collections.Generic;
+using Unity.Services.Analytics;
 
 public class CCTVController : MonoBehaviour
 {
@@ -155,7 +157,9 @@ public class CCTVController : MonoBehaviour
     {
         if (isCaught)
             return;
-        
+        var game = DataManager.instance.nowGame;
+        game.totalCctvDetected++; // 발각 횟수 누적
+
         Debug.Log("게임 오버! 플레이어 검거!");
         isCaught = true;
         detectionTimer = 0; // 타이머 초기화
@@ -166,6 +170,15 @@ public class CCTVController : MonoBehaviour
 
         // (참고) 만약 CharacterController를 사용 중이라면 이동 전후로 
         // .enabled = false/true를 해줘야 위치 값이 즉시 반영됩니다.
+
+        var eventData = new Dictionary<string, object> {
+        { "PlayCode", game.playCode },
+        { "CctvID", gameObject.name },
+        { "DetectedCount", game.totalCctvDetected }
+        };
+        CustomEvent myEvent = new CustomEvent("cctv_detected");
+        foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+        AnalyticsService.Instance.RecordEvent(myEvent);
     }
     public void ResetDetection()
     {

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.Services.Analytics;
 
 public class PerspectiveEmblemPuzzle : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
     }
 
     [Header("State")]
+    private float puzzleStartTime; // 퍼즐을 시작한 시점의 시간을 기억할 변수
     public PuzzleState state = PuzzleState.Before;
     private InteractableObject startInteractable;
     private InteractableObject rightInteractable;
@@ -144,6 +147,8 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
                 Debug.Log("퍼즐 시작");
                 Debug.Log(pieceX.canRotate);
                 Debug.Log(pieceY.canRotate);
+                //퍼즐 플레이 시작 버튼을 누른 실시간 유니티 타임을 기록
+                puzzleStartTime = Time.time;
                 UpdatePuzzleDataToManager(); // 게임데이터(데이터매니저) 갱신
                 break;
 
@@ -229,6 +234,15 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
 
         rightInteractable.canInteract = false;
         leftInteractable.canInteract = false;
+        float puzzleClearTime = Time.time - puzzleStartTime;
+        var eventData = new Dictionary<string, object> {
+        { "PlayCode", DataManager.instance.nowGame.playCode },
+        { "PuzzleName", gameObject.name },
+        { "SolveTimeSeconds", puzzleClearTime }
+        };
+        Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("emblem_puzzle_clear");
+        foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+        Unity.Services.Analytics.AnalyticsService.Instance.RecordEvent(myEvent);
 
         UpdatePuzzleDataToManager(); // 클리어 상태 매니저 데이터 갱신
 

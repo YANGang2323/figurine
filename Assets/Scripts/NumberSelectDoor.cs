@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using Unity.Services.Analytics;
+
 public class NumberSelectDoor : MonoBehaviour
 {
     private int[] currentNumbers;
@@ -57,23 +60,8 @@ public class NumberSelectDoor : MonoBehaviour
 
         ApplyFirstInteractionWorldState();
 
-        ////오브젝트 비활성화
-        //foreach (InteractableObject obj in unlockObjects)
-        //{
-        //    if (obj != null)
-        //        obj.canInteract = true;
-        //}
-        //// CCTV, SpotLight, Trigger 등 원하는 오브젝트 활성화
-        //foreach (GameObject obj in activateObjects)
-        //{
-        //    if (obj != null)
-        //        obj.SetActive(true);
-        //}
-        //foreach (GameObject obj in deactivateObjects)
-        //{
-        //    if (obj != null)
-        //        obj.SetActive(false);
-        //}
+        // 시간 측정 시작점 기록 (유니티 실행 시간 사용)
+        DataManager.instance.nowGame.numSelectStartTime = Time.time;
 
         if (!string.IsNullOrEmpty(firstInteractFlag))
         {
@@ -171,6 +159,19 @@ public class NumberSelectDoor : MonoBehaviour
 
         puzzleUI.SetActive(false);
 
+        // 해결 시간 계산 (현재 유니티 시간 - 최초 상호작용 시간)
+        float solveTime = Time.time - DataManager.instance.nowGame.numSelectStartTime;
+
+        var eventData = new Dictionary<string, object> {
+            { "PlayCode", DataManager.instance.nowGame.playCode },
+            { "DoorID", gameObject.name },
+            { "SolveTimeSeconds", solveTime },
+            { "TotalFailCount", DataManager.instance.nowGame.numSelectFailCount }
+        };
+        CustomEvent successEvent = new CustomEvent("number_puzzle_success");
+        foreach (var param in eventData) successEvent.Add(param.Key, param.Value);
+        AnalyticsService.Instance.RecordEvent(successEvent);
+
         doorDialogue.repeatDialogue = newRepeatDialogue;
 
         DialogueManager.Instance.StartDialogue(successDialogue);
@@ -179,6 +180,18 @@ public class NumberSelectDoor : MonoBehaviour
     void Fail()
     {
         puzzleUI.SetActive(false);
+
+        // 실패 횟수 증가 및 데이터 송신
+        DataManager.instance.nowGame.numSelectFailCount++;
+        var eventData = new Dictionary<string, object> {
+            { "PlayCode", DataManager.instance.nowGame.playCode },
+            { "DoorID", gameObject.name },
+            { "FailAccumulated", DataManager.instance.nowGame.numSelectFailCount }
+        };
+        CustomEvent failEvent = new CustomEvent("number_puzzle_fail");
+        foreach (var param in eventData) failEvent.Add(param.Key, param.Value);
+        AnalyticsService.Instance.RecordEvent(failEvent);
+
         DialogueManager.Instance.StartDialogue(failDialogue);
     }
 }
