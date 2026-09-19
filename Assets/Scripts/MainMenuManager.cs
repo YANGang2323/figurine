@@ -11,6 +11,9 @@ using Unity.Services.Analytics;
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject optionUI;
+    public GameObject soundOptionUI;
+    public GameObject keysetOptionUI;
+    public GameObject languageOptionUI;
     public GameObject LoadUI;
     public Button[] slotButtons; // 버튼들을 인스펙터에서 연결
     public TMP_Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
@@ -44,12 +47,17 @@ public class MainMenuManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            HandleEscape();
+        }
     }
     public void OnClickNewGame()
     {
+        UISoundManager.Instance.PlayClick();
+
         Debug.Log("새 게임");
         // 1. 중복되지 않는 영어 대문자+숫자 4자리 조합 생성
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -80,6 +88,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickLoad()
     {
+        UISoundManager.Instance.PlayClick();
+
         Debug.Log("불러오기");
         SlotTextEdit();
         LoadUI.SetActive(true);
@@ -122,20 +132,54 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnClickDemo2()
     {
+        UISoundManager.Instance.PlayClick();
+
         Debug.Log("데모2");
         NewGameScene = "Demo2";
         SceneManager.LoadScene(NewGameScene);
     }
     public void OnClickPipe()
     {
+        UISoundManager.Instance.PlayClick();
+
         Debug.Log("파이프씬");
         NewGameScene = "Pipe";
         SceneManager.LoadScene(NewGameScene);
     }
     public void OnClickOption()
     {
+        UISoundManager.Instance.PlayClick();
+
         Debug.Log("옵션");
         optionUI.SetActive(true);
+        soundOptionUI.SetActive(true);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(false);
+    }
+
+    public void OnClickSoundOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("사운드 옵션");
+        soundOptionUI.SetActive(true);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(false);
+    }
+    public void OnClickKeysetOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("키 설정 옵션");
+        soundOptionUI.SetActive(false);
+        keysetOptionUI.SetActive(true);
+        languageOptionUI.SetActive(false);
+    }
+    public void OnClickLanguageOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("언어 옵션");
+        soundOptionUI.SetActive(false);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(true);
     }
 
     public void OnClickQuit()
@@ -148,9 +192,27 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnClickBackToMenu()
     {
+        UISoundManager.Instance.PlayClose();
         optionUI.SetActive(false);
         LoadUI.SetActive(false);
     }
+    private void HandleEscape() { 
+        if (optionUI.activeSelf)
+        {   //세부 옵션 원상태 후 닫기
+            soundOptionUI.SetActive(true);
+            keysetOptionUI.SetActive(false);
+            languageOptionUI.SetActive(false);
+            optionUI.SetActive(false);
+            return;
+        }
+        // Load 창이 열려 있으면 닫기
+        if (LoadUI.activeSelf)
+        {
+            LoadUI.SetActive(false);
+            return;
+        }
+    }
+
     private void SlotTextEdit()
     {
         savePath = Application.persistentDataPath; // 저장 경로

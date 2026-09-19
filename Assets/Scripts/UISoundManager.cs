@@ -6,9 +6,6 @@ public class UISoundManager : MonoBehaviour
 
     public AudioSource audioSource;
 
-    [Range(0f, 1f)]
-    public float masterVolume = 1f; // 나중에 설정창에서 변경
-
     public AudioClip openClip;
     [Range(0f, 1f)]
     public float openVolume = 0.5f;
@@ -24,15 +21,14 @@ public class UISoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        audioSource.volume = 0.5f;
     }
 
     public void PlayClick()
     {
         if (clickClip != null)
         {
-
-            audioSource.PlayOneShot(clickClip, clickVolume * masterVolume);
+            float volume = clickVolume * GetSFXVolume();
+            audioSource.PlayOneShot(clickClip, volume);
         }
     }
 
@@ -41,7 +37,8 @@ public class UISoundManager : MonoBehaviour
         if (openClip != null)
         {
             audioSource.pitch = 0.9f;
-            audioSource.PlayOneShot(openClip, openVolume * masterVolume);
+            float volume = openVolume * GetSFXVolume();
+            audioSource.PlayOneShot(openClip, volume);
             audioSource.pitch = 1f;
         }
     }
@@ -51,8 +48,18 @@ public class UISoundManager : MonoBehaviour
         if (closeClip != null)
         {
             audioSource.pitch = 0.3f;
-            audioSource.PlayOneShot(closeClip, closeVolume * masterVolume);
+            float volume = closeVolume * GetSFXVolume();
+            audioSource.PlayOneShot(closeClip, volume);
             audioSource.pitch = 1f;
         }
+    }
+
+    float GetSFXVolume()
+    {
+        if (AudioSettingsManager.Instance == null)
+            return 1f;
+
+        return AudioSettingsManager.Instance.masterVolume *
+               AudioSettingsManager.Instance.sfxVolume;
     }
 }

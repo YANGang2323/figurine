@@ -144,6 +144,7 @@ public class Game : MonoBehaviour
         UISoundManager.Instance.PlayClose();
 
         InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
+        InputLockManager.Refresh();
     }
     public void OnClickOpenOptionUI()
     {
@@ -173,6 +174,7 @@ public class Game : MonoBehaviour
         InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
         InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
         InputLockManager.CameraRotateLock = false; // LockMove, LockCamera 해제
+        InputLockManager.Refresh();
         SceneManager.LoadScene("MainMenu");
     }
     private void SlotText()

@@ -43,7 +43,7 @@ MonoBehaviour:
     soundVolume: 1
     changeBGM: 1
     bgm: {fileID: 8300000, guid: 47e9319f4829ac5469cf5bd70ca94ba9, type: 3}
-    bgmVolume: 0.609
+    bgmVolume: 0.546
     stopBGM: 0
     hasChoice: 0
     choices: []
