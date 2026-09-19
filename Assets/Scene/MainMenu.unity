@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 248679236}
   - component: {fileID: 248679235}
   m_Layer: 5
-  m_Name: Control
+  m_Name: Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5038,9 +5038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '   CONTROL
-
-'
+  m_text: '   OPTION'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 923bdea75f04b2440b0c629b37e0ae8b, type: 2}
   m_sharedMaterial: {fileID: -6322293769709193987, guid: 923bdea75f04b2440b0c629b37e0ae8b, type: 2}
