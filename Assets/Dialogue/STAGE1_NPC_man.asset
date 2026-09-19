@@ -174,7 +174,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
-    text: "\uC800\uBC88 \uAC00\uC871\uD589\uC0AC\uB54C \uBA40\uB9AC\uC11C \uBCF8
+    text: "\uC9C0\uB09C \uAC00\uBB38 \uD589\uC0AC \uB54C \uBA40\uB9AC\uC11C \uBCF8
       \uC5BC\uAD74\uC774\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}

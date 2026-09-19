@@ -622,7 +622,7 @@ MonoBehaviour:
     choices: []
   - speakerName: "\uC5EC\uC790"
     text: "\uACF5\uC5F0\uC740 \uB298 \uC644\uBCBD\uD588\uC5B4. \uC624\uB298\uB3C4
-      \uB9C8\uCC2C\uAC00\uC9C0 \uC77C\uAC70\uC57C."
+      \uB9C8\uCC2C\uAC00\uC9C0\uC77C \uAC70\uC57C."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
