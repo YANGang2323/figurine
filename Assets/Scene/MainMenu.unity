@@ -780,6 +780,9 @@ MonoBehaviour:
   masterVolume: 1
   bgmVolume: 1
   sfxVolume: 1
+  masterMuted: 0
+  bgmMuted: 0
+  sfxMuted: 0
 --- !u!4 &128970922
 Transform:
   m_ObjectHideFlags: 0
@@ -1871,7 +1874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c055a70971338cc48a5f837d74c5f88a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66bdc6c4e3d2e3e49a0c750b9f714157, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2183,7 +2186,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 391496933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1131075746}
+        m_TargetAssemblyTypeName: AudioSettingsUI, Assembly-CSharp
+        m_MethodName: OnSFXMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &391496933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2204,7 +2219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3422f8b1d5f68344c87804536c9a4022, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2529405a38999644a51019237dc4d4e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3885,7 +3900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9dd7acd49957d849b472b4d36646fe8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5bfbfb3106b5be6408c56e27b2c63f81, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4097,7 +4112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3422f8b1d5f68344c87804536c9a4022, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2529405a38999644a51019237dc4d4e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4729,7 +4744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e1911fa078315124698a478ccaefa66f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 613b30d3a032176489c0fe2b5c62d4bf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4794,6 +4809,11 @@ MonoBehaviour:
   masterSlider: {fileID: 1134261711}
   bgmSlider: {fileID: 58521884}
   sfxSlider: {fileID: 461726680}
+  masterIcon: {fileID: 1807573648}
+  bgmIcon: {fileID: 1609505231}
+  sfxIcon: {fileID: 391496933}
+  soundOn: {fileID: 21300000, guid: b2529405a38999644a51019237dc4d4e, type: 3}
+  soundOff: {fileID: 21300000, guid: 374ceee29c34c4644acebb27b0bd5f20, type: 3}
 --- !u!1 &1134261709
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,7 +6319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1609505231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1131075746}
+        m_TargetAssemblyTypeName: AudioSettingsUI, Assembly-CSharp
+        m_MethodName: OnBGMMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1609505231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6320,7 +6352,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3422f8b1d5f68344c87804536c9a4022, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2529405a38999644a51019237dc4d4e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6541,7 +6573,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1807573648}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1131075746}
+        m_TargetAssemblyTypeName: AudioSettingsUI, Assembly-CSharp
+        m_MethodName: OnMasterMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1807573648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6562,7 +6606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3422f8b1d5f68344c87804536c9a4022, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2529405a38999644a51019237dc4d4e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7022,7 +7066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c055a70971338cc48a5f837d74c5f88a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66bdc6c4e3d2e3e49a0c750b9f714157, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7308,8 +7352,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: -0.0000052452}
-  m_SizeDelta: {x: 141.205, y: 118.768}
+  m_AnchoredPosition: {x: 11, y: -0.000020504}
+  m_SizeDelta: {x: 153.815, y: 131.378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127170770
 MonoBehaviour:
@@ -7331,7 +7375,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1047af2fbb9e7a94994f20faadc3b75e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 216e593f418860a4da93b0d433af15af, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -11926,7 +11970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c055a70971338cc48a5f837d74c5f88a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66bdc6c4e3d2e3e49a0c750b9f714157, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -12373,8 +12417,8 @@ SceneRoots:
   - {fileID: 1145663721}
   - {fileID: 125860292}
   - {fileID: 101714281}
-  - {fileID: 634107779}
   - {fileID: 99219481}
+  - {fileID: 634107779}
   - {fileID: 128970922}
   - {fileID: 1131075745}
   - {fileID: 333819910}
