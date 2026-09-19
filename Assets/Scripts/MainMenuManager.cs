@@ -199,6 +199,7 @@ public class MainMenuManager : MonoBehaviour
     private void HandleEscape() { 
         if (optionUI.activeSelf)
         {   //세부 옵션 원상태 후 닫기
+            UISoundManager.Instance.PlayClose();
             soundOptionUI.SetActive(true);
             keysetOptionUI.SetActive(false);
             languageOptionUI.SetActive(false);
@@ -208,6 +209,7 @@ public class MainMenuManager : MonoBehaviour
         // Load 창이 열려 있으면 닫기
         if (LoadUI.activeSelf)
         {
+            UISoundManager.Instance.PlayClose();
             LoadUI.SetActive(false);
             return;
         }
