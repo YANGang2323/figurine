@@ -71,7 +71,7 @@ MonoBehaviour:
     useCustomSpeakerColor: 0
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 8300000, guid: b803d7c59c81c50478b3e352dfd9a469, type: 3}
-    soundVolume: 0.911
+    soundVolume: 0.7
     changeBGM: 0
     bgm: {fileID: 0}
     bgmVolume: 1

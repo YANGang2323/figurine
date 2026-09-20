@@ -16,6 +16,9 @@ public class Game : MonoBehaviour
 {
     public GameObject ESCMenuUI;
     public GameObject OptionUI;
+    public GameObject soundOptionUI;
+    public GameObject keysetOptionUI;
+    public GameObject languageOptionUI;
     public GameObject SaveUI;
     public GameObject Save;
 
@@ -51,22 +54,7 @@ public class Game : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (!ESCMenuUI.activeSelf)
-            {
-                ESCMenuUI.SetActive(true);
-                UISoundManager.Instance.PlayOpen();
-
-                InputLockManager.ESCMenuLock = true; // LockMove, LockInteraction, LockCamera 잠금
-                InputLockManager.Refresh();
-            }
-            else
-            {
-                ESCMenuUI.SetActive(false);
-                UISoundManager.Instance.PlayClose();
-
-                InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
-            }
-            //ESCMenuUI.SetActive(true);
+            HandleEscape();
         }
         //if (nowstage == "1")
         //{
@@ -146,16 +134,48 @@ public class Game : MonoBehaviour
         InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
         InputLockManager.Refresh();
     }
+    // 옵션 UI
     public void OnClickOpenOptionUI()
     {
-        OptionUI.SetActive(true);
         UISoundManager.Instance.PlayClick();
+
+        Debug.Log("옵션");
+        OptionUI.SetActive(true);
+        soundOptionUI.SetActive(true);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(false);
+    }
+
+    public void OnClickSoundOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("사운드 옵션");
+        soundOptionUI.SetActive(true);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(false);
+    }
+    public void OnClickKeysetOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("키 설정 옵션");
+        soundOptionUI.SetActive(false);
+        keysetOptionUI.SetActive(true);
+        languageOptionUI.SetActive(false);
+    }
+    public void OnClickLanguageOption()
+    {
+        UISoundManager.Instance.PlayClick();
+        Debug.Log("언어 옵션");
+        soundOptionUI.SetActive(false);
+        keysetOptionUI.SetActive(false);
+        languageOptionUI.SetActive(true);
     }
     public void OnClickCloseOptionUI()
     {
         OptionUI.SetActive(false);
         UISoundManager.Instance.PlayClick();
     }
+    // 세이브 UI
     public void OnClickOpenSaveUI()
     {
         SaveUI.SetActive(true);
@@ -213,6 +233,54 @@ public class Game : MonoBehaviour
         }
     }
 
-    
+    private void HandleEscape()
+    {
+        // 1. 옵션창이 열려 있으면 옵션창부터 닫음
+        if (OptionUI.activeSelf)
+        {
+            //세부 옵션 원상태 후 닫기
+            UISoundManager.Instance.PlayClose();
+            soundOptionUI.SetActive(true);
+            keysetOptionUI.SetActive(false);
+            languageOptionUI.SetActive(false);
+            OptionUI.SetActive(false);
+            return;
+        }
+
+        // 2. Save 팝업이 열려 있으면 팝업부터 닫음
+        if (Save.activeSelf)
+        {
+            Save.SetActive(false);
+            UISoundManager.Instance.PlayClose();
+            return;
+        }
+
+        // 3. 세이브 UI가 열려 있으면 닫음
+        if (SaveUI.activeSelf)
+        {
+            SaveUI.SetActive(false);
+            UISoundManager.Instance.PlayClose();
+            return;
+        }
+
+        // 4. ESC 메뉴가 열려 있으면 닫음
+        if (ESCMenuUI.activeSelf)
+        {
+            ESCMenuUI.SetActive(false);
+            UISoundManager.Instance.PlayClose();
+
+            InputLockManager.ESCMenuLock = false;
+            InputLockManager.Refresh();
+
+            return;
+        }
+
+        // 5. 아무것도 안 열려 있으면 ESC 메뉴 열기
+        ESCMenuUI.SetActive(true);
+        UISoundManager.Instance.PlayOpen();
+
+        InputLockManager.ESCMenuLock = true;
+        InputLockManager.Refresh();
+    }
 
 }

@@ -81,6 +81,9 @@ public class DialogueManager : MonoBehaviour
     private Coroutine bgmCoroutine;
     [SerializeField] private AudioSource sfxSource; //효과음
 
+    private float currentBGMLineVolume = 1f;
+    private float bgmFadeMultiplier = 1f;
+
 
 
     private Queue<DialogueLine> lines
@@ -112,6 +115,13 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        // 실시간 볼륨 적용
+        RefreshAudioVolume();
+        // ESC 메뉴가 열려있으면 대화 입력 무시
+        if (InputLockManager.ESCMenuLock)
+            return;
+
+        //대화 입력 처리
         if (!isPlaying)
             return;
 
@@ -146,8 +156,9 @@ public class DialogueManager : MonoBehaviour
             }
 
             // 다음 대사로 넘어갈 때만 효과음
-            if (nextClip != null)
+            if (nextClip != null){
                 DialogueAudioSource.PlayOneShot(nextClip);
+            }
 
             ShowNextLine();
         }
@@ -195,6 +206,48 @@ public class DialogueManager : MonoBehaviour
 
         isTyping = false;
     }
+    //볼륨 불러오기
+    float GetMasterVolume()
+    {
+        if (AudioSettingsManager.Instance == null)
+            return 1f;
+
+        return AudioSettingsManager.Instance.masterVolume;
+    }
+
+    float GetSFXVolume()
+    {
+        if (AudioSettingsManager.Instance == null)
+            return 1f;
+
+        return AudioSettingsManager.Instance.sfxVolume;
+    }
+
+    float GetBGMVolume()
+    {
+        if (AudioSettingsManager.Instance == null)
+            return 1f;
+
+        return AudioSettingsManager.Instance.bgmVolume;
+    }
+
+    //볼륨 적용
+    void RefreshAudioVolume()
+    {
+        float master = GetMasterVolume();
+        float sfx = GetSFXVolume();
+        float bgm = GetBGMVolume();
+
+        if (bgmSource != null)
+            bgmSource.volume = currentBGMLineVolume * master * bgm * bgmFadeMultiplier;
+
+        if (sfxSource != null)
+            sfxSource.volume = master * sfx;
+
+        if (DialogueAudioSource != null)
+            DialogueAudioSource.volume = master * sfx;
+    }
+
     //브금
     public bool IsCutsceneBGMPlaying
     {
@@ -203,38 +256,43 @@ public class DialogueManager : MonoBehaviour
             return bgmSource != null && bgmSource.isPlaying;
         }
     }
-    IEnumerator ChangeBGM(AudioClip newClip, float targetVolume, float fadeTime)
-    {
+    
+    IEnumerator ChangeBGM(AudioClip newClip, float targetVolume, float fadeTime) {
+        // 현재 브금 볼륨을 기억하는 변수
+        currentBGMLineVolume = targetVolume;
         // 현재 브금 Fade Out
         if (bgmSource.isPlaying)
         {
-            float start = bgmSource.volume;
-
             for (float t = 0; t < fadeTime; t += Time.deltaTime)
             {
-                bgmSource.volume = Mathf.Lerp(start, 0f, t / fadeTime);
+                bgmFadeMultiplier = Mathf.Lerp(1f, 0f, t / fadeTime);
+                RefreshAudioVolume();
                 yield return null;
             }
         }
 
         // 교체
         bgmSource.Stop();
-
         if (newClip == null)
+        {
+            bgmFadeMultiplier = 1f;
+            RefreshAudioVolume();
             yield break;
+        }
 
         bgmSource.clip = newClip;
-        bgmSource.volume = 0f;
         bgmSource.Play();
 
         // Fade In
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
         {
-            bgmSource.volume = Mathf.Lerp(0f, targetVolume, t / fadeTime);
+            bgmFadeMultiplier = Mathf.Lerp(0f, 1f, t / fadeTime);
+            RefreshAudioVolume();
             yield return null;
         }
 
-        bgmSource.volume = targetVolume;
+        bgmFadeMultiplier = 1f;
+        RefreshAudioVolume();
     }
 
     IEnumerator StopBGM(float fadeTime)
@@ -242,22 +300,21 @@ public class DialogueManager : MonoBehaviour
         if (!bgmSource.isPlaying)
             yield break;
 
-        float start = bgmSource.volume;
-
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
         {
-            bgmSource.volume = Mathf.Lerp(start, 0f, t / fadeTime);
+            bgmFadeMultiplier = Mathf.Lerp(1f, 0f, t / fadeTime);
+            RefreshAudioVolume();
             yield return null;
         }
 
         bgmSource.Stop();
-        bgmSource.volume = start;
+        bgmFadeMultiplier = 1f;
+        RefreshAudioVolume();
     }
 
     public void ShowNextLine()
     {
-        if (lines.Count == 0)
-        {
+        if (lines.Count == 0){
             EndDialogue();
             return;
         }
@@ -363,21 +420,13 @@ public class DialogueManager : MonoBehaviour
             : defaultSpeakerFontSize;
 
         //사운드
-        if (line.soundEffect != null)
-        {
-            DialogueAudioSource.PlayOneShot(line.soundEffect, line.soundVolume);
-        }
         // ===== 컷씬 BGM =====
         if (line.changeBGM)
         {
             if (bgmCoroutine != null)
                 StopCoroutine(bgmCoroutine);
 
-            bgmCoroutine =
-                StartCoroutine(ChangeBGM(
-                    line.bgm,
-                    line.bgmVolume,
-                    bgmFadeTime));
+            bgmCoroutine = StartCoroutine(ChangeBGM(line.bgm, line.bgmVolume, bgmFadeTime));
         }
 
         if (line.stopBGM)
@@ -488,7 +537,7 @@ public class DialogueManager : MonoBehaviour
         leftButton.gameObject.SetActive(hasLeft);
         rightButton.gameObject.SetActive(hasRight);
     }
-    //디테일왼쪽버튼
+    //디테일샷 왼쪽버튼
     public void PrevDetail()
     {
         for (int i = currentDetailIndex - 1; i >= 0; i--)
@@ -501,7 +550,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-    //디테일오른쪽버튼
+    //디테일샷 오른쪽버튼
     public void NextDetail()
     {
         for (int i = currentDetailIndex + 1; i < 3; i++)
@@ -561,12 +610,14 @@ public class DialogueManager : MonoBehaviour
     }
     void SelectChoice(DialogueChoice choice)
     {
-        if (choiceSelectClip != null)
+        //선택지 효과음
+        if (choiceSelectClip != null){
             DialogueAudioSource.PlayOneShot(choiceSelectClip);
-        // ----------------------------------------------------------------
-        // [애널리틱스 수집용 코드 추가] 선택지를 누른 순간 데이터 수집
-        // ----------------------------------------------------------------
-        if (DataManager.instance != null && DataManager.instance.nowGame != null)
+        }
+            // ----------------------------------------------------------------
+            // [애널리틱스 수집용 코드 추가] 선택지를 누른 순간 데이터 수집
+            // ----------------------------------------------------------------
+            if (DataManager.instance != null && DataManager.instance.nowGame != null)
         {
             // 1. 혹시 매개변수(choice) 객체 자체가 널일 경우를 완벽하게 차단
             string playCode = DataManager.instance.nowGame.playCode;
