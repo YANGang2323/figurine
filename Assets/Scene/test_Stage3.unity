@@ -863,13 +863,16 @@ MonoBehaviour:
   playerMovement: {fileID: 1675398722}
   player: {fileID: 419804271}
   followSpeed: 5
-  sideViewOffset: {x: 0, y: 1.8, z: 0}
+  sideViewOffset: {x: 0, y: 0, z: 0}
   playerObj: {fileID: 0}
+  stage3CameraMode: 1
+  stage3TiltAngle: 20
+  stage3FollowOffset: {x: 0, y: 4, z: 0}
   useMovementConstraints: 1
-  minPosDefault: {x: -20, y: 1.35, z: -5}
-  maxPosDefault: {x: 19, y: 1.35, z: -1}
-  minPosSide: {x: 0.5, y: 1.35, z: -16.4}
-  maxPosSide: {x: 0.5, y: 1.35, z: 5}
+  minPosDefault: {x: 5, y: -7, z: -13}
+  maxPosDefault: {x: 25, y: 5, z: 10}
+  minPosSide: {x: 5, y: 2, z: -18.5}
+  maxPosSide: {x: 25, y: 11.5, z: 10}
   cameraType: 1
   PipeManager: {fileID: 0}
   PipeRun: 0
@@ -883,14 +886,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257229015}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4, y: 1.35, z: -5}
+  m_LocalRotation: {x: 0, y: 0.9848078, z: -0.17364816, w: 0}
+  m_LocalPosition: {x: 25, y: 4.7, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 363364676}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 180, z: 0}
 --- !u!1 &288367128
 GameObject:
   m_ObjectHideFlags: 0
@@ -9140,7 +9143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5379395511866914235, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.18413
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 5379395511866914235, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12920,9 +12923,9 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 257229017}
   - {fileID: 372232788}
   - {fileID: 967587855}
-  - {fileID: 257229017}
   - {fileID: 1437800326}
   - {fileID: 215071010}
   - {fileID: 1662992141}

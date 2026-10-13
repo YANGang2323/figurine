@@ -19,8 +19,6 @@ public class CameraPivotRotator : MonoBehaviour
     public float normalSpeed = 5f;
     public float timingSpeed = 10.0f;
 
-
-    //추가
     [Header("Player Following Settings")]
     public PlayerMovement playerMovement;
     public Transform player; // 플레이어 Transform
@@ -29,6 +27,10 @@ public class CameraPivotRotator : MonoBehaviour
     private PlayerMovement3 playerMovement3;
     public GameObject playerObj;
 
+    [Header("Stage 3 Camera")]
+    public bool stage3CameraMode = false;
+    public float stage3TiltAngle = 20f;
+    public Vector3 stage3FollowOffset = new Vector3(0f, 1.8f, 0f);
 
     [Header("Movement Constraints - Current")]
     public bool useMovementConstraints = true;
@@ -54,6 +56,8 @@ public class CameraPivotRotator : MonoBehaviour
     private Vector3 targetPosition; // 목표 위치
     private string nowstage;
 
+    private float stage3Distance = 0; //3스테이지 카메라와 플레이어 거리
+
     public GameObject PipeManager;
     public bool PipeRun = false;
 
@@ -75,20 +79,33 @@ public class CameraPivotRotator : MonoBehaviour
         }
             
         DecideCameraType();
+        if (stage3CameraMode) { 
+            isSideView = false;
+            targetRotation = defaultRotation;
+            transform.rotation = defaultRotation;
+
+            SetConstraintsByView(); //위치제한설정
+            if (stage3CameraMode && player != null) {   // 기본 시점(yaw 180°)에서 카메라와 플레이어의 Z 거리
+            stage3Distance = Mathf.Abs(transform.position.z - player.position.z);
+            }
+            SnapToPlayer();//플레이어위치로
         
-        float currentY = transform.eulerAngles.y;
-        if (Mathf.Abs(currentY - 270f) < 45f || Mathf.Abs(currentY + 90f) < 45f)
-        {
-            isSideView = true;
         }
         else
         {
-            isSideView = false;
+            float currentY = transform.eulerAngles.y;
+            if (Mathf.Abs(currentY - 270f) < 45f || Mathf.Abs(currentY + 90f) < 45f)
+            {
+                isSideView = true;
+            }
+            else
+            {
+                isSideView = false;
+            }
+            targetRotation = isSideView ? sideRotation : defaultRotation;
+
+            SetConstraintsByView();
         }
-        targetRotation = isSideView ? sideRotation : defaultRotation;
-
-        SetConstraintsByView();
-
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
         /* GameData data = DataManager.instance.nowGame;     
@@ -164,11 +181,7 @@ public class CameraPivotRotator : MonoBehaviour
             //{
             float rotationSpeed = 5f;
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                Time.deltaTime * rotationSpeed
-            );
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 
             // 회전 완료 판정
             if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f){
@@ -201,55 +214,74 @@ public class CameraPivotRotator : MonoBehaviour
             defaultPosition = transform.position;
             targetPosition = defaultPosition;
         }
-        else if (nowstage == "2") 
+        if (stage3CameraMode)
         {
-            if (!PipeRun)
+            if (player != null)
             {
-                if (!isSideView) { cameraType = CameraMovingType.Fix; }
-                else if (isSideView) { cameraType = CameraMovingType.Moving; }
+                playerMovement = player.GetComponent<PlayerMovement>();
 
-                defaultRotation = Quaternion.Euler(0, 180, 0);
-                sideRotation = Quaternion.Euler(0, 270, 0);
-                isSideView = false;
+                if (playerMovement != null)
+                    playerMovement.enabled = true;
+            }
 
-                defaultPosition = transform.position;
-                targetPosition = defaultPosition;
-            }
-            else
-            {
-                cameraType = CameraMovingType.Fix;
-                Debug.Log("Fix완료!");
-            }
-            
-            
-        }
-        else if (nowstage == "3") //3스테이지 카메라 조건 정하기
-        {
-            var playerscript1 = playerObj.GetComponent<PlayerMovement>();
-            var playerscript3 = playerObj.GetComponent<PlayerMovement3>();
-            playerscript1.enabled = true;
-            playerscript3.enabled = false;
-            //if (!isSideView) { cameraType = CameraMovingType.Fix; }
-            cameraType = CameraMovingType.Fix;
+            // Tab 시점 전환 사용
+            cameraType = CameraMovingType.Moving;
             isSideView = false;
-            defaultRotation = Quaternion.Euler(0, 180, 0);
-            sideRotation = Quaternion.Euler(0, 270, 0);
 
-            
+            // 기본 시점: 위에서 약 20도 내려다보는 시점
+            defaultRotation = Quaternion.Euler(20f, 180f, 0f);
+
+            // 측면 시점: Y축으로 90도 전환
+            sideRotation = Quaternion.Euler(20f, 270f, 0f);
+
             defaultPosition = transform.position;
             targetPosition = defaultPosition;
-            //else if (isSideView) { cameraType = CameraMovingType.Follow; }
         }
-        targetRotation = isSideView ? sideRotation : defaultRotation;
-        
+        //else if (nowstage == "2") 
+        //{
+        //    if (!PipeRun)
+        //    {
+        //        if (!isSideView) { cameraType = CameraMovingType.Fix; }
+        //        else if (isSideView) { cameraType = CameraMovingType.Moving; }
+
+        //        defaultRotation = Quaternion.Euler(0, 180, 0);
+        //        sideRotation = Quaternion.Euler(0, 270, 0);
+        //        isSideView = false;
+
+        //        defaultPosition = transform.position;
+        //        targetPosition = defaultPosition;
+        //    }
+        //    else
+        //    {
+        //        cameraType = CameraMovingType.Fix;
+        //        Debug.Log("Fix완료!");
+        //    }
+        //}
+        //else if (nowstage == "3") //3스테이지 카메라 조건 정하기
+        //{
+        //    var playerscript1 = playerObj.GetComponent<PlayerMovement>();
+        //    var playerscript3 = playerObj.GetComponent<PlayerMovement3>();
+        //    playerscript1.enabled = true;
+        //    playerscript3.enabled = false;
+        //    //if (!isSideView) { cameraType = CameraMovingType.Fix; }
+        //    cameraType = CameraMovingType.Fix;
+        //    isSideView = false;
+        //    defaultRotation = Quaternion.Euler(0, 180, 0);
+        //    sideRotation = Quaternion.Euler(0, 270, 0);
+
+
+        //    defaultPosition = transform.position;
+        //    targetPosition = defaultPosition;
+        //    //else if (isSideView) { cameraType = CameraMovingType.Follow; }
+        //}
+        //targetRotation = isSideView ? sideRotation : defaultRotation;
     }
     public void SnapToPlayer()
     {
         if (player == null)
             return;
-
-        Vector3 rotatedOffset = transform.rotation * sideViewOffset;
-        Vector3 desiredPosition = player.position + rotatedOffset;
+        Quaternion yawOnly = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+        Vector3 desiredPosition = player.position + yawOnly * sideViewOffset;
 
         if (useMovementConstraints)
         {
@@ -262,28 +294,36 @@ public class CameraPivotRotator : MonoBehaviour
     }
     void FollowPlayer()
     {
-
-        // 플레이어 위치에 오프셋을 더한 목표 위치 계산
-        //Vector3 desiredPosition = player.position + sideViewOffset;
-        // [핵심] 현재 카메라의 회전(transform.rotation)을 오프셋에 곱합니다.
-        // 이렇게 하면 탭 키를 눌러 카메라가 돌 때, 오프셋 방향도 같이 회전합니다.
-        Vector3 rotatedOffset = transform.rotation * sideViewOffset;
+        if (player == null)
+            return;
+        // 기울기(pitch)를 제외하고 Y축 회전만 사용
+        Quaternion yawOnly = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+        Vector3 rotatedOffset = yawOnly * sideViewOffset;
         Vector3 desiredPosition = player.position + rotatedOffset;
-
+        
         // 움직임 제한 적용
         if (useMovementConstraints)
         {
             desiredPosition.x = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
-            desiredPosition.y = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
             desiredPosition.z = Mathf.Clamp(desiredPosition.z, minPosition.z, maxPosition.z);
+            if (!stage3CameraMode)
+                desiredPosition.y = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
         }
-
+        if (stage3CameraMode)// 3스테이지: X, Y, Z 모두 플레이어를 따라감
+        {
+            desiredPosition.y = player.position.y + stage3FollowOffset.y; // Clamp 안 함
+            if (isSideView)
+                desiredPosition.x = player.position.x + stage3Distance;  // 측면: X 거리 유지, Z 따라감
+            else
+                desiredPosition.z = player.position.z + stage3Distance;  // 기본: Z 거리 유지, X 따라감
+        }
         // 부드럽게 이동
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
 
         // [보정] 끝까지 안 따라가는 문제 해결
         if (Vector3.Distance(transform.position, desiredPosition) < 0.01f)
             transform.position = desiredPosition;
+        Debug.Log($"side={isSideView} player=({player.position.x:F1},{player.position.y:F1},{player.position.z:F1}) desired=({desiredPosition.x:F1},{desiredPosition.y:F1},{desiredPosition.z:F1}) cam=({transform.position.x:F1},{transform.position.y:F1},{transform.position.z:F1})");
     }
     // 외부에서 움직임 범위를 설정할 수 있는 메서드
     public void SetMovementConstraints(Vector3 min, Vector3 max)
