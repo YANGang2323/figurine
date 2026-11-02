@@ -323,7 +323,7 @@ public class CameraPivotRotator : MonoBehaviour
         // [보정] 끝까지 안 따라가는 문제 해결
         if (Vector3.Distance(transform.position, desiredPosition) < 0.01f)
             transform.position = desiredPosition;
-        Debug.Log($"side={isSideView} player=({player.position.x:F1},{player.position.y:F1},{player.position.z:F1}) desired=({desiredPosition.x:F1},{desiredPosition.y:F1},{desiredPosition.z:F1}) cam=({transform.position.x:F1},{transform.position.y:F1},{transform.position.z:F1})");
+        //Debug.Log($"side={isSideView} player=({player.position.x:F1},{player.position.y:F1},{player.position.z:F1}) desired=({desiredPosition.x:F1},{desiredPosition.y:F1},{desiredPosition.z:F1}) cam=({transform.position.x:F1},{transform.position.y:F1},{transform.position.z:F1})");
     }
     // 외부에서 움직임 범위를 설정할 수 있는 메서드
     public void SetMovementConstraints(Vector3 min, Vector3 max)

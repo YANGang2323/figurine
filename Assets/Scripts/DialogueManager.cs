@@ -141,9 +141,9 @@ public class DialogueManager : MonoBehaviour
                     { "DialogueID", currentDialogue.dialogueID }, // 현재 출력 중인 대화 데이터의 고유 ID
                     { "TotalSkips", game.dialogueSkipCount }
                 };
-                CustomEvent myEvent = new CustomEvent("dialogue_skip");
-                foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
-                AnalyticsService.Instance.RecordEvent(myEvent);
+                //CustomEvent myEvent = new CustomEvent("dialogue_skip");
+                //foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
+                //AnalyticsService.Instance.RecordEvent(myEvent);
                 return;
             }
 

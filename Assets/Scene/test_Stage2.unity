@@ -1070,7 +1070,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1183,7 +1183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1227,6 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f49c6c48dd3d74581de8d81377bf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isRotating: 1
   rotationAngle: 60
   rotationSpeed: 0.7
@@ -1234,6 +1235,8 @@ MonoBehaviour:
   detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1208358169}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  stage2_cctv_Respawn: {fileID: 0}
 --- !u!4 &237800488
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,7 +1513,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3408,7 +3411,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3452,6 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f49c6c48dd3d74581de8d81377bf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isRotating: 1
   rotationAngle: 50
   rotationSpeed: 0.8
@@ -3459,6 +3463,8 @@ MonoBehaviour:
   detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1930827678}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  stage2_cctv_Respawn: {fileID: 0}
 --- !u!1 &641919711
 GameObject:
   m_ObjectHideFlags: 0
@@ -4746,7 +4752,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4790,6 +4796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f49c6c48dd3d74581de8d81377bf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isRotating: 1
   rotationAngle: 60
   rotationSpeed: 0.6
@@ -4797,6 +4804,8 @@ MonoBehaviour:
   detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 1335924968}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  stage2_cctv_Respawn: {fileID: 0}
 --- !u!4 &930744287
 Transform:
   m_ObjectHideFlags: 0
@@ -6546,7 +6555,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6590,6 +6599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f49c6c48dd3d74581de8d81377bf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isRotating: 1
   rotationAngle: 45
   rotationSpeed: 0.9
@@ -6597,6 +6607,8 @@ MonoBehaviour:
   detectionThreshold: 1.5
   spawnPoint: {fileID: 1065358636}
   rayOrigin: {fileID: 382630953}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  stage2_cctv_Respawn: {fileID: 0}
 --- !u!4 &1539821697
 Transform:
   m_ObjectHideFlags: 0
@@ -8255,7 +8267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8886,6 +8898,9 @@ MonoBehaviour:
   followSpeed: 3
   sideViewOffset: {x: 0, y: 1.8, z: 0}
   playerObj: {fileID: 955303150}
+  stage3CameraMode: 0
+  stage3TiltAngle: 20
+  stage3FollowOffset: {x: 0, y: 1.8, z: 0}
   useMovementConstraints: 1
   minPosDefault: {x: -26, y: 1.8, z: -15}
   maxPosDefault: {x: 10, y: 1.8, z: 15}
@@ -9678,6 +9693,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ESCMenuUI: {fileID: 4607686665125102739}
   OptionUI: {fileID: 4005639194995799202}
+  soundOptionUI: {fileID: 0}
+  keysetOptionUI: {fileID: 0}
+  languageOptionUI: {fileID: 0}
   SaveUI: {fileID: 614015154706736113}
   Save: {fileID: 7238601409279036244}
   slotButtons:

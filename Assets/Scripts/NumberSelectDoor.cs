@@ -22,6 +22,7 @@ public class NumberSelectDoor : MonoBehaviour
     [SerializeField] private GameObject[] deactivateObjects;
     //Progress 플래그
     [SerializeField] private string firstInteractFlag;
+    [SerializeField] private Stage2CCTVLighting cctvLightingOnSuccess;
 
     private bool firstInteract = false;
     private bool solved = false;
@@ -156,6 +157,8 @@ public class NumberSelectDoor : MonoBehaviour
     void Success()
     {
         solved = true;
+        if (cctvLightingOnSuccess != null)
+            cctvLightingOnSuccess.Complete();
 
         puzzleUI.SetActive(false);
 

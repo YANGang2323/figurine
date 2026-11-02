@@ -26,6 +26,7 @@ public class CCTVController : MonoBehaviour
     [Header("오버시 스크립트")]
     public DialogueData stage2_cctv_Respawn;
     private bool isCaught = false;
+    private bool shutDown;
     void Start()
     {
         initialRotation = transform.rotation;
@@ -65,6 +66,7 @@ public class CCTVController : MonoBehaviour
     }
     public void Activate()
     {
+        if (shutDown) return;
         isActive = true;
         isCaught = false;
         detectionTimer = 0f;
@@ -72,6 +74,14 @@ public class CCTVController : MonoBehaviour
         if (cctvLight != null)
             cctvLight.color = normalColor;
     }
+    public void ShutDown()
+    {
+        shutDown = true;
+        isActive = false;
+        detectionTimer = 0f;
+        if (cctvLight != null) cctvLight.enabled = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (!isActive)
