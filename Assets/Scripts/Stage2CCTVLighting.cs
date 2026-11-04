@@ -9,6 +9,7 @@ public sealed class Stage2CCTVLighting : MonoBehaviour
     [SerializeField] private CCTVController[] controllers;
     [SerializeField] private Light directionalLight;
     [SerializeField] private Light[] spotLights;
+    [SerializeField] private Light[] pinLights;
     [SerializeField] private float cctvDirectionalIntensity = 0.12f;
     [SerializeField] private Color cctvAmbientColor = new Color(0.055f, 0.065f, 0.09f);
     [SerializeField] private float cctvReflectionIntensity = 0.18f;
@@ -30,6 +31,7 @@ public sealed class Stage2CCTVLighting : MonoBehaviour
         originalGround = RenderSettings.ambientGroundColor;
         originalAmbientIntensity = RenderSettings.ambientIntensity;
         originalReflectionIntensity = RenderSettings.reflectionIntensity;
+        SetPinLights(false);
         originalEnabled = new bool[spotLights.Length];
         for (int i = 0; i < spotLights.Length; i++)
         {
@@ -57,6 +59,7 @@ public sealed class Stage2CCTVLighting : MonoBehaviour
         if (activated || !ProgressManager.Instance.HasFlag(activationFlag)) return;
 
         activated = true;
+        SetPinLights(true);
         if (directionalLight != null)
             directionalLight.intensity = cctvDirectionalIntensity;
         RenderSettings.ambientMode = AmbientMode.Flat;
@@ -73,6 +76,7 @@ public sealed class Stage2CCTVLighting : MonoBehaviour
     {
         if (completed) return;
         completed = true;
+        SetPinLights(false);
         if (ProgressManager.Instance != null && DataManager.Instance != null &&
             DataManager.Instance.nowGame != null)
             ProgressManager.Instance.AddFlag(completionFlag);
@@ -89,5 +93,12 @@ public sealed class Stage2CCTVLighting : MonoBehaviour
         foreach (var light in spotLights)
             if (light != null) light.enabled = false;
         enabled = false;
+    }
+
+    private void SetPinLights(bool value)
+    {
+        if (pinLights == null) return;
+        foreach (var light in pinLights)
+            if (light != null) light.enabled = value;
     }
 }
