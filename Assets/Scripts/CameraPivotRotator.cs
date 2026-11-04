@@ -70,6 +70,16 @@ public class CameraPivotRotator : MonoBehaviour
         
     }
 
+    void OnEnable()
+    {
+        if (Instance == null) Instance = this;
+    }
+
+    void OnDisable()
+    {
+        if (Instance == this) Instance = null;
+    }
+
     void Start()
     {
         if (player != null)

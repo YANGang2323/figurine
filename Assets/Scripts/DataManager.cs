@@ -172,13 +172,23 @@ public class DataManager : MonoBehaviour
     }
     public string FindLatestSaveFile(int slot)
     {
-        string PlayCode = nowGame.playCode;
-        slot++; // 슬롯 번호를 1부터 시작하도록 조정
-        string[] files = Directory.GetFiles(path, $"{slot}_*.json");
-        if (files.Length == 0) return null;
+        if (slot < 0 || string.IsNullOrEmpty(path) || !Directory.Exists(path))
+            return null;
 
-        System.Array.Sort(files);
-        return files[files.Length - 1]; // 가장 최근 파일
+        // Play codes precede dates in file names; alphabetical order is not save order.
+        string latestFile = null;
+        System.DateTime latestWriteTime = System.DateTime.MinValue;
+        foreach (string file in Directory.GetFiles(path, $"{slot + 1}_*.json"))
+        {
+            System.DateTime writeTime = File.GetLastWriteTimeUtc(file);
+            if (latestFile == null || writeTime > latestWriteTime ||
+                (writeTime == latestWriteTime && string.CompareOrdinal(file, latestFile) > 0))
+            {
+                latestFile = file;
+                latestWriteTime = writeTime;
+            }
+        }
+        return latestFile;
     }
     public void DataClear()
     {

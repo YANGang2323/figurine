@@ -15,6 +15,7 @@ public class ChoiceRecord
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    public event System.Action<DialogueData> DialogueCompleted;
     public PlayerInteraction playerInteraction;
     public GameObject panel;
 
@@ -456,6 +457,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        DialogueData completedDialogue = currentDialogue;
         if (currentChoiceEvent != null)
         {
             ExecuteDialogueEvent(currentChoiceEvent);
@@ -483,6 +485,8 @@ public class DialogueManager : MonoBehaviour
 
         isPlaying = false;
         InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
+        currentDialogue = null;
+        DialogueCompleted?.Invoke(completedDialogue);
     }
 
     void ShowDetail()
