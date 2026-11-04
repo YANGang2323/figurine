@@ -179,9 +179,9 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uAC1D\uC11D\uC5D0\uC120 \uBCF4\uC774\uC9C0 \uC54A\uB358 \uAC01\uC885
-      \uBC15\uC2A4\uB4E4\uACFC \uC758\uC790, \uD654\uC7A5\uB300, \uC758\uC0C1\uC774
-      \uC788\uC5C8\uB2E4."
+    text: "\uC774 \uB05D\uC5D0\uB294 \uAC1D\uC11D\uC5D0\uC120 \uBCF4\uC774\uC9C0
+      \uC54A\uB358 \uAC01\uC885 \uBC15\uC2A4\uB4E4\uACFC \uC758\uC790, \uD654\uC7A5\uB300,
+      \uC758\uC0C1\uC774 \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
