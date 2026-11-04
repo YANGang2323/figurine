@@ -34,6 +34,9 @@ public class DialogueTrigger : MonoBehaviour
         if (triggerType != DialogueTriggerType.Area)
             return;
 
+        if (InputLockManager.TransitionLock)
+            return;
+
         if (!other.CompareTag("Player"))
             return;
 

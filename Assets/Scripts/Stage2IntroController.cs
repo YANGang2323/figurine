@@ -81,6 +81,7 @@ public class Stage2IntroController : MonoBehaviour
     public void TryStartBackstageCutscene(Collider other)
     {
         if (CurrentPhase != Phase.Corridor || manager == null || manager.IsPlaying ||
+            InputLockManager.TransitionLock || InputLockManager.TutorialMoveLock ||
             !corridorCamera.isSideView || corridorCamera.IsRotating ||
             (other.gameObject != corridorPlayer && !other.transform.IsChildOf(corridorPlayer.transform)))
             return;

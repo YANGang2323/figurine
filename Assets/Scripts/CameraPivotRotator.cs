@@ -7,6 +7,7 @@ public class CameraPivotRotator : MonoBehaviour
 {
     // 싱글톤 인스턴스
     public static CameraPivotRotator Instance { get; private set; }
+    public event System.Action ViewTurnStarted;
 
     [Header("Rotation Settings")]
     public float rotationSpeed = 5f;          // 회전 속도 조절
@@ -166,14 +167,7 @@ public class CameraPivotRotator : MonoBehaviour
         (cameraType == CameraMovingType.Fix ||
          cameraType == CameraMovingType.Moving))
         {
-            InputLockManager.CameraRotateLock = true;   //LockMove, LockCamera 잠금
-
-            isSideView = !isSideView;
-            targetRotation = isSideView ? sideRotation : defaultRotation;
-            isRotating = true;
-
-            // 시점에 따라 제한 범위를 즉시 교체
-            SetConstraintsByView();
+            TryRotateView();
         }
 
         // 회전은 Lock이어도 계속 수행
@@ -301,6 +295,29 @@ public class CameraPivotRotator : MonoBehaviour
         }
 
         transform.position = desiredPosition;
+    }
+    public bool TryRotateView()
+    {
+        if (isRotating || InputLockManager.LockCamera ||
+            (cameraType != CameraMovingType.Fix && cameraType != CameraMovingType.Moving)) return false;
+        InputLockManager.CameraRotateLock = true;
+        isSideView = !isSideView;
+        targetRotation = isSideView ? sideRotation : defaultRotation;
+        isRotating = true;
+        SetConstraintsByView();
+        ViewTurnStarted?.Invoke();
+        return true;
+    }
+
+    public void RestoreView(bool sideView)
+    {
+        isSideView = sideView;
+        isRotating = false;
+        targetRotation = isSideView ? sideRotation : defaultRotation;
+        transform.rotation = targetRotation;
+        SetConstraintsByView();
+        SnapToPlayer();
+        InputLockManager.CameraRotateLock = false;
     }
     void FollowPlayer()
     {
