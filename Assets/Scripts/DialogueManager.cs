@@ -812,9 +812,7 @@ public class DialogueManager : MonoBehaviour
             case DialogueEventType.EndingUI:
                 DataManager.Instance.StageClear("STAGE3");
                 DataManager.Instance.EndingClear();
-                StartCoroutine(
-                    CenterMessageUI.Instance.EndingRoutine(
-                        DataManager.Instance.nowGame.playCode));
+                StartCoroutine(CenterMessageUI.Instance.EndingRoutine());
                 break;
         }
     }

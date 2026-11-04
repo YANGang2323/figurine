@@ -14,7 +14,8 @@ public class GameData
 {
     // 스테이지, 쪽지번호, 정보개수
     //public string name;
-    public string playCode = "#000000";
+    public const string DefaultPlayCode = "#000000";
+    public string playCode = DefaultPlayCode;
     public int stage = 1;
     public int piece = 0;
     public int info = 0;

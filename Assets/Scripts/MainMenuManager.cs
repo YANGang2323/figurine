@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Unity.VisualScripting;
@@ -15,6 +16,11 @@ public class MainMenuManager : MonoBehaviour
     public GameObject keysetOptionUI;
     public GameObject languageOptionUI;
     public GameObject LoadUI;
+    [SerializeField] private TMP_FontAsset exitFont;
+    [SerializeField] private Sprite exitTextBox;
+    [SerializeField] private Sprite exitSurveyQr;
+    private ExitFeedbackPopup exitPopup;
+    private GameObject previousSelection;
     public Button[] slotButtons; // 버튼들을 인스펙터에서 연결
     public TMP_Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
 
@@ -184,6 +190,32 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickQuit()
     {
+        string playCode = DataManager.instance?.nowGame?.playCode;
+        if (string.IsNullOrWhiteSpace(playCode) || playCode == GameData.DefaultPlayCode)
+        {
+            QuitApplication();
+            return;
+        }
+
+        if (exitPopup != null && exitPopup.gameObject.activeSelf)
+            return;
+
+        previousSelection = EventSystem.current?.currentSelectedGameObject;
+        if (exitPopup == null)
+            exitPopup = ExitFeedbackPopup.Create(exitFont, exitTextBox, exitSurveyQr,
+                QuitApplication, CloseExitPopup);
+
+        exitPopup.Show(playCode);
+    }
+
+    private void CloseExitPopup()
+    {
+        exitPopup.gameObject.SetActive(false);
+        EventSystem.current?.SetSelectedGameObject(previousSelection);
+    }
+
+    private void QuitApplication()
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -197,6 +229,12 @@ public class MainMenuManager : MonoBehaviour
         LoadUI.SetActive(false);
     }
     private void HandleEscape() { 
+        if (exitPopup != null && exitPopup.gameObject.activeSelf)
+        {
+            CloseExitPopup();
+            return;
+        }
+
         if (optionUI.activeSelf)
         {   //세부 옵션 원상태 후 닫기
             UISoundManager.Instance.PlayClose();

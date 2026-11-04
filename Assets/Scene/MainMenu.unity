@@ -444,6 +444,9 @@ MonoBehaviour:
   keysetOptionUI: {fileID: 4639165464925422282}
   languageOptionUI: {fileID: 5532698146758279202}
   LoadUI: {fileID: 5586564534880688124}
+  exitFont: {fileID: 11400000, guid: d4d7b3c2e14422840b89a543b2189191, type: 2}
+  exitTextBox: {fileID: 21300000, guid: 1300b841d5af77447aa88a00cd71400a, type: 3}
+  exitSurveyQr: {fileID: 21300000, guid: 3b10cacd161c72148ae57fa968e89f27, type: 3}
   slotButtons:
   - {fileID: 1592253324513881442}
   - {fileID: 1502810910026062613}
