@@ -25,8 +25,11 @@ public class CCTVController : MonoBehaviour
     public Color normalColor = Color.white; // 평상시 불빛 색상
     [Header("오버시 스크립트")]
     public DialogueData stage2_cctv_Respawn;
+    public DialogueData cctv_caption; // 4의 배수 게임오버 시 보여줄 팁
     private bool isCaught = false;
     private bool shutDown;
+    public static DialogueData pendingCaptionTip; // 리스폰 후 보여줄 팁 대기열 (모든 CCTV가 공유)
+
     void Start()
     {
         initialRotation = transform.rotation;
@@ -169,6 +172,10 @@ public class CCTVController : MonoBehaviour
             return;
         var game = DataManager.instance.nowGame;
         game.totalCctvDetected++; // 발각 횟수 누적
+
+        // 4의 배수면 리스폰 후 팁 예약
+        if (game.totalCctvDetected % 4 == 0 && cctv_caption != null)
+            pendingCaptionTip = cctv_caption;
 
         Debug.Log("게임 오버! 플레이어 검거!");
         isCaught = true;

@@ -60,5 +60,14 @@ public class StealthManager : MonoBehaviour
 
         foreach (var cctv in FindObjectsOfType<CCTVController>())
             cctv.ResetDetection();
+
+        //연속된 게임오버 후 팁 표시
+        if (CCTVController.pendingCaptionTip != null)
+        {
+            DialogueData tip = CCTVController.pendingCaptionTip;
+            CCTVController.pendingCaptionTip = null;   // 먼저 비워서 중복 재생 방지
+            while (DialogueManager.Instance.IsPlaying) yield return null;
+            DialogueManager.Instance.StartDialogue(tip);
+        }
     }
 }
