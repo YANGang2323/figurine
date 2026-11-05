@@ -16,6 +16,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject keysetOptionUI;
     public GameObject languageOptionUI;
     public GameObject LoadUI;
+    [SerializeField] private Button firstMenuButton;
     [SerializeField] private TMP_FontAsset exitFont;
     [SerializeField] private Sprite exitTextBox;
     [SerializeField] private Sprite exitSurveyQr;
@@ -58,6 +59,17 @@ public class MainMenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             HandleEscape();
+            return;
+        }
+
+        var eventSystem = EventSystem.current;
+        if (eventSystem != null && eventSystem.currentSelectedGameObject == null &&
+            firstMenuButton != null && !optionUI.activeSelf && !LoadUI.activeSelf &&
+            (exitPopup == null || !exitPopup.gameObject.activeSelf) &&
+            (!Mathf.Approximately(Input.GetAxisRaw("Horizontal"), 0f) ||
+             !Mathf.Approximately(Input.GetAxisRaw("Vertical"), 0f)))
+        {
+            firstMenuButton.Select();
         }
     }
     public void OnClickNewGame()

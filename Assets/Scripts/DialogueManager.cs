@@ -129,6 +129,14 @@ public class DialogueManager : MonoBehaviour
         if (choicePanel.activeSelf)
             return;
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F8))
+        {
+            SkipToChoiceOrEnd();
+            return;
+        }
+#endif
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // 타이핑 중이면 효과음 없이 즉시 출력
@@ -164,6 +172,32 @@ public class DialogueManager : MonoBehaviour
             ShowNextLine();
         }
     }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    private void SkipToChoiceOrEnd()
+    {
+        if (!waitingForChoice)
+        {
+            while (lines.Count > 0 && !lines.Peek().hasChoice)
+                lines.Dequeue();
+
+            if (lines.Count == 0)
+            {
+                if (isTyping)
+                    FinishTyping();
+                EndDialogue();
+                return;
+            }
+
+            ShowNextLine();
+        }
+
+        if (isTyping)
+            FinishTyping();
+        waitingForChoice = false;
+        ShowChoiceUI(pendingChoices);
+    }
+#endif
 
     public void StartDialogue(DialogueData dialogue)
     {
