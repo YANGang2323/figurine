@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 using UnityEngine.Playables;
 using Unity.VisualScripting;
 using Unity.Services.Analytics;
@@ -50,6 +51,7 @@ public class DataManager : MonoBehaviour
     public int nowSlot;
 
     public GameData nowGame = new GameData();
+    public string LatestSavedPlayCode { get; private set; }
 
     private void Awake()
     {
@@ -69,6 +71,7 @@ public class DataManager : MonoBehaviour
         path = Application.persistentDataPath + "/save";
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
+        LatestSavedPlayCode = ReadLatestSavedPlayCode();
     }
 
     // 스태틱 속성을 추가하여 코드 어디서든 안전하게 접근하게 만듭니다.
@@ -143,7 +146,39 @@ public class DataManager : MonoBehaviour
         Debug.Log(datetime); Debug.Log(filename); Debug.Log(path);
 
         File.WriteAllText(Path.Combine(path, filename), data);
+        if (HasPlayCode(PlayCode))
+            LatestSavedPlayCode = PlayCode;
     }
+
+    public static bool HasPlayCode(string playCode)
+    {
+        return !string.IsNullOrWhiteSpace(playCode) && playCode != GameData.DefaultPlayCode;
+    }
+
+    private string ReadLatestSavedPlayCode()
+    {
+        var saves = new DirectoryInfo(path).GetFiles("*_*.json")
+            .OrderByDescending(file => file.LastWriteTimeUtc)
+            .ThenByDescending(file => file.Name, System.StringComparer.Ordinal);
+
+        foreach (FileInfo save in saves)
+        {
+            try
+            {
+                var game = JsonUtility.FromJson<GameData>(File.ReadAllText(save.FullName));
+                if (HasPlayCode(game?.playCode))
+                    return game.playCode;
+            }
+            catch (System.Exception exception) when (exception is IOException ||
+                exception is System.UnauthorizedAccessException || exception is System.ArgumentException)
+            {
+                Debug.LogWarning($"Could not read play code from {save.Name}: {exception.Message}");
+            }
+        }
+
+        return null;
+    }
+
     public void LoadData()
     {
         string file = FindLatestSaveFile(nowSlot);

@@ -190,8 +190,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickQuit()
     {
-        string playCode = DataManager.instance?.nowGame?.playCode;
-        if (string.IsNullOrWhiteSpace(playCode) || playCode == GameData.DefaultPlayCode)
+        var dataManager = DataManager.instance;
+        string playCode = dataManager?.nowGame?.playCode;
+        if (!DataManager.HasPlayCode(playCode))
+            playCode = dataManager?.LatestSavedPlayCode;
+
+        if (!DataManager.HasPlayCode(playCode))
         {
             QuitApplication();
             return;
