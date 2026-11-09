@@ -73,7 +73,7 @@ MonoBehaviour:
     useCustomSpeakerColor: 0
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 8300000, guid: 0696a6fa0a521b54ab5c32f84d3a6850, type: 3}
-    soundVolume: 0.485
+    soundVolume: 0.612
     changeBGM: 0
     bgm: {fileID: 0}
     bgmVolume: 1
@@ -173,9 +173,9 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
-    changeBGM: 0
-    bgm: {fileID: 0}
-    bgmVolume: 1
+    changeBGM: 1
+    bgm: {fileID: 8300000, guid: 06640c700318d4f40befff9fb7d94da0, type: 3}
+    bgmVolume: 0.814
     stopBGM: 0
     hasChoice: 0
     choices: []
@@ -394,8 +394,8 @@ MonoBehaviour:
     speakerColor: {r: 0, g: 0, b: 0, a: 0}
     soundEffect: {fileID: 0}
     soundVolume: 0
-    changeBGM: 0
-    bgm: {fileID: 0}
+    changeBGM: 1
+    bgm: {fileID: 8300000, guid: 2a81c4baf621fe64c961c72417b9c104, type: 3}
     bgmVolume: 1
     stopBGM: 0
     hasChoice: 0
