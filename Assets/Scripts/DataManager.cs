@@ -7,13 +7,13 @@ using UnityEngine.Playables;
 using Unity.VisualScripting;
 using Unity.Services.Analytics;
 
-//ÀúÀå: µ¥ÀÌÅÍ¸¦ Á¦ÀÌ½¼À¸·Î º¯È¯->¿ÜºÎ¿¡ ÀúÀå
-//ºÒ·¯¿À±â: ¿ÜºÎ¿¡¼­ Á¦ÀÌ½¼ °¡Á®¿È-> µ¥ÀÌÅÍ·Î º¯È¯
-//DataManager.instance.¸Þ¼­µåÀÌ¸§() À¸·Î È£Ãâ
+//ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯->ï¿½ÜºÎ¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+//ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-> ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½È¯
+//DataManager.instance.ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½() ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 
 public class GameData
 {
-    // ½ºÅ×ÀÌÁö, ÂÊÁö¹øÈ£, Á¤º¸°³¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //public string name;
     public const string DefaultPlayCode = "#000000";
     public string playCode = DefaultPlayCode;
@@ -21,33 +21,33 @@ public class GameData
     public int piece = 0;
     public int info = 0;
 
-    public string sceneName;       // ÀúÀåµÈ ¾À ÀÌ¸§
-    public Vector3 playerPosition = Vector3.zero; // ÇÃ·¹ÀÌ¾î À§Ä¡
-    public List<string> playedDialogues = new List<string>();    // Àç»ýµÈ ´ëÈ­ ID ¸ñ·Ï
-    public List<string> progressFlags = new();  // ÁøÇà »óÈ² ÇÃ·¡±× ¸ñ·Ï
+    public string sceneName;       // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½
+    public Vector3 playerPosition = Vector3.zero; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡
+    public List<string> playedDialogues = new List<string>();    // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ID ï¿½ï¿½ï¿½
+    public List<string> progressFlags = new();  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È² ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
     public int EmblemPuzzleState;          // 0: Before, 1: Playing, 2: Cleared
-    public int EmblempieceXCurrentStep;    // pieceXÀÇ ÇöÀç È¸Àü ´Ü°è (0~3)
-    public int EmblempieceYCurrentStep;    // pieceYÀÇ ÇöÀç È¸Àü ´Ü°è (0~3)
-    public bool EmblemfirstPieceCompleted; // Ã¹ ¹øÂ° Á¶°¢ ¿Ï¼º ¿©ºÎ
+    public int EmblempieceXCurrentStep;    // pieceXï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Ü°ï¿½ (0~3)
+    public int EmblempieceYCurrentStep;    // pieceYï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Ü°ï¿½ (0~3)
+    public bool EmblemfirstPieceCompleted; // Ã¹ ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    public string startTimeStamp; // ½ºÅ×ÀÌÁö ½ÃÀÛ ½Ã°£ ±â·Ï¿ë
-    public string totalGameStartTime;   // »õ°ÔÀÓ ½ÃÀÛ ½Ã°£ ±â·Ï¿ë
+    public string startTimeStamp; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½Ï¿ï¿½
+    public string totalGameStartTime;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½Ï¿ï¿½
 
-    public int totalSaveCount = 0;       // ÀúÀå È½¼ö
-    public int totalLoadCount = 0;       // ·Îµå È½¼ö
-    public int totalCctvDetected = 0;    // CCTV ¹ß°¢ È½¼ö
-    public int numSelectFailCount = 0;   // ³Ñ¹ö ¼¿·º¼Ç ½ÇÆÐ È½¼ö
-    public int dialogueSkipCount = 0;    // Å¸ÀÌÇÎ ½ºÅµ È½¼ö
+    public int totalSaveCount = 0;       // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
+    public int totalLoadCount = 0;       // ï¿½Îµï¿½ È½ï¿½ï¿½
+    public int totalCctvDetected = 0;    // CCTV ï¿½ß°ï¿½ È½ï¿½ï¿½
+    public int numSelectFailCount = 0;   // ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
+    public int dialogueSkipCount = 0;    // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Åµ È½ï¿½ï¿½
 
-    [System.NonSerialized] public float numSelectStartTime; // ³Ñ¹ö¼¿·º¼Ç ÁøÀÔ ½Ã°£ (ÀúÀå¾ÈÇÔ)
+    [System.NonSerialized] public float numSelectStartTime; // ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 }
 public class DataManager : MonoBehaviour
 {
-    //½Ì±ÛÅæ
+    //ï¿½Ì±ï¿½ï¿½ï¿½
     public static DataManager instance;
     public string path;
-    //private int nowSlot; // ÇöÀç ½½·Ô¹øÈ£
+    //private int nowSlot; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¹ï¿½È£
     public int nowSlot;
 
     public GameData nowGame = new GameData();
@@ -55,7 +55,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        #region ½Ì±ÛÅæ (°³¼± ¹öÀü)
+        #region ï¿½Ì±ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         if (instance == null)
         {
             instance = this;
@@ -64,7 +64,7 @@ public class DataManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return; // Áßº¹ »ý¼º ¹æÁö
+            return; // ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         #endregion
 
@@ -74,14 +74,14 @@ public class DataManager : MonoBehaviour
         LatestSavedPlayCode = ReadLatestSavedPlayCode();
     }
 
-    // ½ºÅÂÆ½ ¼Ó¼ºÀ» Ãß°¡ÇÏ¿© ÄÚµå ¾îµð¼­µç ¾ÈÀüÇÏ°Ô Á¢±ÙÇÏ°Ô ¸¸µì´Ï´Ù.
+    // ï¿½ï¿½ï¿½ï¿½Æ½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ð¼­µï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
     public static DataManager Instance
     {
         get
         {
             if (instance == null)
             {
-                // ¾À¿¡ ¾øÀ¸¸é »õ·Î ¸¸µé¾î¼­¶óµµ ¹ÝÈ¯
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ï¿½ï¿½ ï¿½ï¿½È¯
                 GameObject go = new GameObject("DataManager");
                 instance = go.AddComponent<DataManager>();
             }
@@ -99,50 +99,59 @@ public class DataManager : MonoBehaviour
     {
         
     }
-    // GameData °ª Áõ°¡
+    // GameData ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void IncrementStage() => nowGame.stage++;
     public void IncrementPiece() => nowGame.piece++;
     public void IncrementInfo() => nowGame.info++;
 
-    // GameData °ª ¼³Á¤
+    // GameData ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void SetStage(int value) => nowGame.stage = value;
     public void SetPiece(int value) => nowGame.piece = value;
     public void SetInfo(int value) => nowGame.info = value;
 
-    // ÇöÀç °ª °¡Á®¿À±â (¼±ÅÃ »çÇ×)
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     public int GetStage() => nowGame.stage;
     public int GetPiece() => nowGame.piece;
     public int GetInfo() => nowGame.info;
 
     public void SaveData()
     {
-        Debug.Log($"ÇöÀç ÀúÀå ½½·Ô ¹øÈ£: {nowSlot}");
-        nowGame.totalSaveCount++;   // ÀúÀå È½¼ö Áõ°¡
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£: {nowSlot}");
+        nowGame.totalSaveCount++;   // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string PlayCode = nowGame.playCode;
-        // ¾Ö³Î¸®Æ½½º Àü¼Û
+        // ï¿½Ö³Î¸ï¿½Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         var eventData = new Dictionary<string, object> {
             { "PlayCode", PlayCode },
             { "SaveCount", nowGame.totalSaveCount },
             { "CurrentSlot", nowSlot }
         };
-        // ¾Õ¿¡ ÁÖ¼Ò(Unity.Services.Analytics.)¸¦ ¸íÈ®ÇÏ°Ô ºÙ¿©¼­ Ãæµ¹À» ÇÇÇÕ´Ï´Ù.
+        // ï¿½Õ¿ï¿½ ï¿½Ö¼ï¿½(Unity.Services.Analytics.)ï¿½ï¿½ ï¿½ï¿½È®ï¿½Ï°ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("player_save");
         foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
-        AnalyticsService.Instance.RecordEvent(myEvent);
-        AnalyticsService.Instance.Flush(); // Áï½Ã °­Á¦ Àü¼Û
+        try
+        {
+            AnalyticsService.Instance.RecordEvent(myEvent);
+            AnalyticsService.Instance.Flush();
+        }
+        catch (System.Exception error)
+        {
+            Debug.LogWarning($"Save analytics failed: {error.Message}");
+        }
 
-        //ÇÃ·¹ÀÌ¾î À§Ä¡ÀúÀå
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
-            nowGame.playerPosition = player.transform.position;
+            nowGame.playerPosition = CameraPivotRotator.Instance != null
+                ? CameraPivotRotator.Instance.ToSavePosition(player.transform.position)
+                : player.transform.position;
         }
 
         nowGame.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        int slot = nowSlot + 1; //  ½½·Ô ¹øÈ£¸¦ 1ºÎÅÍ ½ÃÀÛÇÏµµ·Ï Á¶Á¤
+        int slot = nowSlot + 1; //  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string datetime = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         string filename = $"{slot}_{PlayCode}_{datetime}.json";
-        string data = JsonUtility.ToJson(nowGame); //string°ª
+        string data = JsonUtility.ToJson(nowGame); //stringï¿½ï¿½
         Debug.Log(datetime); Debug.Log(filename); Debug.Log(path);
 
         File.WriteAllText(Path.Combine(path, filename), data);
@@ -186,13 +195,13 @@ public class DataManager : MonoBehaviour
         {
             string data = File.ReadAllText(file);
             nowGame = JsonUtility.FromJson<GameData>(data);
-            nowGame.totalLoadCount++; // ·Îµå È½¼ö Áõ°¡
+            nowGame.totalLoadCount++; // ï¿½Îµï¿½ È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             var eventData = new Dictionary<string, object> {
                 { "PlayCode", nowGame.playCode },
                 { "LoadCount", nowGame.totalLoadCount }
             };
-            // ¾Õ¿¡ ÁÖ¼Ò(Unity.Services.Analytics.)¸¦ ¸íÈ®ÇÏ°Ô ºÙ¿©¼­ Ãæµ¹À» ÇÇÇÕ´Ï´Ù.
+            // ï¿½Õ¿ï¿½ ï¿½Ö¼ï¿½(Unity.Services.Analytics.)ï¿½ï¿½ ï¿½ï¿½È®ï¿½Ï°ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
             Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("player_load");
             foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
             AnalyticsService.Instance.RecordEvent(myEvent);
@@ -204,7 +213,7 @@ public class DataManager : MonoBehaviour
 
         //string data = File.ReadAllText(path + nowSlot.ToString());
 
-        //nowGame = JsonUtility.FromJson<GameData>(data); //string°ª
+        //nowGame = JsonUtility.FromJson<GameData>(data); //stringï¿½ï¿½
     }
     public string FindLatestSaveFile(int slot)
     {
@@ -234,7 +243,7 @@ public class DataManager : MonoBehaviour
     public void StageClear(string nextSceneName)
     {
         string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        // ¾ÈÀüÀåÄ¡ 1: ¸ÞÀÎ¸Þ´º³ª Å¸ÀÌÆ²·Î µ¹¾Æ°¡´Â ·Îµå¾À È¤Àº Áö±ÝÀÖ´Â ¾ÀÀÎ °æ¿ì´Â ¾Ö³Î¸®Æ½½º ¼öÁý ¾È ÇÔ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ 1: ï¿½ï¿½ï¿½Î¸Þ´ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö³Î¸ï¿½Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
         if (currentSceneName == "MainMenu" || nextSceneName == "MainMenu" || nextSceneName == "Title")
         {
             return;
@@ -256,17 +265,17 @@ public class DataManager : MonoBehaviour
     };
         IncrementStage();
 
-        // ÃÖ½Å RecordEvent ¹æ½ÄÀ¸·Î ÀÌº¥Æ® ÀúÀå
+        // ï¿½Ö½ï¿½ RecordEvent ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("stage_clear");
         foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
         Unity.Services.Analytics.AnalyticsService.Instance.RecordEvent(myEvent);
 
-        // ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¡±â Àü ¹öÆÛ¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ Áï½Ã °­Á¦ Àü¼Û!
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
         Unity.Services.Analytics.AnalyticsService.Instance.Flush();
 
-        Debug.Log($"[Analytics] {game.stage}½ºÅ×ÀÌÁö Å¬¸®¾î µ¥ÀÌÅÍ °­Á¦ Flush ¿Ï·á: {elapsedSeconds}ÃÊ");
+        Debug.Log($"[Analytics] {game.stage}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Flush ï¿½Ï·ï¿½: {elapsedSeconds}ï¿½ï¿½");
 
-        // ´ÙÀ½ ½ºÅ×ÀÌÁöÀÇ Á¤È®ÇÑ ½Ã°£ ÃøÁ¤À» À§ÇØ Å¸ÀÓ½ºÅÆÇÁ¸¦ ÇöÀç ½Ã°£À¸·Î ÃÖ½ÅÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½È­
         game.startTimeStamp = System.DateTime.Now.ToString("o");
     }
 
@@ -274,7 +283,7 @@ public class DataManager : MonoBehaviour
     {
         if (nowGame == null) return;
 
-        // ¾ÈÀüÀåÄ¡: ÀüÃ¼ ½ÃÀÛ ½Ã°£ÀÌ ¸¸¾à ºñ¾îÀÖ´Ù¸é ¸Å ½ºÅ×ÀÌÁö ½ÃÀÛ ½Ã°£ÀÌ¶óµµ °¡Á®¿Í¼­ °è»ê
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡: ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½
         string targetStartTime = string.IsNullOrEmpty(nowGame.totalGameStartTime)
             ? nowGame.startTimeStamp
             : nowGame.totalGameStartTime;
@@ -282,12 +291,12 @@ public class DataManager : MonoBehaviour
         System.DateTime startTime = System.DateTime.Parse(targetStartTime);
         float totalPlayTimeSeconds = (float)(System.DateTime.Now - startTime).TotalSeconds;
 
-        // ¿£µù ½ÃÁ¡ÀÇ ÃÖÁ¾ µ¥ÀÌÅÍ¸¦ ±¸¼ºÇÕ´Ï´Ù. (Stage ´ë½Å "Ending" ¸í½Ã)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. (Stage ï¿½ï¿½ï¿½ "Ending" ï¿½ï¿½ï¿½ï¿½)
         var eventData = new Dictionary<string, object> {
             { "PlayCode", nowGame.playCode },
-            { "Stage", nowGame.stage -1 },              // Å¬¸®¾î ´ç½ÃÀÇ ½ºÅ×ÀÌÁö ¹øÈ£
+            { "Stage", nowGame.stage -1 },              // Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
             { "ClearType", "Demo_Total_Ending_Clear" },
-            { "TotalPlayTimeSeconds", totalPlayTimeSeconds } // ´º°ÔÀÓºÎÅÍ ¿£µù±îÁöÀÇ ÃÑ ´©Àû ½Ã°£!
+            { "TotalPlayTimeSeconds", totalPlayTimeSeconds } // ï¿½ï¿½ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½!
         };
 
         IncrementStage();
@@ -295,11 +304,11 @@ public class DataManager : MonoBehaviour
         foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
         Unity.Services.Analytics.AnalyticsService.Instance.RecordEvent(myEvent);
 
-        // ÃÖÁ¾ ¿£µùÀÌ¹Ç·Î ¹«Á¶°Ç Áï½Ã °­Á¦ Àü¼Û!
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
         Unity.Services.Analytics.AnalyticsService.Instance.Flush();
 
-        Debug.Log($"[Analytics] ÃÖÁ¾ ¿£µù Å¬¸®¾î µ¥ÀÌÅÍ °­Á¦ Flush ¿Ï·á: {totalPlayTimeSeconds}ÃÊ");
-        // ¿£µù ÀÌÈÄ¿¡ È¤½Ã ¸ð¸¦ ÀÚÀ¯ Çàµ¿ÀÌ³ª ¿¬ÃâÀ» ´ëºñÇØ Å¸ÀÓ½ºÅÆÇÁ ÃÖ½ÅÈ­
+        Debug.Log($"[Analytics] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Flush ï¿½Ï·ï¿½: {totalPlayTimeSeconds}ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½È­
         nowGame.startTimeStamp = System.DateTime.Now.ToString("o");
     }
 }

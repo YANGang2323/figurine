@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -53,7 +53,7 @@ public class Game : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if ((!InputLockManager.TransitionLock || transitionSaved != null) && Input.GetKeyDown(KeyCode.Escape)) {
             HandleEscape();
         }
         //if (nowstage == "1")
@@ -98,12 +98,43 @@ public class Game : MonoBehaviour
         //info.text = "코인 : " + DataManager.instance.nowGame.coin.ToString();
     }
 
+    private Action transitionSaved;
+    private Action transitionSaveCancelled;
+    private bool transitionOpenedMenu;
+
+    public void OpenTransitionSave(Action saved, Action cancelled)
+    {
+        transitionSaved = saved;
+        transitionSaveCancelled = cancelled;
+        transitionOpenedMenu = !ESCMenuUI.activeSelf;
+        ESCMenuUI.SetActive(true);
+        Save.SetActive(false);
+        SlotText();
+        OnClickOpenSaveUI();
+    }
+
     public void SaveBtn()
     {
-        DataManager.instance.SaveData();
+        try
+        {
+            DataManager.instance.SaveData();
+        }
+        catch (Exception error)
+        {
+            Debug.LogException(error);
+            return;
+        }
         SlotText();
         UISoundManager.Instance.PlayClick();
         Save.SetActive(false);
+        if (transitionSaved != null)
+        {
+            Action saved = transitionSaved;
+            transitionSaved = null;
+            transitionSaveCancelled = null;
+            SaveUI.SetActive(false);
+            saved();
+        }
 
     }
     public void inGameSlot(int number)	// 슬롯의 기능 구현
@@ -128,6 +159,9 @@ public class Game : MonoBehaviour
    
     public void OnClickBackToGame()
     {
+        if (transitionSaved != null)
+            return;
+
         ESCMenuUI.SetActive(false);
         UISoundManager.Instance.PlayClose();
 
@@ -137,6 +171,9 @@ public class Game : MonoBehaviour
     // 옵션 UI
     public void OnClickOpenOptionUI()
     {
+        if (transitionSaved != null)
+            return;
+
         UISoundManager.Instance.PlayClick();
 
         Debug.Log("옵션");
@@ -183,12 +220,23 @@ public class Game : MonoBehaviour
     }
     public void OnClickCloseSaveUI()
     {
+        Action cancelled = transitionSaveCancelled;
+        transitionSaved = null;
+        transitionSaveCancelled = null;
+        Save.SetActive(false);
         SaveUI.SetActive(false);
+        if (cancelled != null && transitionOpenedMenu)
+            ESCMenuUI.SetActive(false);
+        transitionOpenedMenu = false;
+        cancelled?.Invoke();
         UISoundManager.Instance.PlayClick();
     }
     
     public void OnClickBackToMenu()
     {
+        if (transitionSaved != null)
+            return;
+
         ESCMenuUI.SetActive(false);
         UISoundManager.Instance.PlayClose();
         InputLockManager.ESCMenuLock = false; // LockMove, LockInteraction, LockCamera 잠금 해제
@@ -204,8 +252,8 @@ public class Game : MonoBehaviour
 
         for (int i = 0; i < totalSlots; i++)
         {
-            slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
             if (slotButtons[i] == null) continue;
+            slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>(true);
             string latestFile = DataManager.instance.FindLatestSaveFile(i);
             if (slotText[i] == null) continue;
 
@@ -235,6 +283,15 @@ public class Game : MonoBehaviour
 
     private void HandleEscape()
     {
+        if (transitionSaved != null)
+        {
+            if (Save.activeSelf)
+                SaveDestr();
+            else
+                OnClickCloseSaveUI();
+            return;
+        }
+
         // 1. 옵션창이 열려 있으면 옵션창부터 닫음
         if (OptionUI.activeSelf)
         {
@@ -258,8 +315,7 @@ public class Game : MonoBehaviour
         // 3. 세이브 UI가 열려 있으면 닫음
         if (SaveUI.activeSelf)
         {
-            SaveUI.SetActive(false);
-            UISoundManager.Instance.PlayClose();
+            OnClickCloseSaveUI();
             return;
         }
 

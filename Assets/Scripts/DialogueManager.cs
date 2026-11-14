@@ -50,6 +50,10 @@ public class DialogueManager : MonoBehaviour
     private DialogueChoice[] pendingChoices;
     private bool waitingForChoice = false;
     private DialogueEvent currentChoiceEvent;
+    private DialogueData badEndOrigin;
+    private DialogueLine badEndChoiceLine;
+    private int badEndHistoryIndex;
+    private GameObject badEndOverlay;
 
     //스타일
     [Header("기본 텍스트 스타일")]
@@ -95,6 +99,8 @@ public class DialogueManager : MonoBehaviour
     bool isPlaying;
 
     public bool IsPlaying => isPlaying;
+    public bool EndedThisFrame => endedFrame == Time.frameCount;
+    private int endedFrame = -1;
 
 
     void Awake()
@@ -126,11 +132,11 @@ public class DialogueManager : MonoBehaviour
         if (!isPlaying)
             return;
 
-        if (choicePanel.activeSelf)
+        if (choicePanel.activeSelf || badEndOverlay != null)
             return;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F8))
+#if UNITY_EDITOR
+        if ((Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) && Input.GetKeyDown(KeyCode.Alpha1))
         {
             SkipToChoiceOrEnd();
             return;
@@ -156,6 +162,12 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
 
+            if (IsO3Gallery && detailPanel.activeInHierarchy && rightButton.gameObject.activeSelf)
+            {
+                NextDetail();
+                return;
+            }
+
             // 선택지 대기
             if (waitingForChoice)
             {
@@ -173,13 +185,22 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR
     private void SkipToChoiceOrEnd()
     {
         if (!waitingForChoice)
         {
             while (lines.Count > 0 && !lines.Peek().hasChoice)
-                lines.Dequeue();
+            {
+                DialogueLine skipped = lines.Dequeue();
+                if (skipped.hideBackground)
+                    backgroundImage.gameObject.SetActive(false);
+                else if (skipped.background != null)
+                {
+                    backgroundImage.sprite = skipped.background;
+                    backgroundImage.gameObject.SetActive(true);
+                }
+            }
 
             if (lines.Count == 0)
             {
@@ -491,6 +512,12 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        if (badEndOrigin != null && currentDialogue.dialogueID == "stage1_5_after_choice1")
+        {
+            ShowBadEnd();
+            return;
+        }
+
         DialogueData completedDialogue = currentDialogue;
         if (currentChoiceEvent != null)
         {
@@ -518,9 +545,80 @@ public class DialogueManager : MonoBehaviour
         panel.SetActive(false);
 
         isPlaying = false;
+        endedFrame = Time.frameCount;
         InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
         currentDialogue = null;
         DialogueCompleted?.Invoke(completedDialogue);
+        if (gameObject.scene.name == "Stage1" && completedDialogue?.dialogueID == "emblem_firstPiece")
+            CameraPivotRotator.Instance?.ArmTabTutorialHint(10f);
+    }
+
+    private void ShowBadEnd()
+    {
+        if (badEndOverlay != null)
+            return;
+
+        Canvas canvas = panel.GetComponentInParent<Canvas>();
+        Transform screen = canvas != null ? canvas.transform.Find("Bad End Screen") : null;
+        if (screen == null)
+            screen = transform.Find("Bad End Screen");
+
+        badEndOverlay = screen.gameObject;
+        StartCoroutine(FadeToBadEnd());
+    }
+
+    private IEnumerator FadeToBadEnd()
+    {
+        var background = badEndOverlay.GetComponent<Image>();
+        Transform content = badEndOverlay.transform.Find("Ending Content");
+        content.gameObject.SetActive(false);
+        Color black = background.color;
+        background.color = new Color(black.r, black.g, black.b, 0f);
+        dialogueText.gameObject.SetActive(false);
+        speakerText.gameObject.SetActive(false);
+        badEndOverlay.SetActive(true);
+
+        const float duration = 0.4f;
+        for (float time = 0f; time < duration; time += Time.unscaledDeltaTime)
+        {
+            background.color = Color.Lerp(new Color(black.r, black.g, black.b, 0f), black, time / duration);
+            yield return null;
+        }
+
+        background.color = black;
+        panel.SetActive(false);
+        content.gameObject.SetActive(true);
+        Button retry = content.GetComponentInChildren<Button>();
+        retry.onClick.RemoveListener(ReturnToBadEndChoice);
+        retry.onClick.AddListener(ReturnToBadEndChoice);
+        retry.Select();
+    }
+
+    private void ReturnToBadEndChoice()
+    {
+        badEndOverlay.SetActive(false);
+        badEndOverlay = null;
+        choiceHistory.RemoveAt(badEndHistoryIndex);
+        currentChoiceEvent = null;
+        currentDialogue = badEndOrigin;
+        badEndOrigin = null;
+        lines.Clear();
+        bool afterChoice = false;
+        foreach (DialogueLine line in currentDialogue.lines)
+        {
+            if (afterChoice || line == badEndChoiceLine)
+                lines.Enqueue(line);
+            if (line == badEndChoiceLine)
+                afterChoice = true;
+        }
+        badEndChoiceLine = null;
+
+        panel.SetActive(true);
+        dialogueText.gameObject.SetActive(true);
+        ShowNextLine();
+        FinishTyping();
+        waitingForChoice = false;
+        ShowChoiceUI(pendingChoices);
     }
 
     void ShowDetail()
@@ -547,6 +645,31 @@ public class DialogueManager : MonoBehaviour
         RefreshDetail();
     }
 
+    private bool IsO3Gallery =>
+        currentDialogue?.dialogueID == "O3" || currentDialogue?.dialogueID == "O3_repeat";
+
+    private void SetDetailArrowStyle(Button button)
+    {
+        if (!arrowStyles.TryGetValue(button, out var style))
+        {
+            style = (button.transform.localScale, button.colors, button.image.color);
+            arrowStyles.Add(button, style);
+        }
+
+        button.transform.localScale = IsO3Gallery ? style.scale * 1.35f : style.scale;
+        var colors = style.colors;
+        if (IsO3Gallery)
+        {
+            colors.normalColor = Color.white;
+            colors.highlightedColor = Color.white;
+            colors.selectedColor = Color.white;
+        }
+        button.colors = colors;
+        button.image.color = IsO3Gallery ? Color.white : style.tint;
+    }
+
+    private readonly Dictionary<Button, (Vector3 scale, ColorBlock colors, Color tint)> arrowStyles = new();
+
     void RefreshDetail()
     {
         detailImage.sprite = detailSprites[currentDetailIndex];
@@ -572,6 +695,8 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        SetDetailArrowStyle(leftButton);
+        SetDetailArrowStyle(rightButton);
         leftButton.gameObject.SetActive(hasLeft);
         rightButton.gameObject.SetActive(hasRight);
     }
@@ -708,6 +833,14 @@ public class DialogueManager : MonoBehaviour
         pendingChoices = null;
         waitingForChoice = false;
 
+        if (currentDialogue.dialogueID == "STAGE1.5 Scene" &&
+            choice.nextDialogue != null && choice.nextDialogue.dialogueID == "stage1_5_after_choice1")
+        {
+            badEndOrigin = currentDialogue;
+            badEndChoiceLine = currentLine;
+            badEndHistoryIndex = choiceHistory.Count;
+        }
+
         choiceHistory.Add(new ChoiceRecord()
         {
             tag = choice.tag,
@@ -765,15 +898,12 @@ public class DialogueManager : MonoBehaviour
 
             case DialogueEventType.LoadScene:
 
-                DataManager.Instance.nowGame.sceneName =
-                    dialogueEvent.sceneName;
-
-                DataManager.Instance.nowGame.playerPosition =
-                    dialogueEvent.spawnPosition;
-                //로드씬 함수를 실행하기 직전에 애널리틱스 호출 (가려는 씬 이름을 던져줌)
-                DataManager.Instance.StageClear(dialogueEvent.sceneName);
-
-                SceneManager.LoadScene(dialogueEvent.sceneName);
+                StageChanger.RequestTransition(dialogueEvent.sceneName, () =>
+                {
+                    DataManager.Instance.nowGame.sceneName = dialogueEvent.sceneName;
+                    DataManager.Instance.nowGame.playerPosition = dialogueEvent.spawnPosition;
+                    DataManager.Instance.StageClear(dialogueEvent.sceneName);
+                });
 
                 break;
 

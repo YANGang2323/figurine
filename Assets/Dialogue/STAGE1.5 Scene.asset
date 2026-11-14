@@ -1543,7 +1543,7 @@ MonoBehaviour:
     choices:
     - text: "\uB2EC\uB824\uC624\uB294 \uC0AC\uB78C\uB4E4\uC5D0\uAC8C \uC124\uBA85\uD574
         \uBCF8\uB2E4."
-      nextDialogue: {fileID: 11400000, guid: 7e113d5deaed1434abd0b83c2309ecca, type: 2}
+      nextDialogue: {fileID: 11400000, guid: 96d4d75c8fb2ced4fb338ea550195b73, type: 2}
       eventData:
         type: 0
         targetIDs: []

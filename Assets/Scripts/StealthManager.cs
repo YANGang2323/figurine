@@ -19,7 +19,7 @@ public class StealthManager : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Respawn È£Ãâ");
+        Debug.Log("Respawn È£ï¿½ï¿½");
         if (isRespawning)
             return;
 
@@ -28,16 +28,16 @@ public class StealthManager : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
-        Debug.Log("RespawnRoutine ½ÃÀÛ");
+        Debug.Log("RespawnRoutine ï¿½ï¿½ï¿½ï¿½");
         isRespawning = true;
 
         InputLockManager.DialogueLock = true;
 
-        // ¾ÏÀü
+        // ï¿½ï¿½ï¿½ï¿½
         yield return screenFader.FadeOut(fadeTime);
-        Debug.Log("¾ÏÀü ¿Ï·á");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
         player.position = currentCheckpoint.position;
-        Debug.Log("ÇÃ·¹ÀÌ¾î ÀÌµ¿");
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ìµï¿½");
         Rigidbody rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -51,21 +51,20 @@ public class StealthManager : MonoBehaviour
 
         yield return null;
 
-        // ¹à¾ÆÁü
+        // ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return screenFader.FadeIn(fadeTime);
-        Debug.Log("ÆäÀÌµåÀÎ ¿Ï·á");
-        player.position = currentCheckpoint.position;
+        Debug.Log("ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
         InputLockManager.DialogueLock = false;
         isRespawning = false;
 
         foreach (var cctv in FindObjectsOfType<CCTVController>())
             cctv.ResetDetection();
 
-        //¿¬¼ÓµÈ °ÔÀÓ¿À¹ö ÈÄ ÆÁ Ç¥½Ã
+        //ï¿½ï¿½ï¿½Óµï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½
         if (CCTVController.pendingCaptionTip != null)
         {
             DialogueData tip = CCTVController.pendingCaptionTip;
-            CCTVController.pendingCaptionTip = null;   // ¸ÕÀú ºñ¿ö¼­ Áßº¹ Àç»ý ¹æÁö
+            CCTVController.pendingCaptionTip = null;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             while (DialogueManager.Instance.IsPlaying) yield return null;
             DialogueManager.Instance.StartDialogue(tip);
         }

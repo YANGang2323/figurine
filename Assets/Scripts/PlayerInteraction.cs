@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // »óÈ£ÀÛ¿ë UI
+    // ï¿½ï¿½È£ï¿½Û¿ï¿½ UI
     public GameObject interactionUI;
 
-    // UI ÀÌµ¿ ¼Óµµ
+    // UI ï¿½Ìµï¿½ ï¿½Óµï¿½
     public float uiFollowSpeed = 10f;
 
-    // ±ÙÃ³ »óÈ£ÀÛ¿ë °¡´ÉÇÑ ¹°Ã¼µé
+    // ï¿½ï¿½Ã³ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½
     private List<InteractableObject> nearbyObjects =
         new List<InteractableObject>();
 
-    // ÇöÀç °¡Àå °¡±î¿î ¹°Ã¼
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     private InteractableObject closestObject;
 
-    // ÀÌÀü¿¡ ¼±ÅÃµÈ ¹°Ã¼
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½Ã¼
     private InteractableObject previousObject;
 
     void Start()
     {
-        // ½ÃÀÛ ½Ã UI ¼û±â±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½
         interactionUI.SetActive(false);
     }
 
@@ -32,7 +32,7 @@ public class PlayerInteraction : MonoBehaviour
             interactionUI.SetActive(false);
             return;
         }
-        // È¸Àü ´ÙÇÏ°í ui¶ß°Ô
+        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ uiï¿½ß°ï¿½
         if (CameraPivotRotator.Instance != null &&
             CameraPivotRotator.Instance.IsRotating)
         {
@@ -40,16 +40,16 @@ public class PlayerInteraction : MonoBehaviour
             previousObject = null;
             return;
         }
-        // °¡Àå °¡±î¿î ¹°Ã¼ Ã£±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ Ã£ï¿½ï¿½
         FindClosestObject();
 
-        // °¡±î¿î ¹°Ã¼°¡ ÀÖÀ» °æ¿ì
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (closestObject != null)
         {
-            // UI Ç¥½Ã
+            // UI Ç¥ï¿½ï¿½
             interactionUI.SetActive(true);
 
-            // interactionPoint À§Ä¡ °¡Á®¿À±â
+            // interactionPoint ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Vector3 worldPosition;
 
             if (closestObject.interactionPoint != null)
@@ -61,11 +61,11 @@ public class PlayerInteraction : MonoBehaviour
                 worldPosition = closestObject.transform.position;
             }
 
-            // ¿ùµå ÁÂÇ¥ ¡æ È­¸é ÁÂÇ¥ º¯È¯
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½È¯
             Vector3 screenPosition =
                 Camera.main.WorldToScreenPoint(worldPosition);
 
-            // Ä«¸Þ¶ó ¾Õ¿¡ ÀÖÀ» ¶§¸¸ Ç¥½Ã
+            // Ä«ï¿½Þ¶ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
             if (screenPosition.z > 0)
             {
                 float margin = 80f;
@@ -79,7 +79,7 @@ public class PlayerInteraction : MonoBehaviour
                     margin,
                     Screen.height - margin);
 
-                // ´Ù¸¥ ¹°Ã¼·Î º¯°æµÇ¾úÀ¸¸é Áï½Ã ÀÌµ¿
+                // ï¿½Ù¸ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                 if (closestObject != previousObject)
                 {
                     interactionUI.transform.position = screenPosition;
@@ -87,7 +87,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 else
                 {
-                    // °°Àº ¹°Ã¼¸é ºÎµå·´°Ô ÀÌµ¿
+                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Îµå·´ï¿½ï¿½ ï¿½Ìµï¿½
                     interactionUI.transform.position =
                         Vector3.Lerp(
                             interactionUI.transform.position,
@@ -101,7 +101,7 @@ public class PlayerInteraction : MonoBehaviour
                 interactionUI.SetActive(false);
             }
 
-            // E Å° ÀÔ·Â
+            // E Å° ï¿½Ô·ï¿½
             if (Input.GetKeyDown(KeyCode.E)
             && !InputLockManager.LockInteraction
             && !DialogueManager.Instance.IsPlaying)
@@ -111,10 +111,10 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            // °¡±î¿î ¹°Ã¼°¡ ¾øÀ¸¸é UI ¼û±â±â
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½
             interactionUI.SetActive(false);
 
-            // ÀÌÀü ¹°Ã¼ ÃÊ±âÈ­
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ê±ï¿½È­
             previousObject = null;
         }
     }
@@ -131,20 +131,20 @@ public class PlayerInteraction : MonoBehaviour
         {
             InteractableObject obj = nearbyObjects[i];
 
-            // »èÁ¦µÇ¾ú°Å³ª ºñÈ°¼ºÈ­µÇ¾úÀ¸¸é ¸®½ºÆ®¿¡¼­ Á¦°Å
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Å³ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (obj == null || !obj.gameObject.activeInHierarchy)
             {
                 nearbyObjects.RemoveAt(i);
                 continue;
             }
-            // »óÈ£ÀÛ¿ë ºÒ°¡ÇÑ ¿ÀºêÁ§Æ® ¿¹¿Ü Ã³¸® ÀÎÅÍ·¢¼Ç¿ÀºêÁ§Æ®ÀÇ IsAvailable()
+            // ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ IsAvailable()
             if (!obj.IsAvailable())
                 continue;
-            // °Å¸® °è»ê
+            // ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
             float distance = Vector3.Distance(
                 transform.position,
                 obj.transform.position);
-            // ´õ °¡±î¿î ¹°Ã¼ ¹ß°ß ½Ã ±³Ã¼
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -153,14 +153,28 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    private static bool HasInteractionTrigger(Collider other)
+    {
+        foreach (Collider collider in other.GetComponents<Collider>())
+        {
+            if (collider.enabled && collider.isTrigger)
+                return true;
+        }
+
+        return false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.isTrigger && HasInteractionTrigger(other))
+            return;
+
         InteractableObject interactable =
             other.GetComponent<InteractableObject>();
 
         if (interactable != null)
         {
-            // Áßº¹ Ãß°¡ ¹æÁö
+            // ï¿½ßºï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (!nearbyObjects.Contains(interactable))
             {
                 nearbyObjects.Add(interactable);
@@ -170,6 +184,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!other.isTrigger && HasInteractionTrigger(other))
+            return;
+
         InteractableObject interactable =
             other.GetComponent<InteractableObject>();
 

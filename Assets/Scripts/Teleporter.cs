@@ -2,65 +2,69 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    [Header("텔레포트 설정")]
-    [Tooltip("플레이어가 이동할 목적지 텔레포터 오브젝트를 연결하세요.")]
     public Transform destination;
-
-    [Tooltip("이 포털이 활성화되어 이동 가능한지 여부")]
     public bool isLinkActive = true;
 
-    private bool isPlayerInside = false;
-    private GameObject playerObject;
+    [SerializeField] private bool arrivalSideView;
+    [SerializeField] private float arrivalHeightOffset;
 
-    private void Update()
+    public static bool TryTeleport(Transform player, CameraPivotRotator camera)
     {
-        // 플레이어가 콜라이더 안에 있고, Tab 키를 눌렀을 때
-        if (isPlayerInside && Input.GetKeyDown(KeyCode.Tab))
+        if (player == null || !player.TryGetComponent(out Rigidbody body))
+            return false;
+
+        Collider[] playerColliders = body.GetComponents<Collider>();
+        Teleporter source = null;
+        float closestDistance = float.PositiveInfinity;
+
+        foreach (Teleporter portal in FindObjectsByType<Teleporter>(FindObjectsSortMode.None))
         {
-            Teleport();
-        }
-    }
+            if (!portal.isActiveAndEnabled || !portal.isLinkActive || portal.destination == null ||
+                !portal.destination.TryGetComponent(out Teleporter _) ||
+                !portal.TryGetComponent(out Collider trigger) || !trigger.enabled)
+                continue;
 
-    private void Teleport()
-    {
-        // 목적지가 없거나, 링크가 비활성화된 경우(일방향 출구용) 작동 안 함
-        if (destination == null || !isLinkActive)
+            float distance = (portal.transform.position - body.position).sqrMagnitude;
+            if (distance >= closestDistance)
+                continue;
+
+            foreach (Collider collider in playerColliders)
+            {
+                if (!collider.enabled || collider.isTrigger)
+                    continue;
+
+                if (Physics.ComputePenetration(
+                    collider, body.position, body.rotation,
+                    trigger, trigger.transform.position, trigger.transform.rotation, out _, out _))
+                {
+                    source = portal;
+                    closestDistance = distance;
+                    break;
+                }
+            }
+        }
+
+        if (source == null)
+            return false;
+
+        Teleporter exit = source.destination.GetComponent<Teleporter>();
+        Vector3 arrival = exit.transform.position + Vector3.up * exit.arrivalHeightOffset;
+        if (camera.UsesMapRotation)
         {
-            Debug.LogWarning($"{gameObject.name}: 목적지가 지정되지 않았거나 비활성화된 링크입니다.");
-            return;
+            camera.TurnThroughPortal(exit.arrivalSideView, arrival);
+            return true;
         }
 
-        if (playerObject != null)
+        if (!body.isKinematic)
         {
-            // CharacterController가 있으면 텔레포트 시 오작동하므로 잠시 껐다 켭니다
-            CharacterController cc = playerObject.GetComponent<CharacterController>();
-            if (cc != null) cc.enabled = false;
-
-            // 플레이어 위치를 목적지 텔레포터의 위치로 이동
-            playerObject.transform.position = destination.position;
-
-            if (cc != null) cc.enabled = true;
-
-            Debug.Log($"{playerObject.name}이(가) {destination.name}(으)로 순간이동했습니다.");
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // 충돌한 오브젝트가 플레이어인지 확인 (태그가 "Player"여야 합니다)
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = true;
-            playerObject = other.gameObject;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = false;
-            playerObject = null;
-        }
+        Vector3 playerFraming = camera.CapturePlayerFraming();
+        body.position = arrival;
+        Physics.SyncTransforms();
+        camera.RestorePortalView(exit.arrivalSideView, playerFraming);
+        return true;
     }
 }

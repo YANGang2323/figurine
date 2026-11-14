@@ -33,10 +33,14 @@ public class FallingLightHazard : MonoBehaviour
 
     void Awake()
     {
-        homePosition = lightObject.position;
-        homeRotation = lightObject.rotation;
+        homePosition = lightObject.localPosition;
+        homeRotation = lightObject.localRotation;
         renderers = lightObject.GetComponentsInChildren<Renderer>();
     }
+
+    private Vector3 HomeWorldPosition => lightObject.parent != null
+        ? lightObject.parent.TransformPoint(homePosition)
+        : homePosition;
 
     public Bounds LightBounds
     {
@@ -65,19 +69,22 @@ public class FallingLightHazard : MonoBehaviour
         subscribedPivot = director.Pivot;
         subscribedPivot.ViewTurnStarted += OnViewTurnStarted;
         CurrentState = State.Shaking;
+        if (teachTab && !director.TutorialSeen)
+            director.FrameLight(this);
         elapsed = 0;
     }
 
     void Update()
     {
         if (director.Busy || InputLockManager.ESCMenuLock) return;
+
         if (CurrentState == State.Shaking)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / shakeDuration);
-            lightObject.rotation = homeRotation * Quaternion.Euler(0, 0,
+            lightObject.localRotation = homeRotation * Quaternion.Euler(0, 0,
                 Mathf.Sin(t * Mathf.PI * 4) * shakeAngle * Mathf.Sin(t * Mathf.PI));
-            if (t >= 1) { lightObject.rotation = homeRotation; CurrentState = State.WaitingBelow; }
+            if (t >= 1) { lightObject.localRotation = homeRotation; CurrentState = State.WaitingBelow; }
         }
         if (CurrentState == State.WaitingBelow)
         {
@@ -107,7 +114,7 @@ public class FallingLightHazard : MonoBehaviour
             director.FrameLight(this);
         }
         elapsed += Time.deltaTime;
-        lightObject.position = homePosition + Vector3.down * (0.5f * gravity * elapsed * elapsed);
+        lightObject.position = HomeWorldPosition + Vector3.down * (0.5f * gravity * elapsed * elapsed);
         // A low fixture can reach the head before the normal pause delay.
         // Always show the first tutorial BEFORE evaluating a hit.
         if (teachTab && !director.TutorialSeen &&
@@ -188,7 +195,7 @@ public class FallingLightHazard : MonoBehaviour
     public void ResetForRetry()
     {
         UnsubscribeTurn();
-        lightObject.SetPositionAndRotation(homePosition, homeRotation);
+        lightObject.SetLocalPositionAndRotation(homePosition, homeRotation);
         CurrentState = State.Ready;
         elapsed = 0;
         headChecked = false;

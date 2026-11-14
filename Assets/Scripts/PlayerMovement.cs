@@ -4,202 +4,124 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider standingCollider;
     [SerializeField] private CapsuleCollider crouchCollider;
-    private bool isCrouching = false;
     public bool canMove = true;
-        
+
     public float moveSpeed;
     public Animator animator;
-    float h = 0;
-    float v = 0;
     private Vector3 moveDir = Vector3.zero;
     private Rigidbody rb;
-    private bool isGrounded = true;
-
-    [SerializeField] private float obstacleCheckDistance = 0.2f;
-    [SerializeField] private LayerMask obstacleLayers;
+    private bool jumpRequested;
 
     [Header("Jump Settings")]
     public bool canJump = true;
-    
-
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask jumpableLayers;
 
     [Header("Run & Rotation Settings")]
     public bool runable;
-    public float runSpeedMultiplier = 1.5f; 
-    private float currentSpeed; 
+    public float runSpeedMultiplier = 1.5f;
+    private float currentSpeed;
     public float rotationOffsetA = 90f;
-    public float rotationOffsetD = -90f; 
+    public float rotationOffsetD = -90f;
 
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        InputLockManager.OnLock += StopMotion;
-        Vector3 camDirection = Camera.main.transform.position - transform.position;
-        camDirection.y = 0; 
-        if (camDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(camDirection);
-            Vector3 currentEuler = transform.eulerAngles;
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
-        }
-    }
-
-    void Start()
-    {
         animator = GetComponent<Animator>();
-        standingCollider.enabled = true;
-        crouchCollider.enabled = false;
+        animator.applyRootMotion = false;
+        rb.freezeRotation = true;
+        if (!rb.isKinematic)
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        if (standingCollider != null)
+            standingCollider.enabled = true;
+        if (crouchCollider != null)
+            crouchCollider.enabled = false;
+
+        InputLockManager.OnLock += StopMotion;
     }
 
     void Update()
     {
-        if (InputLockManager.LockMove)
+        if (InputLockManager.LockMove || !canMove)
         {
             moveDir = Vector3.zero;
-            currentSpeed = 0f;
+            jumpRequested = false;
             animator.SetInteger("MoveState", 0);
             return;
         }
 
+        bool sideView = CameraPivotRotator.Instance != null && CameraPivotRotator.Instance.isSideView;
+        bool fixedView = CameraPivotRotator.Instance != null && CameraPivotRotator.Instance.UsesMapRotation;
+        Vector3 left = sideView && !fixedView ? Vector3.back : Vector3.right;
         moveDir = Vector3.zero;
-        h = 0;
-        v = 0;
+        if (InputManager.instance.GetKey(KeyCode.A))
+            moveDir = left;
+        else if (InputManager.instance.GetKey(KeyCode.D))
+            moveDir = -left;
 
-        currentSpeed = moveSpeed;
+        if (canJump && InputManager.instance.GetKeyDown(KeyCode.Space))
+            jumpRequested = true;
 
-        if (!CameraPivotRotator.Instance.isSideView)
-        {
-            if (InputManager.instance.GetKey(KeyCode.A))
-            { 
-                moveDir = Vector3.right;
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
-            }
-            else if (InputManager.instance.GetKey(KeyCode.D))
-            {
-                moveDir = Vector3.left;
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
-            }
-        }
-        else
-        {
-            if (InputManager.instance.GetKey(KeyCode.A))
-            {
-                moveDir = Vector3.back;
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
-            }
-            else if (InputManager.instance.GetKey(KeyCode.D))
-            {
-                moveDir = Vector3.forward;
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
-            }
-        }
-        CheckGrounded();
-
-        if (canJump &&
-        isGrounded &&
-        InputManager.instance.GetKeyDown(KeyCode.Space))
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            EnterCrouch();
-        }
-        else
-        {
-            ExitCrouch();
-        }
-
-        int currentState = 0;
-        
-        if (moveDir != Vector3.zero)
-        {
-            currentState = 1;
-
-            if (Input.GetKey(KeyCode.LeftShift) & runable == true)
-            {
-                currentState = 2;
-                currentSpeed = moveSpeed * runSpeedMultiplier; 
-            }
-            else if (Input.GetKey(KeyCode.LeftControl))
-            {
-                currentState = 4;
-                currentSpeed = moveSpeed * 0.5f;
-            }
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                currentState = 3;
-            }
-            else
-            {
-                currentState = 0; 
-            }
-        }
-        animator.SetInteger("MoveState", currentState);
+        bool isMoving = moveDir != Vector3.zero;
+        bool isRunning = isMoving && runable && Input.GetKey(KeyCode.LeftShift);
+        currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
+        animator.SetInteger("MoveState", isRunning ? 2 : isMoving ? 1 : 0);
     }
 
     void FixedUpdate()
     {
-        if (InputLockManager.LockMove)
-            return;
-        if (moveDir == Vector3.zero)
+        if (rb.isKinematic)
             return;
 
-        // 점프가 불가능한 플레이어만 벽 체크
-        if (!canJump)
+        bool movementLocked = InputLockManager.LockMove || !canMove;
+        Vector3 horizontalVelocity = movementLocked ? Vector3.zero : moveDir * currentSpeed;
+        float verticalVelocity = rb.linearVelocity.y;
+
+        if (!movementLocked && canJump && jumpRequested && IsGrounded())
+            verticalVelocity = jumpForce;
+
+        jumpRequested = false;
+
+        // Stop before pushing a rounded capsule up a wall or prop.
+        if (horizontalVelocity != Vector3.zero &&
+            rb.SweepTest(horizontalVelocity.normalized, out RaycastHit hit,
+                horizontalVelocity.magnitude * Time.fixedDeltaTime, QueryTriggerInteraction.Ignore) &&
+            hit.normal.y < 0.65f)
         {
-            Vector3 origin1 = rb.position + Vector3.up * 0.2f;
-            Vector3 origin2 = rb.position + Vector3.up * 0.8f;
-
-            bool blocked =
-                Physics.Raycast(origin1, moveDir.normalized, obstacleCheckDistance, obstacleLayers) ||
-                Physics.Raycast(origin2, moveDir.normalized, obstacleCheckDistance, obstacleLayers);
-
-            if (blocked)
-                return;
+            float safeDistance = Mathf.Max(0f, hit.distance - Physics.defaultContactOffset);
+            horizontalVelocity = horizontalVelocity.normalized * (safeDistance / Time.fixedDeltaTime);
         }
 
-        Vector3 newPos = rb.position + moveDir * currentSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(newPos);
+        Vector3 velocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
+        if (rb.linearVelocity != velocity)
+            rb.linearVelocity = velocity;
     }
 
     void LateUpdate()
     {
-        //transform.LookAt(Camera.main.transform);
-        Vector3 lookDirection = Camera.main.transform.position - transform.position;
-        lookDirection.y = 0; 
+        Camera camera = Camera.main;
+        if (camera == null)
+            return;
 
-        if (lookDirection.sqrMagnitude > 0.001f) 
+        Vector3 lookDirection = camera.transform.position - transform.position;
+        lookDirection.y = 0f;
+        if (lookDirection.sqrMagnitude <= 0.001f)
+            return;
+
+        float offset = 0f;
+        if (!InputLockManager.LockMove && canMove)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-
-            float yOffset = 0f;
-            if (!InputLockManager.LockMove)
-            {
-                if (InputManager.instance.GetKey(KeyCode.A))
-                {
-                    yOffset = rotationOffsetA; // 90도
-                }
-                else if (InputManager.instance.GetKey(KeyCode.D))
-                {
-                    yOffset = rotationOffsetD; // -90도
-                }
-            }
-
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + yOffset, 0f);
+            if (InputManager.instance.GetKey(KeyCode.A))
+                offset = rotationOffsetA;
+            else if (InputManager.instance.GetKey(KeyCode.D))
+                offset = rotationOffsetD;
         }
+
+        float yaw = Quaternion.LookRotation(lookDirection).eulerAngles.y;
+        transform.rotation = Quaternion.Euler(0f, yaw + offset, 0f);
     }
 
     void OnDestroy()
@@ -210,45 +132,16 @@ public class PlayerMovement : MonoBehaviour
     void StopMotion()
     {
         moveDir = Vector3.zero;
+        jumpRequested = false;
 
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        Vector3 lookDirection = Camera.main.transform.position - transform.position;
-        lookDirection.y = 0f;
-
-        if (lookDirection.sqrMagnitude > 0.001f)
-        {
-            transform.rotation = Quaternion.LookRotation(lookDirection);
-        }
+        if (!rb.isKinematic)
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
     }
 
-    void EnterCrouch(){
-        if (isCrouching) return;
-        isCrouching = true;
-
-        standingCollider.enabled = false;
-        crouchCollider.enabled = true;
-    }
-    void ExitCrouch(){
-        if (!isCrouching) return;
-        isCrouching = false;
-
-        crouchCollider.enabled = false;
-        standingCollider.enabled = true;
-    }
-    private void CheckGrounded()
+    private bool IsGrounded()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.1f; // �ణ ������ ��
-        isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, jumpableLayers);
+        Vector3 origin = rb.position + Vector3.up * 0.1f;
+        return Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f,
+            jumpableLayers, QueryTriggerInteraction.Ignore);
     }
-
-    ////�ٴ� ���� ����
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = true;
-    //    }
-    //}
 }

@@ -10,16 +10,19 @@ public class FallingLightDirector : MonoBehaviour
     public CanvasGroup tutorialOverlay;
     public float fadeDuration = 0.45f;
     public float returnDuration = 0.8f;
+    [Min(0f)] public float tutorialLandingHold = 0.9f;
     public Transform Player { get; private set; }
     public CameraPivotRotator Pivot { get; private set; }
     public Camera ViewCamera { get; private set; }
     public bool Busy { get; private set; }
+    private float retryGraceUntil;
     public bool TutorialSeen => HasFlag("light_tab_tutorial_completed");
     public int DeathCount { get; private set; }
     FallingLightHazard active;
     FallingLightHazard shot;
     bool returning;
     float returnTime;
+    float landingHoldRemaining;
     Vector3 shotPosition;
     float shotHeight;
     const string ReminderFlag = "light_hit_reminder_seen";
@@ -33,7 +36,7 @@ public class FallingLightDirector : MonoBehaviour
 
     public bool TryClaim(FallingLightHazard hazard, Transform player)
     {
-        if (Busy || (active != null && active != hazard)) return false;
+        if (Busy || Time.time < retryGraceUntil || (active != null && active != hazard)) return false;
         active = hazard;
         Player = player;
         Pivot = CameraPivotRotator.Instance;
@@ -75,18 +78,25 @@ public class FallingLightDirector : MonoBehaviour
 
     public void FrameLight(FallingLightHazard hazard)
     {
-        if (shot == null) shotHeight = Pivot.transform.position.y;
+        if (shot == null)
+        {
+            shotHeight = Pivot.transform.position.y;
+        }
         shot = hazard;
+        landingHoldRemaining = 0f;
         returning = false;
     }
 
     public void Finished(FallingLightHazard hazard)
     {
         if (active == hazard) active = null;
+        if (hazard.teachTab && shot != hazard)
+            FrameLight(hazard);
         if (shot == hazard)
         {
             returning = true;
-            returnTime = -0.4f;
+            returnTime = 0f;
+            landingHoldRemaining = hazard.teachTab ? tutorialLandingHold : 0.4f;
             shotPosition = Pivot.transform.position;
         }
     }
@@ -94,23 +104,56 @@ public class FallingLightDirector : MonoBehaviour
     void LateUpdate()
     {
         if (shot == null || Pivot == null || !Pivot.gameObject.activeInHierarchy || Busy) return;
-        if (returning)
+        if (returning && landingHoldRemaining <= 0f)
         {
             returnTime += Time.deltaTime;
             float t = Mathf.SmoothStep(0, 1, Mathf.Clamp01(returnTime / returnDuration));
             Vector3 position = Vector3.Lerp(shotPosition, Pivot.transform.position, t);
             position.y = shotHeight;
-            Pivot.transform.position = position;
+            if (shot.teachTab && Pivot.UsesMapRotation)
+                Pivot.transform.position = position;
+            else
+                ApplyShotPosition(position);
             if (t >= 1) shot = null;
             return;
         }
+        bool holdingLanding = returning && landingHoldRemaining > 0f;
         Bounds bounds = shot.LightBounds;
-        bounds.Encapsulate(Player.position);
-        bounds.Encapsulate(new Vector3(Player.position.x, PlayerHeadHeight + 0.25f, Player.position.z));
+        bool showLandedLight = holdingLanding && shot.teachTab;
+        if (!showLandedLight)
+        {
+            bounds.Encapsulate(Player.position);
+            bounds.Encapsulate(new Vector3(Player.position.x, PlayerHeadHeight + 0.25f, Player.position.z));
+        }
         // Reframe horizontally only; falling geometry must never pull the camera down.
         Vector3 center = bounds.center;
         center.y = shotHeight;
-        Pivot.transform.position = center;
+        if (Pivot.UsesMapRotation)
+        {
+            Vector3 baseline = Pivot.transform.position;
+            center = baseline + Vector3.Project(center - baseline, ViewCamera.transform.right);
+            center.y = shotHeight;
+            if (showLandedLight)
+                Pivot.transform.position = Vector3.Lerp(shotPosition, center, Time.deltaTime * 10f);
+            else
+                ApplyShotPosition(center);
+        }
+        else
+            ApplyShotPosition(center);
+
+        if (holdingLanding)
+        {
+            shotPosition = Pivot.transform.position;
+            landingHoldRemaining -= Time.deltaTime;
+        }
+    }
+
+    private void ApplyShotPosition(Vector3 position)
+    {
+        if (Pivot.UsesMapRotation)
+            Pivot.FrameMapPuzzle(position);
+        else
+            Pivot.transform.position = position;
     }
 
     public void Hit(FallingLightHazard hazard)
@@ -126,7 +169,7 @@ public class FallingLightDirector : MonoBehaviour
         // Snapshot the victim and destination before any dialogue/trigger can change state.
         Transform hitPlayer = Player;
         CameraPivotRotator hitPivot = Pivot;
-        Vector3 respawnPosition = hazard.checkpoint.position;
+        Vector3 respawnPosition;
         Rigidbody body = hitPlayer.GetComponent<Rigidbody>();
         bool wasKinematic = body != null && body.isKinematic;
         HideTutorial();
@@ -153,23 +196,15 @@ public class FallingLightDirector : MonoBehaviour
                 }
                 body.isKinematic = true;
             }
+            hitPivot.RestoreView(hazard.EntrySideView);
+            respawnPosition = FindClearRespawn(hitPlayer, hazard.checkpoint.position, hitPivot.transform.right);
             hitPlayer.position = respawnPosition;
             if (body != null) body.position = respawnPosition;
-            hitPivot.RestoreView(hazard.EntrySideView);
+            hitPivot.SnapToPlayer();
             hazard.ResetForRetry();
             active = null;
             Physics.SyncTransforms();
             yield return PlayAndWait(hitDialogue);
-            // Reapply while still black, then release physics for the visible retry.
-            hitPlayer.position = respawnPosition;
-            if (body != null)
-            {
-                body.position = respawnPosition;
-                body.isKinematic = wasKinematic;
-            }
-            hitPivot.RestoreView(hazard.EntrySideView);
-            Physics.SyncTransforms();
-            Debug.Log($"[FallingLight] Respawn complete: {hitPlayer.name} at {hitPlayer.position}, checkpoint {hazard.checkpoint.name}");
             yield return fader.FadeIn(fadeDuration);
             if (DeathCount >= 2 && !HasFlag(ReminderFlag))
             {
@@ -183,8 +218,49 @@ public class FallingLightDirector : MonoBehaviour
             dialogCanvas.sortingOrder = originalOrder;
             dialogCanvas.overrideSorting = originalOverride;
             InputLockManager.TransitionLock = false;
+            retryGraceUntil = Time.time + 0.75f;
             Busy = false;
         }
+    }
+
+    private static Vector3 FindClearRespawn(Transform player, Vector3 checkpoint, Vector3 right)
+    {
+        foreach (CapsuleCollider capsule in player.GetComponents<CapsuleCollider>())
+        {
+            if (!capsule.enabled || capsule.isTrigger)
+                continue;
+
+            Vector3 centerOffset = capsule.transform.TransformPoint(capsule.center) - player.position;
+            float reach = capsule.bounds.extents.magnitude;
+            for (int step = 0; step <= 8; step++)
+            {
+                for (int direction = -1; direction <= 1; direction += 2)
+                {
+                    Vector3 candidate = checkpoint + right * (direction * step * 0.125f);
+                    bool blocked = false;
+                    foreach (Collider other in Physics.OverlapSphere(candidate + centerOffset, reach,
+                                 Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+                    {
+                        if (other.transform.IsChildOf(player))
+                            continue;
+
+                        if (Physics.ComputePenetration(capsule, candidate, player.rotation,
+                                other, other.transform.position, other.transform.rotation,
+                                out Vector3 separation, out float depth) &&
+                            depth > 0.005f && separation.y < 0.9f)
+                        {
+                            blocked = true;
+                            break;
+                        }
+                    }
+
+                    if (!blocked)
+                        return candidate;
+                }
+            }
+        }
+
+        return checkpoint;
     }
 
     IEnumerator PlayAndWait(DialogueData dialogue)

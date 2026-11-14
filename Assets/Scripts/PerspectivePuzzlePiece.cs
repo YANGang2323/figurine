@@ -32,6 +32,14 @@ public class PerspectivePuzzlePiece : MonoBehaviour
 
     private void Awake()
     {
+        // The emblem rotates independently of its stand. Its interaction trigger
+        // stays active, while the stand provides the stationary solid boundary.
+        foreach (Collider collider in GetComponentsInChildren<Collider>(true))
+        {
+            if (!collider.isTrigger)
+                collider.enabled = false;
+        }
+
         initialSceneRotation = transform.localRotation;
         initialSceneStep = currentStep;
     }
