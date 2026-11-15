@@ -145,7 +145,14 @@ public class MainMenuManager : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
-            player.transform.position = DataManager.instance.nowGame.playerPosition;
+            GameData save = DataManager.instance.nowGame;
+            player.transform.position = save.playerPosition;
+            if (player.TryGetComponent(out Rigidbody body))
+                body.position = save.playerPosition;
+
+            CameraPivotRotator pivot = CameraPivotRotator.Instance;
+            if (pivot != null && pivot.gameObject.scene == scene)
+                pivot.ViewOnLoad = save.cameraView;
         }
     }
     public void OnClickDemo2()

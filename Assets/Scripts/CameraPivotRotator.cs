@@ -35,8 +35,18 @@ public class CameraPivotRotator : MonoBehaviour
 
     public bool UsesMapRotation => mapRoot != null;
 
-    public Vector3 ToSavePosition(Vector3 worldPosition) =>
-        mapRoot != null ? mapRoot.InverseTransformPoint(worldPosition) : worldPosition;
+    internal SavedCameraView ViewOnLoad { get; set; }
+
+    // While the map is turning, keep the last settled position and view together.
+    internal bool SaveSideView => mapRoot != null && isRotating ? mapTurnStartSide : isSideView;
+
+    public Vector3 ToSavePosition(Vector3 worldPosition)
+    {
+        if (mapRoot == null)
+            return worldPosition;
+
+        return isRotating ? mapTurnSource : mapRoot.InverseTransformPoint(worldPosition);
+    }
 
     private void InitializeMapRotation()
     {
@@ -418,6 +428,16 @@ public class CameraPivotRotator : MonoBehaviour
             targetRotation = isSideView ? sideRotation : defaultRotation;
 
             SetConstraintsByView();
+        }
+
+        // sceneLoaded restores the position before Start builds the rotated map around it.
+        if (ViewOnLoad == SavedCameraView.Front || ViewOnLoad == SavedCameraView.Side)
+        {
+            isSideView = ViewOnLoad == SavedCameraView.Side;
+            targetRotation = isSideView ? sideRotation : defaultRotation;
+            transform.rotation = targetRotation;
+            SetConstraintsByView();
+            ViewOnLoad = SavedCameraView.Unspecified;
         }
 
         SnapToPlayer();

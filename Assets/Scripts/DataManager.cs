@@ -11,6 +11,8 @@ using Unity.Services.Analytics;
 //�ҷ�����: �ܺο��� ���̽� ������-> �����ͷ� ��ȯ
 //DataManager.instance.�޼����̸�() ���� ȣ��
 
+public enum SavedCameraView { Unspecified, Front, Side }
+
 public class GameData
 {
     // ��������, ������ȣ, ��������
@@ -21,6 +23,7 @@ public class GameData
     public int piece = 0;
     public int info = 0;
 
+    public SavedCameraView cameraView;
     public string sceneName;       // ����� �� �̸�
     public Vector3 playerPosition = Vector3.zero; // �÷��̾� ��ġ
     public List<string> playedDialogues = new List<string>();    // ����� ��ȭ ID ���
@@ -140,11 +143,19 @@ public class DataManager : MonoBehaviour
 
         //�÷��̾� ��ġ����
         GameObject player = GameObject.FindWithTag("Player");
+        CameraPivotRotator pivot = CameraPivotRotator.Instance;
+        nowGame.cameraView = SavedCameraView.Unspecified;
         if (player != null)
         {
-            nowGame.playerPosition = CameraPivotRotator.Instance != null
-                ? CameraPivotRotator.Instance.ToSavePosition(player.transform.position)
-                : player.transform.position;
+            if (pivot != null)
+            {
+                nowGame.playerPosition = pivot.ToSavePosition(player.transform.position);
+                nowGame.cameraView = pivot.SaveSideView ? SavedCameraView.Side : SavedCameraView.Front;
+            }
+            else
+            {
+                nowGame.playerPosition = player.transform.position;
+            }
         }
 
         nowGame.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
