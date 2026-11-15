@@ -40,7 +40,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "Tab \uD0A4\uB97C \uB20C\uB7EC \uC2DC\uC810\uC744 \uC804\uD658\uD574 \uBCF4\uC138\uC694."
+    text: "Q\uC640 E \uD0A4\uB85C \uC2DC\uC57C\uB97C \uC804\uD658\uD574 \uBCF4\uC138\uC694."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uADF8\uB9AC\uACE0 E \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD574
+    text: "\uADF8\uB9AC\uACE0 Space \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD574
       \uBCF4\uC138\uC694."
     hideBackground: 0
     background: {fileID: 0}

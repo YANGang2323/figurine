@@ -101,10 +101,9 @@ public class PlayerInteraction : MonoBehaviour
                 interactionUI.SetActive(false);
             }
 
-            // E Ű �Է�
-            if (Input.GetKeyDown(KeyCode.E)
+            if (Input.GetKeyDown(KeyCode.Space)
             && !InputLockManager.LockInteraction
-            && !DialogueManager.Instance.IsPlaying)
+            && DialogueManager.Instance?.EndedThisFrame != true)
             {
                 closestObject.Interact();
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-[DefaultExecutionOrder(50)] // Process Tab in CameraPivotRotator before judging a hit this frame.
+[DefaultExecutionOrder(50)] // Process view input in CameraPivotRotator before judging a hit this frame.
 public class FallingLightHazard : MonoBehaviour
 {
     public FallingLightDirector director;
@@ -95,16 +95,6 @@ public class FallingLightHazard : MonoBehaviour
                 elapsed = 0;
             }
         }
-        if (CurrentState == State.Tutorial)
-        {
-            if (hasDodged || director.Pivot.isSideView != fallSideView)
-            {
-                director.HideTutorial(true);
-                hasDodged = true;
-                CurrentState = State.Falling;
-            }
-            else return;
-        }
         if (CurrentState != State.Falling) return;
 
         if (director.Pivot.isSideView != fallSideView) hasDodged = true;
@@ -115,22 +105,19 @@ public class FallingLightHazard : MonoBehaviour
         }
         elapsed += Time.deltaTime;
         lightObject.position = HomeWorldPosition + Vector3.down * (0.5f * gravity * elapsed * elapsed);
-        // A low fixture can reach the head before the normal pause delay.
-        // Always show the first tutorial BEFORE evaluating a hit.
-        if (teachTab && !director.TutorialSeen &&
+        if (teachTab && !director.TutorialSeen && !hasDodged &&
             (elapsed >= tutorialPauseAfter || LightBounds.min.y <= director.PlayerHeadHeight + 0.1f))
         {
-            director.ShowTutorial();
             CurrentState = State.Tutorial;
+            director.ShowTutorial();
             return;
         }
-        if (teachTab && !director.TutorialSeen) return;
 
         float hitHeight = director.PlayerHeadHeight - hitHeightBelowHead;
         if (!headChecked && elapsed >= minimumReactionTime && LightBounds.min.y <= hitHeight)
         {
             headChecked = true;
-            // Starting a Tab turn is enough; do not wait for a rotation angle.
+            // Starting a view turn is enough; do not wait for a rotation angle.
             // frameRequested latches the successful dodge for the rest of this fall.
             bool changedView = hasDodged;
             bool stillBelow = IsPlayerBelow(fallRight);
@@ -158,10 +145,11 @@ public class FallingLightHazard : MonoBehaviour
         hasDodged = true;
         if (CurrentState == State.Tutorial)
         {
-            director.HideTutorial(true);
+            director.CompleteTutorial();
             CurrentState = State.Falling;
         }
-        // Only framing changes on Tab; never reset or stop the falling clock.
+
+        // Only framing changes during a view turn; never reset or stop the falling clock.
         if (CurrentState == State.Falling && !frameRequested)
         {
             frameRequested = true;
@@ -175,7 +163,12 @@ public class FallingLightHazard : MonoBehaviour
         subscribedPivot = null;
     }
 
-    void OnDisable() => UnsubscribeTurn();
+    void OnDisable()
+    {
+        UnsubscribeTurn();
+        if (CurrentState == State.Tutorial)
+            director.CancelTutorial();
+    }
 
     bool IsPlayerBelow(Vector3 right)
     {

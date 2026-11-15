@@ -16,7 +16,7 @@ MonoBehaviour:
   playOnlyOnce: 1
   lines:
   - speakerName: 
-    text: "E \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD558\uACE0
+    text: "Space \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD558\uACE0
       \uC0AC\uB78C\uB4E4\uACFC \uB300\uD654\uB97C \uB098\uB220 \uBCF4\uC138\uC694."
     hideBackground: 0
     background: {fileID: 0}

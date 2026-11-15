@@ -28,7 +28,6 @@ public class Game : MonoBehaviour
     public int slotNum;
 
     bool[] savefile = new bool[5];	// 세이브파일 존재유무 저장
-    //private bool isFirstTab = true;
     //bool isCorrectCameraAngle = true; //카메라 각도 사이드뷰에서 시작
 
     private string savePath;
@@ -56,18 +55,6 @@ public class Game : MonoBehaviour
         if ((!InputLockManager.TransitionLock || transitionSaved != null) && Input.GetKeyDown(KeyCode.Escape)) {
             HandleEscape();
         }
-        //if (nowstage == "1")
-        //{
-        //    if (isFirstTab && InputManager.instance.GetKeyDown(KeyCode.Tab))
-        //    {
-        //        if (DialogueDataBase.instance != null && DialogueDataBase.instance.isFinish)
-        //        {
-        //            Dialogue[] startDialogues = DialogueDataBase.instance.GetDialogues(3, 3);
-        //            dialogManager.ShowDialogue(startDialogues);
-        //            isFirstTab = false; // 두 번 다시 안 뜨게
-        //        }
-        //    }
-        //}
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())

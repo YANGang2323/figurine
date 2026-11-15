@@ -14,15 +14,9 @@ public class PlayerMovement3 : MonoBehaviour
     private string CameraType;
 
     // ���� ���� ����
-    //public float jumpForce = 5f; // ���� ��
     private Rigidbody rb;
-    private bool isGrounded = true;
 
 
-    [Header("Jump Settings")]
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask jumpableLayers;
     private Vector3 moveDir = Vector3.zero;
 
     void Awake() { 
@@ -137,13 +131,6 @@ public class PlayerMovement3 : MonoBehaviour
         currentAngle -= horizontalInput * angularSpeed * Time.deltaTime;
 
         // ���� ó��
-        CheckGrounded();
-        if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
-
         // ��ġ ���
         float rad = currentAngle * Mathf.Deg2Rad;
         float x = center.position.x + radius * Mathf.Cos(rad);
@@ -167,14 +154,6 @@ public class PlayerMovement3 : MonoBehaviour
     {
         // �ʱ�ȭ
         moveDir = Vector3.zero;
-
-        CheckGrounded();
-
-        if (isGrounded && InputManager.instance.GetKeyDown(KeyCode.Space))
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // ���� ���� �����ӵ� �ʱ�ȭ
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
 
         if (!CameraPivotRotator.Instance.isSideView)
         {
@@ -213,12 +192,6 @@ public class PlayerMovement3 : MonoBehaviour
     {
         
     }
-    private void CheckGrounded()
-    {
-        Vector3 origin = transform.position + Vector3.up * 0.1f; // �ణ ������ ��
-        isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, jumpableLayers);
-    }
-
     bool frontBlocked = false;  
 
     private void CheckForwardCollision() //���� ����ĳ��Ʈ

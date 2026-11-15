@@ -34,9 +34,7 @@ public class TimingInteractionManager : MonoBehaviour
         DetectTarget();
         UpdateTimingWindow();
 
-        if (Input.GetKeyDown(KeyCode.Space) ||
-            Input.GetKeyDown(KeyCode.F) ||
-            Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) && !InputLockManager.LockInteraction)
         {
             TryInteract();
         }

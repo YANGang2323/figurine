@@ -10,13 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private Vector3 moveDir = Vector3.zero;
     private Rigidbody rb;
-    private bool jumpRequested;
-
-    [Header("Jump Settings")]
-    public bool canJump = true;
-    [SerializeField] private float jumpForce = 7f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask jumpableLayers;
 
     [Header("Run & Rotation Settings")]
     public bool runable;
@@ -48,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
         if (InputLockManager.LockMove || !canMove)
         {
             moveDir = Vector3.zero;
-            jumpRequested = false;
             animator.SetInteger("MoveState", 0);
             return;
         }
@@ -61,9 +53,6 @@ public class PlayerMovement : MonoBehaviour
             moveDir = left;
         else if (InputManager.instance.GetKey(KeyCode.D))
             moveDir = -left;
-
-        if (canJump && InputManager.instance.GetKeyDown(KeyCode.Space))
-            jumpRequested = true;
 
         bool isMoving = moveDir != Vector3.zero;
         bool isRunning = isMoving && runable && Input.GetKey(KeyCode.LeftShift);
@@ -79,11 +68,6 @@ public class PlayerMovement : MonoBehaviour
         bool movementLocked = InputLockManager.LockMove || !canMove;
         Vector3 horizontalVelocity = movementLocked ? Vector3.zero : moveDir * currentSpeed;
         float verticalVelocity = rb.linearVelocity.y;
-
-        if (!movementLocked && canJump && jumpRequested && IsGrounded())
-            verticalVelocity = jumpForce;
-
-        jumpRequested = false;
 
         // Stop before pushing a rounded capsule up a wall or prop.
         if (horizontalVelocity != Vector3.zero &&
@@ -132,16 +116,8 @@ public class PlayerMovement : MonoBehaviour
     void StopMotion()
     {
         moveDir = Vector3.zero;
-        jumpRequested = false;
 
         if (!rb.isKinematic)
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
-    }
-
-    private bool IsGrounded()
-    {
-        Vector3 origin = rb.position + Vector3.up * 0.1f;
-        return Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f,
-            jumpableLayers, QueryTriggerInteraction.Ignore);
     }
 }

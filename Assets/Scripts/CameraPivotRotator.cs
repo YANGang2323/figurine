@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 // 카메라 시점을 회전시키는 스크립트 (싱글톤 적용)
-// Tab 키를 눌러 왼쪽 시점(기본) ↔ 오른쪽 시점(측면) 전환
+// Q는 측면 시점, E는 정면 시점으로 전환
 public class CameraPivotRotator : MonoBehaviour
 {
     // 싱글톤 인스턴스
@@ -464,9 +464,9 @@ public class CameraPivotRotator : MonoBehaviour
         // 이미 회전중이 아니고 잠겨있을 때만 입력 차단
         if (!isRotating && InputLockManager.LockCamera)
             return;
-        // Tab 키 입력 시 시점 전환
+        // 현재 시점 반대 방향의 입력만 처리
         if (!isRotating &&
-        InputManager.instance.GetKeyDown(KeyCode.Tab) &&
+        InputManager.instance.GetKeyDown(isSideView ? KeyCode.E : KeyCode.Q) &&
         (cameraType == CameraMovingType.Fix ||
          cameraType == CameraMovingType.Moving))
         {
@@ -547,7 +547,7 @@ public class CameraPivotRotator : MonoBehaviour
                     playerMovement.enabled = true;
             }
 
-            // Tab 시점 전환 사용
+            // 시점 전환 사용
             cameraType = CameraMovingType.Moving;
             isSideView = false;
 
@@ -661,7 +661,7 @@ public class CameraPivotRotator : MonoBehaviour
 
     private float tutorialTabDelay;
 
-    public void ArmTabTutorialHint(float delay = 5f)
+    public void ArmViewTutorialHint(float delay = 5f)
     {
         if (tutorialHintUsed)
             return;
@@ -687,13 +687,22 @@ public class CameraPivotRotator : MonoBehaviour
         if (tutorialTabWait < tutorialTabDelay)
             return;
 
+        ShowViewTutorialHint("Q와 E 키로 시야를 전환해 보세요");
+    }
+
+    public void ShowViewTutorialHint(string message, float fontSizeReduction = 0f)
+    {
+        if (tutorialHintUsed || InputLockManager.LockMove)
+            return;
+
         tutorialHintUsed = true;
-        tutorialHint = new GameObject("Tab Tutorial Hint", typeof(Canvas));
+        tutorialHint = new GameObject("View Tutorial Hint", typeof(Canvas));
         var canvas = tutorialHint.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 100;
-        var label = StageChanger.AddLabel(canvas.transform, "Tab 키를 눌러 시점을 전환하세요",
+        var label = StageChanger.AddLabel(canvas.transform, message,
             new Vector2(0f, -60f), new Vector2(750f, 70f));
+        label.fontSize -= fontSizeReduction;
         if (tabHintFont != null)
         {
             if (tabHintFontAsset == null)

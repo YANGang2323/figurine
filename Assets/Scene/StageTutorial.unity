@@ -555,11 +555,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   animator: {fileID: 0}
-  jumpForce: 7
-  groundCheckDistance: 0.2
-  jumpableLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!65 &770354333
 BoxCollider:
   m_ObjectHideFlags: 0

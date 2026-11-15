@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using TMPro;
 using System.Collections.Generic;
@@ -101,6 +102,8 @@ public class DialogueManager : MonoBehaviour
     public bool IsPlaying => isPlaying;
     public bool EndedThisFrame => endedFrame == Time.frameCount;
     private int endedFrame = -1;
+    private int startedFrame = -1;
+    private readonly List<RaycastResult> clickHits = new List<RaycastResult>();
 
 
     void Awake()
@@ -129,7 +132,7 @@ public class DialogueManager : MonoBehaviour
             return;
 
         //대화 입력 처리
-        if (!isPlaying)
+        if (!isPlaying || startedFrame == Time.frameCount)
             return;
 
         if (choicePanel.activeSelf || badEndOverlay != null)
@@ -143,7 +146,7 @@ public class DialogueManager : MonoBehaviour
         }
 #endif
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || IsDialogueAdvanceClick())
         {
             // 타이핑 중이면 효과음 없이 즉시 출력
             if (isTyping)
@@ -183,6 +186,20 @@ public class DialogueManager : MonoBehaviour
 
             ShowNextLine();
         }
+    }
+
+    private bool IsDialogueAdvanceClick()
+    {
+        if (!Input.GetMouseButtonDown(0))
+            return false;
+
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem == null)
+            return true;
+
+        clickHits.Clear();
+        eventSystem.RaycastAll(new PointerEventData(eventSystem) { position = Input.mousePosition }, clickHits);
+        return clickHits.Count == 0 || clickHits[0].gameObject.GetComponentInParent<Selectable>() == null;
     }
 
 #if UNITY_EDITOR
@@ -244,6 +261,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isPlaying = true;
+        startedFrame = Time.frameCount;
 
         ShowNextLine();
     }
@@ -550,7 +568,7 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = null;
         DialogueCompleted?.Invoke(completedDialogue);
         if (gameObject.scene.name == "Stage1" && completedDialogue?.dialogueID == "emblem_firstPiece")
-            CameraPivotRotator.Instance?.ArmTabTutorialHint(10f);
+            CameraPivotRotator.Instance?.ArmViewTutorialHint(10f);
     }
 
     private void ShowBadEnd()

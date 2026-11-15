@@ -122,11 +122,6 @@ MonoBehaviour:
   crouchCollider: {fileID: 5290718893539612148}
   moveSpeed: 3
   animator: {fileID: 2037702239414759361}
-  jumpForce: 7
-  groundCheckDistance: 0.2
-  jumpableLayers:
-    serializedVersion: 2
-    m_Bits: 0
   runable: 0
   runSpeedMultiplier: 1.5
   rotationOffsetA: 90

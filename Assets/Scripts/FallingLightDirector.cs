@@ -68,9 +68,14 @@ public class FallingLightDirector : MonoBehaviour
         tutorialOverlay.alpha = 1;
     }
 
-    public void HideTutorial(bool completed = false)
+    public void CompleteTutorial()
     {
-        if (completed) AddFlag("light_tab_tutorial_completed");
+        AddFlag("light_tab_tutorial_completed");
+        CancelTutorial();
+    }
+
+    public void CancelTutorial()
+    {
         tutorialOverlay.alpha = 0;
         tutorialOverlay.gameObject.SetActive(false);
         InputLockManager.TutorialMoveLock = false;
@@ -172,7 +177,6 @@ public class FallingLightDirector : MonoBehaviour
         Vector3 respawnPosition;
         Rigidbody body = hitPlayer.GetComponent<Rigidbody>();
         bool wasKinematic = body != null && body.isKinematic;
-        HideTutorial();
         InputLockManager.TransitionLock = true;
         InputLockManager.Refresh();
         DeathCount++;
@@ -204,9 +208,9 @@ public class FallingLightDirector : MonoBehaviour
             hazard.ResetForRetry();
             active = null;
             Physics.SyncTransforms();
-            yield return PlayAndWait(hitDialogue);
             yield return fader.FadeIn(fadeDuration);
-            if (DeathCount >= 2 && !HasFlag(ReminderFlag))
+            yield return PlayAndWait(hitDialogue);
+            if ((hazard.teachTab || DeathCount >= 2) && !HasFlag(ReminderFlag))
             {
                 AddFlag(ReminderFlag);
                 yield return PlayAndWait(reminderDialogue);

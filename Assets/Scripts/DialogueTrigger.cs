@@ -3,7 +3,7 @@ using UnityEngine;
 public enum DialogueTriggerType
 {
     AutoOnStart,      // 씬 시작 시 자동 실행
-    Interaction,      // E키 상호작용
+    Interaction,      // Space 키 상호작용
     Area,             // 닿을시
     EventTriggered    // 퍼즐, 조건 달성 등
 }

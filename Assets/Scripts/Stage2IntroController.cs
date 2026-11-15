@@ -40,8 +40,6 @@ public class Stage2IntroController : MonoBehaviour
             manager.StartDialogue(openingDialogue);
         else if (CurrentPhase == Phase.Cutscene)
             manager.StartDialogue(stage2Dialogue);
-        else if (CurrentPhase == Phase.Corridor)
-            corridorCamera.ArmTabTutorialHint(10f);
     }
 
     void SelectRig(bool backstage)
@@ -72,13 +70,19 @@ public class Stage2IntroController : MonoBehaviour
         {
             CurrentPhase = Phase.Corridor;
             AddFlag(CorridorFlag);
-            corridorCamera.ArmTabTutorialHint(10f);
         }
         else if (CurrentPhase == Phase.Cutscene && dialogue == stage2Dialogue)
         {
             CurrentPhase = Phase.Backstage;
             AddFlag(CompleteFlag);
         }
+    }
+
+    public void TryShowViewTutorial(Collider other)
+    {
+        if (CurrentPhase == Phase.Corridor &&
+            other.transform.IsChildOf(corridorPlayer.transform))
+            corridorCamera.ShowViewTutorialHint("Q와 E를 눌러보며 화면을 전환해 보세요.", 5f);
     }
 
     public void TryStartBackstageCutscene(Collider other)

@@ -5198,7 +5198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ': E Key'
+  m_Text: ': Space'
 --- !u!222 &1027406125
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7000,7 +7000,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ': Tab Key'
+  m_Text: ': Q / E'
 --- !u!222 &1425443105
 CanvasRenderer:
   m_ObjectHideFlags: 0
