@@ -31,6 +31,8 @@ public class MainMenuManager : MonoBehaviour
     public string NewGameScene = "Stage1";
     void Start()
     {
+        optionUI?.GetComponent<OptionPanel>()?.Bind(OnClickBackToMenu);
+        LoadUI?.GetComponent<SaveLoadPanel>()?.Bind(Slot, OnClickBackToMenu);
         savePath = Application.persistentDataPath; // 저장 경로
         //SlotTextEdit();
         //for (int i = 0; i < 5; i++)
@@ -284,7 +286,7 @@ public class MainMenuManager : MonoBehaviour
         for (int i = 0; i < totalSlots; i++)
         {
             if (slotButtons[i] == null) continue;
-            slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
+            slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>(true);
             if (slotText[i] == null) continue;
             string latestFile = DataManager.instance.FindLatestSaveFile(i);
 

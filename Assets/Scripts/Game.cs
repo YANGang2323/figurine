@@ -40,6 +40,8 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        OptionUI?.GetComponent<OptionPanel>()?.Bind(OnClickCloseOptionUI);
+        SaveUI?.GetComponent<SaveLoadPanel>()?.Bind(inGameSlot, OnClickCloseSaveUI, SaveBtn, SaveDestr);
         GameData data = DataManager.instance.nowGame;
         SlotText();
 

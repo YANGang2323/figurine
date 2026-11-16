@@ -14,7 +14,7 @@ public class AudioSettingsUI : MonoBehaviour
     [SerializeField] private Sprite soundOn;
     [SerializeField] private Sprite soundOff;
 
-    private void Start()
+    private void OnEnable()
     {
         LoadSliderValues();
     }
@@ -35,6 +35,7 @@ public class AudioSettingsUI : MonoBehaviour
         sfxSlider.SetValueWithoutNotify(
             AudioSettingsManager.Instance.sfxVolume
         );
+        UpdateIcons();
     }
 
     public void OnMasterMute()
@@ -61,6 +62,7 @@ public class AudioSettingsUI : MonoBehaviour
         sfxSlider.SetValueWithoutNotify(
             AudioSettingsManager.Instance.sfxVolume
         );
+        UpdateIcons();
         UpdateIcons();
     }
 
