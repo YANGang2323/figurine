@@ -45,6 +45,7 @@ public class GameData
 
     [System.NonSerialized] public float numSelectStartTime; // �ѹ������� ���� �ð� (�������)
 }
+[DefaultExecutionOrder(-1000)]
 public class DataManager : MonoBehaviour
 {
     //�̱���
@@ -84,9 +85,9 @@ public class DataManager : MonoBehaviour
         {
             if (instance == null)
             {
-                // ���� ������ ���� ������ ��ȯ
-                GameObject go = new GameObject("DataManager");
-                instance = go.AddComponent<DataManager>();
+                instance = FindFirstObjectByType<DataManager>();
+                if (instance == null)
+                    Debug.LogError("Place DataManager in the scene hierarchy before playing.");
             }
             return instance;
         }

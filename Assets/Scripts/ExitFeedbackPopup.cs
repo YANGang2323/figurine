@@ -11,13 +11,16 @@ public class ExitFeedbackPopup : MonoBehaviour
     private const string SurveyInstructions = "\n위 QR 코드를 스캔하거나 클릭해 만족도 조사에 참여해 주세요.\n" +
         "여러분의 의견은 정식 버전 개발에 큰 도움이 됩니다.";
 
-    private TMP_Text codeLabel;
-    private TMP_Text instructionsLabel;
-    private Button cancelButton;
+    [SerializeField] private TMP_Text codeLabel;
+    [SerializeField] private TMP_Text instructionsLabel;
+    [SerializeField] private Button cancelButton;
+    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button codeButton;
+    [SerializeField] private Button qrButton;
     private string playCode;
 
-    public static ExitFeedbackPopup Create(TMP_FontAsset font, Sprite textBox,
-        Sprite qr, Action confirm, Action cancel)
+    #if UNITY_EDITOR
+    public static ExitFeedbackPopup BuildForEditor(TMP_FontAsset font, Sprite textBox, Sprite qr)
     {
         var root = new GameObject("Exit Feedback", typeof(RectTransform), typeof(Canvas),
             typeof(CanvasScaler), typeof(GraphicRaycaster), typeof(ExitFeedbackPopup));
@@ -40,11 +43,11 @@ public class ExitFeedbackPopup : MonoBehaviour
         AddLabel("당신의 플레이 코드", panel.transform, font, 0, 313, 860, 56, 42);
         var codeButton = AddButton("Copy Play Code", panel.transform, textBox, 0, 239, 560, 80);
         popup.codeLabel = AddLabel("", codeButton.transform, font, 0, 0, 478, 50, 38);
-        codeButton.onClick.AddListener(popup.CopyCode);
+        popup.codeButton = codeButton;
 
         var qrButton = AddButton("Open Survey", panel.transform, qr, 0, 50, 256, 256);
         qrButton.image.preserveAspect = true;
-        qrButton.onClick.AddListener(() => Application.OpenURL(SurveyUrl));
+        popup.qrButton = qrButton;
 
         popup.instructionsLabel = AddLabel(CopyInstruction + SurveyInstructions,
             panel.transform, font, 0, -162, 866, 118, 27);
@@ -52,10 +55,10 @@ public class ExitFeedbackPopup : MonoBehaviour
         var cancelButton = AddButton("Cancel", panel.transform, textBox, -160, -303, 280, 88);
         popup.cancelButton = cancelButton;
         AddLabel("GO TO MENU", cancelButton.transform, font, 0, 0, 224, 50, 29);
-        cancelButton.onClick.AddListener(() => cancel());
+
         var confirmButton = AddButton("Confirm", panel.transform, textBox, 160, -303, 280, 88);
         AddLabel("QUIT", confirmButton.transform, font, 0, 0, 224, 50, 29);
-        confirmButton.onClick.AddListener(() => confirm());
+        popup.confirmButton = confirmButton;
 
         SetNavigation(codeButton, confirmButton, qrButton, null, null);
         SetNavigation(qrButton, codeButton, cancelButton, null, null);
@@ -63,6 +66,20 @@ public class ExitFeedbackPopup : MonoBehaviour
         SetNavigation(confirmButton, qrButton, codeButton, cancelButton, null);
 
         return popup;
+    }
+
+    #endif
+
+    public void Bind(Action confirm, Action cancel)
+    {
+        codeButton.onClick.RemoveAllListeners();
+        qrButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.RemoveAllListeners();
+        confirmButton.onClick.RemoveAllListeners();
+        codeButton.onClick.AddListener(CopyCode);
+        qrButton.onClick.AddListener(() => Application.OpenURL(SurveyUrl));
+        cancelButton.onClick.AddListener(() => cancel());
+        confirmButton.onClick.AddListener(() => confirm());
     }
 
     public void Show(string code)
@@ -95,6 +112,7 @@ public class ExitFeedbackPopup : MonoBehaviour
         instructionsLabel.text = CopyInstruction + " (복사 완료)" + SurveyInstructions;
     }
 
+    #if UNITY_EDITOR
     private static T AddElement<T>(string name, Transform parent, float x, float y,
         float width, float height) where T : Component
     {
@@ -131,4 +149,5 @@ public class ExitFeedbackPopup : MonoBehaviour
         button.targetGraphic = image;
         return button;
     }
+    #endif
 }

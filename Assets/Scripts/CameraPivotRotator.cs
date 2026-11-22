@@ -16,7 +16,7 @@ public class CameraPivotRotator : MonoBehaviour
     private Vector3 turnAnchor;
     private Quaternion turnRotation;
     [SerializeField, Min(1f)] private float mapCameraDistance = 36f;
-    private Transform mapRoot;
+    [SerializeField] private Transform mapRoot;
     private Vector3 mapTurnStartPosition;
     private bool mapTurnStartSide;
     private Vector3 mapTurnPivot;
@@ -58,35 +58,10 @@ public class CameraPivotRotator : MonoBehaviour
         if (viewCamera == null)
             return;
 
-        GameObject[] roots = gameObject.scene.GetRootGameObjects();
-        bool stageTwo = gameObject.scene.name == "Stage2";
-        bool distantMap = stageTwo && player.position.x > 150f;
-        string rootName = stageTwo ? (distantMap ? "MapRoot First" : "MapRoot Second") : "MapRoot";
-        var root = new GameObject(rootName);
-        UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(root, gameObject.scene);
-        mapRoot = root.transform;
-
-        foreach (GameObject item in roots)
+        if (mapRoot == null)
         {
-            if (item.GetComponentInChildren<PlayerMovement>(true) != null ||
-                item.GetComponentInChildren<Camera>(true) != null ||
-                item.GetComponentInChildren<Canvas>(true) != null)
-                continue;
-
-            if (!stageTwo)
-                item.transform.SetParent(mapRoot, true);
-            else
-                AttachStageTwoGeometry(item.transform, distantMap);
-        }
-
-        if (distantMap)
-        {
-            foreach (GameObject item in roots)
-            {
-                Stage2IntroTrigger entrance = item.GetComponentInChildren<Stage2IntroTrigger>(true);
-                if (entrance != null)
-                    entrance.transform.SetParent(mapRoot, true);
-            }
+            Debug.LogError("Assign the map root in the scene hierarchy before playing.", this);
+            return;
         }
 
         transform.rotation = defaultRotation;
@@ -97,24 +72,6 @@ public class CameraPivotRotator : MonoBehaviour
         transform.position = mapCameraPosition;
         ApplyMapView(isSideView);
         mapFollowPlayerPosition = player.position;
-    }
-
-    private void AttachStageTwoGeometry(Transform item, bool distantMap)
-    {
-        // The shared wall container holds boundaries from both Stage2 areas.
-        if (item.name == "Unvisible Wall")
-        {
-            for (int index = item.childCount - 1; index >= 0; index--)
-                AttachStageTwoGeometry(item.GetChild(index), distantMap);
-            return;
-        }
-
-        Renderer renderer = item.GetComponentInChildren<Renderer>(true);
-        Collider collider = item.GetComponentInChildren<Collider>(true);
-        Vector3 location = renderer != null ? renderer.bounds.center :
-            collider != null ? collider.transform.position : item.position;
-        if ((location.x > 150f) == distantMap)
-            item.SetParent(mapRoot, true);
     }
 
     private Quaternion MapAngle(bool side) =>
@@ -430,7 +387,7 @@ public class CameraPivotRotator : MonoBehaviour
             SetConstraintsByView();
         }
 
-        // sceneLoaded restores the position before Start builds the rotated map around it.
+        // sceneLoaded restores the position before Start applies the saved map view.
         if (ViewOnLoad == SavedCameraView.Front || ViewOnLoad == SavedCameraView.Side)
         {
             isSideView = ViewOnLoad == SavedCameraView.Side;
@@ -675,7 +632,9 @@ public class CameraPivotRotator : MonoBehaviour
     private float tutorialTabWait;
     private bool tutorialHintArmed;
     private bool tutorialHintUsed;
-    private GameObject tutorialHint;
+    [SerializeField] private GameObject tutorialHint;
+    [SerializeField] private TMPro.TMP_Text tutorialHintLabel;
+    private float tutorialHintHideTime;
     [SerializeField] private Font tabHintFont;
     private TMPro.TMP_FontAsset tabHintFontAsset;
 
@@ -693,10 +652,13 @@ public class CameraPivotRotator : MonoBehaviour
 
     private void UpdateTutorialHint()
     {
+        if (tutorialHint != null && tutorialHint.activeSelf && Time.time >= tutorialHintHideTime)
+            tutorialHint.SetActive(false);
+
         if (InputLockManager.LockMove)
         {
             if (tutorialHint != null)
-                Destroy(tutorialHint);
+                tutorialHint.SetActive(false);
             return;
         }
 
@@ -715,22 +677,22 @@ public class CameraPivotRotator : MonoBehaviour
         if (tutorialHintUsed || InputLockManager.LockMove)
             return;
 
+        if (tutorialHint == null || tutorialHintLabel == null)
+        {
+            Debug.LogError("Assign the tutorial hint in the scene hierarchy before playing.", this);
+            return;
+        }
         tutorialHintUsed = true;
-        tutorialHint = new GameObject("View Tutorial Hint", typeof(Canvas));
-        var canvas = tutorialHint.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 100;
-        var label = StageChanger.AddLabel(canvas.transform, message,
-            new Vector2(0f, -60f), new Vector2(750f, 70f));
-        label.fontSize -= fontSizeReduction;
+        tutorialHintLabel.text = message;
+        tutorialHintLabel.fontSize = 34f - fontSizeReduction;
         if (tabHintFont != null)
         {
             if (tabHintFontAsset == null)
                 tabHintFontAsset = TMPro.TMP_FontAsset.CreateFontAsset(tabHintFont);
-            label.font = tabHintFontAsset;
+            tutorialHintLabel.font = tabHintFontAsset;
         }
-        label.rectTransform.anchorMin = label.rectTransform.anchorMax = new Vector2(0.5f, 0.9f);
-        Destroy(tutorialHint, 4f);
+        tutorialHintHideTime = Time.time + 4f;
+        tutorialHint.SetActive(true);
     }
 
     private void HandleViewInput()
@@ -754,7 +716,7 @@ public class CameraPivotRotator : MonoBehaviour
         if (tutorialHintArmed)
             tutorialHintUsed = true;
         if (tutorialHint != null)
-            Destroy(tutorialHint);
+            tutorialHint.SetActive(false);
         ViewTurnStarted?.Invoke();
         return true;
     }

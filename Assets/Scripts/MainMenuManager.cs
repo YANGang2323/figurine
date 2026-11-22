@@ -20,35 +20,37 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_FontAsset exitFont;
     [SerializeField] private Sprite exitTextBox;
     [SerializeField] private Sprite exitSurveyQr;
-    private ExitFeedbackPopup exitPopup;
+    [SerializeField] private ExitFeedbackPopup exitPopup;
     private GameObject previousSelection;
-    public Button[] slotButtons; // ¹öÆ°µéÀ» ÀÎ½ºÆåÅÍ¿¡¼­ ¿¬°á
-    public TMP_Text[] slotText;		// ½½·Ô¹öÆ° ¾Æ·¡¿¡ Á¸ÀçÇÏ´Â Textµé
+    public Button[] slotButtons; // ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public TMP_Text[] slotText;		// ï¿½ï¿½ï¿½Ô¹ï¿½Æ° ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Textï¿½ï¿½
 
-    bool[] savefile = new bool[4];	// ¼¼ÀÌºêÆÄÀÏ Á¸ÀçÀ¯¹« ÀúÀå
+    bool[] savefile = new bool[4];	// ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private string savePath;
     public string NewGameScene = "Stage1";
     void Start()
     {
+        if (exitPopup != null)
+            exitPopup.Bind(QuitApplication, CloseExitPopup);
         optionUI?.GetComponent<OptionPanel>()?.Bind(OnClickBackToMenu);
         LoadUI?.GetComponent<SaveLoadPanel>()?.Bind(Slot, OnClickBackToMenu);
-        savePath = Application.persistentDataPath; // ÀúÀå °æ·Î
+        savePath = Application.persistentDataPath; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         //SlotTextEdit();
         //for (int i = 0; i < 5; i++)
         //{
         //    slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
         //    string latestFile = DataManager.instance.FindLatestSaveFile(i);
-        //    if (savefile[i] != false)// ½½·Ôº°·Î ÀúÀåµÈ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´ÂÁö ÆÇ´Ü.
+        //    if (savefile[i] != false)// ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½.
         //    {
-        //        savefile[i] = true;			// ÇØ´ç ½½·Ô ¹øÈ£ÀÇ bool¹è¿­ true·Î º¯È¯
+        //        savefile[i] = true;			// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ boolï¿½è¿­ trueï¿½ï¿½ ï¿½ï¿½È¯
         //        string fileName = Path.GetFileName(latestFile);
-        //        DataManager.instance.nowSlot = i;	// ¼±ÅÃÇÑ ½½·Ô ¹øÈ£ ÀúÀå
-        //        DataManager.instance.LoadData();	// ÇØ´ç ½½·Ô µ¥ÀÌÅÍ ºÒ·¯¿È
+        //        DataManager.instance.nowSlot = i;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+        //        DataManager.instance.LoadData();	// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½
 
         //        slotText[i].text = $"Slot {i}: {fileName}";
         //    }
-        //    else	// µ¥ÀÌÅÍ°¡ ¾ø´Â °æ¿ì
+        //    else	// ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         //    {
         //        slotText[i].text = $"Slot {i}";
         //    }
@@ -78,8 +80,8 @@ public class MainMenuManager : MonoBehaviour
     {
         UISoundManager.Instance.PlayClick();
 
-        Debug.Log("»õ °ÔÀÓ");
-        // 1. Áßº¹µÇÁö ¾Ê´Â ¿µ¾î ´ë¹®ÀÚ+¼ýÀÚ 4ÀÚ¸® Á¶ÇÕ »ý¼º
+        Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        // 1. ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ë¹®ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ 4ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         char[] stringChars = new char[4];
         System.Random random = new System.Random();
@@ -88,17 +90,17 @@ public class MainMenuManager : MonoBehaviour
             stringChars[i] = chars[random.Next(chars.Length)];
         }
 
-        // 2. »õ °ÔÀÓ µ¥ÀÌÅÍ ¼¼ÆÃ
+        // 2. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         DataManager.instance.nowGame = new GameData();
         DataManager.instance.nowGame.playCode = "#" + new string(stringChars);
-        DataManager.instance.nowGame.startTimeStamp = System.DateTime.Now.ToString("o"); // ÇöÀç ½Ã°£ ±â·Ï
-        DataManager.instance.nowGame.totalGameStartTime = System.DateTime.Now.ToString("o"); // »õ°ÔÀÓ ½ÃÀÛ ½Ã°£ ±â·Ï    
+        DataManager.instance.nowGame.startTimeStamp = System.DateTime.Now.ToString("o"); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+        DataManager.instance.nowGame.totalGameStartTime = System.DateTime.Now.ToString("o"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½    
 
-        // 3. ¾Ö³Î¸®Æ½½º Àü¼Û: °ÔÀÓ ÃÖÃÊ ½ÇÇà ¹× ÇÃ·¹ÀÌÄÚµå ºÎ¿©
+        // 3. ï¿½Ö³Î¸ï¿½Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½Î¿ï¿½
         var eventData = new Dictionary<string, object> {
             { "PlayCode", DataManager.instance.nowGame.playCode }
         };
-        // ¾Õ¿¡ ÁÖ¼Ò(Unity.Services.Analytics.)¸¦ ¸íÈ®ÇÏ°Ô ºÙ¿©¼­ Ãæµ¹À» ÇÇÇÕ´Ï´Ù.
+        // ï¿½Õ¿ï¿½ ï¿½Ö¼ï¿½(Unity.Services.Analytics.)ï¿½ï¿½ ï¿½ï¿½È®ï¿½Ï°ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         Unity.Services.Analytics.CustomEvent myEvent = new Unity.Services.Analytics.CustomEvent("game_start");
         foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
         AnalyticsService.Instance.RecordEvent(myEvent);
@@ -110,34 +112,34 @@ public class MainMenuManager : MonoBehaviour
     {
         UISoundManager.Instance.PlayClick();
 
-        Debug.Log("ºÒ·¯¿À±â");
+        Debug.Log("ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½");
         SlotTextEdit();
         LoadUI.SetActive(true);
     }
-    public void Slot(int number)	// ½½·ÔÀÇ ±â´É ±¸Çö
+    public void Slot(int number)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
-        DataManager.instance.nowSlot = number;	// ½½·ÔÀÇ ¹øÈ£¸¦ ½½·Ô¹øÈ£·Î ÀÔ·ÂÇÔ.
+        DataManager.instance.nowSlot = number;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¹ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½.
 
-        if (number < savefile.Length && savefile[number])	// bool ¹è¿­¿¡¼­ ÇöÀç ½½·Ô¹øÈ£°¡ true¶ó¸é = µ¥ÀÌÅÍ Á¸ÀçÇÑ´Ù´Â ¶æ
+        if (number < savefile.Length && savefile[number])	// bool ï¿½è¿­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¹ï¿½È£ï¿½ï¿½ trueï¿½ï¿½ï¿½ = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù´ï¿½ ï¿½ï¿½
         {
-            DataManager.instance.LoadData();	// µ¥ÀÌÅÍ¸¦ ·ÎµåÇÏ°í
-            GoGame();	// °ÔÀÓ¾ÀÀ¸·Î ÀÌµ¿
+            DataManager.instance.LoadData();	// ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Îµï¿½ï¿½Ï°ï¿½
+            GoGame();	// ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         }
-        else	// bool ¹è¿­¿¡¼­ ÇöÀç ½½·Ô¹øÈ£°¡ false¶ó¸é µ¥ÀÌÅÍ°¡ ¾ø´Ù´Â ¶æ
+        else	// bool ï¿½è¿­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¹ï¿½È£ï¿½ï¿½ falseï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ù´ï¿½ ï¿½ï¿½
         {
-            Debug.Log("µ¥ÀÌÅÍ°¡ ÀúÀåµÇÁö ¾Ê¾Ò½À´Ï´Ù. °ÔÀÓ ¾ÀÀ¸·Î ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
-            //SaveCreat();	// ÀúÀå UI È°¼ºÈ­
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+            //SaveCreat();	// ï¿½ï¿½ï¿½ï¿½ UI È°ï¿½ï¿½È­
         }
     }
-    public void GoGame()	// °ÔÀÓ¾ÀÀ¸·Î ÀÌµ¿
+    public void GoGame()	// ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     {
-        if (!savefile[DataManager.instance.nowSlot])	// ÇöÀç ½½·Ô¹øÈ£ÀÇ µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é
+        if (!savefile[DataManager.instance.nowSlot])	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½
         {
-            Debug.Log("µ¥ÀÌÅÍ°¡ ÀúÀåµÇÁö ¾Ê¾Ò½À´Ï´Ù. °ÔÀÓ ¾ÀÀ¸·Î ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
         string targetScene = DataManager.instance.nowGame.sceneName;
-        SceneManager.sceneLoaded += OnSceneLoaded; // ¾À ·Îµå ¿Ï·á ÈÄ Ã³¸® ¿¬°á
+        SceneManager.sceneLoaded += OnSceneLoaded; // ï¿½ï¿½ ï¿½Îµï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         SceneManager.LoadScene(targetScene);
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -161,7 +163,7 @@ public class MainMenuManager : MonoBehaviour
     {
         UISoundManager.Instance.PlayClick();
 
-        Debug.Log("µ¥¸ð2");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½2");
         NewGameScene = "Demo2";
         SceneManager.LoadScene(NewGameScene);
     }
@@ -169,7 +171,7 @@ public class MainMenuManager : MonoBehaviour
     {
         UISoundManager.Instance.PlayClick();
 
-        Debug.Log("ÆÄÀÌÇÁ¾À");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         NewGameScene = "Pipe";
         SceneManager.LoadScene(NewGameScene);
     }
@@ -177,7 +179,7 @@ public class MainMenuManager : MonoBehaviour
     {
         UISoundManager.Instance.PlayClick();
 
-        Debug.Log("¿É¼Ç");
+        Debug.Log("ï¿½É¼ï¿½");
         optionUI.SetActive(true);
         soundOptionUI.SetActive(true);
         keysetOptionUI.SetActive(false);
@@ -187,7 +189,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickSoundOption()
     {
         UISoundManager.Instance.PlayClick();
-        Debug.Log("»ç¿îµå ¿É¼Ç");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½");
         soundOptionUI.SetActive(true);
         keysetOptionUI.SetActive(false);
         languageOptionUI.SetActive(false);
@@ -195,7 +197,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickKeysetOption()
     {
         UISoundManager.Instance.PlayClick();
-        Debug.Log("Å° ¼³Á¤ ¿É¼Ç");
+        Debug.Log("Å° ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½");
         soundOptionUI.SetActive(false);
         keysetOptionUI.SetActive(true);
         languageOptionUI.SetActive(false);
@@ -203,7 +205,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickLanguageOption()
     {
         UISoundManager.Instance.PlayClick();
-        Debug.Log("¾ð¾î ¿É¼Ç");
+        Debug.Log("ï¿½ï¿½ï¿½ ï¿½É¼ï¿½");
         soundOptionUI.SetActive(false);
         keysetOptionUI.SetActive(false);
         languageOptionUI.SetActive(true);
@@ -227,8 +229,10 @@ public class MainMenuManager : MonoBehaviour
 
         previousSelection = EventSystem.current?.currentSelectedGameObject;
         if (exitPopup == null)
-            exitPopup = ExitFeedbackPopup.Create(exitFont, exitTextBox, exitSurveyQr,
-                QuitApplication, CloseExitPopup);
+        {
+            Debug.LogError("Exit Feedback is missing from the scene hierarchy.", this);
+            return;
+        }
 
         exitPopup.Show(playCode);
     }
@@ -261,7 +265,7 @@ public class MainMenuManager : MonoBehaviour
         }
 
         if (optionUI.activeSelf)
-        {   //¼¼ºÎ ¿É¼Ç ¿ø»óÅÂ ÈÄ ´Ý±â
+        {   //ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ý±ï¿½
             UISoundManager.Instance.PlayClose();
             soundOptionUI.SetActive(true);
             keysetOptionUI.SetActive(false);
@@ -269,7 +273,7 @@ public class MainMenuManager : MonoBehaviour
             optionUI.SetActive(false);
             return;
         }
-        // Load Ã¢ÀÌ ¿­·Á ÀÖÀ¸¸é ´Ý±â
+        // Load Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½
         if (LoadUI.activeSelf)
         {
             UISoundManager.Instance.PlayClose();
@@ -280,7 +284,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void SlotTextEdit()
     {
-        savePath = Application.persistentDataPath; // ÀúÀå °æ·Î
+        savePath = Application.persistentDataPath; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         int totalSlots = slotButtons.Length;
 
         for (int i = 0; i < totalSlots; i++)
@@ -298,7 +302,7 @@ public class MainMenuManager : MonoBehaviour
                 }
                 string fileName = Path.GetFileName(latestFile);
 
-                // ÅØ½ºÆ®¸¸ ¾÷µ¥ÀÌÆ® (½½·Ô »óÅÂ´Â °Çµå¸®Áö ¾ÊÀ½)
+                // ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½ ï¿½Çµå¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
                 slotText[i].text = $"Slot {i+1}: {fileName}";
             }
             else

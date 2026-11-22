@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
      */
     public GameObject choicePanel;
     public Button[] choiceButtons;
+    [SerializeField] private DialogueBarChoices barChoices;
+    private bool promptChoicesOpen;
     private DialogueChoice[] pendingChoices;
     private bool waitingForChoice = false;
     private DialogueEvent currentChoiceEvent;
@@ -99,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 
     bool isPlaying;
 
-    public bool IsPlaying => isPlaying;
+    public bool IsPlaying => isPlaying || promptChoicesOpen;
     public bool EndedThisFrame => endedFrame == Time.frameCount;
     private int endedFrame = -1;
     private int startedFrame = -1;
@@ -111,6 +113,8 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("DialogueManager Awake");
         Instance = this;
         panel.SetActive(false);
+        if (barChoices == null)
+            barChoices = panel.GetComponentInChildren<DialogueBarChoices>(true);
         choicePanel.SetActive(false);
 
         dialogueText.font = defaultDialogueFont;
@@ -135,7 +139,7 @@ public class DialogueManager : MonoBehaviour
         if (!isPlaying || startedFrame == Time.frameCount)
             return;
 
-        if (choicePanel.activeSelf || badEndOverlay != null)
+        if (promptChoicesOpen || choicePanel.activeSelf || badEndOverlay != null)
             return;
 
 #if UNITY_EDITOR
@@ -241,7 +245,11 @@ public class DialogueManager : MonoBehaviour
     {
         InputLockManager.DialogueLock = true; // LockMove, LockInteraction, LockCamera 잠금
 
-        playerInteraction.HideInteractionUI();
+        playerInteraction?.HideInteractionUI();
+        barChoices.Hide();
+        promptChoicesOpen = false;
+        pendingChoices = null;
+        waitingForChoice = false;
         currentDialogue = dialogue;
 
         // 한번만 재생되는 대화는 시작하는 순간 기록
@@ -396,6 +404,25 @@ public class DialogueManager : MonoBehaviour
         currentLine = lines.Dequeue();
         DialogueLine line = currentLine;
 
+        barChoices.Hide();
+        dialogueText.gameObject.SetActive(true);
+        ApplyLinePresentation(line);
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+        typingCoroutine = StartCoroutine(TypeText(line.text ?? string.Empty));
+        pendingChoices = line.hasChoice ? line.choices : null;
+        waitingForChoice = line.hasChoice && pendingChoices != null && pendingChoices.Length > 0;
+        // An empty choice-only line opens directly without an extra advance.
+        if (waitingForChoice && string.IsNullOrWhiteSpace(line.text))
+        {
+            FinishTyping();
+            waitingForChoice = false;
+            ShowChoiceUI(pendingChoices);
+        }
+    }
+
+    private void ApplyLinePresentation(DialogueLine line)
+    {
         if (string.IsNullOrEmpty(line.speakerName))
         {
             speakerText.gameObject.SetActive(false);
@@ -406,10 +433,6 @@ public class DialogueManager : MonoBehaviour
             speakerText.text = line.speakerName;
         }
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        typingCoroutine = StartCoroutine(TypeText(line.text));
 
         // 배경
         if (line.hideBackground)
@@ -520,12 +543,6 @@ public class DialogueManager : MonoBehaviour
 
 
         //선택지 저장만
-        if (line.hasChoice)
-        {
-            pendingChoices = line.choices;
-            waitingForChoice = true;
-        }
-
     }
 
     void EndDialogue()
@@ -559,7 +576,10 @@ public class DialogueManager : MonoBehaviour
         rightPortraitImage.gameObject.SetActive(false);
         detailPanel.SetActive(false);
 
+        barChoices.Hide();
         choicePanel.SetActive(false);
+        dialogueText.text = string.Empty;
+        speakerText.text = string.Empty;
         panel.SetActive(false);
 
         isPlaying = false;
@@ -759,36 +779,42 @@ public class DialogueManager : MonoBehaviour
 
     void ShowChoiceUI(DialogueChoice[] choices)
     {
-        choicePanel.SetActive(true);
-
-
-        for (int i = 0; i < choiceButtons.Length; i++)
-        {
-            if (i < choices.Length)
-            {
-                choiceButtons[i].gameObject.SetActive(true);
-
-                choiceButtons[i]
-                    .GetComponentInChildren<TMP_Text>().text
-                    = choices[i].text;
-
-                choiceButtons[i].onClick.RemoveAllListeners();
-
-                DialogueChoice choice = choices[i];
-
-                choiceButtons[i].onClick.RemoveAllListeners();
-
-                choiceButtons[i].onClick.AddListener(() =>
-                {
-                    SelectChoice(choice);
-                });
-            }
-            else
-            {
-                choiceButtons[i].gameObject.SetActive(false);
-            }
-        }
+        if (choices == null || choices.Length == 0) return;
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        isTyping = false;
+        dialogueText.text = string.Empty;
+        speakerText.text = string.Empty;
+        var options = new string[choices.Length];
+        for (int i = 0; i < choices.Length; i++) options[i] = choices[i].text;
+        barChoices.Show(options, dialogueText.font, dialogueText.fontSize, dialogueText.color,
+            index => SelectChoice(choices[index]));
     }
+
+    public void ShowPromptChoices(DialogueLine presentation, string[] options, System.Action<int> onSelected)
+    {
+        barChoices.Hide();
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        isTyping = false;
+        waitingForChoice = false;
+        promptChoicesOpen = true;
+        panel.SetActive(true);
+        ApplyLinePresentation(presentation);
+        dialogueText.text = string.Empty;
+        speakerText.text = string.Empty;
+        barChoices.Show(options, dialogueText.font, dialogueText.fontSize, dialogueText.color, onSelected);
+    }
+
+    public void HidePromptChoices()
+    {
+        barChoices.Hide();
+        promptChoicesOpen = false;
+        panel.SetActive(false);
+        backgroundImage.gameObject.SetActive(false);
+        leftPortraitImage.gameObject.SetActive(false);
+        rightPortraitImage.gameObject.SetActive(false);
+        detailPanel.SetActive(false);
+    }
+
     void SelectChoice(DialogueChoice choice)
     {
         //선택지 효과음
@@ -846,7 +872,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
         // ----------------------------------------------------------------
-        choicePanel.SetActive(false);
+        barChoices.Hide();
 
         pendingChoices = null;
         waitingForChoice = false;
