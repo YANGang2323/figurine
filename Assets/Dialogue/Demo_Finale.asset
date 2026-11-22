@@ -48,9 +48,9 @@ MonoBehaviour:
     hasChoice: 0
     choices: []
   - speakerName: 
-    text: "\uADF8\uACF3\uC740 \uC644\uC804\uD55C \uC554\uC804\uC774\uC5C8\uB2E4.\n\uB4E4\uB9AC\uB294
-      \uAC83\uC774\uB77C\uACE4 \uB0B4 \uBC1C\uAC78\uC74C \uC18C\uB9AC\uC640 \uC5B4\uB514\uC120\uAC00
-      \uBB3C \uB5A8\uC5B4\uC9C0\uB294 \uC18C\uB9AC\uBFD0\uC774\uC5C8\uB2E4."
+    text: "\uADF8\uACF3\uC740 \uC644\uC804\uD55C \uC554\uC804\uC774\uC5C8\uB2E4.
+      \uB4E4\uB9AC\uB294 \uAC83\uC774\uB77C\uACE4 \uB0B4 \uBC1C\uAC78\uC74C \uC18C\uB9AC\uC640
+      \uC5B4\uB514\uC120\uAC00 \uBB3C \uB5A8\uC5B4\uC9C0\uB294 \uC18C\uB9AC\uBFD0\uC774\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -147,9 +147,7 @@ MonoBehaviour:
   - speakerName: 
     text: "\uD1B5\uB85C\uAC00 \uB05D\uB098\uACE0. \uADF8\uACF3\uC5D0\uB294 \uAE68\uC9C4
       \uC720\uB9AC\uCC3D \uC0AC\uC774\uB85C \uB369\uAD74\uACFC \uBFCC\uB9AC\uAC00
-      \uB4A4\uC5C9\uCF1C \uC788\uC5C8\uB2E4. \n\uBC29\uCE58\uB41C \uC5F0\uAD6C \uB3C4\uAD6C\uC640
-      \uB179\uC2A8 \uBC30\uC591 \uC6A9\uAE30\uAC00 \uC2DD\uBB3C \uC0AC\uC774\uC5D0
-      \uBC18\uCBE4 \uBB3B\uD600 \uC788\uC5C8\uB2E4."
+      \uB4A4\uC5C9\uCF1C \uC788\uC5C8\uB2E4."
     hideBackground: 0
     background: {fileID: 21300000, guid: eecc9c8bb16718b4984433526b9060a1, type: 3}
     hideLeftPortrait: 0
@@ -176,6 +174,39 @@ MonoBehaviour:
     changeBGM: 1
     bgm: {fileID: 8300000, guid: 06640c700318d4f40befff9fb7d94da0, type: 3}
     bgmVolume: 0.814
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: 
+    text: "\uBC29\uCE58\uB41C \uC5F0\uAD6C \uB3C4\uAD6C\uC640 \uB179\uC2A8 \uBC30\uC591
+      \uC6A9\uAE30\uAC00 \uC2DD\uBB3C \uC0AC\uC774\uC5D0 \uBC18\uCBE4 \uBB3B\uD600
+      \uC788\uC5C8\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
     stopBGM: 0
     hasChoice: 0
     choices: []

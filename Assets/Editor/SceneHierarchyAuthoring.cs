@@ -68,8 +68,8 @@ public static class SceneHierarchyAuthoring
             }
         }
 
-        var font = roots.SelectMany(r => r.GetComponentsInChildren<DialogueManager>(true))
-            .Select(d => d.defaultDialogueFont).FirstOrDefault(f => f != null);
+        var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(
+            "Assets/Fonts/MapoPeacefull/MapoPeacefull SDF.asset");
         foreach (var camera in cameras)
         {
             var serialized = new SerializedObject(camera);

@@ -197,13 +197,28 @@ public class DialogueManager : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return false;
 
+        if (panel == null || !panel.activeInHierarchy || !(panel.transform is RectTransform dialogueRect))
+            return false;
+
+        Canvas canvas = panel.GetComponentInParent<Canvas>();
+        Canvas rootCanvas = canvas != null ? canvas.rootCanvas : null;
+        Camera eventCamera = rootCanvas != null && rootCanvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? rootCanvas.worldCamera
+            : null;
+        if (!RectTransformUtility.RectangleContainsScreenPoint(dialogueRect, Input.mousePosition, eventCamera))
+            return false;
+
         EventSystem eventSystem = EventSystem.current;
         if (eventSystem == null)
             return true;
 
         clickHits.Clear();
         eventSystem.RaycastAll(new PointerEventData(eventSystem) { position = Input.mousePosition }, clickHits);
-        return clickHits.Count == 0 || clickHits[0].gameObject.GetComponentInParent<Selectable>() == null;
+        if (clickHits.Count == 0)
+            return true;
+
+        Transform hit = clickHits[0].gameObject.transform;
+        return hit.IsChildOf(dialogueRect) && hit.GetComponentInParent<Selectable>() == null;
     }
 
 #if UNITY_EDITOR

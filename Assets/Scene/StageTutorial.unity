@@ -890,8 +890,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Q\uC640 E \uD0A4\uB85C \uC2DC\uC57C\uB97C \uC804\uD658\uD574 \uBCF4\uC138\uC694"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e95220e2c8fa454882a68bbfc5998e7, type: 2}
+  m_sharedMaterial: {fileID: 4882486413490566693, guid: 3e95220e2c8fa454882a68bbfc5998e7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1588,6 +1588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   isSideView: 0
+  viewDirection: 0
+  allowFourDirections: 1
   mapCameraDistance: 36
   mapRoot: {fileID: 0}
   cameraBoundaryWalls: []
@@ -1614,7 +1616,7 @@ MonoBehaviour:
   pipe: {fileID: 147737035}
   tutorialHint: {fileID: 1801528501}
   tutorialHintLabel: {fileID: 912319518}
-  tabHintFont: {fileID: 0}
+  tabHintFont: {fileID: 12800000, guid: 0153fd71445da804086a1794141ed3ed, type: 3}
   cameraOffset: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
