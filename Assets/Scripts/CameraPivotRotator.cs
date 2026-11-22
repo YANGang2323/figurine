@@ -12,14 +12,22 @@ public class CameraPivotRotator : MonoBehaviour
     [Header("Rotation Settings")]
     public float rotationSpeed = 5f;          // 회전 속도 조절
     public bool isSideView;           // 현재 측면 시점 여부 (true면 시점2)
+    public enum ViewDirection { Front, Side, Back, OppositeSide }
+    [SerializeField] private ViewDirection viewDirection;
+    [SerializeField] private bool allowFourDirections = true;
+    public ViewDirection CurrentViewDirection => viewDirection;
+    public bool AllowsFourDirections => allowFourDirections &&
+        gameObject.scene.name != "Stage1" && gameObject.scene.name != "Stage2";
+    private int mapTurnStartDirection;
     private bool isRotating = false;
     private Vector3 turnAnchor;
     private Quaternion turnRotation;
-    [SerializeField, Min(1f)] private float mapCameraDistance = 36f;
+    [SerializeField, Min(1f)] private float mapCameraDistance = 8f;
     [SerializeField] private Transform mapRoot;
     private Vector3 mapTurnStartPosition;
     private bool mapTurnStartSide;
     private Vector3 mapTurnPivot;
+    private float mapTurnDestinationHeight;
     private Vector3 mapTurnOrigin;
     private Vector3 mapTurnSource;
     private float mapTurnProgress;
@@ -39,6 +47,8 @@ public class CameraPivotRotator : MonoBehaviour
 
     // While the map is turning, keep the last settled position and view together.
     internal bool SaveSideView => mapRoot != null && isRotating ? mapTurnStartSide : isSideView;
+    internal SavedCameraView SaveView => (SavedCameraView)(1 +
+        (mapRoot != null && isRotating ? mapTurnStartDirection : (int)viewDirection));
 
     public Vector3 ToSavePosition(Vector3 worldPosition)
     {
@@ -50,8 +60,7 @@ public class CameraPivotRotator : MonoBehaviour
 
     private void InitializeMapRotation()
     {
-        if (player == null || stage3CameraMode ||
-            (gameObject.scene.name != "Stage1" && gameObject.scene.name != "Stage2"))
+        if (player == null || stage3CameraMode)
             return;
 
         viewCamera = GetComponentInChildren<Camera>();
@@ -66,36 +75,48 @@ public class CameraPivotRotator : MonoBehaviour
 
         transform.rotation = defaultRotation;
         Vector3 lensOffset = viewCamera.transform.localPosition;
-        lensOffset.z = -mapCameraDistance;
+        // Move along the lens axis so distance does not change framing.
+        Vector3 lensForward = viewCamera.transform.localRotation * Vector3.forward;
+        lensOffset += lensForward * ((-mapCameraDistance - lensOffset.z) / lensForward.z);
         viewCamera.transform.localPosition = lensOffset;
         mapCameraPosition = GetFollowPosition(defaultRotation);
         transform.position = mapCameraPosition;
-        ApplyMapView(isSideView);
+        ApplyMapView((int)viewDirection);
         mapFollowPlayerPosition = player.position;
+        ApplyMapCamera();
     }
 
-    private Quaternion MapAngle(bool side) =>
-        Quaternion.Euler(0f, side ? -90f : 0f, 0f);
+    private Quaternion MapAngle(int direction) => Quaternion.Euler(0f, -90f * direction, 0f);
 
-    private void ApplyMapView(bool side)
+    private void SetViewDirection(int direction)
+    {
+        viewDirection = (ViewDirection)((direction % 4 + 4) % 4);
+        isSideView = ((int)viewDirection & 1) != 0;
+    }
+
+    private void ApplyMapView(int direction)
     {
         Vector3 pivot = player.position;
         Vector3 localPivot = mapRoot.InverseTransformPoint(pivot);
-        Quaternion angle = MapAngle(side);
+        Quaternion angle = MapAngle(direction);
         mapRoot.SetPositionAndRotation(pivot - angle * localPivot, angle);
         Physics.SyncTransforms();
     }
 
-    private void StartMapTurn(bool side, Vector3 destination)
+    private void StartMapTurn(bool side, Vector3 destination) => StartMapTurn(side ? 1 : 0, destination);
+
+    private void StartMapTurn(int direction, Vector3 destination)
     {
         mapTurnStartPosition = mapRoot.position;
         mapTurnStartSide = isSideView;
+        mapTurnStartDirection = (int)viewDirection;
         mapTurnPivot = player.position;
+        mapTurnDestinationHeight = destination.y;
         mapTurnSource = mapRoot.InverseTransformPoint(mapTurnPivot);
         mapTurnOrigin = mapRoot.InverseTransformPoint(destination);
         mapTurnProgress = 0f;
         mapTurnStart = mapRoot.rotation;
-        mapTurnTarget = MapAngle(side);
+        mapTurnTarget = MapAngle(direction);
         mapTurnCameraOrigin = mapCameraPosition;
         mapTurnBody = player.GetComponent<Rigidbody>();
         if (mapTurnBody != null)
@@ -110,7 +131,7 @@ public class CameraPivotRotator : MonoBehaviour
                 mapTurnBody.detectCollisions = false;
             }
         }
-        isSideView = side;
+        SetViewDirection(direction);
         InputLockManager.CameraRotateLock = true;
         InputLockManager.Refresh();
         isRotating = true;
@@ -124,7 +145,16 @@ public class CameraPivotRotator : MonoBehaviour
         float progress = Mathf.SmoothStep(0f, 1f, mapTurnProgress);
         Quaternion rotation = Quaternion.Slerp(mapTurnStart, mapTurnTarget, progress);
         Vector3 localPivot = Vector3.Lerp(mapTurnSource, mapTurnOrigin, progress);
-        mapRoot.SetPositionAndRotation(mapTurnPivot - rotation * localPivot, rotation);
+        // Portal clearance belongs to the player, not the map. Moving the map
+        // vertically here would accumulate each time gravity settles the player.
+        Vector3 playerPosition = mapTurnPivot;
+        playerPosition.y = Mathf.Lerp(mapTurnPivot.y, mapTurnDestinationHeight, progress);
+        Vector3 mapPosition = playerPosition - rotation * localPivot;
+        mapPosition.y = mapTurnStartPosition.y;
+        mapRoot.SetPositionAndRotation(mapPosition, rotation);
+        player.position = playerPosition;
+        if (mapTurnBody != null)
+            mapTurnBody.position = playerPosition;
         Physics.SyncTransforms();
         mapCameraPosition = mapTurnCameraOrigin;
         ApplyMapCamera();
@@ -133,7 +163,10 @@ public class CameraPivotRotator : MonoBehaviour
             if (PlayerOverlapsMap())
             {
                 mapRoot.SetPositionAndRotation(mapTurnStartPosition, mapTurnStart);
-                isSideView = mapTurnStartSide;
+                player.position = mapTurnPivot;
+                if (mapTurnBody != null)
+                    mapTurnBody.position = mapTurnPivot;
+                SetViewDirection(mapTurnStartDirection);
                 Physics.SyncTransforms();
                 ApplyMapCamera();
             }
@@ -193,6 +226,13 @@ public class CameraPivotRotator : MonoBehaviour
     private void ApplyMapCamera(Vector3 position)
     {
         transform.position = position;
+        if (GetComponent<CloseThirdPersonCamera>() != null)
+        {
+            // Old camera bounds fixed the depth far from the player. A close
+            // pitched lens must keep its framing plane at the player's depth.
+            Vector3 forward = Vector3.ProjectOnPlane(viewCamera.transform.forward, Vector3.up).normalized;
+            transform.position += forward * Vector3.Dot(player.position - transform.position, forward);
+        }
         if (cameraBoundaryWalls == null || cameraBoundaryWalls.Length == 0)
             return;
 
@@ -366,7 +406,8 @@ public class CameraPivotRotator : MonoBehaviour
 
             SetConstraintsByView(); //위치제한설정
             if (stage3CameraMode && player != null) {   // 기본 시점(yaw 180°)에서 카메라와 플레이어의 Z 거리
-            stage3Distance = Mathf.Abs(transform.position.z - player.position.z);
+            stage3Distance = GetComponent<CloseThirdPersonCamera>() != null
+                ? 0f : Mathf.Abs(transform.position.z - player.position.z);
             }
             SnapToPlayer();//플레이어위치로
         
@@ -388,10 +429,17 @@ public class CameraPivotRotator : MonoBehaviour
         }
 
         // sceneLoaded restores the position before Start applies the saved map view.
-        if (ViewOnLoad == SavedCameraView.Front || ViewOnLoad == SavedCameraView.Side)
+        SetViewDirection(AllowsFourDirections ? (int)viewDirection : (isSideView ? 1 : 0));
+        if (AllowsFourDirections)
         {
-            isSideView = ViewOnLoad == SavedCameraView.Side;
-            targetRotation = isSideView ? sideRotation : defaultRotation;
+            targetRotation = RotationForDirection((int)viewDirection);
+            transform.rotation = targetRotation;
+        }
+        if (ViewOnLoad != SavedCameraView.Unspecified)
+        {
+            int savedDirection = (int)ViewOnLoad - 1;
+            SetViewDirection(AllowsFourDirections ? savedDirection : Mathf.Clamp(savedDirection, 0, 1));
+            targetRotation = RotationForDirection((int)viewDirection);
             transform.rotation = targetRotation;
             SetConstraintsByView();
             ViewOnLoad = SavedCameraView.Unspecified;
@@ -442,12 +490,15 @@ public class CameraPivotRotator : MonoBehaviour
         if (!isRotating && InputLockManager.LockCamera)
             return;
         // 현재 시점 반대 방향의 입력만 처리
-        if (!isRotating &&
-        InputManager.instance.GetKeyDown(isSideView ? KeyCode.E : KeyCode.Q) &&
-        (cameraType == CameraMovingType.Fix ||
-         cameraType == CameraMovingType.Moving))
+        if (!isRotating && (cameraType == CameraMovingType.Fix || cameraType == CameraMovingType.Moving))
         {
-            HandleViewInput();
+            if (AllowsFourDirections)
+            {
+                if (InputManager.instance.GetKeyDown(KeyCode.Q)) HandleViewInput(1);
+                else if (InputManager.instance.GetKeyDown(KeyCode.E)) HandleViewInput(-1);
+            }
+            else if (InputManager.instance.GetKeyDown(isSideView ? KeyCode.E : KeyCode.Q))
+                HandleViewInput();
         }
 
     }
@@ -580,6 +631,16 @@ public class CameraPivotRotator : MonoBehaviour
     {
         if (player == null)
             return;
+        if (mapRoot != null && viewCamera != null)
+        {
+            mapFollowPlayerPosition = player.position;
+            mapCameraPosition = GetFollowPosition(defaultRotation);
+            Vector3 right = viewCamera.transform.right;
+            Vector3 lensOffset = viewCamera.transform.position - transform.position;
+            mapCameraPosition += right * Vector3.Dot(player.position - mapCameraPosition - lensOffset, right);
+            ApplyMapCamera();
+            return;
+        }
         transform.position = GetFollowPosition(transform.rotation);
     }
 
@@ -695,24 +756,29 @@ public class CameraPivotRotator : MonoBehaviour
         tutorialHint.SetActive(true);
     }
 
-    private void HandleViewInput()
+    private void HandleViewInput(int step = 1)
     {
         if (DialogueManager.Instance != null && DialogueManager.Instance.EndedThisFrame)
             return;
 
         if (!Teleporter.TryTeleport(player, this))
-            TryRotateView();
+            TryRotateView(step);
     }
 
-    public bool TryRotateView()
+    public bool TryRotateView() => TryRotateView(1);
+
+    public bool TryRotateView(int step)
     {
         if (isRotating || InputLockManager.LockCamera ||
             (DialogueManager.Instance != null && DialogueManager.Instance.EndedThisFrame) ||
             (cameraType != CameraMovingType.Fix && cameraType != CameraMovingType.Moving)) return false;
+        int direction = AllowsFourDirections
+            ? ((int)viewDirection + (step < 0 ? -1 : 1) + 4) % 4
+            : (isSideView ? 0 : 1);
         if (mapRoot != null)
-            StartMapTurn(!isSideView, player.position);
+            StartMapTurn(direction, player.position);
         else
-            BeginViewTurn(!isSideView, player != null ? CapturePlayerFraming() : Vector3.zero);
+            BeginViewTurn(direction, player != null ? CapturePlayerFraming() : Vector3.zero);
         if (tutorialHintArmed)
             tutorialHintUsed = true;
         if (tutorialHint != null)
@@ -721,7 +787,13 @@ public class CameraPivotRotator : MonoBehaviour
         return true;
     }
 
-    private void BeginViewTurn(bool sideView, Vector3 playerFraming)
+    private Quaternion RotationForDirection(int direction) =>
+        Quaternion.Euler(stage3CameraMode ? stage3TiltAngle : 0f, 180f + 90f * direction, 0f);
+
+    private void BeginViewTurn(bool sideView, Vector3 playerFraming) =>
+        BeginViewTurn(sideView ? 1 : 0, playerFraming);
+
+    private void BeginViewTurn(int direction, Vector3 playerFraming)
     {
         if (viewCamera == null)
             viewCamera = GetComponentInChildren<Camera>();
@@ -736,8 +808,8 @@ public class CameraPivotRotator : MonoBehaviour
         turnAnchor = playerFraming;
         turnRotation = transform.rotation;
         InputLockManager.CameraRotateLock = true;
-        isSideView = sideView;
-        targetRotation = isSideView ? sideRotation : defaultRotation;
+        SetViewDirection(direction);
+        targetRotation = RotationForDirection(direction);
         turnStartAngle = Quaternion.Angle(turnRotation, targetRotation);
         turnStartMin = minPosition;
         turnStartMax = maxPosition;
@@ -751,8 +823,8 @@ public class CameraPivotRotator : MonoBehaviour
         if (mapRoot != null)
         {
             FinishMapTurn();
-            isSideView = sideView;
-            ApplyMapView(sideView);
+            SetViewDirection(sideView ? 1 : 0);
+            ApplyMapView((int)viewDirection);
             mapFollowPlayerPosition = player.position;
             mapCameraPosition = player.position + transform.rotation * sideViewOffset;
             mapCameraPosition.y = minPosDefault.y;
@@ -760,7 +832,7 @@ public class CameraPivotRotator : MonoBehaviour
             return;
         }
 
-        isSideView = sideView;
+        SetViewDirection(sideView ? 1 : 0);
         isRotating = false;
         targetRotation = isSideView ? sideRotation : defaultRotation;
         transform.rotation = targetRotation;
@@ -778,10 +850,9 @@ public class CameraPivotRotator : MonoBehaviour
         if (stage3CameraMode)// 3스테이지: X, Y, Z 모두 플레이어를 따라감
         {
             desiredPosition.y = player.position.y + stage3FollowOffset.y; // Clamp 안 함
-            if (isSideView)
-                desiredPosition.x = player.position.x + stage3Distance;  // 측면: X 거리 유지, Z 따라감
-            else
-                desiredPosition.z = player.position.z + stage3Distance;  // 기본: Z 거리 유지, X 따라감
+            Vector3 depthOffset = yawOnly * (Vector3.back * stage3Distance);
+            desiredPosition.x = player.position.x + depthOffset.x;
+            desiredPosition.z = player.position.z + depthOffset.z;
         }
         return ClampCameraPosition(desiredPosition, minPosition, maxPosition);
     }

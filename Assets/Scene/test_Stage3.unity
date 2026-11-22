@@ -882,6 +882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257229017}
   - component: {fileID: 257229016}
+  - component: {fileID: 257229018}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -903,7 +904,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   isSideView: 0
-  mapCameraDistance: 36
+  viewDirection: 0
+  allowFourDirections: 1
+  mapCameraDistance: 8
   mapRoot: {fileID: 0}
   cameraBoundaryWalls: []
   cameraEdgeInset: 0.05
@@ -918,7 +921,7 @@ MonoBehaviour:
   stage3CameraMode: 1
   stage3TiltAngle: 20
   stage3FollowOffset: {x: 0, y: 4, z: 0}
-  useMovementConstraints: 1
+  useMovementConstraints: 0
   minPosDefault: {x: 5, y: -7, z: -13}
   maxPosDefault: {x: 25, y: 5, z: 10}
   minPosSide: {x: 5, y: 2, z: -18.5}
@@ -944,9 +947,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 363364676}
+  - {fileID: 572356842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: 180, z: 0}
+--- !u!114 &257229018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257229015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8488d403d1577419a6cc4dcebe5e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseThirdPersonCamera
+  viewCamera: {fileID: 363364678}
+  player: {fileID: 419804271}
+  walls: []
+  floors:
+  - {fileID: 1437800323}
+  floorClearance: 0.05
+  playerDepthMargin: 0.35
 --- !u!1 &288367128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,12 +1459,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363364675}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0026179885, y: 0, z: 0, w: 0.9999966}
-  m_LocalPosition: {x: 0, y: 0.5, z: -43.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 257229017}
+  m_Father: {fileID: 572356842}
   m_LocalEulerAnglesHint: {x: 0.3, y: 0, z: 0}
 --- !u!81 &363364677
 AudioListener:
@@ -1483,8 +1505,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.05
+  far clip plane: 200
   field of view: 60
   orthographic: 1
   orthographic size: 2.3
@@ -2501,6 +2523,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552438739}
   m_CullTransparentMesh: 1
+--- !u!1 &572356841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 572356842}
+  m_Layer: 0
+  m_Name: Camera Framing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &572356842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572356841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 363364676}
+  m_Father: {fileID: 257229017}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &578696596
 GameObject:
   m_ObjectHideFlags: 0

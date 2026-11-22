@@ -231,7 +231,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20760167}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: bcd2a6eceb9fae34ab5bf46ca30946ef, type: 2}
 --- !u!1 &61470330
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 77038895}
   - component: {fileID: 77038894}
   - component: {fileID: 77038893}
+  - component: {fileID: 77038897}
   m_Layer: 0
   m_Name: RightWall (1)
   m_TagString: Untagged
@@ -456,6 +457,23 @@ Transform:
   - {fileID: 461315851}
   m_Father: {fileID: 709414608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &77038897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77038892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 77038894}
+  - {fileID: 897244103}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1001 &83993702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -997,6 +1015,7 @@ GameObject:
   - component: {fileID: 289322821}
   - component: {fileID: 289322820}
   - component: {fileID: 289322819}
+  - component: {fileID: 289322823}
   m_Layer: 0
   m_Name: RightWall
   m_TagString: Untagged
@@ -1099,6 +1118,23 @@ Transform:
   - {fileID: 1355067148}
   m_Father: {fileID: 709414608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &289322823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289322818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 289322820}
+  - {fileID: 1355067150}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1 &342256565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,6 +1376,7 @@ GameObject:
   - component: {fileID: 461315850}
   - component: {fileID: 461315849}
   - component: {fileID: 461315848}
+  - component: {fileID: 461315852}
   m_Layer: 0
   m_Name: LeftWall
   m_TagString: Untagged
@@ -1444,6 +1481,25 @@ Transform:
   - {fileID: 1632620896}
   m_Father: {fileID: 77038896}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &461315852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461315847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 461315849}
+  - {fileID: 860918394}
+  - {fileID: 20760170}
+  - {fileID: 1632620898}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1 &463113847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,6 +1950,38 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1474580595}
   m_SourcePrefab: {fileID: 100100000, guid: eecdc2aa314aad94fa6906a31ca184ec, type: 3}
+--- !u!1 &572356841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 572356842}
+  m_Layer: 0
+  m_Name: Camera Framing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &572356842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572356841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.44999993, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1222665100}
+  m_Father: {fileID: 2144843937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587495620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,6 +2252,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 894822204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &702847673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 702847674}
+  - component: {fileID: 702847675}
+  m_Layer: 0
+  m_Name: Floor Cut Face - Floor Color
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &702847674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702847673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222665100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702847675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702847673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808880eed1b5ef549975027e715dc035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloorCutFaceFill
+  viewCamera: {fileID: 1222665099}
+  floor: {fileID: 1983592550}
+  faceColor: {r: 0.5764706, g: 0.45882353, b: 0.5176471, a: 1}
+  sceneLight: {fileID: 0}
+  followSceneLighting: 0
 --- !u!1 &709414607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,7 +2839,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860918391}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 8cafe1adfbb0bf544b5a0421656daa7f, type: 2}
 --- !u!1001 &894822197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2950,7 +3087,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897244100}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 2e30e8b45ac9e0647b4d68b58602a743, type: 2}
 --- !u!1 &903424687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,11 +4112,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.05
+  far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 2.3
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4003,12 +4140,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222665097}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0026179885, y: 0, z: 0, w: 0.9999966}
-  m_LocalPosition: {x: 0, y: 0.5, z: -43.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2144843937}
+  m_Children:
+  - {fileID: 702847674}
+  m_Father: {fileID: 572356842}
   m_LocalEulerAnglesHint: {x: 0.3, y: 0, z: 0}
 --- !u!114 &1222665101
 MonoBehaviour:
@@ -4504,7 +4642,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355067147}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 2d6017fa8d64bd047bd807bb57e18b60, type: 2}
 --- !u!1 &1402123288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5930,7 +6068,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632620895}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: f784c2f7a741b1d4391d1d2d8938acfe, type: 2}
 --- !u!1 &1633532935
 GameObject:
   m_ObjectHideFlags: 0
@@ -7399,6 +7537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2144843937}
   - component: {fileID: 2144843938}
+  - component: {fileID: 2144843939}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -7419,7 +7558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1222665100}
+  - {fileID: 572356842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &2144843938
@@ -7436,7 +7575,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   isSideView: 0
-  mapCameraDistance: 36
+  viewDirection: 0
+  allowFourDirections: 0
+  mapCameraDistance: 8
   mapRoot: {fileID: 709414608}
   cameraBoundaryWalls:
   - {fileID: 1079362146}
@@ -7468,6 +7609,28 @@ MonoBehaviour:
   tutorialHintLabel: {fileID: 1320244780}
   tabHintFont: {fileID: 12800000, guid: 552052f1ab1ad1548b75286779cc8511, type: 3}
   cameraOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2144843939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144843936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8488d403d1577419a6cc4dcebe5e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseThirdPersonCamera
+  viewCamera: {fileID: 1222665099}
+  player: {fileID: 1474580602}
+  walls:
+  - {fileID: 289322823}
+  - {fileID: 77038897}
+  - {fileID: 461315852}
+  floors:
+  - {fileID: 1983592550}
+  floorClearance: 0.05
+  playerDepthMargin: 0.35
 --- !u!1001 &2635324474268464711
 PrefabInstance:
   m_ObjectHideFlags: 0

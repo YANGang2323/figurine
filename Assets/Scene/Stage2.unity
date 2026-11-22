@@ -171,6 +171,55 @@ MonoBehaviour:
   - {fileID: 683912512}
   activeColor: {r: 0.43529412, g: 1, b: 0.4509804, a: 1}
   inactiveColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
+--- !u!1 &21155005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21155006}
+  - component: {fileID: 21155007}
+  m_Layer: 0
+  m_Name: Floor Cut Face - Ground Color
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &21155006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21155005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1011517868}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21155007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21155005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808880eed1b5ef549975027e715dc035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloorCutFaceFill
+  viewCamera: {fileID: 1011517870}
+  floor: {fileID: 490357785}
+  faceColor: {r: 0.43137255, g: 0.43529412, b: 0.48235294, a: 1}
+  sceneLight: {fileID: 647805137}
+  followSceneLighting: 1
 --- !u!1 &33730511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,6 +1137,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: affedef51a40a704bba8e57db9454cce, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (1)
@@ -1177,6 +1230,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 54cdcd67e0b51474299685d37098a561, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (4)
@@ -1505,6 +1562,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 78dd55ffdc45b6241875f4dd74a786de, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (7)
@@ -1681,6 +1742,7 @@ GameObject:
   - component: {fileID: 198930198}
   - component: {fileID: 198930197}
   - component: {fileID: 198930196}
+  - component: {fileID: 198930200}
   m_Layer: 0
   m_Name: LeftWall1
   m_TagString: Untagged
@@ -1782,6 +1844,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1513142740}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &198930200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198930195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 198930197}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1001 &201574537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2861,6 +2939,7 @@ GameObject:
   - component: {fileID: 289322821}
   - component: {fileID: 289322820}
   - component: {fileID: 289322819}
+  - component: {fileID: 289322823}
   m_Layer: 0
   m_Name: RightWall
   m_TagString: Untagged
@@ -2962,6 +3041,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2130967312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &289322823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289322818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 289322820}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1 &294072197
 GameObject:
   m_ObjectHideFlags: 0
@@ -3232,6 +3327,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 78fcdbf1ed9ea9e40a7e7b2c6b143c1a, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (3)
@@ -3591,6 +3690,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: d6b9582f26b8c064faf3a7a0375231c4, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (5)
@@ -4552,6 +4655,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 6e3df83659cc9564ab8b97182e2b1eb8, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (2)
@@ -4859,6 +4966,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 41ab24983e828d248b3e886d347c8c91, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (3)
@@ -5067,6 +5178,7 @@ GameObject:
   - component: {fileID: 461315850}
   - component: {fileID: 461315849}
   - component: {fileID: 461315848}
+  - component: {fileID: 461315852}
   m_Layer: 0
   m_Name: LeftWall
   m_TagString: Untagged
@@ -5168,6 +5280,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2130967312}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &461315852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461315847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 461315849}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1001 &462590126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6224,6 +6352,7 @@ GameObject:
   - component: {fileID: 549533288}
   - component: {fileID: 549533287}
   - component: {fileID: 549533286}
+  - component: {fileID: 549533290}
   m_Layer: 0
   m_Name: RightWall1
   m_TagString: Untagged
@@ -6325,6 +6454,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1513142740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &549533290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549533285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f32f1670f57dd40b3916030b3e3251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOccludingWall
+  wallRenderers:
+  - {fileID: 549533287}
+  occludedAlpha: 0.08
+  fadeDuration: 0.15
 --- !u!1 &557840674
 GameObject:
   m_ObjectHideFlags: 0
@@ -6540,6 +6685,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561302377}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &572356841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 572356842}
+  m_Layer: 0
+  m_Name: Camera Framing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &572356842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572356841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1011517868}
+  m_Father: {fileID: 1939806534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &579209573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6604,6 +6781,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 9ddbeb25b4179a54da38fdf078fefe75, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (2)
@@ -8509,6 +8690,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: ff733040ae2855d46a398cf643b1eab1, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed
@@ -8817,6 +9002,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 3e29e849666052e479cee8989d4cef21, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (5)
@@ -9094,6 +9283,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: e1aeccd84a133c14d87b7b0ea22446a4, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (6)
@@ -9206,6 +9399,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: fbfd23ffaa2830348beba9ea1bf6a910, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (end)
@@ -9298,6 +9495,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: ab6cfc2ff2767aa419db497e439b22e1, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (4)
@@ -10171,6 +10372,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 21f405952ed220b43a86f0fbbbcf2c94, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (4)
@@ -10322,11 +10527,12 @@ Transform:
   m_GameObject: {fileID: 1011517867}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -43}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1939806534}
+  m_Children:
+  - {fileID: 21155006}
+  m_Father: {fileID: 572356842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1011517869
 AudioListener:
@@ -10367,11 +10573,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 100
+  near clip plane: 0.05
+  far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10851,7 +11057,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040047647}
-  m_Mesh: {fileID: -2432090755550338912, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 022faaa8c348a9f459e975ad429c72a5, type: 2}
 --- !u!1 &1057909177
 GameObject:
   m_ObjectHideFlags: 0
@@ -12087,6 +12293,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f82a62dbe7ef418499e2c1579a2af427, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (4)
@@ -12173,6 +12383,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 60f8360a9a949864c860b8df9de2f750, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (2)
@@ -12871,11 +13085,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 100
+  near clip plane: 0.05
+  far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12899,12 +13113,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222665097}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0026179885, y: 0, z: 0, w: 0.9999966}
-  m_LocalPosition: {x: 0, y: 0, z: -43}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2144843937}
+  m_Children:
+  - {fileID: 1238646789}
+  m_Father: {fileID: 1429200628}
   m_LocalEulerAnglesHint: {x: 0.3, y: 0, z: 0}
 --- !u!114 &1222665101
 MonoBehaviour:
@@ -12950,6 +13165,55 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &1238646788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238646789}
+  - component: {fileID: 1238646790}
+  m_Layer: 0
+  m_Name: Floor Cut Face - Ground Color
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238646789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238646788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222665100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1238646790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238646788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808880eed1b5ef549975027e715dc035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloorCutFaceFill
+  viewCamera: {fileID: 1222665099}
+  floor: {fileID: 54196282}
+  faceColor: {r: 0.43137255, g: 0.43529412, b: 0.48235294, a: 1}
+  sceneLight: {fileID: 647805137}
+  followSceneLighting: 1
 --- !u!1 &1258451056
 GameObject:
   m_ObjectHideFlags: 0
@@ -13186,6 +13450,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f99310a4144b1db4b89ff28a28c37621, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (8)
@@ -13991,6 +14259,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 83e500377e9cbfb4bb8c64332be1ea9e, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (7)
@@ -14303,6 +14575,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 23e56ddab4b55b3488397181aa1ea386, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (5)
@@ -14385,6 +14661,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 0195ca5b97544bb438f3b1d8a09f591b, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (3)
@@ -14619,6 +14899,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f9be15fb02c92b64d8ae7b5990d491a3, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (6)
@@ -14772,6 +15056,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 32.861633, y: 8.011935, z: 1}
   m_Center: {x: -9.9236145, y: 3.5059676, z: 0}
+--- !u!1 &1429200627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429200628}
+  m_Layer: 0
+  m_Name: Camera Framing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1429200628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429200627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1222665100}
+  m_Father: {fileID: 2144843937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1435849325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14836,6 +15152,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: ffd9b050aa6fe6347aa33771f45ccd46, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (1)
@@ -15746,6 +16066,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 65cd0e0e635b891429edd455665a6c10, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (9)
@@ -15827,6 +16151,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: bd8ef106e65178e4ab8f603f0bdf3928, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (1)
@@ -16442,6 +16770,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: ed0be1a95272ee845adf2ce7a11442d3, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (8)
@@ -16954,6 +17286,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 99e438ae68576ac4e9220929c14476fa, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (1)
@@ -17155,7 +17491,7 @@ MonoBehaviour:
   alignmentWidth: 0.75
   gravity: 9.8
   tutorialPauseAfter: 0.12
-  floorY: -0.35
+  floorY: -0.25
   hitHeightBelowHead: 1
   minimumReactionTime: 0.55
 --- !u!1 &1697723703
@@ -17253,6 +17589,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 8092492c409d3834894732f729975441, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (10)
@@ -18399,7 +18739,7 @@ MonoBehaviour:
   alignmentWidth: 1
   gravity: 9.8
   tutorialPauseAfter: 0.12
-  floorY: -0.35
+  floorY: -0.25
   hitHeightBelowHead: 1
   minimumReactionTime: 0.55
 --- !u!1 &1878560776
@@ -18946,6 +19286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1939806534}
   - component: {fileID: 1939806533}
+  - component: {fileID: 1939806535}
   m_Layer: 0
   m_Name: CameraPivot0
   m_TagString: Untagged
@@ -18967,7 +19308,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   isSideView: 1
-  mapCameraDistance: 36
+  viewDirection: 0
+  allowFourDirections: 0
+  mapCameraDistance: 8
   mapRoot: {fileID: 1513142740}
   cameraBoundaryWalls:
   - {fileID: 1425222991}
@@ -19012,9 +19355,30 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1011517868}
+  - {fileID: 572356842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1939806535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939806532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8488d403d1577419a6cc4dcebe5e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseThirdPersonCamera
+  viewCamera: {fileID: 1011517870}
+  player: {fileID: 1959544693}
+  walls:
+  - {fileID: 549533290}
+  - {fileID: 198930200}
+  floors:
+  - {fileID: 490357786}
+  floorClearance: 0.05
+  playerDepthMargin: 0.35
 --- !u!1001 &1950117473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19079,6 +19443,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 3177e6d4c69af51459f25969c7821ffa, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed
@@ -19403,6 +19771,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 7fbddaf9318b2a947bb417aac7273394, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (3)
@@ -19509,7 +19881,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981856467}
-  m_Mesh: {fileID: -2432090755550338912, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f5558f75bf3d91c45bcdd921fe6b890f, type: 2}
 --- !u!1 &1983592549
 GameObject:
   m_ObjectHideFlags: 0
@@ -20460,6 +20832,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 0beba55d22c6f884e97743f8dfc19c30, type: 2}
     - target: {fileID: 919132149155446097, guid: 83404e5132f9df04483a0a0ee1d20f46, type: 3}
       propertyPath: m_Name
       value: curtainOpen (2)
@@ -20999,6 +21375,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6400281290468069383, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 5019cc1d519e1b14c964c97658c960ab, type: 2}
     - target: {fileID: 919132149155446097, guid: 2310623e7137d4c488b0050238ba722c, type: 3}
       propertyPath: m_Name
       value: curtainClosed (5)
@@ -21031,6 +21411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2144843937}
   - component: {fileID: 2144843938}
+  - component: {fileID: 2144843939}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -21051,7 +21432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1222665100}
+  - {fileID: 1429200628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &2144843938
@@ -21068,7 +21449,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 3
   isSideView: 1
-  mapCameraDistance: 36
+  viewDirection: 0
+  allowFourDirections: 0
+  mapCameraDistance: 8
   mapRoot: {fileID: 2130967312}
   cameraBoundaryWalls:
   - {fileID: 213135527}
@@ -21100,6 +21483,28 @@ MonoBehaviour:
   tutorialHintLabel: {fileID: 1553332487}
   tabHintFont: {fileID: 12800000, guid: 552052f1ab1ad1548b75286779cc8511, type: 3}
   cameraOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2144843939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144843936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8488d403d1577419a6cc4dcebe5e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseThirdPersonCamera
+  viewCamera: {fileID: 1222665099}
+  player: {fileID: 955303158}
+  walls:
+  - {fileID: 289322823}
+  - {fileID: 461315852}
+  floors:
+  - {fileID: 54196278}
+  - {fileID: 1983592550}
+  floorClearance: 0.05
+  playerDepthMargin: 0.35
 --- !u!4 &989641692891750891
 Transform:
   m_ObjectHideFlags: 0

@@ -920,6 +920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionUI
       objectReference: {fileID: 0}
+    - target: {fileID: 151492808726885721, guid: 0936bfd17327aa14998b6527ad30d417, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 890763142667979729, guid: 0936bfd17327aa14998b6527ad30d417, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

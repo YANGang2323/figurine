@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private Vector3 moveDir = Vector3.zero;
     private Rigidbody rb;
+    private bool facingInitialized;
 
     [Header("Run & Rotation Settings")]
     public bool runable;
@@ -45,9 +46,10 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        bool sideView = CameraPivotRotator.Instance != null && CameraPivotRotator.Instance.isSideView;
         bool fixedView = CameraPivotRotator.Instance != null && CameraPivotRotator.Instance.UsesMapRotation;
-        Vector3 left = sideView && !fixedView ? Vector3.back : Vector3.right;
+        Vector3 left = !fixedView && CameraPivotRotator.Instance != null
+            ? Quaternion.Euler(0f, 90f * (int)CameraPivotRotator.Instance.CurrentViewDirection, 0f) * Vector3.right
+            : Vector3.right;
         moveDir = Vector3.zero;
         if (InputManager.instance.GetKey(KeyCode.A))
             moveDir = left;
@@ -57,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = moveDir != Vector3.zero;
         bool isRunning = isMoving && runable && Input.GetKey(KeyCode.LeftShift);
         currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
-        animator.SetInteger("MoveState", isRunning ? 2 : isMoving ? 1 : 0);
     }
 
     void FixedUpdate()
@@ -82,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
         if (rb.linearVelocity != velocity)
             rb.linearVelocity = velocity;
+        bool actuallyMoving = horizontalVelocity.sqrMagnitude > 0.0001f;
+        animator.SetInteger("MoveState", actuallyMoving ? (currentSpeed > moveSpeed ? 2 : 1) : 0);
     }
 
     void LateUpdate()
@@ -90,22 +93,17 @@ public class PlayerMovement : MonoBehaviour
         if (camera == null)
             return;
 
-        Vector3 lookDirection = camera.transform.position - transform.position;
-        lookDirection.y = 0f;
-        if (lookDirection.sqrMagnitude <= 0.001f)
-            return;
-
-        float offset = 0f;
-        if (!InputLockManager.LockMove && canMove)
+        // Orthographic screen direction is independent of the lens position.
+        // Keep the last facing direction when idle instead of snapping at the lens.
+        if (!facingInitialized)
         {
-            if (InputManager.instance.GetKey(KeyCode.A))
-                offset = rotationOffsetA;
-            else if (InputManager.instance.GetKey(KeyCode.D))
-                offset = rotationOffsetD;
+            Vector3 initialFacing = Vector3.ProjectOnPlane(-camera.transform.forward, Vector3.up);
+            if (initialFacing.sqrMagnitude > 0.001f)
+                transform.rotation = Quaternion.LookRotation(initialFacing, Vector3.up);
+            facingInitialized = true;
         }
-
-        float yaw = Quaternion.LookRotation(lookDirection).eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0f, yaw + offset, 0f);
+        if (!InputLockManager.LockMove && canMove && moveDir.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
     }
 
     void OnDestroy()

@@ -11,7 +11,7 @@ using Unity.Services.Analytics;
 //�ҷ�����: �ܺο��� ���̽� ������-> �����ͷ� ��ȯ
 //DataManager.instance.�޼����̸�() ���� ȣ��
 
-public enum SavedCameraView { Unspecified, Front, Side }
+public enum SavedCameraView { Unspecified, Front, Side, Back, OppositeSide }
 
 public class GameData
 {
@@ -151,7 +151,7 @@ public class DataManager : MonoBehaviour
             if (pivot != null)
             {
                 nowGame.playerPosition = pivot.ToSavePosition(player.transform.position);
-                nowGame.cameraView = pivot.SaveSideView ? SavedCameraView.Side : SavedCameraView.Front;
+                nowGame.cameraView = pivot.SaveView;
             }
             else
             {
