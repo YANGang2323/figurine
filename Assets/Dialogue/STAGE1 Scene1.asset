@@ -18,6 +18,8 @@ MonoBehaviour:
   - speakerName: 
     text: "\uC5BC\uAD74 \uC704\uB85C \uC3DF\uC544\uC9C0\uB294 \uB208\uBD80\uC2E0
       \uBE5B."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 21300000, guid: 752b975b4ec4b814dad6b812c4264efc, type: 3}
     hideLeftPortrait: 0
@@ -49,6 +51,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uBD89\uC740\uC0C9 \uAC00\uBB38\uC758 \uBB38\uC7A5."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -80,6 +84,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uC6B0\uB9AC \uAC00\uBB38\uC5D0 \uC628 \uAC78 \uD658\uC601\uD574, \uC544\uAC00."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -111,6 +117,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uC800\uB7F0, \uADC0\uAC00 \uB4E4\uB9AC\uC9C0 \uC54A\uB294 \uBAA8\uC591\uC774\uC5D0\uC694."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -143,6 +151,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uBC15\uC0AC\uB2D8\uC5D0\uAC8C \uCC3E\uC544\uAC00 \uBCF4\uC790. \uADF8\uBD84\uC740
       \uBAA8\uB4E0 \uAC78 \uD574\uACB0\uD558\uC2E4\uC218 \uC788\uC73C\uC2DC\uB2C8\uAE4C."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -175,6 +185,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uADF8\uB798\uB3C4 \uB10C \uD6CC\uB96D\uD55C \uBCA0\uC778 \uAC00\uC758
       \uC77C\uC6D0\uC774\uB780\uB2E4."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -206,6 +218,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\u2026"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -238,6 +252,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uBC15\uC0AC\uB2D8\uC774 \uB110 \uC704\uD55C \uAC10\uAC01 \uBCF4\uC870
       \uC7A5\uCE58 \uBC1C\uBA85\uC5D0 \uC131\uACF5\uD558\uC168\uC5B4!"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -269,6 +285,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uC790\uAC00 \uC870\uC9C1 \uC7AC\uC0DD\uC220, \uC784\uC0C1 \uC131\uACF5."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -300,6 +318,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\uC73D...!"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -332,6 +352,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uB4DC\uB514\uC5B4 \uAD6D\uB0B4 \uCD5C\uB300 \uADDC\uBAA8\uC758 \uC624\uD398\uB77C
       \uD558\uC6B0\uC2A4\uAC00 \uC644\uACF5\uB418\uC5C8\uB2E4!"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 21300000, guid: a9ae9beffdef5c349bfad84e8143ff34, type: 3}
     hideLeftPortrait: 0
@@ -364,6 +386,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uC6B0\uB9AC\uB294 \uBCA0\uC778\uBB38\uD654\uC7AC\uB2E8\uC758 \uC774\uB984\uC744
       \uB530 \uBCA0\uC778\uD640\uC774\uB77C \uD558\uAE30\uB85C \uD588\uC2B5\uB2C8\uB2E4."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -397,6 +421,8 @@ MonoBehaviour:
     text: "\uBCA0\uC778\uD640\uC5D0\uC11C \uAC01\uC885 \uC720\uBA85 \uACF5\uC5F0\uC774
       \uC5F4\uB838\uACE0, \uBCA0\uC778 \uAC00\uBB38\uC740 \uC0AC\uC5C5 \uBFD0 \uC544\uB2C8\uB77C
       \uC0AC\uD68C\uBB38\uD654\uC801\uC778 \uC601\uD5A5\uB825\uB3C4 \uB113\uD600\uAC14\uB2E4."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -429,6 +455,8 @@ MonoBehaviour:
   - speakerName: 
     text: "\uBC15\uC0AC\uB294 \uC8FD\uC5B4\uAC00\uB358 \uC774\uB4E4\uC5D0\uAC8C \uB450
       \uBC88\uC9F8 \uC2EC\uC7A5\uC744 \uC8FC\uC5C8\uACE0."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -460,6 +488,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uADF8\uBD84\uC740 \uC778\uB958\uC758 \uC704\uC778\uC774\uC57C!"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -491,6 +521,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uADF8\uBD84\uC758 \uC5C5\uC801\uC744 \uAE30\uB9AC\uB294 \uACF5\uC5F0\uC774\uB798\uC694."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -522,6 +554,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uC6B0\uB9B0 \uADF8\uC5D0\uAC8C \uAC10\uC0AC\uD574\uC57C \uD574."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -553,6 +587,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uBC15\uC0AC\uB2D8 \uB300\uC5ED\uC774 \uC5C6\uB294\uB370?"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -585,6 +621,8 @@ MonoBehaviour:
   - speakerName: ???
     text: "\uADF8\uBD84\uC744 \uB300\uD45C\uD560 \uC218 \uC788\uB294 \uBC30\uC6B0\uAC00
       \uC5B4\uB514 \uC788\uC5B4?"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -616,6 +654,8 @@ MonoBehaviour:
     choices: []
   - speakerName: ???
     text: "\uADF8\uB798\uB3C4 \uADF8 \uACF5\uC5F0\uC740 \uC815\uB9D0 \uB300\uB2E8\uD588\uC5B4."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -647,6 +687,8 @@ MonoBehaviour:
     choices: []
   - speakerName: 
     text: "\u2026"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 21300000, guid: 51ba6ca1aec6b3a428e633fc7b5bc93a, type: 3}
     hideLeftPortrait: 0
@@ -678,6 +720,8 @@ MonoBehaviour:
     choices: []
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
     text: "\uC774\uAC8C \uB300\uCCB4 \uBB34\uC2A8 \uAFC8\uC774\uC9C0...?"
+    tutorialID: 
+    tutorialName: 
     hideBackground: 1
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -710,6 +754,8 @@ MonoBehaviour:
   - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
     text: "\uC774\uB7F0, \uC2DC\uAC04\uC774 \uBC8C\uC368... \uC2DC\uC791\uD558\uAE30
       \uC804\uC5D0 \uC5B4\uC11C \uB458\uB7EC\uBD10\uC57C\uC9C0."
+    tutorialID: 
+    tutorialName: 
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
@@ -742,6 +788,8 @@ MonoBehaviour:
   - speakerName: 
     text: "A, D \uD0A4\uB97C \uB20C\uB7EC \uC67C\uCABD, \uC624\uB978\uCABD\uC73C\uB85C
       \uC6C0\uC9C1\uC5EC \uBCF4\uC138\uC694."
+    tutorialID: movement_ad
+    tutorialName: "A/D \uC774\uB3D9"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 1

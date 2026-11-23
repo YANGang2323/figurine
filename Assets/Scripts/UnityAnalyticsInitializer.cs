@@ -11,6 +11,7 @@ public class UnityAnalyticsInitializer : MonoBehaviour
             // UGS 애널리틱스 서비스 초기화
             await UnityServices.InitializeAsync();
             AnalyticsService.Instance.StartDataCollection();
+            PlayExitAnalytics.MarkServiceReady();
             Debug.Log("유니티 애널리틱스 초기화 성공!");
         }
         catch (System.Exception e)

@@ -41,6 +41,7 @@ public class FallingLightDirector : MonoBehaviour
         Player = player;
         Pivot = CameraPivotRotator.Instance;
         ViewCamera = Pivot.GetComponentInChildren<Camera>();
+        PlayExitAnalytics.Puzzle(hazard, "falling_light", "started", 0, 1, "waiting");
         return true;
     }
 
@@ -66,11 +67,13 @@ public class FallingLightDirector : MonoBehaviour
         InputLockManager.Refresh();
         tutorialOverlay.gameObject.SetActive(true);
         tutorialOverlay.alpha = 1;
+        PlayExitAnalytics.Tutorial("falling_light_tab_dodge", "낙하 조명 회피 (Tab)");
     }
 
     public void CompleteTutorial()
     {
         AddFlag("light_tab_tutorial_completed");
+        PlayExitAnalytics.Milestone("light_dodge_complete");
         CancelTutorial();
     }
 
@@ -94,6 +97,7 @@ public class FallingLightDirector : MonoBehaviour
 
     public void Finished(FallingLightHazard hazard)
     {
+        PlayExitAnalytics.Puzzle(hazard, "falling_light", "completed", 1, 1, "dodged", true);
         if (active == hazard) active = null;
         if (hazard.teachTab && shot != hazard)
             FrameLight(hazard);
@@ -164,6 +168,7 @@ public class FallingLightDirector : MonoBehaviour
     public void Hit(FallingLightHazard hazard)
     {
         if (Busy) return;
+        PlayExitAnalytics.Puzzle(hazard, "falling_light", "failed", 0, 1, "hit", true);
         Busy = true;
         Debug.Log($"[FallingLight] Hit {hazard.name}; returning {Player.name} to {hazard.checkpoint.name} at {hazard.checkpoint.position}");
         StartCoroutine(HitRoutine(hazard));
@@ -180,6 +185,7 @@ public class FallingLightDirector : MonoBehaviour
         InputLockManager.TransitionLock = true;
         InputLockManager.Refresh();
         DeathCount++;
+        PlayExitAnalytics.Failure("falling_light");
         AddFlag(DeathCount >= 2 ? "light_death_2" : "light_death_1");
         var manager = DialogueManager.Instance;
         var dialogCanvas = manager.panel.GetComponentInParent<Canvas>();

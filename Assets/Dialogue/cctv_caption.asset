@@ -16,7 +16,10 @@ MonoBehaviour:
   playOnlyOnce: 0
   lines:
   - speakerName: 
-    text: "Q\uC640 E \uD0A4\uB85C \uC2DC\uC57C\uB97C \uC804\uD658\uD574 \uD68C\uD53C\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    text: "Q\uC640 E \uD0A4\uB85C \uC2DC\uC57C\uB97C \uC804\uD658\uD574 \uD68C\uD53C\uD560
+      \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    tutorialID: cctv_evade_qe
+    tutorialName: "CCTV Q/E \uD68C\uD53C"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0

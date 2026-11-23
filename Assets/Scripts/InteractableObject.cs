@@ -13,6 +13,8 @@ public class InteractableObject : MonoBehaviour
     public PerspectiveEmblemPuzzle puzzle;
     public PerspectivePuzzlePiece puzzlePiece;
 
+    public string ObjectID => GetComponent<DialogueTarget>()?.targetID;
+
 
     private void Awake()
     {
@@ -40,8 +42,9 @@ public class InteractableObject : MonoBehaviour
         // 애널리틱스 전송: 오브젝트 ID와 플레이코드를 묶어서 송신
         var eventData = new Dictionary<string, object> {
             { "PlayCode", DataManager.instance.nowGame.playCode },
-            { "ObjectID", objectName } // 인스펙터에 적어두신 extrawoman 같은 고유 이름 활용
+            { "ObjectID", ObjectID } // Stable DialogueTarget ID.
         };
+        PlayExitAnalytics.Interaction(ObjectID);
         CustomEvent myEvent = new CustomEvent("object_interact");
         foreach (var param in eventData) myEvent.Add(param.Key, param.Value);
         AnalyticsService.Instance.RecordEvent(myEvent);

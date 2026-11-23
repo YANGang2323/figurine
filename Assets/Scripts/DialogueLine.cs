@@ -10,6 +10,10 @@ public class DialogueLine
     [TextArea(3, 5)]
     public string text;
 
+    [Header("Tutorial Analytics (optional)")]
+    public string tutorialID;
+    public string tutorialName;
+
     [Header("Background")]
     public bool hideBackground;
     public Sprite background;

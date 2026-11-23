@@ -89,17 +89,6 @@ public static class SceneHierarchyAuthoring
             prompt.SetActive(false);
         }
 
-        foreach (var menu in roots.SelectMany(r => r.GetComponentsInChildren<MainMenuManager>(true)))
-        {
-            var serialized = new SerializedObject(menu);
-            if (serialized.FindProperty("exitPopup").objectReferenceValue != null) continue;
-            var popup = ExitFeedbackPopup.BuildForEditor(
-                serialized.FindProperty("exitFont").objectReferenceValue as TMP_FontAsset,
-                serialized.FindProperty("exitTextBox").objectReferenceValue as Sprite,
-                serialized.FindProperty("exitSurveyQr").objectReferenceValue as Sprite);
-            Set(menu, "exitPopup", popup);
-            popup.gameObject.SetActive(false);
-        }
         DialogueChoiceAuthoring.ConfigureScene(scene);
     }
 

@@ -41,10 +41,19 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
         rightInteractable.canInteract = false;
         leftInteractable.canInteract = false;
     }
+    private void TrackExitPuzzle(bool restore = false)
+    {
+        if (state == PuzzleState.Before) return;
+        int completed = state == PuzzleState.Cleared ? 2 : (firstPieceCompleted ? 1 : 0);
+        PlayExitAnalytics.Puzzle(this, "emblem", completed == 2 ? "completed" :
+            completed == 1 ? "first_piece_completed" : "started", completed, 2,
+            "x=" + pieceX.currentStep + ";y=" + pieceY.currentStep, restore: restore);
+    }
     private void Start()
     {
         // 게임이 시작되거나 씬이 로드될 때 저장된 데이터를 불러옵니다.
         LoadPuzzleData();
+        TrackExitPuzzle(true);
     }
 
     // 현재 데이터 정보를 DataManager의 변수에 덮음
@@ -57,6 +66,7 @@ public class PerspectiveEmblemPuzzle : MonoBehaviour
         save.EmblempieceXCurrentStep = pieceX.currentStep;
         save.EmblempieceYCurrentStep = pieceY.currentStep;
         save.EmblemfirstPieceCompleted = firstPieceCompleted;
+        TrackExitPuzzle();
 
     }
 

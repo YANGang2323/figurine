@@ -6,6 +6,8 @@ using Unity.Services.Analytics;
 public class NumberSelectDoor : MonoBehaviour
 {
     private int[] currentNumbers;
+    private string submittedAnswer = string.Empty;
+    public string CurrentInput => currentNumbers == null ? string.Empty : string.Join("", currentNumbers);
 
     [Header("UI")]
     [SerializeField] private GameObject puzzleUI;
@@ -108,10 +110,12 @@ public class NumberSelectDoor : MonoBehaviour
         if (solved)
             return;
         puzzleUI.SetActive(true);
+        TrackExitPuzzle("opened");
     }
 
     public void ClosePuzzle()
     {
+        TrackExitPuzzle("closed");
         puzzleUI.SetActive(false);
     }
 
@@ -119,14 +123,21 @@ public class NumberSelectDoor : MonoBehaviour
     {
         currentNumbers[index] = (currentNumbers[index] + 1) % 10;
         Refresh(index);
+        TrackExitPuzzle("editing");
     }
 
     public void Decrease(int index)
     {
         currentNumbers[index] = (currentNumbers[index] + 9) % 10;
         Refresh(index);
+        TrackExitPuzzle("editing");
     }
 
+    private void TrackExitPuzzle(string step, bool attempt = false)
+    {
+        PlayExitAnalytics.Puzzle(this, "number_lock", step, solved ? 1 : 0, 1,
+            attempt ? submittedAnswer : CurrentInput, attempt);
+    }
     void Refresh(int index)
     {
         numberTexts[index].text = currentNumbers[index].ToString();
@@ -142,6 +153,7 @@ public class NumberSelectDoor : MonoBehaviour
         if (currentNumbers.Length != answerNumbers.Length)
             return;
 
+        submittedAnswer = CurrentInput;
         for (int i = 0; i < currentNumbers.Length; i++)
         {
             if (currentNumbers[i] != answerNumbers[i])
@@ -157,6 +169,7 @@ public class NumberSelectDoor : MonoBehaviour
     void Success()
     {
         solved = true;
+        TrackExitPuzzle("completed", true);
         if (cctvLightingOnSuccess != null)
             cctvLightingOnSuccess.Complete();
 
@@ -168,6 +181,7 @@ public class NumberSelectDoor : MonoBehaviour
         var eventData = new Dictionary<string, object> {
             { "PlayCode", DataManager.instance.nowGame.playCode },
             { "DoorID", gameObject.name },
+            { "SubmittedAnswer", submittedAnswer },
             { "SolveTimeSeconds", solveTime },
             { "TotalFailCount", DataManager.instance.nowGame.numSelectFailCount }
         };
@@ -182,6 +196,7 @@ public class NumberSelectDoor : MonoBehaviour
 
     void Fail()
     {
+        TrackExitPuzzle("failed", true);
         puzzleUI.SetActive(false);
 
         // 실패 횟수 증가 및 데이터 송신
@@ -189,6 +204,7 @@ public class NumberSelectDoor : MonoBehaviour
         var eventData = new Dictionary<string, object> {
             { "PlayCode", DataManager.instance.nowGame.playCode },
             { "DoorID", gameObject.name },
+            { "SubmittedAnswer", submittedAnswer },
             { "FailAccumulated", DataManager.instance.nowGame.numSelectFailCount }
         };
         CustomEvent failEvent = new CustomEvent("number_puzzle_fail");

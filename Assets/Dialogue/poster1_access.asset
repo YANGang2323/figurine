@@ -18,12 +18,17 @@ MonoBehaviour:
   - speakerName: 
     text: "Space \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD558\uACE0
       \uC0AC\uB78C\uB4E4\uACFC \uB300\uD654\uB97C \uB098\uB220 \uBCF4\uC138\uC694."
+    tutorialID: interaction_space
+    tutorialName: "Space \uC624\uBE0C\uC81D\uD2B8 \uC0C1\uD638\uC791\uC6A9\xB7\uB300\uD654"
     hideBackground: 0
     background: {fileID: 0}
     hideLeftPortrait: 0
     leftPortrait: {fileID: 0}
     hideRightPortrait: 0
     rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
     useCustomDialogueFont: 0
     dialogueFont: {fileID: 0}
     useCustomSpeakerFont: 0
@@ -38,10 +43,14 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     soundEffect: {fileID: 8300000, guid: e747aa2f37247ef4abc60bb24ea33f17, type: 3}
     soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
     hasChoice: 0
     choices: []
   endEvent:
     type: 0
-    target: {fileID: 0}
+    targetIDs: []
     sceneName: 
     spawnPosition: {x: 0, y: 0, z: 0}

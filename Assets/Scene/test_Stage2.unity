@@ -2000,6 +2000,7 @@ GameObject:
   - component: {fileID: 359447367}
   - component: {fileID: 359447366}
   - component: {fileID: 359447365}
+  - component: {fileID: 359447368}
   m_Layer: 0
   m_Name: O3
   m_TagString: Untagged
@@ -2081,6 +2082,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11.354294, y: 2.257594, z: 1.431762}
   m_Center: {x: 5.177147, y: -3.7067294, z: 0.027094722}
+--- !u!114 &359447368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359447363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0aeaaad42163149a38badfb4e33bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
+  targetID: interact_99f02e2deebdba13
+  progressFlag: 
 --- !u!1 &359575557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,6 +4152,20 @@ MonoBehaviour:
   useViewCondition: 1
   puzzle: {fileID: 0}
   puzzlePiece: {fileID: 0}
+--- !u!114 &717223908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717223901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0aeaaad42163149a38badfb4e33bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
+  targetID: interact_8fac52044405bb83
+  progressFlag: 
 --- !u!4 &758340263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 976d4df10192b7a4c8cb0e930c8afc8f, type: 3}
@@ -4659,6 +4688,7 @@ GameObject:
   - component: {fileID: 896377255}
   - component: {fileID: 896377254}
   - component: {fileID: 896377253}
+  - component: {fileID: 896377256}
   m_Layer: 0
   m_Name: O4
   m_TagString: Untagged
@@ -4740,6 +4770,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.0965447, y: 1.1482983, z: 1}
   m_Center: {x: 2.0482724, y: -3.6587162, z: 0}
+--- !u!114 &896377256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896377251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0aeaaad42163149a38badfb4e33bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
+  targetID: interact_32a15a3d76f10398
+  progressFlag: 
 --- !u!1 &908577736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,6 +5148,7 @@ GameObject:
   - component: {fileID: 1065143495}
   - component: {fileID: 1065143494}
   - component: {fileID: 1065143493}
+  - component: {fileID: 1065143496}
   m_Layer: 0
   m_Name: O1
   m_TagString: Untagged
@@ -5190,6 +5235,20 @@ MonoBehaviour:
   useViewCondition: 1
   puzzle: {fileID: 0}
   puzzlePiece: {fileID: 0}
+--- !u!114 &1065143496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065143491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0aeaaad42163149a38badfb4e33bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
+  targetID: interact_95c41ecfa7dc6fc6
+  progressFlag: 
 --- !u!1 &1065358635
 GameObject:
   m_ObjectHideFlags: 0
@@ -8469,6 +8528,7 @@ GameObject:
   - component: {fileID: 1878560780}
   - component: {fileID: 1878560779}
   - component: {fileID: 1878560778}
+  - component: {fileID: 1878560781}
   m_Layer: 0
   m_Name: O2
   m_TagString: Untagged
@@ -8550,6 +8610,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.694092, y: 2.0159674, z: 1}
   m_Center: {x: 4.347046, y: -3.4998016, z: 0}
+--- !u!114 &1878560781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878560776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0aeaaad42163149a38badfb4e33bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTarget
+  targetID: interact_1f36a978cd2b7de7
+  progressFlag: 
 --- !u!1 &1890423583
 GameObject:
   m_ObjectHideFlags: 0
@@ -9430,6 +9504,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 244e813c91b576b4da25d9f39829b72b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 717223906}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 244e813c91b576b4da25d9f39829b72b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 717223908}
   m_SourcePrefab: {fileID: 100100000, guid: 244e813c91b576b4da25d9f39829b72b, type: 3}
 --- !u!4 &2079023200 stripped
 Transform:

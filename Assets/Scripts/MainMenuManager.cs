@@ -17,11 +17,6 @@ public class MainMenuManager : MonoBehaviour
     public GameObject languageOptionUI;
     public GameObject LoadUI;
     [SerializeField] private Button firstMenuButton;
-    [SerializeField] private TMP_FontAsset exitFont;
-    [SerializeField] private Sprite exitTextBox;
-    [SerializeField] private Sprite exitSurveyQr;
-    [SerializeField] private ExitFeedbackPopup exitPopup;
-    private GameObject previousSelection;
     public Button[] slotButtons; // ��ư���� �ν����Ϳ��� ����
     public TMP_Text[] slotText;		// ���Թ�ư �Ʒ��� �����ϴ� Text��
 
@@ -31,17 +26,14 @@ public class MainMenuManager : MonoBehaviour
     public string NewGameScene = "Stage1";
     void Start()
     {
-        if (exitPopup != null)
-            exitPopup.Bind(QuitApplication, CloseExitPopup);
         optionUI?.GetComponent<OptionPanel>()?.Bind(OnClickBackToMenu);
         LoadUI?.GetComponent<SaveLoadPanel>()?.Bind(Slot, OnClickBackToMenu);
-        savePath = Application.persistentDataPath; // ���� ���
-        //SlotTextEdit();
+        savePath = Application.persistentDataPath; // ���� ���?        //SlotTextEdit();
         //for (int i = 0; i < 5; i++)
         //{
         //    slotText[i] = slotButtons[i].GetComponentInChildren<TMP_Text>();
         //    string latestFile = DataManager.instance.FindLatestSaveFile(i);
-        //    if (savefile[i] != false)// ���Ժ��� ����� �����Ͱ� �����ϴ��� �Ǵ�.
+        //    if (savefile[i] != false)// ���Ժ��� �����?�����Ͱ� �����ϴ��� �Ǵ�.
         //    {
         //        savefile[i] = true;			// �ش� ���� ��ȣ�� bool�迭 true�� ��ȯ
         //        string fileName = Path.GetFileName(latestFile);
@@ -50,8 +42,7 @@ public class MainMenuManager : MonoBehaviour
 
         //        slotText[i].text = $"Slot {i}: {fileName}";
         //    }
-        //    else	// �����Ͱ� ���� ���
-        //    {
+        //    else	// �����Ͱ� ���� ���?        //    {
         //        slotText[i].text = $"Slot {i}";
         //    }
         //}
@@ -69,7 +60,6 @@ public class MainMenuManager : MonoBehaviour
         var eventSystem = EventSystem.current;
         if (eventSystem != null && eventSystem.currentSelectedGameObject == null &&
             firstMenuButton != null && !optionUI.activeSelf && !LoadUI.activeSelf &&
-            (exitPopup == null || !exitPopup.gameObject.activeSelf) &&
             (!Mathf.Approximately(Input.GetAxisRaw("Horizontal"), 0f) ||
              !Mathf.Approximately(Input.GetAxisRaw("Vertical"), 0f)))
         {
@@ -93,8 +83,7 @@ public class MainMenuManager : MonoBehaviour
         // 2. �� ���� ������ ����
         DataManager.instance.nowGame = new GameData();
         DataManager.instance.nowGame.playCode = "#" + new string(stringChars);
-        DataManager.instance.nowGame.startTimeStamp = System.DateTime.Now.ToString("o"); // ���� �ð� ���
-        DataManager.instance.nowGame.totalGameStartTime = System.DateTime.Now.ToString("o"); // ������ ���� �ð� ���    
+        DataManager.instance.nowGame.startTimeStamp = System.DateTime.Now.ToString("o"); // ���� �ð� ���?        DataManager.instance.nowGame.totalGameStartTime = System.DateTime.Now.ToString("o"); // ������ ���� �ð� ���?   
 
         // 3. �ֳθ�ƽ�� ����: ���� ���� ���� �� �÷����ڵ� �ο�
         var eventData = new Dictionary<string, object> {
@@ -116,18 +105,18 @@ public class MainMenuManager : MonoBehaviour
         SlotTextEdit();
         LoadUI.SetActive(true);
     }
-    public void Slot(int number)	// ������ ��� ����
+    public void Slot(int number)	// ������ ���?����
     {
         DataManager.instance.nowSlot = number;	// ������ ��ȣ�� ���Թ�ȣ�� �Է���.
 
-        if (number < savefile.Length && savefile[number])	// bool �迭���� ���� ���Թ�ȣ�� true��� = ������ �����Ѵٴ� ��
+        if (number < savefile.Length && savefile[number])	// bool �迭���� ���� ���Թ�ȣ�� true���?= ������ �����Ѵٴ� ��
         {
             DataManager.instance.LoadData();	// �����͸� �ε��ϰ�
             GoGame();	// ���Ӿ����� �̵�
         }
-        else	// bool �迭���� ���� ���Թ�ȣ�� false��� �����Ͱ� ���ٴ� ��
+        else	// bool �迭���� ���� ���Թ�ȣ�� false���?�����Ͱ� ���ٴ� ��
         {
-            Debug.Log("�����Ͱ� ������� �ʾҽ��ϴ�. ���� ������ �̵��� �� �����ϴ�.");
+            Debug.Log("�����Ͱ� �������?�ʾҽ��ϴ�. ���� ������ �̵��� �� �����ϴ�.");
             //SaveCreat();	// ���� UI Ȱ��ȭ
         }
     }
@@ -135,7 +124,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!savefile[DataManager.instance.nowSlot])	// ���� ���Թ�ȣ�� �����Ͱ� ���ٸ�
         {
-            Debug.Log("�����Ͱ� ������� �ʾҽ��ϴ�. ���� ������ �̵��� �� �����ϴ�.");
+            Debug.Log("�����Ͱ� �������?�ʾҽ��ϴ�. ���� ������ �̵��� �� �����ϴ�.");
             return;
         }
         string targetScene = DataManager.instance.nowGame.sceneName;
@@ -205,7 +194,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickLanguageOption()
     {
         UISoundManager.Instance.PlayClick();
-        Debug.Log("��� �ɼ�");
+        Debug.Log("���?�ɼ�");
         soundOptionUI.SetActive(false);
         keysetOptionUI.SetActive(false);
         languageOptionUI.SetActive(true);
@@ -213,38 +202,20 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickQuit()
     {
-        var dataManager = DataManager.instance;
-        string playCode = dataManager?.nowGame?.playCode;
-        if (!DataManager.HasPlayCode(playCode))
-            playCode = dataManager?.LatestSavedPlayCode;
-
-        if (!DataManager.HasPlayCode(playCode))
-        {
-            QuitApplication();
-            return;
-        }
-
-        if (exitPopup != null && exitPopup.gameObject.activeSelf)
-            return;
-
-        previousSelection = EventSystem.current?.currentSelectedGameObject;
-        if (exitPopup == null)
-        {
-            Debug.LogError("Exit Feedback is missing from the scene hierarchy.", this);
-            return;
-        }
-
-        exitPopup.Show(playCode);
+        QuitApplication();
     }
 
-    private void CloseExitPopup()
-    {
-        exitPopup.gameObject.SetActive(false);
-        EventSystem.current?.SetSelectedGameObject(previousSelection);
-    }
-
+    private bool quitRequested;
     private void QuitApplication()
     {
+        if (quitRequested) return;
+        quitRequested = true;
+        StartCoroutine(QuitAfterAnalytics());
+    }
+    private IEnumerator QuitAfterAnalytics()
+    {
+        PlayExitAnalytics.SendExitSummary();
+        yield return new WaitForSecondsRealtime(0.5f);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -258,12 +229,6 @@ public class MainMenuManager : MonoBehaviour
         LoadUI.SetActive(false);
     }
     private void HandleEscape() { 
-        if (exitPopup != null && exitPopup.gameObject.activeSelf)
-        {
-            CloseExitPopup();
-            return;
-        }
-
         if (optionUI.activeSelf)
         {   //���� �ɼ� ������ �� �ݱ�
             UISoundManager.Instance.PlayClose();
@@ -284,7 +249,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void SlotTextEdit()
     {
-        savePath = Application.persistentDataPath; // ���� ���
+        savePath = Application.persistentDataPath;
         int totalSlots = slotButtons.Length;
 
         for (int i = 0; i < totalSlots; i++)

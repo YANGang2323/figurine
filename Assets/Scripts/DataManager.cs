@@ -19,6 +19,7 @@ public class GameData
     //public string name;
     public const string DefaultPlayCode = "#000000";
     public string playCode = DefaultPlayCode;
+    public PlayExitSnapshot exitSnapshot = new PlayExitSnapshot();
     public int stage = 1;
     public int piece = 0;
     public int info = 0;
@@ -76,6 +77,7 @@ public class DataManager : MonoBehaviour
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
         LatestSavedPlayCode = ReadLatestSavedPlayCode();
+        if (GetComponent<PlayExitAnalytics>() == null) gameObject.AddComponent<PlayExitAnalytics>();
     }
 
     // ����ƽ �Ӽ��� �߰��Ͽ� �ڵ� ��𼭵� �����ϰ� �����ϰ� ����ϴ�.
@@ -206,6 +208,7 @@ public class DataManager : MonoBehaviour
         if (file != null)
         {
             string data = File.ReadAllText(file);
+            PlayExitAnalytics.BeforeLoad();
             nowGame = JsonUtility.FromJson<GameData>(data);
             nowGame.totalLoadCount++; // �ε� Ƚ�� ����
 

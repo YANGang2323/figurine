@@ -232,6 +232,7 @@ public class Game : MonoBehaviour
         InputLockManager.DialogueLock = false;   // LockMove, LockInteraction, LockCamera 해제
         InputLockManager.CameraRotateLock = false; // LockMove, LockCamera 해제
         InputLockManager.Refresh();
+        PlayExitAnalytics.BeforeMenu();
         SceneManager.LoadScene("MainMenu");
     }
     private void SlotText()

@@ -754,6 +754,7 @@ public class CameraPivotRotator : MonoBehaviour
         }
         tutorialHintHideTime = Time.time + 4f;
         tutorialHint.SetActive(true);
+        PlayExitAnalytics.Tutorial("view_rotation", message);
     }
 
     private void HandleViewInput(int step = 1)

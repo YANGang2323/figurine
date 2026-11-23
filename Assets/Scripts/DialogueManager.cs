@@ -266,6 +266,7 @@ public class DialogueManager : MonoBehaviour
         pendingChoices = null;
         waitingForChoice = false;
         currentDialogue = dialogue;
+        PlayExitAnalytics.Dialogue(dialogue);
 
         // 한번만 재생되는 대화는 시작하는 순간 기록
         if (dialogue.playOnlyOnce &&
@@ -422,6 +423,8 @@ public class DialogueManager : MonoBehaviour
         barChoices.Hide();
         dialogueText.gameObject.SetActive(true);
         ApplyLinePresentation(line);
+        PlayExitAnalytics.DialogueLineShown(currentDialogue, line);
+        PlayExitAnalytics.DialogueTutorial(line);
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
         typingCoroutine = StartCoroutine(TypeText(line.text ?? string.Empty));
@@ -569,6 +572,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueData completedDialogue = currentDialogue;
+        PlayExitAnalytics.DialogueEnded(completedDialogue);
         if (currentChoiceEvent != null)
         {
             ExecuteDialogueEvent(currentChoiceEvent);
@@ -654,6 +658,7 @@ public class DialogueManager : MonoBehaviour
         choiceHistory.RemoveAt(badEndHistoryIndex);
         currentChoiceEvent = null;
         currentDialogue = badEndOrigin;
+        PlayExitAnalytics.Dialogue(currentDialogue);
         badEndOrigin = null;
         lines.Clear();
         bool afterChoice = false;
@@ -1033,6 +1038,7 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case DialogueEventType.EndingUI:
+                PlayExitAnalytics.Ending();
                 DataManager.Instance.StageClear("STAGE3");
                 DataManager.Instance.EndingClear();
                 StartCoroutine(CenterMessageUI.Instance.EndingRoutine());

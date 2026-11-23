@@ -179,6 +179,7 @@ public class CCTVController : MonoBehaviour
 
         Debug.Log("게임 오버! 플레이어 검거!");
         isCaught = true;
+        PlayExitAnalytics.Failure("cctv");
         detectionTimer = 0; // 타이머 초기화
         UpdateLightColor();
 
