@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 
 // Fills the exposed floor cut face without moving the lens or changing physics.
 [DefaultExecutionOrder(1100)]
+[ExecuteAlways]
 [DisallowMultipleComponent]
 public sealed class FloorCutFaceFill : MonoBehaviour
 {
@@ -16,29 +17,57 @@ public sealed class FloorCutFaceFill : MonoBehaviour
     private Mesh mesh;
     private Material material;
     private MeshRenderer face;
+    private GameObject generatedFace;
     private readonly List<Vector3> polygon = new List<Vector3>(6);
     private readonly List<Vector3> clipped = new List<Vector3>(6);
     private readonly List<int> triangles = new List<int>(12);
 
-    private void Awake()
+    private void OnEnable()
     {
+        // A Resources material is a build dependency; a name-only Shader.Find is not.
+        Material template = Resources.Load<Material>("FloorCutFaceFill");
+        if (template == null || template.shader == null || !template.shader.isSupported)
+        {
+            Debug.LogError("Floor cut face material is missing or unsupported.", this);
+            return;
+        }
         initialLightIntensity = sceneLight != null ? sceneLight.intensity : 1f;
-        mesh = new Mesh { name = "Floor cut face fill" };
+        mesh = new Mesh { name = "Floor cut face fill", hideFlags = HideFlags.HideAndDontSave };
         mesh.MarkDynamic();
-        var filter = gameObject.AddComponent<MeshFilter>();
+        // Keep preview geometry out of saved scenes and recreate it after reloads.
+        generatedFace = new GameObject("Floor cut face preview") { hideFlags = HideFlags.HideAndDontSave };
+        generatedFace.layer = gameObject.layer;
+        generatedFace.transform.SetParent(transform, false);
+        var filter = generatedFace.AddComponent<MeshFilter>();
         filter.sharedMesh = mesh;
-        face = gameObject.AddComponent<MeshRenderer>();
+        face = generatedFace.AddComponent<MeshRenderer>();
         face.shadowCastingMode = ShadowCastingMode.Off;
         face.receiveShadows = false;
         face.allowOcclusionWhenDynamic = false;
-        material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        material = new Material(template);
+        material.hideFlags = HideFlags.HideAndDontSave;
         material.SetColor("_BaseColor", faceColor);
-        material.SetFloat("_Cull", 0f);
         face.sharedMaterial = material;
+        RenderPipelineManager.beginCameraRendering += BeforeCameraRendering;
+        Camera.onPreCull += BeforeCameraCull;
+        LateUpdate();
     }
+
+    private void BeforeCameraRendering(ScriptableRenderContext context, Camera camera)
+    {
+        if (camera == viewCamera) LateUpdate();
+    }
+
+    private void BeforeCameraCull(Camera camera)
+    {
+        if (camera == viewCamera) LateUpdate();
+    }
+
     private void LateUpdate()
     {
-        if (viewCamera == null || floor == null || !floor.enabled) return;
+        if (face == null || mesh == null) return;
+        face.enabled = viewCamera != null && floor != null && floor.enabled && floor.gameObject.activeInHierarchy;
+        if (!face.enabled) return;
         mesh.Clear(); polygon.Clear(); clipped.Clear(); triangles.Clear();
         float depth = viewCamera.nearClipPlane + 0.02f;
         polygon.Add(viewCamera.ViewportToWorldPoint(new Vector3(0,0,depth)));
@@ -66,7 +95,20 @@ public sealed class FloorCutFaceFill : MonoBehaviour
         color.a = 1f;
         material.SetColor("_BaseColor",color);
     }
-    private void OnDisable(){if(face!=null)face.enabled=false;}
-    private void OnEnable(){if(face!=null)face.enabled=true;}
-    private void OnDestroy(){if(mesh!=null)Destroy(mesh);if(material!=null)Destroy(material);}
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= BeforeCameraRendering;
+        Camera.onPreCull -= BeforeCameraCull;
+        Release(generatedFace);
+        Release(mesh);
+        Release(material);
+        generatedFace = null; face = null; mesh = null; material = null;
+    }
+
+    private static void Release(Object value)
+    {
+        if (value == null) return;
+        if (Application.isPlaying) Destroy(value);
+        else DestroyImmediate(value);
+    }
 }

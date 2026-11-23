@@ -9163,6 +9163,14 @@ MonoBehaviour:
   openingDialogue: {fileID: 11400000, guid: 17a75225e85987643babde9220037293, type: 2}
   afterChoiceDialogue: {fileID: 11400000, guid: 7e113d5deaed1434abd0b83c2309ecca, type: 2}
   stage2Dialogue: {fileID: 11400000, guid: 1cf9ccc22d35a7746b74e835517b40c9, type: 2}
+  stage2SceneChoiceDialogue: {fileID: 11400000, guid: a0330f7648db79f4388f737b207d4d7e, type: 2}
+  teodorDialogue: {fileID: 11400000, guid: 79f79eef34ff73948bc5112072ae8c10, type: 2}
+  teodorChoiceDialogues:
+  - {fileID: 11400000, guid: 63f97222e2238754994c6c0bb0c2f7ab, type: 2}
+  - {fileID: 11400000, guid: 23cb9a2fb059757449d095d2a808a6a6, type: 2}
+  doorTarget: {fileID: 2029648546}
+  doorPanDuration: 1.25
+  doorHoldDuration: 1.5
   corridorPlayer: {fileID: 1959544692}
   backstagePlayer: {fileID: 955303150}
   corridorCamera: {fileID: 1939806533}

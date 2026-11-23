@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
   m_Name: stage2_Teodor_repeat
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: stage2_Teodor_choice2
+  dialogueID: stage2_Teodor_repeat
   playOnlyOnce: 0
   lines:
   - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"

@@ -8,6 +8,12 @@ public class Stage2IntroController : MonoBehaviour
     public DialogueData openingDialogue;
     public DialogueData afterChoiceDialogue;
     public DialogueData stage2Dialogue;
+    public DialogueData stage2SceneChoiceDialogue;
+    public DialogueData teodorDialogue;
+    public DialogueData[] teodorChoiceDialogues;
+    public Transform doorTarget;
+    public float doorPanDuration = 1.25f;
+    public float doorHoldDuration = 1.5f;
     public GameObject corridorPlayer;
     public GameObject backstagePlayer;
     public CameraPivotRotator corridorCamera;
@@ -73,9 +79,59 @@ public class Stage2IntroController : MonoBehaviour
         }
         else if (CurrentPhase == Phase.Cutscene && dialogue == stage2Dialogue)
         {
-            CurrentPhase = Phase.Backstage;
-            AddFlag(CompleteFlag);
+            manager.StartDialogue(stage2SceneChoiceDialogue);
         }
+        else if (CurrentPhase == Phase.Cutscene && dialogue == stage2SceneChoiceDialogue)
+        {
+            manager.StartDialogue(teodorDialogue);
+        }
+        else if (CurrentPhase == Phase.Cutscene &&
+            System.Array.IndexOf(teodorChoiceDialogues, dialogue) >= 0)
+        {
+            CurrentPhase = Phase.Transition;
+            StartCoroutine(ShowDoorAndReturn());
+        }
+    }
+
+    IEnumerator ShowDoorAndReturn()
+    {
+        InputLockManager.TransitionLock = true;
+        InputLockManager.Refresh();
+        Transform rig = backstageCamera.transform;
+        Vector3 origin = rig.position;
+        if (doorTarget != null)
+        {
+            Camera lens = backstageCamera.GetComponentInChildren<Camera>();
+            Vector3 focus = doorTarget.position;
+            // Translate along the image plane, preserving the authored view and depth.
+            Vector3 offset = focus - lens.transform.position;
+            Vector3 destination = origin + Vector3.ProjectOnPlane(offset, lens.transform.forward);
+            yield return PanCamera(rig, origin, destination);
+            float held = 0f;
+            while (held < doorHoldDuration)
+            {
+                if (!InputLockManager.ESCMenuLock) held += Time.deltaTime;
+                yield return null;
+            }
+            yield return PanCamera(rig, destination, origin);
+        }
+        rig.position = origin;
+        AddFlag(CompleteFlag);
+        CurrentPhase = Phase.Backstage;
+        InputLockManager.TransitionLock = false;
+    }
+
+    IEnumerator PanCamera(Transform rig, Vector3 from, Vector3 to)
+    {
+        float elapsed = 0f;
+        while (elapsed < doorPanDuration)
+        {
+            if (!InputLockManager.ESCMenuLock) elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / Mathf.Max(0.01f, doorPanDuration));
+            rig.position = Vector3.Lerp(from, to, t);
+            yield return null;
+        }
+        rig.position = to;
     }
 
     public void TryShowViewTutorial(Collider other)
