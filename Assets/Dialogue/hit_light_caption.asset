@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: hit_light_caption
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: hit_light_caption
+  playOnlyOnce: 0
+  lines:
+  - speakerName: 
+    text: "\uC870\uBA85\uC774 \uB5A8\uC5B4\uC9C8 \uB54C Q\uB97C \uB20C\uB7EC \uC2DC\uC57C\uB97C
+      \uC804\uD658\uD574 \uBCF4\uC138\uC694"
+    tutorialID: falling_light_evade_q
+    tutorialName: "\uB099\uD558 \uC870\uBA85 Q \uD68C\uD53C \uC548\uB0B4"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  endEvent:
+    type: 0
+    targetIDs: []
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}

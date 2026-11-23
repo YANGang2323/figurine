@@ -1,0 +1,583 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: stage2_Teodor
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: STAGE2_Teodor
+  playOnlyOnce: 1
+  lines:
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uB2F9\uC2E0\uC740\u2026\u2026"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: 83f481c23212f1b47b3ffe6a7b41f9d2, type: 3}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uBAA9\uC18C\uB9AC\uB97C \uB0AE\uCD94\uC138\uC694. \uC544\uC9C1 \uC774\uCABD\uAE4C\uC9C4
+      \uC0AC\uB78C\uC774 \uC624\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC65C \uC5EC\uAE30\uC5D0 \uC788\uB294 \uAC81\uB2C8\uAE4C?"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uADF8\uAC74 \uC81C\uAC00 \uBB3B\uACE0 \uC2F6\uAD70\uC694."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC800\uB294\u2026\u2026"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uC804\uBD80 \uC124\uBA85\uD558\uC9C0 \uC54A\uC544\uB3C4 \uB429\uB2C8\uB2E4.
+      \uC800\uB294 \uB2F9\uC2E0\uC744 \uBBFF\uC73C\uB2C8\uAE4C\uC694."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uADF8\uAC8C \uBB34\uC2A8 \uB9D0\uC774\uC8E0? \uADF8\uB7FC \uB2F9\uC2E0\uC740
+      \uC54C\uACE0 \uC788\uB2E4\uB294 \uAC81\uB2C8\uAE4C?"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: c28917c0c77902645bfe12a8d1f76bc5, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC65C \uADF8\uAC83\uC774 \uD3ED\uBC1C\uD588\uB294\uC9C0, \uB204\uAC00
+      \uAFB8\uBBFC \uC77C\uC778\uC9C0\u2026"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uC800\uB3C4 \uC804\uBD80 \uC124\uBA85\uD560 \uC21C \uC5C6\uC2B5\uB2C8\uB2E4.
+      \uD558\uC9C0\uB9CC \uD655\uC2E4\uD55C \uAC74, \uBB34\uB300\uC5D0\uC11C \uBC8C\uC5B4\uC9C4
+      \uC77C\uC740 \uC6B0\uC5F0\uC774 \uC544\uB2D9\uB2C8\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: f1d6ad807131c924ea9437a93f1f092e, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: 
+    text: "\uADF8\uB9AC \uB9D0\uD558\uACE4 \uD14C\uC624\uB3C4\uB974\uB294 \uBCF5\uB3C4
+      \uB05D\uC5D0 \uC788\uB294 \uBB38\uC744 \uD5A5\uD574 \uACE0\uAC1C\uB97C \uB3CC\uB838\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uC800 \uBB38 \uB4A4\uC5D0 \uCC3D\uACE0\uAC00 \uC788\uC2B5\uB2C8\uB2E4.
+      \n\uADF8\uACF3\uC744 \uC9C0\uB098\uBA74 \uAD00\uACC4\uC790\uB4E4\uB3C4 \uC798
+      \uBAA8\uB974\uB294 \uC628\uC2E4\uC774 \uB098\uC624\uC8E0."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: e9e636ec537efd840a78872f2cb814ae, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC628\uC2E4\uC774\uC694?"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uC9C1\uC811 \uBCF4\uBA74 \uC54C\uAC8C \uB420 \uAC81\uB2C8\uB2E4. \uC624\uB298
+      \uC77C\uC5B4\uB09C \uC77C\uB3C4, \uC774 \uADF9\uC7A5\uC774 \uC228\uACA8 \uC628
+      \uBE44\uBC00\uB3C4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: e9e636ec537efd840a78872f2cb814ae, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC544\uB9C8\uB3C4 \uB2F9\uC2E0\uC740 \uC808 \uAE30\uB2E4\uB9B0 \uAC83
+      \uAC19\uB124\uC694. "
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 21300000, guid: 40bd066d7b2b57e4483a9d8476223c31, type: 3}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uBE48\uC13C\uD2B8 \uBCA0\uC778"
+    text: "\uC800\uC640 \uD568\uAED8 \uAC00\uB294 \uAC81\uB2C8\uAE4C?"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: "\uD14C\uC624\uB3C4\uB974 \uBCA0\uC778"
+    text: "\uC804 \uC5EC\uAE30\uC5D0 \uC788\uB2E4\uB294 \uC0AC\uC2E4\uB9CC \uB4E4\uCF1C\uB3C4
+      \uACE4\uB780\uD569\uB2C8\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 1
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 21300000, guid: e9e636ec537efd840a78872f2cb814ae, type: 3}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  - speakerName: 
+    text: "\uADF8\uB294 \uB098\uB97C \uC7A0\uC2DC \uBC14\uB77C\uBCF4\uC558\uB2E4."
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 1
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    soundEffect: {fileID: 0}
+    soundVolume: 0
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 0
+    stopBGM: 0
+    hasChoice: 1
+    choices:
+    - text: "\uB9DE\uC544, \uADF8\uB3C4 \uBC14\uC05C \uC0AC\uB78C\uC774\uC9C0."
+      nextDialogue: {fileID: 11400000, guid: 63f97222e2238754994c6c0bb0c2f7ab, type: 2}
+      eventData:
+        type: 0
+        targetIDs: []
+        sceneName: 
+        spawnPosition: {x: 0, y: 0, z: 0}
+      tag: 0
+      value: 0
+      score: 0
+    - text: "\uD14C\uC624\uB3C4\uB974 \uC528\uB294 \uC774 \uC0AC\uAC74\uACFC \uBB34\uC2A8
+        \uAD00\uB828\uC774 \uC788\uB294 \uAC70\uC9C0?"
+      nextDialogue: {fileID: 11400000, guid: 23cb9a2fb059757449d095d2a808a6a6, type: 2}
+      eventData:
+        type: 0
+        targetIDs: []
+        sceneName: 
+        spawnPosition: {x: 0, y: 0, z: 0}
+      tag: 0
+      value: 0
+      score: 0
+  endEvent:
+    type: 0
+    targetIDs: []
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}

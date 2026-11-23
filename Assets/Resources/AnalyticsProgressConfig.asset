@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3585321f3b41ebb4a81771b5bdf18cb7, type: 3}
+  m_Name: AnalyticsProgressConfig
+  m_EditorClassIdentifier: Assembly-CSharp::AnalyticsProgressConfig
+  progressVersion: demo_v1
+  snapshotIntervalSeconds: 30
+  milestones:
+  - id: stage1_enter
+    label: "1\uC2A4\uD14C\uC774\uC9C0 \uC9C4\uC785"
+    percent: 0
+  - id: intro_complete
+    label: "\uB3C4\uC785 \uB300\uD654\xB7\uC774\uB3D9 \uC548\uB0B4 \uC644\uB8CC"
+    percent: 5
+  - id: emblem_started
+    label: "\uC5E0\uBE14\uB7FC \uC2DC\uC791"
+    percent: 15
+  - id: emblem_first_piece
+    label: "\uC5E0\uBE14\uB7FC \uCCAB \uC870\uAC01 \uC644\uC131"
+    percent: 25
+  - id: emblem_complete
+    label: "\uC5E0\uBE14\uB7FC \uD574\uACB0"
+    percent: 35
+  - id: stage2_enter
+    label: "1\uC2A4\uD14C\uC774\uC9C0 \uC644\uB8CC\xB72\uC2A4\uD14C\uC774\uC9C0 \uC9C4\uC785"
+    percent: 40
+  - id: light_dodge_complete
+    label: "\uB099\uD558 \uC870\uBA85 \uD68C\uD53C \uD29C\uD1A0\uB9AC\uC5BC \uC644\uB8CC"
+    percent: 45
+  - id: corridor_complete
+    label: "\uBCF5\uB3C4 \uD1B5\uACFC"
+    percent: 50
+  - id: backstage_enter
+    label: "\uBB34\uB300 \uB4A4 \uB3C4\uC785 \uC644\uB8CC"
+    percent: 60
+  - id: number_lock_started
+    label: "\uC22B\uC790 \uC790\uBB3C\uC1E0 \uC9C4\uC785"
+    percent: 65
+  - id: number_lock_complete
+    label: "\uC22B\uC790 \uC790\uBB3C\uC1E0 \uD574\uACB0"
+    percent: 85
+  - id: finale_started
+    label: "\uB9C8\uC9C0\uB9C9 \uB300\uD654 \uC9C4\uC785"
+    percent: 90
+  - id: ending
+    label: "\uC5D4\uB529 \uB3C4\uB2EC"
+    percent: 100

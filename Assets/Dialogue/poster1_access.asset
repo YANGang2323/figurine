@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d317eef674082489f00248ae6df60c, type: 3}
+  m_Name: poster1_access
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: poster_access
+  playOnlyOnce: 1
+  lines:
+  - speakerName: 
+    text: "Space \uD0A4\uB97C \uB20C\uB7EC \uBB3C\uCCB4\uC640 \uC0C1\uD638\uC791\uC6A9\uD558\uACE0
+      \uC0AC\uB78C\uB4E4\uACFC \uB300\uD654\uB97C \uB098\uB220 \uBCF4\uC138\uC694."
+    tutorialID: interaction_space
+    tutorialName: "Space \uC624\uBE0C\uC81D\uD2B8 \uC0C1\uD638\uC791\uC6A9\xB7\uB300\uD654"
+    hideBackground: 0
+    background: {fileID: 0}
+    hideLeftPortrait: 0
+    leftPortrait: {fileID: 0}
+    hideRightPortrait: 0
+    rightPortrait: {fileID: 0}
+    detailImage1: {fileID: 0}
+    detailImage2: {fileID: 0}
+    detailImage3: {fileID: 0}
+    useCustomDialogueFont: 0
+    dialogueFont: {fileID: 0}
+    useCustomSpeakerFont: 0
+    speakerFont: {fileID: 0}
+    useCustomDialogueSize: 0
+    dialogueFontSize: 0
+    useCustomSpeakerSize: 0
+    speakerFontSize: 0
+    useCustomDialogueColor: 0
+    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
+    useCustomSpeakerColor: 0
+    speakerColor: {r: 1, g: 1, b: 1, a: 1}
+    soundEffect: {fileID: 8300000, guid: e747aa2f37247ef4abc60bb24ea33f17, type: 3}
+    soundVolume: 1
+    changeBGM: 0
+    bgm: {fileID: 0}
+    bgmVolume: 1
+    stopBGM: 0
+    hasChoice: 0
+    choices: []
+  endEvent:
+    type: 0
+    targetIDs: []
+    sceneName: 
+    spawnPosition: {x: 0, y: 0, z: 0}
